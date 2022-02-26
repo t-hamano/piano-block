@@ -1,0 +1,197 @@
+.wp-block-piano-block-piano {
+	padding-top: 16px;
+	background: url(../assets/block_bg.png);
+
+	// Loading Component
+	.piano-block-loading {
+		position: absolute;
+		top: 0;
+		left: 0;
+		z-index: 2;
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		width: 100%;
+		height: 100%;
+		color: #fff;
+		background: rgba(0, 0, 0, 0.5);
+	}
+
+	// Controls component
+	.piano-block-controls {
+		position: relative;
+		box-sizing: border-box;
+		display: flex;
+		flex-wrap: wrap;
+		align-items: flex-start;
+		width: calc(100% - 32px);
+		max-width: 818px;
+		padding: 8px 50px 0 16px;
+		margin: 0 auto;
+		background: #fff;
+		border-radius: 2px;
+
+		&__control {
+			margin-bottom: 8px;
+
+			&:not(:last-child) {
+				margin-right: 12px;
+			}
+
+			.components-base-control__field {
+				margin-bottom: 0;
+			}
+
+			.components-base-control__label,
+			.components-input-control__label {
+				display: block;
+				font-size: 13px;
+				font-weight: normal;
+				line-height: 1.2;
+			}
+
+			.components-select-control {
+
+				.components-input-control__label {
+					padding-bottom: 0;
+					margin-bottom: 8px;
+				}
+
+				.components-select-control__input {
+					padding-top: 0;
+					padding-bottom: 0;
+				}
+			}
+
+			.components-toggle-control {
+
+				.components-base-control__field {
+					display: flex;
+					flex-flow: column-reverse;
+					align-items: flex-start;
+				}
+
+				.components-toggle-control__label {
+					margin-bottom: 12px;
+					font-size: 13px;
+					font-weight: normal;
+				}
+			}
+
+			.components-button-group .components-button {
+				height: 30px;
+			}
+
+			&--volume {
+				width: 170px;
+			}
+
+			&--instrument {
+				display: flex;
+				align-items: flex-end;
+
+				.components-button {
+					height: 30px;
+					margin-left: 4px;
+				}
+			}
+		}
+	}
+
+	// Keyboard Component
+	.piano-block-keyboard {
+		position: relative;
+		padding: 16px 0;
+
+		&.is-scroll {
+			overflow-x: scroll;
+		}
+
+		&__inner {
+			box-sizing: border-box;
+			display: flex;
+			height: 205px;
+			margin: 0 auto;
+		}
+
+		&__key {
+			display: flex;
+			align-items: flex-end;
+			justify-content: center;
+			padding: 0;
+			padding-bottom: 8px;
+			font-size: 14px;
+
+			&--black {
+				position: relative;
+				width: 34px;
+				height: 120px;
+				margin: 0 -17px;
+				color: #fff;
+				background: linear-gradient(to bottom, #666 0%, #000 100%);
+				border-color: #000;
+				border-style: solid;
+				border-width: 0 6px 8px;
+				border-bottom-color: #666;
+				border-radius: 0 0 4px 4px;
+				box-shadow: 0 3px 5px #ccc, inset 0 0 0 1px rgb(220 220 220 / 20%);
+				transition: background 0.03s, border-bottom-width 0.03s;
+			}
+
+			&--white {
+				flex: 1;
+				height: 200px;
+				color: #000;
+				background: #fff;
+				border: 1px #999 solid;
+				border-bottom: none;
+				border-radius: 0 0 3px 3px;
+				box-shadow: 0 4px 4px #aaa;
+				transition: height 0.03s, box-shadow 0.03s;
+			}
+
+			&.is-pressed,
+			&:active {
+
+				&.piano-block-keyboard__key--black {
+					background: linear-gradient(to bottom, #666 50%, #000 100%);
+					border-bottom-width: 4px;
+				}
+
+				&.piano-block-keyboard__key--white {
+					height: 204px;
+					background: linear-gradient(to bottom, #ccc 10%, #fff);
+					box-shadow: 0 2px 2px #aaa;
+				}
+			}
+		}
+	}
+}
+
+// Help component
+.piano-block-help {
+	position: absolute;
+	top: 8px;
+	right: 8px;
+}
+
+.piano-block-help-modal {
+	max-width: 500px;
+
+	&__content {
+
+		> *:last-child {
+			margin-bottom: 0 !important;
+		}
+
+		ul {
+			padding-left: 1.5em;
+			margin: 0 0 1em;
+			list-style: disc outside;
+		}
+
+		p {
+			margin: 0 0 1em;
+		}
+	}
+}
