@@ -24,13 +24,13 @@ export const INSTRUMENTS = [
 		octaveOffset: 0,
 	},
 	{
-		label: __( 'Electric Piano 1', 'piano-block' ),
+		label: __( 'Electric Piano1', 'piano-block' ),
 		value: 'electric-piano-1',
 		notes: [ 'A1', 'A2', 'A3', 'A4', 'A5' ],
 		octaveOffset: 0,
 	},
 	{
-		label: __( 'Electric Piano 2', 'piano-block' ),
+		label: __( 'Electric Piano2', 'piano-block' ),
 		value: 'electric-piano-2',
 		notes: [ 'A1', 'C2', 'F2', 'B2', 'E3', 'Gs3', 'Cs4', 'E4', 'G4', 'Cs5', 'G5' ],
 		octaveOffset: 0,

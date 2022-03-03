@@ -22,7 +22,7 @@ $ npm run build
 
 ## Resources, Audio Samples
 
-### Web Audio framework (Tone.js)
+### Tone.js (Web Audio framework)
 * License: MIT License
 * Source: https://github.com/Tonejs/Tone.js/
 
@@ -30,7 +30,7 @@ $ npm run build
 * License: Public Domain
 * Source: https://github.com/sfzinstruments/SplendidGrandPiano
 
-### Greg Sullivan's E-Pianos (Electric Piano 1, 2)
+### Greg Sullivan's E-Pianos (Electric Piano1, 2)
 * License: CC-BY-3.0
 * Source: https://github.com/sfzinstruments/GregSullivan.E-Pianos
 
@@ -66,7 +66,7 @@ $ npm run build
 * License: Public Domain
 * Source: https://freesvg.org/wg-3
 
-### Gooogle Fonts (Banner Font)
+### Google Fonts (Banner Font)
 * License: Apache License 2.0
 * Source: https://fonts.google.com/specimen/Yellowtail
 

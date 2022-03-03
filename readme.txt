@@ -15,7 +15,7 @@ Can play a variety of tones using the piano keyboard on the block editor.
 
 Piano Block is a plugin that allow you to play a variety of tones using the piano keyboard on the block editor.
 This plugin does not add any useful features to WordPress, nor does it add any useful blocks to help you write posts.
-Let's insert this blocks and enjoy the music if you are stuck in writing an article or just want a little distraction.
+Let's insert this block and enjoy the music if you are stuck in writing an article or just want a little distraction.
 
 - 14 instruments
 - Realistic sound based on sound sources sampled from actual instruments
@@ -28,10 +28,10 @@ Let's insert this blocks and enjoy the music if you are stuck in writing an arti
 
 == Frequently Asked Questions ==
 
-= How will these blocks be displayed in the frontend ? =
+= How will this block be displayed in the frontend ? =
 
-These blocks do not display anything on the frontend.
-They are just blocks for playing music in the block editor.
+This block do not display anything on the frontend.
+This block is only for playing music in the block editor.
 
 = Is it possible to record the sound of my play ? =
 
@@ -44,7 +44,7 @@ I may add it in a future update if those issues can be resolved.
 
 == Resources, Audio Samples ==
 
-= Web Audio framework (Tone.js) =
+= Tone.js (Web Audio framework) =
 License: MIT License
 Source: https://github.com/Tonejs/Tone.js/
 
@@ -52,7 +52,7 @@ Source: https://github.com/Tonejs/Tone.js/
 License: Public Domain
 Source: https://github.com/sfzinstruments/SplendidGrandPiano
 
-= Greg Sullivan's E-Pianos (Electric Piano 1, 2) =
+= Greg Sullivan's E-Pianos (Electric Piano1, 2) =
 License: CC-BY-3.0
 Source: https://github.com/sfzinstruments/GregSullivan.E-Pianos
 
@@ -88,7 +88,7 @@ Source: https://www.svgrepo.com/svg/47923/piano-keys-part
 License: Public Domain
 Source: https://freesvg.org/wg-3
 
-= Gooogle Fonts (Banner Font) =
+= Google Fonts (Banner Font) =
 License: Apache License 2.0
 Source: https://fonts.google.com/specimen/Yellowtail
 
