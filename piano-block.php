@@ -45,4 +45,4 @@ function piano_block_register_block() {
 
 	wp_set_script_translations( PIANO_BLOCK_NAMESPACE, PIANO_BLOCK_NAMESPACE );
 }
-add_action( 'init', 'piano_block_register_block' );
+add_action( 'enqueue_block_editor_assets', 'piano_block_register_block' );
