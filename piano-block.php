@@ -4,14 +4,14 @@
  * Description: Can play a variety of tones using the piano keyboard on the block editor.
  * Requires at least: 5.9
  * Requires PHP: 7.3
- * Version: 1.0.1
- * Author: Tetsuaki Hamano
+ * Version: 1.0.2
+ * Author: Aki Hamano
  * Author URI: https://github.com/t-hamano
  * License: GPL2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.html
  * Text Domain: piano-block
  *
- * @author Tetsuaki Hamano
+ * @author Aki Hamano
  * @license GPL-2.0+
  */
 
@@ -45,4 +45,4 @@ function piano_block_register_block() {
 
 	wp_set_script_translations( PIANO_BLOCK_NAMESPACE, PIANO_BLOCK_NAMESPACE );
 }
-add_action( 'init', 'piano_block_register_block' );
+add_action( 'enqueue_block_editor_assets', 'piano_block_register_block' );

@@ -1,6 +1,6 @@
 {
 	"name": "piano-block",
-	"author": "Tetsuaki Hamano",
+	"author": "Aki Hamano",
 	"license": "GPL-2.0+",
 	"scripts": {
 		"wp-env": "wp-env",
@@ -16,20 +16,20 @@
 		"format": "wp-scripts format ./src"
 	},
 	"devDependencies": {
-		"@types/wordpress__block-editor": "^6.0.5",
-		"@types/wordpress__components": "^19.3.0",
+		"@types/wordpress__block-editor": "^7.0.0",
+		"@types/wordpress__components": "^19.10.0",
 		"@types/wordpress__compose": "^4.0.1",
 		"@types/wordpress__i18n": "^3.11.0",
-		"@wordpress/env": "^4.2.1",
-		"@wordpress/scripts": "^21.0.2",
+		"@wordpress/env": "^4.7.0",
+		"@wordpress/scripts": "^23.1.0",
 		"opener": "^1.5.2",
-		"prettier": "npm:wp-prettier@2.2.1-beta-1",
+		"prettier": "npm:wp-prettier@2.6.2-beta-1",
 		"stylelint-config-recess-order": "^3.0.0",
 		"stylelint-order": "^5.0.0",
-		"typescript": "^4.5.5"
+		"typescript": "^4.6.4"
 	},
 	"dependencies": {
-		"@wordpress/icons": "^6.3.0",
+		"@wordpress/icons": "^9.0.0",
 		"tone": "^14.7.77"
 	}
 }

@@ -12,6 +12,8 @@
 - Realistic sound based on sound sources sampled from actual instruments
 - Variable volume, switchable octave pitch and sustain pedal status
 
+Note: The keys are optimized for the QWERTY keyboard and may not map correctly on other keyboards.
+
 ## How to build
 
 ```
@@ -72,4 +74,4 @@ $ npm run build
 
 ## Author
 
-[Tetsuaki Hamano (Github)](https://github.com/t-hamano)
+[Aki Hamano (Github)](https://github.com/t-hamano)
