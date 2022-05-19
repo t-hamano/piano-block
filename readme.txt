@@ -21,6 +21,8 @@ Let's insert this block and enjoy the music if you are stuck in writing an artic
 - Realistic sound based on sound sources sampled from actual instruments
 - Variable volume, switchable octave pitch and sustain pedal status
 
+Note: The keys are optimized for the QWERTY keyboard and may not map correctly on other keyboards.
+
 == Installation ==
 
 1. Upload the `piano-block` folder to the `/wp-content/plugins/` directory.
