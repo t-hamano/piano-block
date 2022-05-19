@@ -1,6 +1,6 @@
 {
 	"name": "piano-block",
-	"author": "Tetsuaki Hamano",
+	"author": "Aki Hamano",
 	"license": "GPL-2.0+",
 	"scripts": {
 		"wp-env": "wp-env",
