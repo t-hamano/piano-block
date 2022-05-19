@@ -18,6 +18,7 @@ module.exports = {
 				printWidth: 100,
 				bracketSpacing: true,
 				parenSpacing: true,
+				bracketSameLine: false,
 			},
 		],
 	},
