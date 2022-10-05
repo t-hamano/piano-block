@@ -148,7 +148,7 @@ const Piano = ( { settings, onChange }: Props ) => {
 	return (
 		// eslint-disable-next-line jsx-a11y/no-static-element-interactions
 		<div
-			className="wp-block-piano-block-piano__container"
+			className="piano-block-container"
 			onKeyDown={ onKeyDown }
 			onKeyUp={ onKeyUp }
 			tabIndex={ 0 }
