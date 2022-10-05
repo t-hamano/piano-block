@@ -1,6 +1,9 @@
 .wp-block-piano-block-piano {
 	position: relative;
-	background: url(../assets/block_bg.png);
+
+	&:not(.has-background) {
+		background: url(../assets/block_bg.png);
+	}
 
 	&__container {
 		padding-top: 16px;
