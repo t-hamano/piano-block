@@ -30,7 +30,7 @@ Note: The keys are optimized for the QWERTY keyboard and may not map correctly o
 
 == Frequently Asked Questions ==
 
-= How will this block be displayed in the frontend ? =
+= How will this block be displayed on the frontend ? =
 
 This block do not display anything on the frontend.
 This block is only for playing music in the block editor.

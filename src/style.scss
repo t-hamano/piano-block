@@ -1,6 +1,10 @@
 .wp-block-piano-block-piano {
-	padding-top: 16px;
+	position: relative;
 	background: url(../assets/block_bg.png);
+
+	&__container {
+		padding-top: 16px;
+	}
 
 	// Loading Component
 	.piano-block-loading {
@@ -179,6 +183,7 @@
 	max-width: 500px;
 
 	&__content {
+		font-size: 13px;
 
 		> *:last-child {
 			margin-bottom: 0 !important;

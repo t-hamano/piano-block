@@ -8,6 +8,7 @@ export interface BlockAttributes {
 	octaveOffset: number;
 	instrument: string;
 	useSustainPedal: boolean;
+	showOnFront: boolean;
 }
 
 export const MIN_VOLUME = -10 as const;
@@ -15,6 +16,14 @@ export const MAX_VOLUME = 5 as const;
 export const DEFAULT_INSTRUMENT = 'acoustic-piano' as const;
 export const KEYBOARD_WIDTH = 850 as const;
 export const KEYBOARD_PADDING = 16 as const;
+
+export const DEFAULT_SETTINGS = {
+	volume: 0,
+	useSustainPedal: false,
+	octaveOffset: 0,
+	instrument: DEFAULT_INSTRUMENT,
+	showOnFront: false,
+};
 
 export const INSTRUMENTS = [
 	{

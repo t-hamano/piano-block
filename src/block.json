@@ -18,6 +18,9 @@
 		},
 		"useSustainPedal": {
 			"type": "boolean"
+		},
+		"showOnFront": {
+			"type": "boolean"
 		}
 	},
 	"supports": {
@@ -25,6 +28,8 @@
 		"multiple": false
 	},
 	"textdomain": "piano-block",
+	"viewScript": "file:view.js",
 	"editorScript": "file:index.js",
-	"editorStyle": "file:index.css"
+	"editorStyle": "file:index.css",
+	"style": "file:style-index.css"
 }

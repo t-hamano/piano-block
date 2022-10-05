@@ -23,49 +23,41 @@ import { help } from '@wordpress/icons';
 /**
  * Internal dependencies
  */
-import { DEFAULT_INSTRUMENT, INSTRUMENTS, OCTAVE_OFFSETS } from '../constants';
+import { INSTRUMENTS, OCTAVE_OFFSETS, MIN_VOLUME, MAX_VOLUME } from '../constants';
 import { getSamplerUrls } from '../utils';
 import type { BlockAttributes, Key } from '../constants';
 
-const MIN_VOLUME = -10;
-const MAX_VOLUME = 5;
-
 type Props = {
-	attributes: BlockAttributes;
-	setAttributes: ( attributes: Partial< BlockAttributes > ) => void;
+	settings: BlockAttributes;
 	piano: Tone.Sampler | undefined;
 	setPiano: Dispatch< SetStateAction< Tone.Sampler | undefined > >;
 	setActiveKeys: Dispatch< SetStateAction< Key[] > >;
 	setIsReady: Dispatch< SetStateAction< boolean > >;
 	setInstrumentOctaveOffset: Dispatch< SetStateAction< number > >;
+	onChange: ( {}: Partial< BlockAttributes > ) => void;
 };
 
 const Controls = ( {
-	attributes,
-	setAttributes,
+	settings,
 	piano,
 	setPiano,
 	setActiveKeys,
 	setIsReady,
 	setInstrumentOctaveOffset,
+	onChange,
 }: Props ) => {
-	const {
-		volume = 0,
-		useSustainPedal = false,
-		octaveOffset = 0,
-		instrument = DEFAULT_INSTRUMENT,
-	} = attributes;
-
+	const { assetsUrl } = window.pianoBlockVars;
+	const { volume, useSustainPedal, octaveOffset, instrument } = settings;
 	const [ isHelpOpen, setIsHelpOpen ] = useState< boolean >( false );
 
 	const onVolumeChange = ( value: number ) => {
 		if ( ! piano ) return;
 		piano.volume.value = value ?? 0;
-		setAttributes( { volume: value } );
+		onChange( { volume: value } );
 	};
 
 	const onOctaveOffsetChange = ( value: number ) => {
-		setAttributes( { octaveOffset: value } );
+		onChange( { octaveOffset: value } );
 	};
 
 	const onInstrumentChange = ( newValue: string ) => {
@@ -84,11 +76,11 @@ const Controls = ( {
 		const tonePlayer = new Tone.Sampler( {
 			urls,
 			release: 1,
-			baseUrl: `${ window.pianoBlockVars.assetsUrl }/instruments/${ newInstrument.value }/`,
+			baseUrl: `${ assetsUrl }/instruments/${ newInstrument.value }/`,
 			onload: () => {
 				setIsReady( true );
 				setInstrumentOctaveOffset( newInstrument.octaveOffset );
-				setAttributes( { instrument: newInstrument.value } );
+				onChange( { instrument: newInstrument.value } );
 			},
 		} ).toDestination();
 
@@ -96,7 +88,7 @@ const Controls = ( {
 	};
 
 	const onUseSustainPedalChange = () => {
-		setAttributes( { useSustainPedal: ! useSustainPedal } );
+		onChange( { useSustainPedal: ! useSustainPedal } );
 	};
 
 	return (
