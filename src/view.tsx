@@ -11,11 +11,10 @@ import { DEFAULT_SETTINGS } from './constants';
 import type { BlockAttributes } from './constants';
 
 function View() {
-	const defaultSettings = {
+	const [ settings, setSettings ] = useState< BlockAttributes >( {
 		...DEFAULT_SETTINGS,
 		...window?.pianoBlockVars?.defaultSettings,
-	};
-	const [ settings, setSettings ] = useState< BlockAttributes >( defaultSettings );
+	} );
 
 	const onChange = ( newSettings: Partial< BlockAttributes > ) => {
 		setSettings( {
