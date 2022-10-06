@@ -9,7 +9,7 @@
 		"start": "wp-scripts start",
 		"start:hot": "wp-scripts start --hot",
 		"build": "wp-scripts build",
-		"lint": "npm run lint:css && npm run lint:js && npm run lint:php",
+		"lint": "npm run lint:css && npm run lint:js && npm run lint:types && npm run lint:php",
 		"lint:css": "wp-scripts lint-style",
 		"lint:js": "wp-scripts lint-js",
 		"lint:php": "composer lint",
