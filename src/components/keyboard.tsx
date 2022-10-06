@@ -6,8 +6,10 @@ import classnames from 'classnames';
 /**
  * WordPress dependencies
  */
-// @ts-ignore: has no exported member
-import { useResizeObserver } from '@wordpress/compose';
+import {
+	// @ts-ignore: has no exported member
+	useResizeObserver,
+} from '@wordpress/compose';
 
 /**
  * Internal dependencies
