@@ -32,6 +32,9 @@
 			"text": false,
 			"background": true,
 			"gradients": true
+		},
+		"spacing": {
+			"margin": [ "top", "bottom" ]
 		}
 	},
 	"textdomain": "piano-block",
