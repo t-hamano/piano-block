@@ -10,12 +10,12 @@ import { registerBlockType } from '@wordpress/blocks';
 import './style.scss';
 import metadata from './block.json';
 import edit from './edit';
-import { blockIcon } from './icon';
+import { blockIcon as icon } from './icon';
 
 registerBlockType( metadata.name, {
 	title: __( 'Piano', 'piano-block' ),
 	description: __( 'Play the melody.', 'piano-block' ),
-	icon: blockIcon,
+	icon,
 	edit,
 	save: () => null,
 } );

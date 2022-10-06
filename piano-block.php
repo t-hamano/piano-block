@@ -46,6 +46,7 @@ function piano_block_render_callback( $attributes ) {
 	$asset_file = include( PIANO_BLOCK_PATH . '/build/view.asset.php' );
 
 	wp_enqueue_style( 'wp-components' );
+
 	wp_enqueue_script(
 		PIANO_BLOCK_NAMESPACE,
 		PIANO_BLOCK_URL . '/build/view.js',
@@ -76,16 +77,8 @@ function piano_block_render_callback( $attributes ) {
 
 // Enqueue block editor assets.
 function piano_block_enqueue_block_editor_assets() {
-	wp_enqueue_script(
-		PIANO_BLOCK_NAMESPACE,
-		PIANO_BLOCK_URL . '/src/block.js',
-		array(),
-		filemtime( PIANO_BLOCK_PATH . '/src/block.js' ),
-		false
-	);
-
 	wp_localize_script(
-		PIANO_BLOCK_NAMESPACE,
+		PIANO_BLOCK_NAMESPACE . '-piano-editor-script',
 		'pianoBlockVars',
 		array( 'assetsUrl' => PIANO_BLOCK_URL . '/assets' )
 	);
