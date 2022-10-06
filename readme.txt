@@ -32,8 +32,7 @@ Note: The keys are optimized for the QWERTY keyboard and may not map correctly o
 
 = How will this block be displayed on the frontend ? =
 
-By default, nothing is output to the front end.
-If you turn on "Display on the front end" in the sidebar settings, the piano will also appear on the front end and the visitors to yout site can play.
+By default, nothing is output to the front end. If you turn on "Display on the front end" in the sidebar settings, the piano will also appear on the front end and the visitors to yout site can play. However, multiple pianos cannot be displayed on the same page.
 
 = Is it possible to record the sound of my play ? =
 
