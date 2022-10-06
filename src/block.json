@@ -1,4 +1,5 @@
 {
+	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 2,
 	"name": "piano-block/piano",
 	"title": "Piano",
@@ -18,13 +19,27 @@
 		},
 		"useSustainPedal": {
 			"type": "boolean"
+		},
+		"showOnFront": {
+			"type": "boolean"
 		}
 	},
 	"supports": {
     "align": [ "wide", "full" ],
-		"multiple": false
+		"multiple": false,
+		"color": {
+			"enableContrastChecker": false,
+			"text": false,
+			"background": true,
+			"gradients": true
+		},
+		"spacing": {
+			"margin": [ "top", "bottom" ]
+		}
 	},
 	"textdomain": "piano-block",
+	"viewScript": "file:view.js",
 	"editorScript": "file:index.js",
-	"editorStyle": "file:index.css"
+	"editorStyle": "file:index.css",
+	"style": "file:style-index.css"
 }
