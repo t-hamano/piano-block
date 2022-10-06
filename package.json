@@ -13,6 +13,7 @@
 		"lint:css": "wp-scripts lint-style",
 		"lint:js": "wp-scripts lint-js",
 		"lint:php": "composer lint",
+		"lint:types": "tsc",
 		"format": "wp-scripts format ./src"
 	},
 	"devDependencies": {

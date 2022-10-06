@@ -19,3 +19,4 @@ package.json
 phpcs.ruleset.xml
 README.md
 tsconfig.json
+*.tsbuildinfo
