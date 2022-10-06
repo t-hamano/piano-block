@@ -4,7 +4,7 @@ Tags: gutenberg, audio, music, piano
 Donate link: https://www.paypal.me/thamanoJP
 Requires at least: 5.9
 Tested up to: 6.0
-Stable tag: 1.0.2
+Stable tag: 1.1.0
 Requires PHP: 7.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -94,6 +94,14 @@ License: Apache License 2.0
 Source: https://fonts.google.com/specimen/Yellowtail
 
 == Changelog ==
+
+= 1.1.0 =
+* Add: Rendering option on the front-end
+* Add: margin block support
+* Add: background block support
+* Enhancement: Polish the style of the control section
+* Clean: Remove unnecessary files
+* Doc: Update readme
 
 = 1.0.2 =
 * Tested to WordPress 6.0
