@@ -4,7 +4,7 @@
 
 ![Piano Block](https://raw.githubusercontent.com/t-hamano/piano-block/main/.wordpress-org/banner-1544x500.png)
 
-"Piano Block" is a WordPress custom block plugin that allows you to play a variety of tones using the piano keyboard on the block editor.
+"Piano Block" is a WordPress custom block plugin that allows you to play a variety of tones using the piano keyboard.
 
 ## Features
 

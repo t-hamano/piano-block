@@ -9,11 +9,11 @@ Requires PHP: 7.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Can play a variety of tones using the piano keyboard on the block editor.
+Can play a variety of tones using the piano keyboard.
 
 == Description ==
 
-Piano Block is a plugin that allow you to play a variety of tones using the piano keyboard on the block editor.
+Piano Block is a plugin that allow you to play a variety of tones using the piano keyboard.
 This plugin does not add any useful features to WordPress, nor does it add any useful blocks to help you write posts.
 Let's insert this block and enjoy the music if you are stuck in writing an article or just want a little distraction.
 
@@ -32,8 +32,8 @@ Note: The keys are optimized for the QWERTY keyboard and may not map correctly o
 
 = How will this block be displayed on the frontend ? =
 
-This block do not display anything on the frontend.
-This block is only for playing music in the block editor.
+By default, nothing is output to the front end.
+If you turn on "Display on the front end" in the sidebar settings, the piano will also appear on the front end and the visitors to yout site can play.
 
 = Is it possible to record the sound of my play ? =
 
