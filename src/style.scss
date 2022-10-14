@@ -202,14 +202,18 @@
 }
 
 .piano-block-help-modal {
-	max-width: 500px;
 	font-size: 13px;
 	color: #1d2327;
+
+	&.piano-block-help-modal {
+		max-width: 500px;
+	}
 
 	.components-modal__header {
 
 		h1 {
 			font-size: 20px;
+			font-style: normal;
 			color: inherit;
 		}
 
