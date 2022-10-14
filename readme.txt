@@ -3,8 +3,8 @@ Contributors: wildworks
 Tags: gutenberg, audio, music, piano
 Donate link: https://www.paypal.me/thamanoJP
 Requires at least: 5.9
-Tested up to: 6.0
-Stable tag: 1.1.0
+Tested up to: 6.1
+Stable tag: 1.1.1
 Requires PHP: 7.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -94,6 +94,12 @@ License: Apache License 2.0
 Source: https://fonts.google.com/specimen/Yellowtail
 
 == Changelog ==
+
+= 1.1.1 =
+* Tested to WordPress 6.1
+* Enhancement: Polish front-end styles
+* Fix: browser console error
+* Fix: Apply translation on the front end
 
 = 1.1.0 =
 * Add: Rendering option on the front-end
