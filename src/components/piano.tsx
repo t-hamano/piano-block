@@ -44,8 +44,10 @@ const Piano = ( { settings, onChange }: Props ) => {
 			release: 1,
 			baseUrl: `${ assetsUrl }/instruments/${ instrument }/`,
 			onload: () => {
-				setInstrumentOctaveOffset( currentInstrument.octaveOffset );
-				setIsReady( true );
+				if ( ref.current ) {
+					setInstrumentOctaveOffset( currentInstrument.octaveOffset );
+					setIsReady( true );
+				}
 			},
 		} ).toDestination();
 

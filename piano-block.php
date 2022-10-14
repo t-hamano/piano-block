@@ -69,6 +69,8 @@ function piano_block_render_callback( $attributes ) {
 		)
 	);
 
+	wp_set_script_translations( PIANO_BLOCK_NAMESPACE, PIANO_BLOCK_NAMESPACE );
+
 	return sprintf(
 		'<div %s></div>',
 		get_block_wrapper_attributes(),
