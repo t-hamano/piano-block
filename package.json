@@ -32,5 +32,13 @@
 	"dependencies": {
 		"@wordpress/icons": "^9.10.0",
 		"tone": "^14.7.77"
+	},
+	"engines": {
+		"node": ">=16.0.0",
+		"npm": ">=8.0.0"
+	},
+	"volta": {
+		"node": "16.18.0",
+		"npm": "8.19.2"
 	}
 }
