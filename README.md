@@ -1,6 +1,7 @@
 # Piano Block
 
-[![Deploy to WordPress.org](https://github.com/t-hamano/piano-block/actions/workflows/wp-plugin-deploy.yml/badge.svg)](https://github.com/t-hamano/piano-block/actions/workflows/wp-plugin-deploy.yml)
+[![Test](https://github.com/t-hamano/piano-block/actions/workflows/run-test.yml/badge.svg)](https://github.com/t-hamano/piano-block/actions/workflows/run-test.yml)
+[![Test and Deploy](https://github.com/t-hamano/piano-block/actions/workflows/run-test-and-deploy.yml/badge.svg)](https://github.com/t-hamano/piano-block/actions/workflows/run-test-and-deploy.yml)
 
 ![Piano Block](https://raw.githubusercontent.com/t-hamano/piano-block/main/.wordpress-org/banner-1544x500.png)
 
