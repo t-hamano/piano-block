@@ -29,8 +29,8 @@ import type { BlockAttributes, Key } from '../constants';
 
 type Props = {
 	settings: BlockAttributes;
-	piano: Tone.Sampler | undefined;
-	setPiano: Dispatch< SetStateAction< Tone.Sampler | undefined > >;
+	piano: Tone.Sampler | Tone.PolySynth | undefined;
+	setPiano: Dispatch< SetStateAction< Tone.Sampler | Tone.PolySynth | undefined > >;
 	setActiveKeys: Dispatch< SetStateAction< Key[] > >;
 	setIsReady: Dispatch< SetStateAction< boolean > >;
 	setInstrumentOctaveOffset: Dispatch< SetStateAction< number > >;
@@ -70,19 +70,28 @@ const Controls = ( {
 		setActiveKeys( [] );
 		setIsReady( false );
 
-		// Regenerate Tone.js Sampler with new audio urls map.
-		const urls = getSamplerUrls( newInstrument );
+		// Regenerate Tone.js.
+		let tonePlayer: Tone.Sampler | Tone.PolySynth;
 
-		const tonePlayer = new Tone.Sampler( {
-			urls,
-			release: 1,
-			baseUrl: `${ assetsUrl }/instruments/${ newInstrument.value }/`,
-			onload: () => {
-				setIsReady( true );
-				setInstrumentOctaveOffset( newInstrument.octaveOffset );
-				onChange( { instrument: newInstrument.value } );
-			},
-		} ).toDestination();
+		if ( newInstrument.value === 'synthesizer' ) {
+			tonePlayer = new Tone.PolySynth( {} ).toDestination();
+			setIsReady( true );
+			setInstrumentOctaveOffset( 0 );
+			onChange( { instrument: newInstrument.value } );
+		} else {
+			const urls = getSamplerUrls( newInstrument );
+
+			tonePlayer = new Tone.Sampler( {
+				urls,
+				release: 1,
+				baseUrl: `${ assetsUrl }/instruments/${ newInstrument.value }/`,
+				onload: () => {
+					setIsReady( true );
+					setInstrumentOctaveOffset( newInstrument.octaveOffset || 0 );
+					onChange( { instrument: newInstrument.value } );
+				},
+			} ).toDestination();
+		}
 
 		setPiano( tonePlayer );
 	};
@@ -136,6 +145,8 @@ const Controls = ( {
 					label={ __( 'Use Sustain Pedal', 'piano-block' ) }
 					checked={ useSustainPedal }
 					onChange={ onUseSustainPedalChange }
+					// @ts-ignore: `disabled` prop is not exist at @types
+					disabled={ instrument === 'synthesizer' }
 				/>
 			</div>
 			<Button

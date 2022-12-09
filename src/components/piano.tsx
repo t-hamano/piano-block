@@ -25,7 +25,7 @@ type Props = {
 const Piano = ( { settings, onChange }: Props ) => {
 	const { assetsUrl } = window.pianoBlockVars;
 	const { volume, useSustainPedal, octaveOffset, instrument } = settings;
-	const [ piano, setPiano ] = useState< Tone.Sampler >();
+	const [ piano, setPiano ] = useState< Tone.Sampler | Tone.PolySynth >();
 	const [ isReady, setIsReady ] = useState< boolean >( false );
 	const [ activeKeys, setActiveKeys ] = useState< Key[] >( [] );
 	const [ instrumentOctaveOffset, setInstrumentOctaveOffset ] = useState< number >( 0 );
@@ -33,23 +33,29 @@ const Piano = ( { settings, onChange }: Props ) => {
 	const ref = useRef< HTMLDivElement >( null );
 
 	useEffect( () => {
-		// Initial processing of Tone.js Sampler.
+		// Initial processing of Tone.js.
 		const currentInstrument = INSTRUMENTS.find( ( { value } ) => value === instrument );
 		if ( ! currentInstrument ) return;
 
-		const urls = getSamplerUrls( currentInstrument );
+		let tonePlayer: Tone.Sampler | Tone.PolySynth;
 
-		const tonePlayer = new Tone.Sampler( {
-			urls,
-			release: 1,
-			baseUrl: `${ assetsUrl }/instruments/${ instrument }/`,
-			onload: () => {
-				if ( ref.current ) {
-					setInstrumentOctaveOffset( currentInstrument.octaveOffset );
-					setIsReady( true );
-				}
-			},
-		} ).toDestination();
+		if ( currentInstrument.value === 'synthesizer' ) {
+			tonePlayer = new Tone.PolySynth( {} ).toDestination();
+			setInstrumentOctaveOffset( 0 );
+			setIsReady( true );
+		} else {
+			tonePlayer = new Tone.Sampler( {
+				urls: getSamplerUrls( currentInstrument ),
+				release: 1,
+				baseUrl: `${ assetsUrl }/instruments/${ instrument }/`,
+				onload: () => {
+					if ( ref.current ) {
+						setInstrumentOctaveOffset( currentInstrument.octaveOffset || 0 );
+						setIsReady( true );
+					}
+				},
+			} ).toDestination();
+		}
 
 		tonePlayer.volume.value = volume;
 		setPiano( tonePlayer );
@@ -106,7 +112,7 @@ const Piano = ( { settings, onChange }: Props ) => {
 
 		if ( ! targetKey ) return;
 
-		if ( ! useSustainPedal ) {
+		if ( ! useSustainPedal || instrument === 'synthesizer' ) {
 			const targetNote = `${ targetKey.note }${
 				targetKey.octave + octaveOffset + instrumentOctaveOffset
 			}`;
@@ -126,7 +132,7 @@ const Piano = ( { settings, onChange }: Props ) => {
 
 		const targetNote = `${ note }${ octave + octaveOffset + instrumentOctaveOffset }`;
 
-		if ( useSustainPedal ) {
+		if ( useSustainPedal && instrument !== 'synthesizer' ) {
 			piano.triggerAttack( targetNote );
 		} else {
 			piano.triggerAttackRelease( targetNote, 0.2 );

@@ -111,6 +111,10 @@ export const INSTRUMENTS = [
 		notes: [ 'G4', 'C5', 'G5', 'C6', 'G6', 'C7', 'G7' ],
 		octaveOffset: 1,
 	},
+	{
+		label: __( 'Synthesizer', 'piano-block' ),
+		value: 'synthesizer',
+	},
 ];
 
 export const OCTAVE_OFFSETS = [

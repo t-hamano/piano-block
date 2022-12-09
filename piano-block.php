@@ -59,8 +59,8 @@ function piano_block_render_callback( $attributes ) {
 		PIANO_BLOCK_NAMESPACE,
 		'pianoBlockVars',
 		array(
-			'assetsUrl'       => PIANO_BLOCK_URL . '/assets',
-			'defaultSettings' => array(
+			'assetsUrl' => PIANO_BLOCK_URL . '/assets',
+			'settings'  => array(
 				'volume'          => $volume,
 				'useSustainPedal' => $use_sustain_pedal,
 				'octaveOffset'    => $octave_offset,
