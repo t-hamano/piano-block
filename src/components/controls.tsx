@@ -17,6 +17,7 @@ import {
 	RangeControl,
 	ToggleControl,
 	Modal,
+	Popover,
 } from '@wordpress/components';
 import { cog, help } from '@wordpress/icons';
 
@@ -49,6 +50,7 @@ const Controls = ( {
 	const { assetsUrl } = window.pianoBlockVars;
 	const { volume, useSustainPedal, octaveOffset, instrument } = settings;
 	const [ isHelpOpen, setIsHelpOpen ] = useState< boolean >( false );
+	const [ isSynthesizerSettingOpen, setIsSynthesizerSettingOpen ] = useState< boolean >( false );
 
 	const onVolumeChange = ( newVolume: number ) => {
 		const instrumentSetting = INSTRUMENTS.find( ( { value } ) => value === instrument );
@@ -149,11 +151,23 @@ const Controls = ( {
 					onChange={ onInstrumentChange }
 				/>
 				{ instrument === 'synthesizer' && (
-					<Button
-						label={ __( 'Synthesizer Setting', 'piano-block' ) }
-						icon={ cog }
-						variant="primary"
-					/>
+					<>
+						<Button
+							label={ __( 'Synthesizer Setting', 'piano-block' ) }
+							icon={ cog }
+							variant="primary"
+							onClick={ () => setIsSynthesizerSettingOpen( true ) }
+						/>
+						{ isSynthesizerSettingOpen && (
+							<Popover
+								// @ts-ignore: `withInputField` prop is not exist at @types
+								placement="top"
+								onClose={ () => setIsSynthesizerSettingOpen( false ) }
+							>
+								Popover is toggled!
+							</Popover>
+						) }
+					</>
 				) }
 			</div>
 			<div className="piano-block-controls__control">

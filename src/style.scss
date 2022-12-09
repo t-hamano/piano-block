@@ -122,7 +122,6 @@
 
 			&--instrument {
 				display: flex;
-				gap: 8px;
 				align-items: flex-end;
 
 				.components-button {
@@ -130,6 +129,7 @@
 					min-width: 30px;
 					height: 30px;
 					padding: 4px;
+					margin-left: 8px;
 				}
 			}
 		}
