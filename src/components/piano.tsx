@@ -34,30 +34,32 @@ const Piano = ( { settings, onChange }: Props ) => {
 
 	useEffect( () => {
 		// Initial processing of Tone.js.
-		const currentInstrument = INSTRUMENTS.find( ( { value } ) => value === instrument );
-		if ( ! currentInstrument ) return;
+		const instrumentSetting = INSTRUMENTS.find( ( { value } ) => value === instrument );
+		if ( ! instrumentSetting ) return;
 
 		let tonePlayer: Tone.Sampler | Tone.PolySynth;
 
-		if ( currentInstrument.value === 'synthesizer' ) {
+		if ( instrumentSetting.value === 'synthesizer' ) {
 			tonePlayer = new Tone.PolySynth( {} ).toDestination();
 			setInstrumentOctaveOffset( 0 );
 			setIsReady( true );
 		} else {
 			tonePlayer = new Tone.Sampler( {
-				urls: getSamplerUrls( currentInstrument ),
+				urls: getSamplerUrls( instrumentSetting ),
 				release: 1,
 				baseUrl: `${ assetsUrl }/instruments/${ instrument }/`,
 				onload: () => {
 					if ( ref.current ) {
-						setInstrumentOctaveOffset( currentInstrument.octaveOffset || 0 );
+						setInstrumentOctaveOffset( instrumentSetting.octaveOffset || 0 );
 						setIsReady( true );
 					}
 				},
 			} ).toDestination();
 		}
 
-		tonePlayer.volume.value = volume;
+		tonePlayer.volume.value = instrumentSetting.volumeOffset
+			? volume + instrumentSetting.volumeOffset
+			: volume;
 		setPiano( tonePlayer );
 
 		return () => {

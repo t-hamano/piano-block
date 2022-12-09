@@ -18,7 +18,7 @@ import {
 	ToggleControl,
 	Modal,
 } from '@wordpress/components';
-import { help } from '@wordpress/icons';
+import { cog, help } from '@wordpress/icons';
 
 /**
  * Internal dependencies
@@ -50,21 +50,27 @@ const Controls = ( {
 	const { volume, useSustainPedal, octaveOffset, instrument } = settings;
 	const [ isHelpOpen, setIsHelpOpen ] = useState< boolean >( false );
 
-	const onVolumeChange = ( value: number ) => {
-		if ( ! piano ) return;
-		piano.volume.value = value ?? 0;
-		onChange( { volume: value } );
+	const onVolumeChange = ( newVolume: number ) => {
+		const instrumentSetting = INSTRUMENTS.find( ( { value } ) => value === instrument );
+		if ( ! piano || ! instrumentSetting ) return;
+
+		piano.volume.value = newVolume ?? 0;
+		if ( instrumentSetting.volumeOffset ) {
+			piano.volume.value += instrumentSetting.volumeOffset;
+		}
+
+		onChange( { volume: newVolume } );
 	};
 
-	const onOctaveOffsetChange = ( value: number ) => {
-		onChange( { octaveOffset: value } );
+	const onOctaveOffsetChange = ( newOctaveOffset: number ) => {
+		onChange( { octaveOffset: newOctaveOffset } );
 	};
 
-	const onInstrumentChange = ( newValue: string ) => {
+	const onInstrumentChange = ( newInstrument: string ) => {
 		if ( ! piano ) return;
 
-		const newInstrument = INSTRUMENTS.find( ( { value } ) => value === newValue );
-		if ( ! newInstrument ) return;
+		const instrumentSetting = INSTRUMENTS.find( ( { value } ) => value === newInstrument );
+		if ( ! instrumentSetting ) return;
 
 		piano.dispose();
 		setActiveKeys( [] );
@@ -73,26 +79,29 @@ const Controls = ( {
 		// Regenerate Tone.js.
 		let tonePlayer: Tone.Sampler | Tone.PolySynth;
 
-		if ( newInstrument.value === 'synthesizer' ) {
+		if ( instrumentSetting.value === 'synthesizer' ) {
 			tonePlayer = new Tone.PolySynth( {} ).toDestination();
 			setIsReady( true );
 			setInstrumentOctaveOffset( 0 );
-			onChange( { instrument: newInstrument.value } );
+			onChange( { instrument: instrumentSetting.value } );
 		} else {
-			const urls = getSamplerUrls( newInstrument );
+			const urls = getSamplerUrls( instrumentSetting );
 
 			tonePlayer = new Tone.Sampler( {
 				urls,
 				release: 1,
-				baseUrl: `${ assetsUrl }/instruments/${ newInstrument.value }/`,
+				baseUrl: `${ assetsUrl }/instruments/${ instrumentSetting.value }/`,
 				onload: () => {
 					setIsReady( true );
-					setInstrumentOctaveOffset( newInstrument.octaveOffset || 0 );
-					onChange( { instrument: newInstrument.value } );
+					setInstrumentOctaveOffset( instrumentSetting.octaveOffset || 0 );
+					onChange( { instrument: instrumentSetting.value } );
 				},
 			} ).toDestination();
 		}
 
+		tonePlayer.volume.value = instrumentSetting.volumeOffset
+			? volume + instrumentSetting.volumeOffset
+			: volume;
 		setPiano( tonePlayer );
 	};
 
@@ -139,6 +148,13 @@ const Controls = ( {
 					} ) }
 					onChange={ onInstrumentChange }
 				/>
+				{ instrument === 'synthesizer' && (
+					<Button
+						label={ __( 'Synthesizer Setting', 'piano-block' ) }
+						icon={ cog }
+						variant="primary"
+					/>
+				) }
 			</div>
 			<div className="piano-block-controls__control">
 				<ToggleControl

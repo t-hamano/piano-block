@@ -119,6 +119,19 @@
 			&--volume {
 				width: 170px;
 			}
+
+			&--instrument {
+				display: flex;
+				gap: 8px;
+				align-items: flex-end;
+
+				.components-button {
+					width: 30px;
+					min-width: 30px;
+					height: 30px;
+					padding: 4px;
+				}
+			}
 		}
 	}
 

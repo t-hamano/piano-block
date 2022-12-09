@@ -114,6 +114,7 @@ export const INSTRUMENTS = [
 	{
 		label: __( 'Synthesizer', 'piano-block' ),
 		value: 'synthesizer',
+		volumeOffset: -5,
 	},
 ];
 
