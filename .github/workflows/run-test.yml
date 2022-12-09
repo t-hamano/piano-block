@@ -11,10 +11,22 @@ on:
       - '*'
 
 jobs:
-
-  lint:
-    name: Lint
+  test:
     runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        php-versions: [
+          '7.3',
+          '7.4',
+          '8.0'
+        ]
+        wp-versions: [
+          'WordPress#5.9.4',
+          'WordPress#6.0.3',
+          'WordPress#6.1',
+          'WordPress'
+        ]
+    name: PHP ${{ matrix.php-versions }} / ${{ matrix.wp-versions }} Test
     steps:
       - uses: actions/checkout@v3
 
@@ -35,3 +47,12 @@ jobs:
 
       - name: Running lint check
         run: npm run lint
+
+      - name: Install WordPress
+        run: |
+          WP_ENV_CORE=WordPress/${{ matrix.wp-versions }} WP_ENV_PHP_VERSION=${{ matrix.php-versions }} npm run wp-env start
+          npm run wp-env run cli wp core version
+          npm run wp-env run cli wp cli info
+
+      - name: Running e2e tests
+        run: npm run test:e2e
