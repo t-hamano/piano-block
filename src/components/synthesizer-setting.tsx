@@ -102,7 +102,7 @@ const SynthesizerSetting = ( { synthesizerSetting, onChange }: Props ) => {
 			<div className="piano-block-synthesizer-setting__content">
 				<div className="piano-block-synthesizer-setting__controls">
 					<SelectControl
-						label={ __( 'Insturment', 'piano-block' ) }
+						label={ __( 'Oscillator Type', 'piano-block' ) }
 						value={ oscillator?.type || DEFAULT_OSCILLATOR_TYPE }
 						options={ OSCILLATOR_TYPES.map( ( { label, value } ) => {
 							return { label, value };

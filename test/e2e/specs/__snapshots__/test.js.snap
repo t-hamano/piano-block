@@ -1,3 +1,3 @@
 // Jest Snapshot v1, https://goo.gl/fbAQLP
 
-exports[`Block should update attributes 1`] = `"<!-- wp:piano-block/piano {\\"volume\\":-0.3,\\"octaveOffset\\":-2,\\"instrument\\":\\"electric-piano-2\\",\\"useSustainPedal\\":true,\\"showOnFront\\":true} /-->"`;
+exports[`Block should update attributes 1`] = `"<!-- wp:piano-block/piano {\\"volume\\":-0.3,\\"octaveOffset\\":-2,\\"instrument\\":\\"electric-piano-2\\",\\"useSustainPedal\\":true,\\"showOnFront\\":true,\"synthesizerSetting\":{}} /-->"`;
