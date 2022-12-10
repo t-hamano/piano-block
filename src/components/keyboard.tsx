@@ -10,6 +10,7 @@ import {
 	// @ts-ignore: has no exported member
 	useResizeObserver,
 } from '@wordpress/compose';
+import { forwardRef } from '@wordpress/element';
 
 /**
  * Internal dependencies
@@ -22,7 +23,7 @@ type Props = {
 	onKeyClick: ( note: string, octave: number ) => void;
 };
 
-const Keyboard = ( { activeKeys, onKeyClick }: Props ) => {
+const Keyboard = ( { activeKeys, onKeyClick }: Props, ref: any ) => {
 	// Hooks to control the display of horizontal scroll bars
 	const [ resizeListener, keysInnerSizes ] = useResizeObserver();
 
@@ -36,6 +37,8 @@ const Keyboard = ( { activeKeys, onKeyClick }: Props ) => {
 			className={ classnames( 'piano-block-keyboard', {
 				'is-scroll': keysInnerSizes.width < KEYBOARD_WIDTH + KEYBOARD_PADDING * 2,
 			} ) }
+			tabIndex={ 0 }
+			ref={ ref }
 		>
 			{ resizeListener }
 			<div
@@ -63,4 +66,4 @@ const Keyboard = ( { activeKeys, onKeyClick }: Props ) => {
 	);
 };
 
-export default Keyboard;
+export default forwardRef( Keyboard );

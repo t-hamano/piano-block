@@ -23,8 +23,8 @@
 		"showOnFront": {
 			"type": "boolean"
 		},
-		"synthesizerSettings": {
-			"type": "array"
+		"synthesizerSetting": {
+			"type": "object"
 		}
 	},
 	"supports": {

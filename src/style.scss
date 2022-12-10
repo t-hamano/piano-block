@@ -161,6 +161,10 @@
 			font-weight: normal;
 			text-transform: uppercase;
 
+			&:focus-visible {
+				outline: var(--wp-admin-theme-color) auto 4px;
+			}
+
 			&--black {
 				position: relative;
 				width: 34px;
