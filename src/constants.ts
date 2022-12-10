@@ -13,6 +13,12 @@ export interface BlockAttributes {
 		oscillator: {
 			type: typeof OSCILLATOR_TYPES[ number ][ 'value' ];
 		};
+		envelope: {
+			attack: number;
+			decay: number;
+			sustain: number;
+			release: number;
+		};
 	};
 }
 
@@ -22,6 +28,13 @@ export const DEFAULT_INSTRUMENT = 'acoustic-piano' as const;
 export const DEFAULT_OSCILLATOR_TYPE = 'fatsine' as const;
 export const KEYBOARD_WIDTH = 850 as const;
 export const KEYBOARD_PADDING = 16 as const;
+
+export const DEFAULT_ENVELOPE = {
+	attack: 1.0,
+	decay: 1.0,
+	sustain: 0.5,
+	release: 1.5,
+};
 
 export const DEFAULT_SETTINGS = {
 	volume: 0,
@@ -287,6 +300,33 @@ export const OSCILLATOR_TYPES = [
 	},
 ] as const;
 
+export const EMVELOPE_CONTROLS = [
+	{
+		label: __( 'Attack', 'piano-block' ),
+		parameter: 'attack',
+		min: 0,
+		max: 2,
+	},
+	{
+		label: __( 'Decay', 'piano-block' ),
+		parameter: 'decay',
+		min: 0,
+		max: 2,
+	},
+	{
+		label: __( 'Sustain', 'piano-block' ),
+		parameter: 'sustain',
+		min: 0.1,
+		max: 1,
+	},
+	{
+		label: __( 'Release', 'piano-block' ),
+		parameter: 'release',
+		min: 0,
+		max: 3,
+	},
+] as const;
+
 export interface Instrument {
 	label: string;
 	value: typeof INSTRUMENTS[ number ][ 'value' ];
@@ -296,3 +336,4 @@ export interface Instrument {
 }
 export type Key = typeof KEYS[ number ];
 export type OscillatorType = typeof OSCILLATOR_TYPES[ number ];
+export type EmvelopeControl = typeof EMVELOPE_CONTROLS[ number ];

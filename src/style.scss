@@ -211,6 +211,40 @@
 	}
 }
 
+// SynthesizerSetting component
+.piano-block-synthesizer-setting {
+	width: 400px;
+	padding: 16px;
+
+	h2 {
+		margin: 0 0 1em;
+	}
+
+	&__content {
+		display: flex;
+		gap: 16px;
+	}
+
+	&__controls {
+		flex: 1;
+	}
+
+	&__envelope {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0 16px;
+
+		.components-range-control {
+			width: calc(50% - 8px);
+		}
+	}
+
+	&__graph {
+		width: 200px;
+		border: 1px solid var(--wp-admin-theme-color);
+	}
+}
+
 // Help component
 .piano-block-help {
 	position: absolute;

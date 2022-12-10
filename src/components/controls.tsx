@@ -71,7 +71,6 @@ const Controls = ( { settings, piano, onChange }: Props ) => {
 
 		piano.set( newSynthesizerSetting );
 		piano.releaseAll();
-
 		onChange( { synthesizerSetting: newSynthesizerSetting } );
 	};
 
@@ -122,7 +121,7 @@ const Controls = ( { settings, piano, onChange }: Props ) => {
 							variant="primary"
 							onClick={ () => setIsSynthesizerSettingOpen( ! isSynthesizerSettingOpen ) }
 						/>
-						{ isSynthesizerSettingOpen && (
+						{ ! isSynthesizerSettingOpen && (
 							<Popover
 								// @ts-ignore: `withInputField` prop is not exist at @types
 								placement="top"
