@@ -89,8 +89,8 @@ const SynthesizerSetting = ( { synthesizerSetting, onChange }: Props ) => {
 		// Release
 		context.lineTo( width - CANVAS_OFFSET, height );
 
-		context.strokeStyle = '#666';
-		context.lineWidth = 4;
+		context.strokeStyle = '#1e1e1e';
+		context.lineWidth = 2;
 
 		context.stroke();
 		context.closePath();
@@ -98,35 +98,30 @@ const SynthesizerSetting = ( { synthesizerSetting, onChange }: Props ) => {
 
 	return (
 		<div className="piano-block-synthesizer-setting">
-			<h2>{ __( 'Synthesizer Setting', 'piano-block' ) }</h2>
-			<div className="piano-block-synthesizer-setting__content">
-				<div className="piano-block-synthesizer-setting__controls">
-					<SelectControl
-						label={ __( 'Oscillator Type', 'piano-block' ) }
-						value={ oscillator?.type || DEFAULT_OSCILLATOR_TYPE }
-						options={ OSCILLATOR_TYPES.map( ( { label, value } ) => {
-							return { label, value };
-						} ) }
-						onChange={ onOscillatorTypeChange }
+			<SelectControl
+				label={ __( 'Oscillator Type', 'piano-block' ) }
+				value={ oscillator?.type || DEFAULT_OSCILLATOR_TYPE }
+				options={ OSCILLATOR_TYPES.map( ( { label, value } ) => {
+					return { label, value };
+				} ) }
+				onChange={ onOscillatorTypeChange }
+			/>
+			<div className="piano-block-synthesizer-setting__envelope">
+				{ EMVELOPE_CONTROLS.map( ( { label, parameter, min, max } ) => (
+					<RangeControl
+						key={ parameter }
+						label={ label }
+						value={ envelope[ parameter ] ?? DEFAULT_ENVELOPE[ parameter ] }
+						min={ min }
+						max={ max }
+						step={ 0.1 }
+						// @ts-ignore: `withInputField` prop is not exist at @types
+						withInputField={ false }
+						onChange={ ( value ) => onEnvelopeChange( parameter, value ) }
 					/>
-					<div className="piano-block-synthesizer-setting__envelope">
-						{ EMVELOPE_CONTROLS.map( ( { label, parameter, min, max } ) => (
-							<RangeControl
-								key={ parameter }
-								label={ label }
-								value={ envelope[ parameter ] ?? DEFAULT_ENVELOPE[ parameter ] }
-								min={ min }
-								max={ max }
-								step={ 0.1 }
-								// @ts-ignore: `withInputField` prop is not exist at @types
-								withInputField={ false }
-								onChange={ ( value ) => onEnvelopeChange( parameter, value ) }
-							/>
-						) ) }
-					</div>
-				</div>
-				<canvas ref={ ref } className="piano-block-synthesizer-setting__graph"></canvas>
+				) ) }
 			</div>
+			<canvas ref={ ref } className="piano-block-synthesizer-setting__graph"></canvas>
 		</div>
 	);
 };
