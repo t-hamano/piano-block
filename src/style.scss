@@ -165,6 +165,10 @@
 				outline: var(--wp-admin-theme-color) auto 4px;
 			}
 
+			// &:focus:not(:focus-visible) {
+			// 	outline: none;
+			// }
+
 			&--black {
 				position: relative;
 				width: 34px;

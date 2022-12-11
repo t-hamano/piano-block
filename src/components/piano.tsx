@@ -77,13 +77,6 @@ const Piano = ( { settings, onChange }: Props ) => {
 		};
 	}, [ instrument ] );
 
-	// Focus on the block itself to prevent manipulation of the form elements in the block.
-	useEffect( () => {
-		if ( ref.current ) {
-			ref.current.focus();
-		}
-	}, [ activeKeys, instrument ] );
-
 	// Normalize Volume.
 	useEffect( () => {
 		if ( piano ) {
@@ -117,6 +110,12 @@ const Piano = ( { settings, onChange }: Props ) => {
 		);
 		if ( isKeyPressed ) {
 			return;
+		}
+
+		// Remove focus from key.
+		const activeElement = ref.current?.ownerDocument.activeElement;
+		if ( activeElement && activeElement.classList.contains( 'piano-block-keyboard__key' ) ) {
+			ref.current.focus();
 		}
 
 		const targetNote = `${ targetKey.note }${
@@ -183,12 +182,17 @@ const Piano = ( { settings, onChange }: Props ) => {
 	const keyboardProps = {
 		activeKeys,
 		onKeyClick,
-		ref,
 	};
 
 	return (
 		// eslint-disable-next-line jsx-a11y/no-static-element-interactions
-		<div className="piano-block-container" onKeyDown={ onKeyDown } onKeyUp={ onKeyUp }>
+		<div
+			className="piano-block-container"
+			ref={ ref }
+			tabIndex={ 0 }
+			onKeyDown={ onKeyDown }
+			onKeyUp={ onKeyUp }
+		>
 			{ ! isReady && <Loading /> }
 			<Controls { ...controlsProps } />
 			<Keyboard { ...keyboardProps } />

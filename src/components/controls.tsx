@@ -125,6 +125,7 @@ const Controls = ( { settings, piano, onChange }: Props ) => {
 							<Popover
 								// @ts-ignore: `withInputField` prop is not exist at @types
 								placement="top"
+								onClose={ () => setIsSynthesizerSettingOpen( false ) }
 							>
 								<SynthesizerSetting
 									synthesizerSetting={ synthesizerSetting }
