@@ -216,12 +216,12 @@ export const OSCILLATOR_TYPES = [
 	{
 		label: __( 'Square', 'piano-block' ),
 		value: 'square',
-		volumeOffset: -12,
+		volumeOffset: -18,
 	},
 	{
 		label: __( 'Sawtooth', 'piano-block' ),
 		value: 'sawtooth',
-		volumeOffset: -7,
+		volumeOffset: -12,
 	},
 	{
 		label: __( 'Triangle', 'piano-block' ),
@@ -236,12 +236,12 @@ export const OSCILLATOR_TYPES = [
 	{
 		label: __( 'Fat Square', 'piano-block' ),
 		value: 'fatsquare',
-		volumeOffset: -6,
+		volumeOffset: -10,
 	},
 	{
 		label: __( 'Fat Sawtooth', 'piano-block' ),
 		value: 'fatsawtooth',
-		volumeOffset: -3,
+		volumeOffset: -8,
 	},
 	{
 		label: __( 'Fat Triangle', 'piano-block' ),
@@ -256,17 +256,17 @@ export const OSCILLATOR_TYPES = [
 	{
 		label: __( 'FM Square', 'piano-block' ),
 		value: 'fmsquare',
-		volumeOffset: -10,
+		volumeOffset: -12,
 	},
 	{
 		label: __( 'FM Sawtooth', 'piano-block' ),
 		value: 'fmsawtooth',
-		volumeOffset: -10,
+		volumeOffset: -12,
 	},
 	{
 		label: __( 'FM Triangle', 'piano-block' ),
 		value: 'fmtriangle',
-		volumeOffset: 0,
+		volumeOffset: -2,
 	},
 	{
 		label: __( 'AM Sine', 'piano-block' ),
@@ -276,12 +276,12 @@ export const OSCILLATOR_TYPES = [
 	{
 		label: __( 'AM Square', 'piano-block' ),
 		value: 'amsquare',
-		volumeOffset: -6,
+		volumeOffset: -10,
 	},
 	{
 		label: __( 'AM Sawtooth', 'piano-block' ),
 		value: 'amsawtooth',
-		volumeOffset: -3,
+		volumeOffset: -8,
 	},
 	{
 		label: __( 'AM Triangle', 'piano-block' ),
@@ -291,12 +291,12 @@ export const OSCILLATOR_TYPES = [
 	{
 		label: __( 'Pulse', 'piano-block' ),
 		value: 'pulse',
-		volumeOffset: -12,
+		volumeOffset: -17,
 	},
 	{
 		label: __( 'PWM', 'piano-block' ),
 		value: 'pwm',
-		volumeOffset: -12,
+		volumeOffset: -17,
 	},
 ] as const;
 
