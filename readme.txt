@@ -4,7 +4,7 @@ Tags: gutenberg, audio, music, piano
 Donate link: https://www.paypal.me/thamanoJP
 Requires at least: 5.9
 Tested up to: 6.1
-Stable tag: 1.1.1
+Stable tag: 2.0.0
 Requires PHP: 7.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -96,6 +96,10 @@ License: Apache License 2.0
 Source: https://fonts.google.com/specimen/Yellowtail
 
 == Changelog ==
+
+= 2.0.0 =
+* Add synthesizer to instruments
+* Accessibility Improvements
 
 = 1.1.1 =
 * Tested to WordPress 6.1
