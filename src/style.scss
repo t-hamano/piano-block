@@ -124,7 +124,7 @@
 				display: flex;
 				align-items: flex-end;
 
-				.components-button {
+				> .components-button {
 					width: 30px;
 					min-width: 30px;
 					height: 30px;
@@ -214,13 +214,19 @@
 // SynthesizerSetting component
 .piano-block-synthesizer-setting {
 	width: 240px;
+	max-width: 100%;
 	padding: 8px 16px;
 	overflow: hidden;
+
+	.components-base-control__field {
+		margin: 0;
+	}
 
 	&__envelope {
 		display: flex;
 		flex-wrap: wrap;
 		gap: 0 16px;
+		margin-top: 8px;
 
 		.components-range-control {
 			width: calc(50% - 8px);
@@ -236,13 +242,14 @@
 		display: block;
 		width: 100%;
 		height: 80px;
-		margin-bottom: 8px;
+		margin: 8px 0;
 		border: 1px solid var(--wp-admin-theme-color);
 	}
 
-	&__reset {
+	&__reset.components-button {
 		display: block;
 		margin-left: auto;
+		color: #cc1818 !important;
 	}
 }
 

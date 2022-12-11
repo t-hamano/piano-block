@@ -38,10 +38,11 @@ function piano_block_render_callback( $attributes ) {
 		return '';
 	}
 
-	$volume            = ! empty( $attributes['volume'] ) ? min( max( (int) $attributes['volume'], -10 ), 5 ) : 0;
-	$use_sustain_pedal = ! empty( $attributes['useSustainPedal'] );
-	$octave_offset     = ! empty( $attributes['octaveOffset'] ) ? min( max( (int) $attributes['octaveOffset'], -2 ), 2 ) : 0;
-	$instrument        = ! empty( $attributes['instrument'] ) ? $attributes['instrument'] : 'acoustic-piano';
+	$volume              = ! empty( $attributes['volume'] ) ? min( max( (int) $attributes['volume'], -10 ), 5 ) : 0;
+	$use_sustain_pedal   = ! empty( $attributes['useSustainPedal'] );
+	$octave_offset       = ! empty( $attributes['octaveOffset'] ) ? min( max( (int) $attributes['octaveOffset'], -2 ), 2 ) : 0;
+	$instrument          = ! empty( $attributes['instrument'] ) ? $attributes['instrument'] : 'acoustic-piano';
+	$synthesizer_setting = ! empty( $attributes['synthesizerSetting'] ) ? $attributes['synthesizerSetting'] : array();
 
 	$asset_file = include( PIANO_BLOCK_PATH . '/build/view.asset.php' );
 
@@ -61,10 +62,11 @@ function piano_block_render_callback( $attributes ) {
 		array(
 			'assetsUrl' => PIANO_BLOCK_URL . '/assets',
 			'settings'  => array(
-				'volume'          => $volume,
-				'useSustainPedal' => $use_sustain_pedal,
-				'octaveOffset'    => $octave_offset,
-				'instrument'      => $instrument,
+				'volume'             => $volume,
+				'useSustainPedal'    => $use_sustain_pedal,
+				'octaveOffset'       => $octave_offset,
+				'instrument'         => $instrument,
+				'synthesizerSetting' => $synthesizer_setting,
 			),
 		)
 	);
