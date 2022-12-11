@@ -3,7 +3,7 @@
  */
 import { __ } from '@wordpress/i18n';
 import { useEffect, useRef } from '@wordpress/element';
-import { RangeControl, SelectControl } from '@wordpress/components';
+import { Button, RangeControl, SelectControl } from '@wordpress/components';
 
 /**
  * Internal dependencies
@@ -24,6 +24,54 @@ type Props = {
 const SynthesizerSetting = ( { synthesizerSetting, onChange }: Props ) => {
 	const { oscillator, envelope = DEFAULT_ENVELOPE } = synthesizerSetting;
 	const ref = useRef< HTMLCanvasElement >( null );
+
+	// Draw ADSR graph.
+	useEffect( () => {
+		if ( ! ref.current ) {
+			return;
+		}
+
+		const context = ref.current.getContext( '2d' );
+
+		if ( ! context ) {
+			return;
+		}
+
+		const { width, height } = ref.current;
+
+		const { attack, decay, sustain, release } = envelope;
+		const canvasOffset = 20;
+		const innerWidth = width - canvasOffset * 2;
+		const sustainWidth = innerWidth / 4;
+		const total = attack + decay + release;
+
+		let point = canvasOffset;
+
+		context.clearRect( 0, 0, width, height );
+		context.beginPath();
+
+		// Attack
+		context.moveTo( point, height );
+		point += ( attack / total ) * ( innerWidth - sustainWidth );
+		context.lineTo( point, canvasOffset );
+
+		// Decay
+		point += ( decay / total ) * ( innerWidth - sustainWidth );
+		context.lineTo( point, height - sustain * ( height - canvasOffset ) );
+
+		// Sustain
+		context.lineTo( point + sustainWidth, height - sustain * ( height - canvasOffset ) );
+		point += sustainWidth;
+
+		// Release
+		context.lineTo( width - canvasOffset, height );
+
+		context.strokeStyle = '#1e1e1e';
+		context.lineWidth = 2;
+
+		context.stroke();
+		context.closePath();
+	}, [ envelope ] );
 
 	const onOscillatorTypeChange = ( newOscillatorType: OscillatorType[ 'value' ] ) => {
 		onChange( {
@@ -49,52 +97,10 @@ const SynthesizerSetting = ( { synthesizerSetting, onChange }: Props ) => {
 		} );
 	};
 
-	// Draw ADSR graph.
-	useEffect( () => {
-		if ( ! ref.current ) {
-			return;
-		}
-
-		const context = ref.current.getContext( '2d' );
-
-		if ( ! context ) {
-			return;
-		}
-
-		const { width, height } = ref.current;
-
-		const { attack, decay, sustain, release } = envelope;
-		const CANVAS_OFFSET = 20;
-		const SUSTAIN_WIDTH = width / 4;
-
-		const total = attack + decay + release;
-		let point = CANVAS_OFFSET;
-
-		context.clearRect( 0, 0, width, height );
-		context.beginPath();
-
-		// Attack
-		context.moveTo( point, height );
-		point = ( attack / total ) * ( width - SUSTAIN_WIDTH - CANVAS_OFFSET * 2 ) + CANVAS_OFFSET;
-		context.lineTo( point, CANVAS_OFFSET );
-
-		// Decay
-		point += ( decay / total ) * ( width - SUSTAIN_WIDTH - CANVAS_OFFSET * 2 );
-		context.lineTo( point, height - sustain * ( height - CANVAS_OFFSET ) );
-
-		// Sustain
-		context.lineTo( point + SUSTAIN_WIDTH, height - sustain * ( height - CANVAS_OFFSET ) );
-		point += SUSTAIN_WIDTH;
-
-		// Release
-		context.lineTo( width - CANVAS_OFFSET, height );
-
-		context.strokeStyle = '#1e1e1e';
-		context.lineWidth = 2;
-
-		context.stroke();
-		context.closePath();
-	}, [ envelope ] );
+	const onEnvelopeReset = () => {
+		const { envelope: _, ...newSynthesizerSetting } = synthesizerSetting;
+		onChange( newSynthesizerSetting );
+	};
 
 	return (
 		<div className="piano-block-synthesizer-setting">
@@ -107,14 +113,14 @@ const SynthesizerSetting = ( { synthesizerSetting, onChange }: Props ) => {
 				onChange={ onOscillatorTypeChange }
 			/>
 			<div className="piano-block-synthesizer-setting__envelope">
-				{ EMVELOPE_CONTROLS.map( ( { label, parameter, min, max } ) => (
+				{ EMVELOPE_CONTROLS.map( ( { label, parameter, max } ) => (
 					<RangeControl
 						key={ parameter }
 						label={ label }
 						value={ envelope[ parameter ] ?? DEFAULT_ENVELOPE[ parameter ] }
-						min={ min }
+						min={ 0 }
 						max={ max }
-						step={ 0.1 }
+						step={ 0.05 }
 						// @ts-ignore: `withInputField` prop is not exist at @types
 						withInputField={ false }
 						onChange={ ( value ) => onEnvelopeChange( parameter, value ) }
@@ -122,6 +128,14 @@ const SynthesizerSetting = ( { synthesizerSetting, onChange }: Props ) => {
 				) ) }
 			</div>
 			<canvas ref={ ref } className="piano-block-synthesizer-setting__graph"></canvas>
+			<Button
+				className="piano-block-synthesizer-setting__reset"
+				isDestructive
+				isSmall
+				onClick={ onEnvelopeReset }
+			>
+				{ __( 'Reset envelope', 'piano-block' ) }
+			</Button>
 		</div>
 	);
 };

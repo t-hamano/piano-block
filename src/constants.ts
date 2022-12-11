@@ -13,7 +13,7 @@ export interface BlockAttributes {
 		oscillator: {
 			type: typeof OSCILLATOR_TYPES[ number ][ 'value' ];
 		};
-		envelope: {
+		envelope?: {
 			attack: number;
 			decay: number;
 			sustain: number;
@@ -42,7 +42,6 @@ export const DEFAULT_SETTINGS = {
 	octaveOffset: 0,
 	instrument: DEFAULT_INSTRUMENT,
 	showOnFront: false,
-	synthesizerSetting: {},
 };
 
 export const INSTRUMENTS = [
@@ -304,25 +303,21 @@ export const EMVELOPE_CONTROLS = [
 	{
 		label: __( 'Attack', 'piano-block' ),
 		parameter: 'attack',
-		min: 0,
 		max: 2,
 	},
 	{
 		label: __( 'Decay', 'piano-block' ),
 		parameter: 'decay',
-		min: 0,
 		max: 2,
 	},
 	{
 		label: __( 'Sustain', 'piano-block' ),
 		parameter: 'sustain',
-		min: 0.1,
 		max: 1,
 	},
 	{
 		label: __( 'Release', 'piano-block' ),
 		parameter: 'release',
-		min: 0,
 		max: 3,
 	},
 ] as const;
