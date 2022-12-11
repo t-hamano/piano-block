@@ -83,6 +83,13 @@ const SynthesizerSetting = ( { synthesizerSetting, onChange }: Props ) => {
 		} );
 	};
 
+	// Disable search on keystroke while select is focused.
+	const onOscillatorTypeKeyDown = ( event: React.KeyboardEvent< HTMLSelectElement > ) => {
+		if ( ! [ 'ArrowUp', 'ArrowDown', 'Enter' ].includes( event.key ) ) {
+			event.preventDefault();
+		}
+	};
+
 	const onEnvelopeChange = (
 		parameter: EmvelopeControl[ 'parameter' ],
 		value: number | undefined
@@ -106,10 +113,12 @@ const SynthesizerSetting = ( { synthesizerSetting, onChange }: Props ) => {
 		<div className="piano-block-synthesizer-setting">
 			<SelectControl
 				label={ __( 'Oscillator Type', 'piano-block' ) }
+				autoComplete="off"
 				value={ oscillator?.type || DEFAULT_OSCILLATOR_TYPE }
 				options={ OSCILLATOR_TYPES.map( ( { label, value } ) => {
 					return { label, value };
 				} ) }
+				onKeyDown={ onOscillatorTypeKeyDown }
 				onChange={ onOscillatorTypeChange }
 			/>
 			<div className="piano-block-synthesizer-setting__envelope">
@@ -118,7 +127,7 @@ const SynthesizerSetting = ( { synthesizerSetting, onChange }: Props ) => {
 						key={ parameter }
 						label={ label }
 						value={ envelope[ parameter ] ?? DEFAULT_ENVELOPE[ parameter ] }
-						min={ 0 }
+						min={ 0.05 }
 						max={ max }
 						step={ 0.05 }
 						// @ts-ignore: `withInputField` prop is not exist at @types

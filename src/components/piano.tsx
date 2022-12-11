@@ -12,7 +12,7 @@ import { useEffect, useState, useRef } from '@wordpress/element';
 /**
  * Internal dependencies
  */
-import { INSTRUMENTS, KEYS } from '../constants';
+import { DEFAULT_ENVELOPE, INSTRUMENTS, KEYS } from '../constants';
 import { Loading, Keyboard, Controls } from '../components';
 import { getNormalizedVolume, getSamplerUrls } from '../utils';
 import type { BlockAttributes, Key } from '../constants';
@@ -50,7 +50,10 @@ const Piano = ( { settings, onChange }: Props ) => {
 
 		if ( instrumentSetting.value === 'synthesizer' ) {
 			tonePlayer = new Tone.PolySynth().toDestination();
-			tonePlayer.set( synthesizerSetting );
+			tonePlayer.set( {
+				...synthesizerSetting,
+				envelope: synthesizerSetting.envelope || DEFAULT_ENVELOPE,
+			} );
 			setInstrumentOctaveOffset( 0 );
 			setIsReady( true );
 		} else {
@@ -93,6 +96,18 @@ const Piano = ( { settings, onChange }: Props ) => {
 
 	// Play the audio corresponding to the pressed key.
 	const onKeyDown = ( event: KeyboardEvent ): void => {
+		// Remove focus from key.
+		const activeElement = ref.current?.ownerDocument.activeElement;
+		if ( activeElement && activeElement.classList.contains( 'piano-block-keyboard__key' ) ) {
+			ref.current.focus();
+		}
+
+		// Disable search on keystroke while select is focused.
+		const isAcceptableKey = [ 'ArrowUp', 'ArrowDown', 'Enter' ].includes( event.key );
+		if ( activeElement && activeElement?.tagName === 'SELECT' && ! isAcceptableKey ) {
+			event.preventDefault();
+		}
+
 		if ( ! isReady || ! piano ) {
 			return;
 		}
@@ -112,17 +127,6 @@ const Piano = ( { settings, onChange }: Props ) => {
 			return;
 		}
 
-		// Remove focus from key.
-		const activeElement = ref.current?.ownerDocument.activeElement;
-		if ( activeElement && activeElement.classList.contains( 'piano-block-keyboard__key' ) ) {
-			ref.current.focus();
-		}
-
-		// Disable search on keystroke while select is focused.
-		if ( activeElement && activeElement?.tagName ) {
-			event.preventDefault();
-		}
-
 		const targetNote = `${ targetKey.note }${
 			targetKey.octave + octaveOffset + instrumentOctaveOffset
 		}`;
@@ -137,6 +141,7 @@ const Piano = ( { settings, onChange }: Props ) => {
 		if ( ! isReady || ! piano ) {
 			return;
 		}
+		event.preventDefault();
 
 		const targetKey = KEYS.find( ( key ) => key.name.some( ( name ) => event.key === name ) );
 

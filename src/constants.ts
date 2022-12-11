@@ -30,7 +30,7 @@ export const KEYBOARD_WIDTH = 850 as const;
 export const KEYBOARD_PADDING = 16 as const;
 
 export const DEFAULT_ENVELOPE = {
-	attack: 1.0,
+	attack: 0.3,
 	decay: 1.0,
 	sustain: 0.5,
 	release: 1.5,
@@ -304,7 +304,7 @@ export const EMVELOPE_CONTROLS = [
 	{
 		label: __( 'Attack', 'piano-block' ),
 		parameter: 'attack',
-		max: 2,
+		max: 1,
 	},
 	{
 		label: __( 'Decay', 'piano-block' ),

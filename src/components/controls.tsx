@@ -23,7 +23,13 @@ import { cog, help } from '@wordpress/icons';
 /**
  * Internal dependencies
  */
-import { INSTRUMENTS, OCTAVE_OFFSETS, MIN_VOLUME, MAX_VOLUME } from '../constants';
+import {
+	INSTRUMENTS,
+	DEFAULT_ENVELOPE,
+	OCTAVE_OFFSETS,
+	MIN_VOLUME,
+	MAX_VOLUME,
+} from '../constants';
 import { SynthesizerSetting } from '../components';
 import { getNormalizedVolume } from '../utils';
 import type { BlockAttributes } from '../constants';
@@ -69,7 +75,10 @@ const Controls = ( { settings, piano, onChange }: Props ) => {
 			return;
 		}
 
-		piano.set( newSynthesizerSetting );
+		piano.set( {
+			...newSynthesizerSetting,
+			envelope: newSynthesizerSetting.envelope || DEFAULT_ENVELOPE,
+		} );
 		piano.releaseAll();
 		onChange( { synthesizerSetting: newSynthesizerSetting } );
 	};
