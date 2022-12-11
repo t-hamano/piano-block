@@ -2,4 +2,4 @@
 
 exports[`Block should update attributes in the block sidebar. 1`] = `"<!-- wp:piano-block/piano {\\"showOnFront\\":true} /-->"`;
 
-exports[`Block should update attributes related to sound using only keyboard. 1`] = `"<!-- wp:piano-block/piano {\\"volume\\":-0.3,\\"octaveOffset\\":-1,\\"instrument\\":\\"synthesizer\\",\\"useSustainPedal\\":false,\\"showOnFront\\":false,\\"synthesizerSetting\\":{\\"oscillator\\":{\\"type\\":\\"sawtooth\\"},\\"envelope\\":{\\"attack\\":1.1,\\"decay\\":1.1,\\"sustain\\":0.6,\\"release\\":1.6}}} /-->"`;
+exports[`Block should update attributes related to sound using only keyboard. 1`] = `"<!-- wp:piano-block/piano {\\"volume\\":-0.3,\\"octaveOffset\\":-1,\\"instrument\\":\\"synthesizer\\",\\"useSustainPedal\\":false,\\"showOnFront\\":false,\\"synthesizerSetting\\":{\\"oscillator\\":{\\"type\\":\\"sawtooth\\"},\\"envelope\\":{\\"attack\\":0.4,\\"decay\\":1.1,\\"sustain\\":0.6,\\"release\\":1.6}}} /-->"`;

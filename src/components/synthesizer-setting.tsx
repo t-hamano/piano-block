@@ -85,7 +85,7 @@ const SynthesizerSetting = ( { synthesizerSetting, onChange }: Props ) => {
 
 	// Disable search on keystroke while select is focused.
 	const onOscillatorTypeKeyDown = ( event: React.KeyboardEvent< HTMLSelectElement > ) => {
-		if ( ! [ 'ArrowUp', 'ArrowDown', 'Enter' ].includes( event.key ) ) {
+		if ( ! [ 'ArrowUp', 'ArrowDown', 'Enter', 'Tab' ].includes( event.key ) ) {
 			event.preventDefault();
 		}
 	};

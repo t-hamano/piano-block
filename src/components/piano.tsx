@@ -103,7 +103,7 @@ const Piano = ( { settings, onChange }: Props ) => {
 		}
 
 		// Disable search on keystroke while select is focused.
-		const isAcceptableKey = [ 'ArrowUp', 'ArrowDown', 'Enter' ].includes( event.key );
+		const isAcceptableKey = [ 'ArrowUp', 'ArrowDown', 'Enter', 'Tab' ].includes( event.key );
 		if ( activeElement && activeElement?.tagName === 'SELECT' && ! isAcceptableKey ) {
 			event.preventDefault();
 		}
