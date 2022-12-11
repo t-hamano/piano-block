@@ -42,6 +42,7 @@ export const DEFAULT_SETTINGS = {
 	octaveOffset: 0,
 	instrument: DEFAULT_INSTRUMENT,
 	showOnFront: false,
+	synthesizerSetting: {},
 };
 
 export const INSTRUMENTS = [

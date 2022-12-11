@@ -121,7 +121,7 @@ const Controls = ( { settings, piano, onChange }: Props ) => {
 							variant="primary"
 							onClick={ () => setIsSynthesizerSettingOpen( ! isSynthesizerSettingOpen ) }
 						/>
-						{ ! isSynthesizerSettingOpen && (
+						{ isSynthesizerSettingOpen && (
 							<Popover
 								// @ts-ignore: `withInputField` prop is not exist at @types
 								placement="top"
