@@ -330,6 +330,7 @@ export interface Instrument {
 	octaveOffset: number;
 	volumeOffset: number;
 }
+
 export type Key = typeof KEYS[ number ];
 export type OscillatorType = typeof OSCILLATOR_TYPES[ number ];
 export type EmvelopeControl = typeof EMVELOPE_CONTROLS[ number ];

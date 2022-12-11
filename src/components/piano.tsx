@@ -118,6 +118,11 @@ const Piano = ( { settings, onChange }: Props ) => {
 			ref.current.focus();
 		}
 
+		// Disable search on keystroke while select is focused.
+		if ( activeElement && activeElement?.tagName ) {
+			event.preventDefault();
+		}
+
 		const targetNote = `${ targetKey.note }${
 			targetKey.octave + octaveOffset + instrumentOctaveOffset
 		}`;
