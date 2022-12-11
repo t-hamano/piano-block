@@ -21,34 +21,71 @@ describe( 'Block', () => {
 		await createNewPost();
 	} );
 
-	it( 'should update attributes', async () => {
+	it( 'should update attributes related to sound using only keyboard.', async () => {
 		await insertBlock( 'Piano' );
+		await page.keyboard.press( 'ArrowRight' );
+		await page.keyboard.press( 'ArrowRight' );
 
 		// Volume
-		await page.waitForXPath( '//label[text()="Volume"]' );
-		const [ volume ] = await page.$x( '//label[text()="Volume"]' );
-		await volume.click();
 		for ( let i = 0; i < 3; i++ ) {
 			await page.keyboard.press( 'ArrowLeft' );
 		}
 
 		// Octave Offset
-		const [ octaveOffset ] = await page.$x( '//button[text()="-2"]' );
-		await octaveOffset.click();
+		await page.keyboard.press( 'Tab' );
+		await page.keyboard.press( 'Tab' );
+		await page.keyboard.press( 'ArrowRight' );
+		await page.keyboard.press( 'Enter' );
+
+		// Pressing a piano key should not remove focus.
+		await page.keyboard.press( 'z' );
 
 		// Instrument
-		const [ instrument ] = await page.$x( '//label[text()="Insturment"]' );
-		await instrument.click();
+		await page.keyboard.press( 'ArrowRight' );
+		await page.keyboard.press( 'ArrowRight' );
+		await page.keyboard.press( 'ArrowRight' );
+		await page.keyboard.press( 'ArrowRight' );
+		await page.keyboard.press( 'Enter' );
+		for ( let index = 0; index < 14; index++ ) {
+			await page.keyboard.press( 'ArrowDown' );
+		}
+		await page.keyboard.press( 'Enter' );
+
+		// Pressing a piano key should not remove focus.
+		await page.keyboard.press( 'z' );
+
+		// Synthesizer Setting
+		await page.keyboard.press( 'ArrowRight' );
 		await page.keyboard.press( 'Enter' );
 		await page.keyboard.press( 'ArrowDown' );
 		await page.keyboard.press( 'ArrowDown' );
-		await page.keyboard.press( 'Enter' );
 
-		// Use Sustain Pedal
-		const [ useSustainPedal ] = await page.$x( '//label[text()="Use Sustain Pedal"]' );
-		await useSustainPedal.click();
+		for ( let index = 0; index < 4; index++ ) {
+			await page.keyboard.press( 'Tab' );
+			await page.keyboard.press( 'ArrowRight' );
+			await page.keyboard.press( 'ArrowRight' );
+		}
+		await page.keyboard.press( 'Escape' );
+		// const [ synthesizerSetting ] = await page.$x( '//button[text()="Synthesizer Setting"]' );
+		// await synthesizerSetting.click();
+		// // Use Sustain Pedal
+		// const [ useSustainPedal ] = await page.$x( '//label[text()="Use Sustain Pedal"]' );
+		// await useSustainPedal.click();
 
-		// Display on the front end
+		// // Display on the front end
+		// const [ sidebarButton ] = await page.$$(
+		// 	'.edit-post-header [aria-label="Settings"][aria-expanded="false"]'
+		// );
+		// await sidebarButton.click();
+		// await page.waitForXPath( '//label[text()="Display on the front end"]' );
+		// const [ showOnFront ] = await page.$x( '//label[text()="Display on the front end"]' );
+		// await showOnFront.click();
+
+		expect( await getEditedPostContent() ).toMatchSnapshot();
+	} );
+
+	it( 'should update attributes in the block sidebar.', async () => {
+		await insertBlock( 'Piano' );
 		const [ sidebarButton ] = await page.$$(
 			'.edit-post-header [aria-label="Settings"][aria-expanded="false"]'
 		);
