@@ -42,6 +42,7 @@ I may add it in a future update if those issues can be resolved.
 == Screenshots ==
 
 1. Piano Block
+2. Piano Block Synthesizer Setting
 
 == Resources, Audio Samples ==
 
