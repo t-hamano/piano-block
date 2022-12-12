@@ -27,7 +27,7 @@ const Keyboard = ( { activeKeys, onKeyClick }: Props ) => {
 	// Hooks to control the display of horizontal scroll bars.
 	const [ resizeListener, keysInnerSizes ] = useResizeObserver();
 
-	// Mouse cursor is clicked or the Enter key is pressed on the keyboard.
+	// Trigger the note when the key is clicked by the mouse cursor or when the enter key is pressed.
 	const onClick = ( note: string, octave: number ) => {
 		onKeyClick( note, octave );
 	};

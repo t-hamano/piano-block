@@ -94,7 +94,7 @@ const Piano = ( { settings, onChange }: Props ) => {
 		}
 	}, [ settings.useSustainPedal, settings.synthesizerSetting ] );
 
-	// Play the audio corresponding to the pressed key.
+	// Trigger the note corresponding to the pressed key.
 	const onKeyDown = ( event: KeyboardEvent ): void => {
 		// Remove focus from key.
 		const activeElement = ref.current?.ownerDocument.activeElement;
@@ -102,7 +102,7 @@ const Piano = ( { settings, onChange }: Props ) => {
 			ref.current.focus();
 		}
 
-		// Disable search on keystroke while select is focused.
+		// Disable unexpected key events on select elements.
 		const isAcceptableKey = [ 'ArrowUp', 'ArrowDown', 'Enter', 'Tab' ].includes( event.key );
 		if ( activeElement && activeElement?.tagName === 'SELECT' && ! isAcceptableKey ) {
 			event.preventDefault();
@@ -137,7 +137,7 @@ const Piano = ( { settings, onChange }: Props ) => {
 		setActiveKeys( [ ...activeKeys, targetKey ] );
 	};
 
-	// Release the note when the key is released.
+	// Stop the note when the key is released.
 	const onKeyUp = ( event: KeyboardEvent ) => {
 		event.preventDefault();
 
@@ -151,7 +151,7 @@ const Piano = ( { settings, onChange }: Props ) => {
 			return;
 		}
 
-		// Release the note.
+		// Stop the note.
 		if ( ! useSustainPedal || instrument === 'synthesizer' ) {
 			const targetNote = `${ targetKey.note }${
 				targetKey.octave + octaveOffset + instrumentOctaveOffset
@@ -165,7 +165,7 @@ const Piano = ( { settings, onChange }: Props ) => {
 		setActiveKeys( newActiveKeys );
 	};
 
-	// Mouse cursor is clicked or the Enter key is pressed on the keyboard.
+	// Trigger the note when the key is clicked by the mouse cursor or when the enter key is pressed.
 	const onKeyClick = ( note: string, octave: number ) => {
 		if ( ! isReady || ! piano ) {
 			return;
