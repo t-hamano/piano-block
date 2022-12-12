@@ -2,6 +2,7 @@
  * WordPress dependencies
  */
 import { render, useState } from '@wordpress/element';
+import domReady from '@wordpress/dom-ready';
 
 /**
  * Internal dependencies
@@ -26,8 +27,10 @@ function View() {
 	return <Piano settings={ settings } onChange={ onChange } />;
 }
 
-const block = document.querySelector( '.wp-block-piano-block-piano' );
+domReady( function () {
+	const block = document.querySelector( '.wp-block-piano-block-piano' );
 
-if ( block ) {
-	render( <View />, block );
-}
+	if ( block ) {
+		render( <View />, block );
+	}
+} );
