@@ -60,7 +60,6 @@ const Controls = ( { settings, piano, onChange }: Props ) => {
 	};
 
 	const onInstrumentChange = ( newInstrument: typeof INSTRUMENTS[ number ][ 'value' ] ) => {
-		setIsSynthesizerSettingOpen( false );
 		onChange( { instrument: newInstrument } );
 	};
 
@@ -79,7 +78,6 @@ const Controls = ( { settings, piano, onChange }: Props ) => {
 			...newSynthesizerSetting,
 			envelope: newSynthesizerSetting.envelope || DEFAULT_ENVELOPE,
 		} );
-		piano.releaseAll();
 		onChange( { synthesizerSetting: newSynthesizerSetting } );
 	};
 

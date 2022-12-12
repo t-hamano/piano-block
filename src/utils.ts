@@ -47,7 +47,7 @@ export function getNormalizedVolume(
 
 	if ( instrument === 'synthesizer' && synthesizerSetting.oscillator?.type ) {
 		const oscillatorType = OSCILLATOR_TYPES.find(
-			( { value } ) => value === synthesizerSetting.oscillator?.type
+			( { value } ) => value === synthesizerSetting.oscillator.type
 		);
 		normalizedVolume += oscillatorType?.volumeOffset || 0;
 	}

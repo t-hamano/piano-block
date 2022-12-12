@@ -92,7 +92,7 @@ const Piano = ( { settings, onChange }: Props ) => {
 		if ( piano ) {
 			piano.releaseAll();
 		}
-	}, [ settings.useSustainPedal ] );
+	}, [ settings.useSustainPedal, settings.synthesizerSetting ] );
 
 	// Play the audio corresponding to the pressed key.
 	const onKeyDown = ( event: KeyboardEvent ): void => {
@@ -112,6 +112,7 @@ const Piano = ( { settings, onChange }: Props ) => {
 			return;
 		}
 
+		// Search the pressed key.
 		const targetKey: Key | undefined = KEYS.find( ( key ) =>
 			key.name.some( ( name ) => event.key === name )
 		);
@@ -127,21 +128,22 @@ const Piano = ( { settings, onChange }: Props ) => {
 			return;
 		}
 
+		// Trigger the note.
 		const targetNote = `${ targetKey.note }${
 			targetKey.octave + octaveOffset + instrumentOctaveOffset
 		}`;
 
 		piano.triggerAttack( targetNote );
-
 		setActiveKeys( [ ...activeKeys, targetKey ] );
 	};
 
-	// Release audio when a key is released.
+	// Release the note when the key is released.
 	const onKeyUp = ( event: KeyboardEvent ) => {
+		event.preventDefault();
+
 		if ( ! isReady || ! piano ) {
 			return;
 		}
-		event.preventDefault();
 
 		const targetKey = KEYS.find( ( key ) => key.name.some( ( name ) => event.key === name ) );
 
@@ -149,6 +151,7 @@ const Piano = ( { settings, onChange }: Props ) => {
 			return;
 		}
 
+		// Release the note.
 		if ( ! useSustainPedal || instrument === 'synthesizer' ) {
 			const targetNote = `${ targetKey.note }${
 				targetKey.octave + octaveOffset + instrumentOctaveOffset
@@ -159,7 +162,6 @@ const Piano = ( { settings, onChange }: Props ) => {
 		const newActiveKeys = activeKeys.filter(
 			( { note, octave } ) => ! ( targetKey.note === note && targetKey.octave === octave )
 		);
-
 		setActiveKeys( newActiveKeys );
 	};
 
@@ -169,6 +171,7 @@ const Piano = ( { settings, onChange }: Props ) => {
 			return;
 		}
 
+		// Trigger the note.
 		const targetNote = `${ note }${ octave + octaveOffset + instrumentOctaveOffset }`;
 
 		if ( useSustainPedal && instrument !== 'synthesizer' ) {

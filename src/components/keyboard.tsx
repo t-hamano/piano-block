@@ -24,7 +24,7 @@ type Props = {
 };
 
 const Keyboard = ( { activeKeys, onKeyClick }: Props ) => {
-	// Hooks to control the display of horizontal scroll bars
+	// Hooks to control the display of horizontal scroll bars.
 	const [ resizeListener, keysInnerSizes ] = useResizeObserver();
 
 	// Mouse cursor is clicked or the Enter key is pressed on the keyboard.

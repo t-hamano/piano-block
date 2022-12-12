@@ -38,7 +38,6 @@ const SynthesizerSetting = ( { synthesizerSetting, onChange }: Props ) => {
 		}
 
 		const { width, height } = ref.current;
-
 		const { attack, decay, sustain, release } = envelope;
 		const canvasOffset = 20;
 		const innerWidth = width - canvasOffset * 2;
@@ -68,7 +67,6 @@ const SynthesizerSetting = ( { synthesizerSetting, onChange }: Props ) => {
 
 		context.strokeStyle = '#1e1e1e';
 		context.lineWidth = 2;
-
 		context.stroke();
 		context.closePath();
 	}, [ envelope ] );
@@ -136,7 +134,7 @@ const SynthesizerSetting = ( { synthesizerSetting, onChange }: Props ) => {
 					/>
 				) ) }
 			</div>
-			<canvas ref={ ref } className="piano-block-synthesizer-setting__graph"></canvas>
+			<canvas ref={ ref } className="piano-block-synthesizer-setting__graph" />
 			<Button
 				className="piano-block-synthesizer-setting__reset"
 				isDestructive

@@ -29,13 +29,6 @@ export const DEFAULT_OSCILLATOR_TYPE = 'sine' as const;
 export const KEYBOARD_WIDTH = 850 as const;
 export const KEYBOARD_PADDING = 16 as const;
 
-export const DEFAULT_ENVELOPE = {
-	attack: 0.3,
-	decay: 1.0,
-	sustain: 0.5,
-	release: 1.5,
-};
-
 export const DEFAULT_SETTINGS = {
 	volume: 0,
 	useSustainPedal: false,
@@ -43,6 +36,13 @@ export const DEFAULT_SETTINGS = {
 	instrument: DEFAULT_INSTRUMENT,
 	showOnFront: false,
 	synthesizerSetting: {},
+};
+
+export const DEFAULT_ENVELOPE = {
+	attack: 0.3,
+	decay: 1.0,
+	sustain: 0.5,
+	release: 1.5,
 };
 
 export const INSTRUMENTS = [
