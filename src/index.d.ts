@@ -6,7 +6,7 @@ import type { BlockAttributes } from './constants';
 // Global variables output by wp_localize_script
 export interface PianoBlockVars {
 	assetsUrl: string;
-	defaultSettings: BlockAttributes
+	settings: BlockAttributes
 }
 
 declare global {

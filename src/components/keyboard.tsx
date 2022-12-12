@@ -6,6 +6,7 @@ import classnames from 'classnames';
 /**
  * WordPress dependencies
  */
+import { __, sprintf } from '@wordpress/i18n';
 import {
 	// @ts-ignore: has no exported member
 	useResizeObserver,
@@ -23,10 +24,10 @@ type Props = {
 };
 
 const Keyboard = ( { activeKeys, onKeyClick }: Props ) => {
-	// Hooks to control the display of horizontal scroll bars
+	// Hooks to control the display of horizontal scroll bars.
 	const [ resizeListener, keysInnerSizes ] = useResizeObserver();
 
-	// Mouse cursor is clicked or the Enter key is pressed on the keyboard.
+	// Trigger the note when the key is clicked by the mouse cursor or when the enter key is pressed.
 	const onClick = ( note: string, octave: number ) => {
 		onKeyClick( note, octave );
 	};
@@ -44,6 +45,7 @@ const Keyboard = ( { activeKeys, onKeyClick }: Props ) => {
 			>
 				{ KEYS.map( ( key, index ) => (
 					<button
+						key={ index }
 						className={ classnames( 'piano-block-keyboard__key', {
 							'piano-block-keyboard__key--white': ! key.isBlackKey,
 							'piano-block-keyboard__key--black': key.isBlackKey,
@@ -51,7 +53,11 @@ const Keyboard = ( { activeKeys, onKeyClick }: Props ) => {
 								( { note, octave } ) => key.note === note && key.octave === octave
 							),
 						} ) }
-						key={ index }
+						aria-label={ sprintf(
+							/* translators: %s is replaced with the key name. */
+							__( 'Note: %s', 'piano-block' ),
+							key.note + key.octave
+						) }
 						type="button"
 						onClick={ () => onClick( key.note, key.octave ) }
 					>

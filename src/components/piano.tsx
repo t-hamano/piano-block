@@ -12,9 +12,9 @@ import { useEffect, useState, useRef } from '@wordpress/element';
 /**
  * Internal dependencies
  */
-import { INSTRUMENTS, KEYS } from '../constants';
+import { DEFAULT_ENVELOPE, INSTRUMENTS, KEYS } from '../constants';
 import { Loading, Keyboard, Controls } from '../components';
-import { getSamplerUrls } from '../utils';
+import { getNormalizedVolume, getSamplerUrls } from '../utils';
 import type { BlockAttributes, Key } from '../constants';
 
 type Props = {
@@ -24,34 +24,53 @@ type Props = {
 
 const Piano = ( { settings, onChange }: Props ) => {
 	const { assetsUrl } = window.pianoBlockVars;
-	const { volume, useSustainPedal, octaveOffset, instrument } = settings;
-	const [ piano, setPiano ] = useState< Tone.Sampler >();
+	const { volume, useSustainPedal, octaveOffset, instrument, synthesizerSetting } = settings;
+	const [ piano, setPiano ] = useState< Tone.Sampler | Tone.PolySynth >();
 	const [ isReady, setIsReady ] = useState< boolean >( false );
 	const [ activeKeys, setActiveKeys ] = useState< Key[] >( [] );
 	const [ instrumentOctaveOffset, setInstrumentOctaveOffset ] = useState< number >( 0 );
 
 	const ref = useRef< HTMLDivElement >( null );
 
+	// Create Tone.js Player.
 	useEffect( () => {
-		// Initial processing of Tone.js Sampler.
-		const currentInstrument = INSTRUMENTS.find( ( { value } ) => value === instrument );
-		if ( ! currentInstrument ) return;
+		const instrumentSetting = INSTRUMENTS.find( ( { value } ) => value === instrument );
+		if ( ! instrumentSetting ) {
+			return;
+		}
 
-		const urls = getSamplerUrls( currentInstrument );
+		if ( piano ) {
+			piano.dispose();
+		}
 
-		const tonePlayer = new Tone.Sampler( {
-			urls,
-			release: 1,
-			baseUrl: `${ assetsUrl }/instruments/${ instrument }/`,
-			onload: () => {
-				if ( ref.current ) {
-					setInstrumentOctaveOffset( currentInstrument.octaveOffset );
-					setIsReady( true );
-				}
-			},
-		} ).toDestination();
+		setActiveKeys( [] );
+		setIsReady( false );
 
-		tonePlayer.volume.value = volume;
+		let tonePlayer: Tone.Sampler | Tone.PolySynth;
+
+		if ( instrumentSetting.value === 'synthesizer' ) {
+			tonePlayer = new Tone.PolySynth().toDestination();
+			tonePlayer.set( {
+				...synthesizerSetting,
+				envelope: synthesizerSetting.envelope || DEFAULT_ENVELOPE,
+			} );
+			setInstrumentOctaveOffset( 0 );
+			setIsReady( true );
+		} else {
+			tonePlayer = new Tone.Sampler( {
+				urls: getSamplerUrls( instrumentSetting ),
+				release: 1,
+				baseUrl: `${ assetsUrl }/instruments/${ instrument }/`,
+				onload: () => {
+					if ( ref.current ) {
+						setInstrumentOctaveOffset( instrumentSetting.octaveOffset || 0 );
+						setIsReady( true );
+					}
+				},
+			} ).toDestination();
+		}
+
+		tonePlayer.volume.value = getNormalizedVolume( volume, settings );
 		setPiano( tonePlayer );
 
 		return () => {
@@ -59,54 +78,81 @@ const Piano = ( { settings, onChange }: Props ) => {
 				tonePlayer.dispose();
 			}
 		};
-	}, [] );
+	}, [ instrument ] );
 
-	// Focus on the block itself to prevent manipulation of the form elements in the block when the key is pressed.
+	// Normalize Volume.
 	useEffect( () => {
-		if ( ref.current ) {
-			ref.current.focus();
+		if ( piano ) {
+			piano.volume.value = getNormalizedVolume( volume, settings );
 		}
-	}, [ activeKeys ] );
+	}, [ volume, settings.synthesizerSetting ] );
 
 	// Release all sounds.
 	useEffect( () => {
-		if ( ! piano ) return;
-		piano.releaseAll();
-	}, [ settings.useSustainPedal ] );
+		if ( piano ) {
+			piano.releaseAll();
+		}
+	}, [ settings.octaveOffset, settings.useSustainPedal, settings.synthesizerSetting ] );
 
-	// Play the audio corresponding to the pressed key.
+	// Trigger the note corresponding to the pressed key.
 	const onKeyDown = ( event: KeyboardEvent ): void => {
-		if ( ! isReady || ! piano ) return;
+		// Remove focus from key.
+		const activeElement = ref.current?.ownerDocument.activeElement;
+		if ( activeElement && activeElement.classList.contains( 'piano-block-keyboard__key' ) ) {
+			ref.current.focus();
+		}
 
+		// Disable unexpected key events on select elements.
+		const isAcceptableKey = [ 'ArrowUp', 'ArrowDown', 'Enter', 'Tab' ].includes( event.key );
+		if ( activeElement && activeElement?.tagName === 'SELECT' && ! isAcceptableKey ) {
+			event.preventDefault();
+		}
+
+		if ( ! isReady || ! piano ) {
+			return;
+		}
+
+		// Search the pressed key.
 		const targetKey: Key | undefined = KEYS.find( ( key ) =>
 			key.name.some( ( name ) => event.key === name )
 		);
-		if ( ! targetKey ) return;
+		if ( ! targetKey ) {
+			return;
+		}
 
 		// Do nothing if the key has already been pressed.
 		const isKeyPressed = activeKeys.some(
 			( { note, octave } ) => targetKey.note === note && targetKey.octave === octave
 		);
-		if ( isKeyPressed ) return;
+		if ( isKeyPressed ) {
+			return;
+		}
 
+		// Trigger the note.
 		const targetNote = `${ targetKey.note }${
 			targetKey.octave + octaveOffset + instrumentOctaveOffset
 		}`;
 
 		piano.triggerAttack( targetNote );
-
 		setActiveKeys( [ ...activeKeys, targetKey ] );
 	};
 
-	// Release audio when a key is released.
+	// Stop the note when the key is released.
 	const onKeyUp = ( event: KeyboardEvent ) => {
-		if ( ! isReady || ! piano ) return;
+		event.preventDefault();
+
+		if ( ! isReady || ! piano ) {
+			return;
+		}
 
 		const targetKey = KEYS.find( ( key ) => key.name.some( ( name ) => event.key === name ) );
 
-		if ( ! targetKey ) return;
+		if ( ! targetKey ) {
+			return;
+		}
 
-		if ( ! useSustainPedal ) {
+		// Stop the note.
+		if ( ! useSustainPedal || instrument === 'synthesizer' ) {
 			const targetNote = `${ targetKey.note }${
 				targetKey.octave + octaveOffset + instrumentOctaveOffset
 			}`;
@@ -116,17 +162,19 @@ const Piano = ( { settings, onChange }: Props ) => {
 		const newActiveKeys = activeKeys.filter(
 			( { note, octave } ) => ! ( targetKey.note === note && targetKey.octave === octave )
 		);
-
 		setActiveKeys( newActiveKeys );
 	};
 
-	// Mouse cursor is clicked or the Enter key is pressed on the keyboard.
+	// Trigger the note when the key is clicked by the mouse cursor or when the enter key is pressed.
 	const onKeyClick = ( note: string, octave: number ) => {
-		if ( ! isReady || ! piano ) return;
+		if ( ! isReady || ! piano ) {
+			return;
+		}
 
+		// Trigger the note.
 		const targetNote = `${ note }${ octave + octaveOffset + instrumentOctaveOffset }`;
 
-		if ( useSustainPedal ) {
+		if ( useSustainPedal && instrument !== 'synthesizer' ) {
 			piano.triggerAttack( targetNote );
 		} else {
 			piano.triggerAttackRelease( targetNote, 0.2 );
@@ -136,10 +184,12 @@ const Piano = ( { settings, onChange }: Props ) => {
 	const controlsProps = {
 		settings,
 		piano,
-		setPiano,
-		setActiveKeys,
-		setIsReady,
-		setInstrumentOctaveOffset,
+		onChange: ( newSettings: Partial< BlockAttributes > ) => {
+			onChange( {
+				...settings,
+				...newSettings,
+			} );
+		},
 	};
 
 	const keyboardProps = {
@@ -151,21 +201,13 @@ const Piano = ( { settings, onChange }: Props ) => {
 		// eslint-disable-next-line jsx-a11y/no-static-element-interactions
 		<div
 			className="piano-block-container"
+			ref={ ref }
+			tabIndex={ 0 }
 			onKeyDown={ onKeyDown }
 			onKeyUp={ onKeyUp }
-			tabIndex={ 0 }
-			ref={ ref }
 		>
 			{ ! isReady && <Loading /> }
-			<Controls
-				{ ...controlsProps }
-				onChange={ ( newSettings ) => {
-					onChange( {
-						...settings,
-						...newSettings,
-					} );
-				} }
-			/>
+			<Controls { ...controlsProps } />
 			<Keyboard { ...keyboardProps } />
 		</div>
 	);

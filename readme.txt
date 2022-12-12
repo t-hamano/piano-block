@@ -4,7 +4,7 @@ Tags: gutenberg, audio, music, piano
 Donate link: https://www.paypal.me/thamanoJP
 Requires at least: 5.9
 Tested up to: 6.1
-Stable tag: 1.1.1
+Stable tag: 2.0.0
 Requires PHP: 7.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -17,9 +17,10 @@ Piano Block is a plugin that allow you to play a variety of tones using the pian
 This plugin does not add any useful features to WordPress, nor does it add any useful blocks to help you write posts.
 Let's insert this block and enjoy the music if you are stuck in writing an article or just want a little distraction.
 
-- 14 instruments
+- 15 instruments
 - Realistic sound based on sound sources sampled from actual instruments
 - Variable volume, switchable octave pitch and sustain pedal status
+- Synthesizer with 18 oscillators and customizable envelope
 
 Note: The keys are optimized for the QWERTY keyboard and may not map correctly on other keyboards.
 
@@ -42,6 +43,7 @@ I may add it in a future update if those issues can be resolved.
 == Screenshots ==
 
 1. Piano Block
+2. Piano Block Synthesizer Setting
 
 == Resources, Audio Samples ==
 
@@ -94,6 +96,11 @@ License: Apache License 2.0
 Source: https://fonts.google.com/specimen/Yellowtail
 
 == Changelog ==
+
+= 2.0.0 =
+* Add: Synthesizer
+* Enhancement: Accessibility Improvements
+* Fix: Duplicate script loading on the front end
 
 = 1.1.1 =
 * Tested to WordPress 6.1

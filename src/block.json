@@ -22,6 +22,9 @@
 		},
 		"showOnFront": {
 			"type": "boolean"
+		},
+		"synthesizerSetting": {
+			"type": "object"
 		}
 	},
 	"supports": {

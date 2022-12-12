@@ -2,7 +2,6 @@
  * External dependencies
  */
 import * as Tone from 'tone';
-import type { Dispatch, SetStateAction } from 'react';
 
 /**
  * WordPress dependencies
@@ -17,78 +16,69 @@ import {
 	RangeControl,
 	ToggleControl,
 	Modal,
+	Popover,
 } from '@wordpress/components';
-import { help } from '@wordpress/icons';
+import { cog, help } from '@wordpress/icons';
 
 /**
  * Internal dependencies
  */
-import { INSTRUMENTS, OCTAVE_OFFSETS, MIN_VOLUME, MAX_VOLUME } from '../constants';
-import { getSamplerUrls } from '../utils';
-import type { BlockAttributes, Key } from '../constants';
+import {
+	INSTRUMENTS,
+	DEFAULT_ENVELOPE,
+	OCTAVE_OFFSETS,
+	MIN_VOLUME,
+	MAX_VOLUME,
+} from '../constants';
+import { SynthesizerSetting } from '../components';
+import { getNormalizedVolume } from '../utils';
+import type { BlockAttributes } from '../constants';
 
 type Props = {
 	settings: BlockAttributes;
-	piano: Tone.Sampler | undefined;
-	setPiano: Dispatch< SetStateAction< Tone.Sampler | undefined > >;
-	setActiveKeys: Dispatch< SetStateAction< Key[] > >;
-	setIsReady: Dispatch< SetStateAction< boolean > >;
-	setInstrumentOctaveOffset: Dispatch< SetStateAction< number > >;
+	piano: Tone.Sampler | Tone.PolySynth | undefined;
 	onChange: ( {}: Partial< BlockAttributes > ) => void;
 };
 
-const Controls = ( {
-	settings,
-	piano,
-	setPiano,
-	setActiveKeys,
-	setIsReady,
-	setInstrumentOctaveOffset,
-	onChange,
-}: Props ) => {
-	const { assetsUrl } = window.pianoBlockVars;
-	const { volume, useSustainPedal, octaveOffset, instrument } = settings;
+const Controls = ( { settings, piano, onChange }: Props ) => {
+	const { volume, useSustainPedal, octaveOffset, instrument, synthesizerSetting } = settings;
 	const [ isHelpOpen, setIsHelpOpen ] = useState< boolean >( false );
+	const [ isSynthesizerSettingOpen, setIsSynthesizerSettingOpen ] = useState< boolean >( false );
 
-	const onVolumeChange = ( value: number ) => {
-		if ( ! piano ) return;
-		piano.volume.value = value ?? 0;
-		onChange( { volume: value } );
+	const onVolumeChange = ( newVolume: number | undefined ) => {
+		const instrumentSetting = INSTRUMENTS.find( ( { value } ) => value === instrument );
+		if ( ! piano || ! instrumentSetting ) {
+			return;
+		}
+
+		piano.volume.value = getNormalizedVolume( newVolume, settings );
+		onChange( { volume: newVolume } );
 	};
 
-	const onOctaveOffsetChange = ( value: number ) => {
-		onChange( { octaveOffset: value } );
+	const onOctaveOffsetChange = ( newOctaveOffset: number ) => {
+		onChange( { octaveOffset: newOctaveOffset } );
 	};
 
-	const onInstrumentChange = ( newValue: string ) => {
-		if ( ! piano ) return;
-
-		const newInstrument = INSTRUMENTS.find( ( { value } ) => value === newValue );
-		if ( ! newInstrument ) return;
-
-		piano.dispose();
-		setActiveKeys( [] );
-		setIsReady( false );
-
-		// Regenerate Tone.js Sampler with new audio urls map.
-		const urls = getSamplerUrls( newInstrument );
-
-		const tonePlayer = new Tone.Sampler( {
-			urls,
-			release: 1,
-			baseUrl: `${ assetsUrl }/instruments/${ newInstrument.value }/`,
-			onload: () => {
-				setIsReady( true );
-				setInstrumentOctaveOffset( newInstrument.octaveOffset );
-				onChange( { instrument: newInstrument.value } );
-			},
-		} ).toDestination();
-
-		setPiano( tonePlayer );
+	const onInstrumentChange = ( newInstrument: typeof INSTRUMENTS[ number ][ 'value' ] ) => {
+		onChange( { instrument: newInstrument } );
 	};
 
 	const onUseSustainPedalChange = () => {
 		onChange( { useSustainPedal: ! useSustainPedal } );
+	};
+
+	const onSynthesizerSettingChange = (
+		newSynthesizerSetting: BlockAttributes[ 'synthesizerSetting' ]
+	) => {
+		if ( ! piano || instrument !== 'synthesizer' ) {
+			return;
+		}
+
+		piano.set( {
+			...newSynthesizerSetting,
+			envelope: newSynthesizerSetting.envelope || DEFAULT_ENVELOPE,
+		} );
+		onChange( { synthesizerSetting: newSynthesizerSetting } );
 	};
 
 	return (
@@ -96,7 +86,7 @@ const Controls = ( {
 			<div className="piano-block-controls__control piano-block-controls__control--volume">
 				<RangeControl
 					label={ __( 'Volume', 'piano-block' ) }
-					value={ volume }
+					value={ volume || 0 }
 					min={ MIN_VOLUME }
 					max={ MAX_VOLUME }
 					step={ 0.1 }
@@ -130,12 +120,36 @@ const Controls = ( {
 					} ) }
 					onChange={ onInstrumentChange }
 				/>
+				{ instrument === 'synthesizer' && (
+					<>
+						<Button
+							label={ __( 'Synthesizer Setting', 'piano-block' ) }
+							icon={ cog }
+							variant="primary"
+							onClick={ () => setIsSynthesizerSettingOpen( ! isSynthesizerSettingOpen ) }
+						/>
+						{ isSynthesizerSettingOpen && (
+							<Popover
+								// @ts-ignore: `withInputField` prop is not exist at @types
+								placement="top"
+								onClose={ () => setIsSynthesizerSettingOpen( false ) }
+							>
+								<SynthesizerSetting
+									synthesizerSetting={ synthesizerSetting }
+									onChange={ onSynthesizerSettingChange }
+								/>
+							</Popover>
+						) }
+					</>
+				) }
 			</div>
 			<div className="piano-block-controls__control">
 				<ToggleControl
 					label={ __( 'Use Sustain Pedal', 'piano-block' ) }
 					checked={ useSustainPedal }
 					onChange={ onUseSustainPedalChange }
+					// @ts-ignore: `disabled` prop is not exist at @types
+					disabled={ instrument === 'synthesizer' }
 				/>
 			</div>
 			<Button
