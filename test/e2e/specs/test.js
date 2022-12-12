@@ -66,20 +66,6 @@ describe( 'Block', () => {
 			await page.keyboard.press( 'ArrowRight' );
 		}
 		await page.keyboard.press( 'Escape' );
-		// const [ synthesizerSetting ] = await page.$x( '//button[text()="Synthesizer Setting"]' );
-		// await synthesizerSetting.click();
-		// // Use Sustain Pedal
-		// const [ useSustainPedal ] = await page.$x( '//label[text()="Use Sustain Pedal"]' );
-		// await useSustainPedal.click();
-
-		// // Display on the front end
-		// const [ sidebarButton ] = await page.$$(
-		// 	'.edit-post-header [aria-label="Settings"][aria-expanded="false"]'
-		// );
-		// await sidebarButton.click();
-		// await page.waitForXPath( '//label[text()="Display on the front end"]' );
-		// const [ showOnFront ] = await page.$x( '//label[text()="Display on the front end"]' );
-		// await showOnFront.click();
 
 		expect( await getEditedPostContent() ).toMatchSnapshot();
 	} );
