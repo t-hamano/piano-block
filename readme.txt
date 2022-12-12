@@ -98,8 +98,9 @@ Source: https://fonts.google.com/specimen/Yellowtail
 == Changelog ==
 
 = 2.0.0 =
-* Add synthesizer to instruments
-* Accessibility Improvements
+* Add: Add synthesizer to instruments
+* Enhancement: Accessibility Improvements
+* Fix: Duplicate script loading on the front end
 
 = 1.1.1 =
 * Tested to WordPress 6.1
