@@ -98,7 +98,7 @@ Source: https://fonts.google.com/specimen/Yellowtail
 == Changelog ==
 
 = 2.0.0 =
-* Add: Add synthesizer to instruments
+* Add: Synthesizer
 * Enhancement: Accessibility Improvements
 * Fix: Duplicate script loading on the front end
 
