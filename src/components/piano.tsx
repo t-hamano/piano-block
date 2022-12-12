@@ -92,7 +92,7 @@ const Piano = ( { settings, onChange }: Props ) => {
 		if ( piano ) {
 			piano.releaseAll();
 		}
-	}, [ settings.useSustainPedal, settings.synthesizerSetting ] );
+	}, [ settings.octaveOffset, settings.useSustainPedal, settings.synthesizerSetting ] );
 
 	// Trigger the note corresponding to the pressed key.
 	const onKeyDown = ( event: KeyboardEvent ): void => {
