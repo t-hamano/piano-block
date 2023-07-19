@@ -12,7 +12,8 @@ import { useEffect, useState, useRef } from '@wordpress/element';
 /**
  * Internal dependencies
  */
-import { DEFAULT_ENVELOPE, INSTRUMENTS, KEYS } from '../../constants';
+import { DEFAULT_ENVELOPE, INSTRUMENTS } from '../../constants';
+import { KEYBOARD_LAYOUTS } from '../../keyboard-layout';
 import Loading from '../loading';
 import Keyboard from '../keyboard';
 import Controls from '../controls';
@@ -26,13 +27,18 @@ type Props = {
 
 const Piano = ( { settings, onChange }: Props ) => {
 	const { assetsUrl } = window.pianoBlockVars;
-	const { volume, useSustainPedal, octaveOffset, instrument, synthesizerSetting } = settings;
+	const { volume, useSustainPedal, octaveOffset, instrument, synthesizerSetting, keyLayout } =
+		settings;
 	const [ piano, setPiano ] = useState< Tone.Sampler | Tone.PolySynth >();
 	const [ isReady, setIsReady ] = useState< boolean >( false );
 	const [ activeKeys, setActiveKeys ] = useState< Key[] >( [] );
 	const [ instrumentOctaveOffset, setInstrumentOctaveOffset ] = useState< number >( 0 );
 
 	const ref = useRef< HTMLDivElement >( null );
+
+	const keys: Key[] =
+		KEYBOARD_LAYOUTS.find( ( { value } ) => value === keyLayout )?.keys ||
+		KEYBOARD_LAYOUTS[ 0 ].keys;
 
 	// Create Tone.js Player.
 	useEffect( () => {
@@ -118,9 +124,7 @@ const Piano = ( { settings, onChange }: Props ) => {
 		}
 
 		// Search the pressed key.
-		const targetKey: Key | undefined = KEYS.find( ( key ) =>
-			key.name.some( ( name ) => event.key === name )
-		);
+		const targetKey = keys.find( ( key ) => key.name.some( ( name ) => event.key === name ) );
 		if ( ! targetKey ) {
 			return;
 		}
@@ -150,7 +154,7 @@ const Piano = ( { settings, onChange }: Props ) => {
 			return;
 		}
 
-		const targetKey = KEYS.find( ( key ) => key.name.some( ( name ) => event.key === name ) );
+		const targetKey = keys.find( ( key ) => key.name.some( ( name ) => event.key === name ) );
 
 		if ( ! targetKey ) {
 			return;
@@ -199,6 +203,7 @@ const Piano = ( { settings, onChange }: Props ) => {
 
 	const keyboardProps = {
 		activeKeys,
+		keyLayout,
 		onKeyClick,
 	};
 

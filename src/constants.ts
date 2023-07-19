@@ -20,6 +20,7 @@ export interface BlockAttributes {
 			release: number;
 		};
 	};
+	keyLayout: string;
 }
 
 export const MIN_VOLUME = -10 as const;
@@ -36,6 +37,7 @@ export const DEFAULT_SETTINGS = {
 	instrument: DEFAULT_INSTRUMENT,
 	showOnFront: false,
 	synthesizerSetting: {},
+	keyLayout: 'qwerty-1',
 };
 
 export const DEFAULT_ENVELOPE = {
@@ -331,6 +333,11 @@ export interface Instrument {
 	volumeOffset: number;
 }
 
-export type Key = ( typeof KEYS )[ number ];
 export type OscillatorType = ( typeof OSCILLATOR_TYPES )[ number ];
 export type EmvelopeControl = ( typeof EMVELOPE_CONTROLS )[ number ];
+export type Key = {
+	note: string;
+	octave: number;
+	isBlackKey: boolean;
+	name: string[];
+};

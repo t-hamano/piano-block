@@ -29,6 +29,7 @@ import {
 	MIN_VOLUME,
 	MAX_VOLUME,
 } from '../../constants';
+import { KEYBOARD_LAYOUTS } from '../../keyboard-layout';
 import SynthesizerSetting from '../synthesizer-setting';
 import HelpModal from '../help-modal';
 import { getNormalizedVolume } from '../../utils';
@@ -41,7 +42,8 @@ type Props = {
 };
 
 const Controls = ( { settings, piano, onChange }: Props ) => {
-	const { volume, useSustainPedal, octaveOffset, instrument, synthesizerSetting } = settings;
+	const { volume, useSustainPedal, octaveOffset, instrument, synthesizerSetting, keyLayout } =
+		settings;
 	const [ isHelpOpen, setIsHelpOpen ] = useState< boolean >( false );
 	const [ isSynthesizerSettingOpen, setIsSynthesizerSettingOpen ] = useState< boolean >( false );
 
@@ -65,6 +67,10 @@ const Controls = ( { settings, piano, onChange }: Props ) => {
 
 	const onUseSustainPedalChange = () => {
 		onChange( { useSustainPedal: ! useSustainPedal } );
+	};
+
+	const onKeyLayoutChange = ( newKeyLayout: string ) => {
+		onChange( { keyLayout: newKeyLayout } );
 	};
 
 	const onSynthesizerSettingChange = (
@@ -145,11 +151,20 @@ const Controls = ( { settings, piano, onChange }: Props ) => {
 			) }
 			<ToggleControl
 				className="piano-block-controls__control"
-				label={ __( 'Use Sustain Pedal', 'piano-block' ) }
+				label={ __( 'Sustain Pedal', 'piano-block' ) }
 				checked={ useSustainPedal }
 				onChange={ onUseSustainPedalChange }
 				// @ts-ignore: `disabled` prop is not exist at @types
 				disabled={ instrument === 'synthesizer' }
+			/>
+			<SelectControl
+				className="piano-block-controls__control"
+				label={ __( 'Key Layout', 'piano-block' ) }
+				value={ keyLayout }
+				options={ KEYBOARD_LAYOUTS.map( ( { label, value } ) => {
+					return { label, value };
+				} ) }
+				onChange={ onKeyLayoutChange }
 			/>
 			<Button
 				className="piano-block-controls__help"

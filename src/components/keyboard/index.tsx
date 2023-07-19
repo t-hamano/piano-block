@@ -15,17 +15,23 @@ import {
 /**
  * Internal dependencies
  */
-import { KEYBOARD_WIDTH, KEYBOARD_PADDING, KEYS } from '../../constants';
+import { KEYBOARD_WIDTH, KEYBOARD_PADDING } from '../../constants';
+import { KEYBOARD_LAYOUTS } from '../../keyboard-layout';
 import type { Key } from '../../constants';
 
 type Props = {
 	activeKeys: Key[];
+	keyLayout: string;
 	onKeyClick: ( note: string, octave: number ) => void;
 };
 
-const Keyboard = ( { activeKeys, onKeyClick }: Props ) => {
+const Keyboard = ( { activeKeys, keyLayout, onKeyClick }: Props ) => {
 	// Hooks to control the display of horizontal scroll bars.
 	const [ resizeListener, keysInnerSizes ] = useResizeObserver();
+
+	const keys =
+		KEYBOARD_LAYOUTS.find( ( { value } ) => value === keyLayout )?.keys ||
+		KEYBOARD_LAYOUTS[ 0 ].keys;
 
 	// Trigger the note when the key is clicked by the mouse cursor or when the enter key is pressed.
 	const onClick = ( note: string, octave: number ) => {
@@ -44,7 +50,7 @@ const Keyboard = ( { activeKeys, onKeyClick }: Props ) => {
 				className="piano-block-keyboard__inner"
 				style={ { width: `${ KEYBOARD_WIDTH }px`, padding: `0 ${ KEYBOARD_PADDING }px` } }
 			>
-				{ KEYS.map( ( key, index ) => (
+				{ keys.map( ( key, index ) => (
 					<button
 						key={ index }
 						className={ classnames( 'piano-block-keyboard__key', {
