@@ -22,7 +22,8 @@ jobs:
         wp-versions: [
           'WordPress#6.0.5',
           'WordPress#6.1.3',
-          'WordPress'
+          'WordPress',
+          'https://wordpress.org/wordpress-6.3-RC1.zip'
         ]
     name: PHP ${{ matrix.php-versions }} / ${{ matrix.wp-versions }} Test
     steps:
