@@ -1,0 +1,42 @@
+.piano-block-help-modal {
+	font-size: 13px;
+	color: #1d2327;
+
+	&.piano-block-help-modal {
+		max-width: 500px;
+	}
+
+	.components-modal__header {
+
+		h1 {
+			font-size: 20px;
+			font-style: normal;
+			color: inherit;
+		}
+
+		.components-button {
+			color: inherit !important;
+			background-color: #fff !important;
+		}
+	}
+
+	.piano-block-help-modal__content {
+
+		> *:last-child {
+			margin-bottom: 0 !important;
+		}
+
+		ul {
+			padding-left: 1.5em;
+			margin: 0 0 1em;
+			font-size: inherit;
+			list-style: disc outside;
+		}
+
+		p {
+			margin: 0 0 1em;
+			font-size: inherit;
+			color: inherit;
+		}
+	}
+}

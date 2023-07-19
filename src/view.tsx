@@ -13,7 +13,7 @@ import domReady from '@wordpress/dom-ready';
 /**
  * Internal dependencies
  */
-import { Piano } from './components';
+import Piano from './components/piano';
 import { DEFAULT_SETTINGS } from './constants';
 import type { BlockAttributes } from './constants';
 

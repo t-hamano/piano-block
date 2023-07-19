@@ -12,10 +12,12 @@ import { useEffect, useState, useRef } from '@wordpress/element';
 /**
  * Internal dependencies
  */
-import { DEFAULT_ENVELOPE, INSTRUMENTS, KEYS } from '../constants';
-import { Loading, Keyboard, Controls } from '../components';
-import { getNormalizedVolume, getSamplerUrls } from '../utils';
-import type { BlockAttributes, Key } from '../constants';
+import { DEFAULT_ENVELOPE, INSTRUMENTS, KEYS } from '../../constants';
+import Loading from '../loading';
+import Keyboard from '../keyboard';
+import Controls from '../controls';
+import { getNormalizedVolume, getSamplerUrls } from '../../utils';
+import type { BlockAttributes, Key } from '../../constants';
 
 type Props = {
 	settings: BlockAttributes;

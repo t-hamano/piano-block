@@ -1,3 +1,6 @@
+@import "./components/controls/style";
+@import "./components/help-modal/style";
+
 .wp-block-piano-block-piano {
 	position: relative;
 	color: #1d2327;
@@ -35,104 +38,6 @@
 		height: 100%;
 		color: #fff;
 		background: rgba(0, 0, 0, 0.5);
-	}
-
-	// Controls component
-	.piano-block-controls {
-		position: relative;
-		box-sizing: border-box;
-		display: flex;
-		flex-wrap: wrap;
-		gap: 12px;
-		align-items: flex-start;
-		width: calc(100% - 32px);
-		max-width: 818px;
-		padding: 8px 50px 8px 16px;
-		margin: 0 auto;
-		background: #fff;
-		border-radius: 2px;
-
-		&__control {
-
-			.components-base-control__label,
-			.components-input-control__label {
-				display: block;
-				padding: 0 !important;
-				margin-bottom: 8px !important;
-				font-size: 11px;
-				font-weight: 500;
-				line-height: 1.4;
-				text-transform: uppercase;
-			}
-
-			.components-base-control__field {
-				margin-bottom: 0;
-			}
-
-			.components-toggle-control {
-				margin-bottom: 0;
-
-				.components-base-control__field {
-					flex-flow: column-reverse;
-					align-items: flex-start;
-
-					.components-flex {
-						flex-flow: column-reverse;
-						gap: 0;
-						align-items: flex-start;
-					}
-				}
-
-				.components-toggle-control__label {
-					margin-bottom: 8px;
-					font-size: 11px;
-					font-weight: 500;
-					text-transform: uppercase;
-				}
-
-				.components-form-toggle__input {
-					cursor: pointer;
-				}
-			}
-
-			.components-select-control {
-				gap: 0;
-			}
-
-			.components-select-control__input {
-				font-size: inherit !important;
-				line-height: 30px;
-
-				&:focus {
-					outline: none;
-				}
-			}
-
-			.components-range-control__root {
-				vertical-align: top;
-			}
-
-			.components-button-group .components-button {
-				height: 30px;
-			}
-
-			&--volume {
-				width: 170px;
-			}
-
-			&--instrument {
-				display: flex;
-				align-items: flex-end;
-
-				> .components-button {
-					width: 30px;
-					min-width: 30px;
-					height: 30px;
-					padding: 4px;
-					margin-left: 8px;
-				}
-			}
-		}
 	}
 
 	// Keyboard Component
@@ -262,47 +167,4 @@
 	position: absolute;
 	top: 8px;
 	right: 8px;
-}
-
-.piano-block-help-modal {
-	font-size: 13px;
-	color: #1d2327;
-
-	&.piano-block-help-modal {
-		max-width: 500px;
-	}
-
-	.components-modal__header {
-
-		h1 {
-			font-size: 20px;
-			font-style: normal;
-			color: inherit;
-		}
-
-		.components-button {
-			color: inherit !important;
-			background-color: #fff !important;
-		}
-	}
-
-	&__content {
-
-		> *:last-child {
-			margin-bottom: 0 !important;
-		}
-
-		ul {
-			padding-left: 1.5em;
-			margin: 0 0 1em;
-			font-size: inherit;
-			list-style: disc outside;
-		}
-
-		p {
-			margin: 0 0 1em;
-			font-size: inherit;
-			color: inherit;
-		}
-	}
 }

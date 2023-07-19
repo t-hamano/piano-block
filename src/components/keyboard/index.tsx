@@ -15,8 +15,8 @@ import {
 /**
  * Internal dependencies
  */
-import { KEYBOARD_WIDTH, KEYBOARD_PADDING, KEYS } from '../constants';
-import type { Key } from '../constants';
+import { KEYBOARD_WIDTH, KEYBOARD_PADDING, KEYS } from '../../constants';
+import type { Key } from '../../constants';
 
 type Props = {
 	activeKeys: Key[];
