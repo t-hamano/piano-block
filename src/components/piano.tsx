@@ -78,6 +78,7 @@ const Piano = ( { settings, onChange }: Props ) => {
 				tonePlayer.dispose();
 			}
 		};
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [ instrument ] );
 
 	// Normalize Volume.
@@ -85,6 +86,7 @@ const Piano = ( { settings, onChange }: Props ) => {
 		if ( piano ) {
 			piano.volume.value = getNormalizedVolume( volume, settings );
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [ volume, settings.synthesizerSetting ] );
 
 	// Release all sounds.
@@ -92,6 +94,7 @@ const Piano = ( { settings, onChange }: Props ) => {
 		if ( piano ) {
 			piano.releaseAll();
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [ settings.octaveOffset, settings.useSustainPedal, settings.synthesizerSetting ] );
 
 	// Trigger the note corresponding to the pressed key.

@@ -59,7 +59,7 @@ const Controls = ( { settings, piano, onChange }: Props ) => {
 		onChange( { octaveOffset: newOctaveOffset } );
 	};
 
-	const onInstrumentChange = ( newInstrument: typeof INSTRUMENTS[ number ][ 'value' ] ) => {
+	const onInstrumentChange = ( newInstrument: ( typeof INSTRUMENTS )[ number ][ 'value' ] ) => {
 		onChange( { instrument: newInstrument } );
 	};
 

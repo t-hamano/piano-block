@@ -6,12 +6,12 @@ import { __ } from '@wordpress/i18n';
 export interface BlockAttributes {
 	volume: number | undefined;
 	octaveOffset: number;
-	instrument: typeof INSTRUMENTS[ number ][ 'value' ];
+	instrument: ( typeof INSTRUMENTS )[ number ][ 'value' ];
 	useSustainPedal: boolean;
 	showOnFront: boolean;
 	synthesizerSetting: {
 		oscillator: {
-			type: typeof OSCILLATOR_TYPES[ number ][ 'value' ];
+			type: ( typeof OSCILLATOR_TYPES )[ number ][ 'value' ];
 		};
 		envelope?: {
 			attack: number;
@@ -325,12 +325,12 @@ export const EMVELOPE_CONTROLS = [
 
 export interface Instrument {
 	label: string;
-	value: typeof INSTRUMENTS[ number ][ 'value' ];
+	value: ( typeof INSTRUMENTS )[ number ][ 'value' ];
 	notes?: string[];
 	octaveOffset: number;
 	volumeOffset: number;
 }
 
-export type Key = typeof KEYS[ number ];
-export type OscillatorType = typeof OSCILLATOR_TYPES[ number ];
-export type EmvelopeControl = typeof EMVELOPE_CONTROLS[ number ];
+export type Key = ( typeof KEYS )[ number ];
+export type OscillatorType = ( typeof OSCILLATOR_TYPES )[ number ];
+export type EmvelopeControl = ( typeof EMVELOPE_CONTROLS )[ number ];
