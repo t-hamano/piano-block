@@ -35,6 +35,9 @@ function View() {
 
 domReady( function () {
 	const domNode = document.querySelector( '.wp-block-piano-block-piano' );
+	if ( ! domNode ) {
+		return;
+	}
 
 	// If version is less than 18 use `render` to render the app
 	// otherwise use `createRoot` to render the app

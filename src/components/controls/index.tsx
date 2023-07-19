@@ -122,9 +122,8 @@ const Controls = ( { settings, piano, onChange }: Props ) => {
 				onChange={ onInstrumentChange }
 			/>
 			{ instrument === 'synthesizer' && (
-				<>
+				<div className="piano-block-controls__synthesizer-toggle">
 					<Button
-						className="piano-block-controls__synthesizer-toggle"
 						label={ __( 'Synthesizer Setting', 'piano-block' ) }
 						icon={ cog }
 						variant="primary"
@@ -142,7 +141,7 @@ const Controls = ( { settings, piano, onChange }: Props ) => {
 							/>
 						</Popover>
 					) }
-				</>
+				</div>
 			) }
 			<ToggleControl
 				className="piano-block-controls__control"
@@ -153,7 +152,7 @@ const Controls = ( { settings, piano, onChange }: Props ) => {
 				disabled={ instrument === 'synthesizer' }
 			/>
 			<Button
-				className="piano-block-help"
+				className="piano-block-controls__help"
 				label={ __( 'Help', 'piano-block' ) }
 				icon={ help }
 				onClick={ () => setIsHelpOpen( true ) }

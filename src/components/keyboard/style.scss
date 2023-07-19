@@ -1,0 +1,73 @@
+.piano-block-keyboard {
+	position: relative;
+	padding: 16px 0;
+
+	&.is-scroll {
+		overflow-x: scroll;
+	}
+
+	.piano-block-keyboard__inner {
+		box-sizing: border-box;
+		display: flex;
+		height: 205px;
+		margin: 0 auto;
+	}
+
+	.piano-block-keyboard__key {
+		display: flex;
+		align-items: flex-end;
+		justify-content: center;
+		padding: 0;
+		padding-bottom: 8px;
+		font-size: 14px;
+		font-weight: normal;
+		text-transform: uppercase;
+
+		&:focus-visible {
+			outline: var(--wp-admin-theme-color) auto 4px;
+		}
+
+		&.is-pressed,
+		&:active {
+
+			&.piano-block-keyboard__key--black {
+				background: linear-gradient(to bottom, #666 50%, #000 100%);
+				border-bottom-width: 4px;
+			}
+
+			&.piano-block-keyboard__key--white {
+				height: 204px;
+				background: linear-gradient(to bottom, #ccc 10%, #fff);
+				box-shadow: 0 2px 2px #aaa;
+			}
+		}
+	}
+
+	.piano-block-keyboard__key--black {
+		position: relative;
+		width: 34px;
+		height: 120px;
+		margin: 0 -17px;
+		color: #fff !important;
+		background: linear-gradient(to bottom, #666 0%, #000 100%) !important;
+		border-color: #000;
+		border-style: solid;
+		border-width: 0 6px 8px;
+		border-bottom-color: #666;
+		border-radius: 0 0 4px 4px;
+		box-shadow: 0 3px 5px #ccc, inset 0 0 0 1px rgb(220 220 220 / 20%);
+		transition: background 0.03s, border-bottom-width 0.03s;
+	}
+
+	.piano-block-keyboard__key--white {
+		flex: 1;
+		height: 200px;
+		color: #000 !important;
+		background-color: #fff !important;
+		border: 1px #999 solid;
+		border-bottom: none;
+		border-radius: 0 0 3px 3px;
+		box-shadow: 0 4px 4px #aaa;
+		transition: height 0.03s, box-shadow 0.03s;
+	}
+}

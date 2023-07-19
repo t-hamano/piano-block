@@ -1,0 +1,40 @@
+.piano-block-synthesizer-setting {
+	width: 240px;
+	max-width: 100%;
+	padding: 8px 16px;
+	overflow: hidden;
+
+	.components-base-control__field {
+		margin: 0;
+	}
+
+	.piano-block-synthesizer-setting__envelope {
+		display: flex;
+		flex-wrap: wrap;
+		gap: 0 16px;
+		margin-top: 8px;
+
+		.components-range-control {
+			width: calc(50% - 8px);
+		}
+
+		.components-base-control__label {
+			display: block;
+			margin-bottom: 0;
+		}
+	}
+
+	.piano-block-synthesizer-setting__graph {
+		display: block;
+		width: 100%;
+		height: 80px;
+		margin: 8px 0;
+		border: 1px solid var(--wp-admin-theme-color);
+	}
+
+	.piano-block-synthesizer-setting__reset {
+		display: block;
+		margin-left: auto;
+		color: #cc1818 !important;
+	}
+}
