@@ -35,7 +35,8 @@ const Keyboard = ( { activeKeys, onKeyClick }: Props ) => {
 	return (
 		<div
 			className={ classnames( 'piano-block-keyboard', {
-				'is-scroll': keysInnerSizes.width < KEYBOARD_WIDTH + KEYBOARD_PADDING * 2,
+				'is-scroll':
+					keysInnerSizes?.width && keysInnerSizes.width < KEYBOARD_WIDTH + KEYBOARD_PADDING * 2,
 			} ) }
 		>
 			{ resizeListener }
