@@ -1,15 +1,14 @@
 .piano-block-keyboard {
 	position: relative;
 	padding: 16px 0;
-
-	&.is-scroll {
-		overflow-x: scroll;
-	}
+	overflow-x: auto;
 
 	.piano-block-keyboard__inner {
 		box-sizing: border-box;
 		display: flex;
+		width: 850px;
 		height: 205px;
+		padding: 0 16px;
 		margin: 0 auto;
 	}
 

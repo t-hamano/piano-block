@@ -7,15 +7,10 @@ import classnames from 'classnames';
  * WordPress dependencies
  */
 import { __, sprintf } from '@wordpress/i18n';
-import {
-	// @ts-ignore: has no exported member
-	useResizeObserver,
-} from '@wordpress/compose';
 
 /**
  * Internal dependencies
  */
-import { KEYBOARD_WIDTH, KEYBOARD_PADDING } from '../../constants';
 import { KEYBOARD_LAYOUTS } from '../../keyboard-layout';
 import type { Key } from '../../constants';
 
@@ -26,9 +21,6 @@ type Props = {
 };
 
 const Keyboard = ( { activeKeys, keyLayout, onKeyClick }: Props ) => {
-	// Hooks to control the display of horizontal scroll bars.
-	const [ resizeListener, keysInnerSizes ] = useResizeObserver();
-
 	const keys =
 		KEYBOARD_LAYOUTS.find( ( { value } ) => value === keyLayout )?.keys ||
 		KEYBOARD_LAYOUTS[ 0 ].keys;
@@ -39,17 +31,8 @@ const Keyboard = ( { activeKeys, keyLayout, onKeyClick }: Props ) => {
 	};
 
 	return (
-		<div
-			className={ classnames( 'piano-block-keyboard', {
-				'is-scroll':
-					keysInnerSizes?.width && keysInnerSizes.width < KEYBOARD_WIDTH + KEYBOARD_PADDING * 2,
-			} ) }
-		>
-			{ resizeListener }
-			<div
-				className="piano-block-keyboard__inner"
-				style={ { width: `${ KEYBOARD_WIDTH }px`, padding: `0 ${ KEYBOARD_PADDING }px` } }
-			>
+		<div className="piano-block-keyboard">
+			<div className="piano-block-keyboard__inner">
 				{ keys.map( ( key, index ) => (
 					<button
 						key={ index }
