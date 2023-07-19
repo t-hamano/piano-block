@@ -22,8 +22,22 @@
 		font-weight: normal;
 		text-transform: uppercase;
 
+		&:focus,
+		&:hover {
+			text-decoration: none;
+		}
+
+		&:focus {
+			outline: none;
+		}
+
+		&:hover {
+			cursor: pointer;
+		}
+
 		&:focus-visible {
-			outline: var(--wp-admin-theme-color) auto 4px;
+			outline: var(--wp-admin-theme-color, #007cba) auto 4px;
+			outline-offset: -2px;
 		}
 
 		&.is-pressed,

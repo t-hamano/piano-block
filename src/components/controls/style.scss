@@ -18,6 +18,9 @@
 
 	.components-base-control__label {
 		display: block;
+		font-size: 11px;
+		font-weight: 500;
+		line-height: 1.4;
 	}
 
 	.components-base-control__field {
@@ -28,15 +31,8 @@
 		height: 30px;
 	}
 
-	.piano-block-controls__synthesizer-toggle {
-		display: flex;
-		align-self: flex-end;
-
-		.components-button {
-			min-width: 30px;
-			height: 30px;
-			padding: 0;
-		}
+	.components-select-control__input:focus {
+		outline: none;
 	}
 
 	.components-toggle-control {
@@ -49,10 +45,26 @@
 		}
 
 		.components-toggle-control__label {
+			margin: 0;
 			font-size: 11px;
 			font-weight: 500;
 			line-height: 1.4;
 			text-transform: uppercase;
+		}
+
+		.components-form-toggle {
+			display: inline-flex;
+		}
+	}
+
+	.piano-block-controls__synthesizer-toggle {
+		display: flex;
+		align-self: flex-end;
+
+		> .components-button {
+			min-width: 30px;
+			height: 30px;
+			padding: 0;
 		}
 	}
 

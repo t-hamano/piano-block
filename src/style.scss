@@ -13,13 +13,23 @@
 		background: url(../assets/block_bg.png);
 	}
 
+	// Override theme button style.
 	.components-button {
 		color: inherit !important;
 		background: #fff !important;
 
 		&.is-primary {
 			color: #fff !important;
-			background: var(--wp-admin-theme-color) !important;
+			background: var(--wp-admin-theme-color, #007cba) !important;
+		}
+
+		&.is-destructive {
+			color: #cc1818 !important;
+		}
+
+		&:focus,
+		&:hover {
+			text-decoration: none !important;
 		}
 	}
 }

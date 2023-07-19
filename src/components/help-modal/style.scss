@@ -1,6 +1,4 @@
 .piano-block-help-modal {
-	font-size: 13px;
-	color: #1d2327;
 
 	&.piano-block-help-modal {
 		max-width: 500px;
@@ -12,6 +10,11 @@
 			font-size: 20px;
 			font-style: normal;
 			color: inherit;
+
+			&::before,
+			&::after {
+				content: none;
+			}
 		}
 
 		.components-button {
@@ -20,23 +23,13 @@
 		}
 	}
 
-	.piano-block-help-modal__content {
+	ul {
+		padding-left: 1.5em;
+		margin: 0;
+		list-style: disc outside;
 
-		> *:last-child {
-			margin-bottom: 0 !important;
-		}
-
-		ul {
-			padding-left: 1.5em;
-			margin: 0 0 1em;
-			font-size: inherit;
-			list-style: disc outside;
-		}
-
-		p {
-			margin: 0 0 1em;
-			font-size: inherit;
-			color: inherit;
+		li {
+			margin-left: 0;
 		}
 	}
 }
