@@ -107,18 +107,6 @@ const Piano = ( { settings, onChange }: Props ) => {
 
 	// Trigger the note corresponding to the pressed key.
 	const onKeyDown = ( event: KeyboardEvent ): void => {
-		// Remove focus from key.
-		const activeElement = ref.current?.ownerDocument.activeElement;
-		if ( activeElement && activeElement.classList.contains( 'piano-block-keyboard__key' ) ) {
-			ref.current.focus();
-		}
-
-		// Disable unexpected key events on select elements.
-		const isAcceptableKey = [ 'ArrowUp', 'ArrowDown', 'Enter', 'Tab' ].includes( event.key );
-		if ( activeElement && activeElement?.tagName === 'SELECT' && ! isAcceptableKey ) {
-			event.preventDefault();
-		}
-
 		if ( ! isReady || ! piano ) {
 			return;
 		}
@@ -148,8 +136,6 @@ const Piano = ( { settings, onChange }: Props ) => {
 
 	// Stop the note when the key is released.
 	const onKeyUp = ( event: KeyboardEvent ) => {
-		event.preventDefault();
-
 		if ( ! isReady || ! piano ) {
 			return;
 		}

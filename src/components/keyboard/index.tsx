@@ -36,6 +36,7 @@ const Keyboard = ( { activeKeys, keyLayout, onKeyClick }: Props ) => {
 				{ keys.map( ( key, index ) => (
 					<button
 						key={ index }
+						tabIndex={ -1 }
 						className={ classnames( 'piano-block-keyboard__key', {
 							'piano-block-keyboard__key--white': ! key.isBlackKey,
 							'piano-block-keyboard__key--black': key.isBlackKey,
