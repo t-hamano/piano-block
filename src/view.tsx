@@ -1,7 +1,13 @@
 /**
  * WordPress dependencies
  */
-import { render, useState } from '@wordpress/element';
+import {
+	render,
+	// @ts-ignore: has no exported member
+	// eslint-disable-next-line import/named
+	createRoot,
+	useState,
+} from '@wordpress/element';
 import domReady from '@wordpress/dom-ready';
 
 /**
@@ -28,9 +34,14 @@ function View() {
 }
 
 domReady( function () {
-	const block = document.querySelector( '.wp-block-piano-block-piano' );
+	const domNode = document.querySelector( '.wp-block-piano-block-piano' );
 
-	if ( block ) {
-		render( <View />, block );
+	// If version is less than 18 use `render` to render the app
+	// otherwise use `createRoot` to render the app
+	if ( createRoot === undefined ) {
+		render( <View />, domNode );
+	} else {
+		const root = createRoot( domNode );
+		root.render( <View /> );
 	}
 } );
