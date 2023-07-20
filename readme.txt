@@ -100,6 +100,7 @@ Source: https://fonts.google.com/specimen/Yellowtail
 = 2.2.0 =
 * Tested to WordPress 6.3
 * Add: Keyboard layout setting
+* Enhancement: Allow multiple blocks to be inserted
 * Enhancement: Improve keyboard and focus events
 * Enhancement: Improve compatibility with theme styles on the front end
 * Drop support for WordPress 5.9, 6.0
