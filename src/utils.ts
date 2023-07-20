@@ -7,7 +7,7 @@ import type { BlockAttributes, Instrument } from './constants';
 /**
  * Return a object of audio URLs from notes of Tone.js Sampler.
  *
- * @param  instrument Instrument object.
+ * @param instrument Instrument object.
  * @return Object of audio URLs.
  */
 export function getSamplerUrls( instrument: Instrument ) {
@@ -26,8 +26,8 @@ export function getSamplerUrls( instrument: Instrument ) {
 /**
  * Return a normalized volume according to instrument or synthesizer oscillator type.
  *
- * @param  newVolume New volume.
- * @param  settings  Settings.
+ * @param newVolume New volume.
+ * @param settings  Settings.
  * @return number Normalized volume.
  */
 export function getNormalizedVolume(

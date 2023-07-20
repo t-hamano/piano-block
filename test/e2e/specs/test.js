@@ -67,6 +67,15 @@ describe( 'Block', () => {
 		}
 		await page.keyboard.press( 'Escape' );
 
+		// Pressing a piano key should not remove focus.
+		await page.keyboard.press( 'z' );
+
+		// Key Layout
+		await page.keyboard.press( 'ArrowRight' );
+		await page.keyboard.press( 'Enter' );
+		await page.keyboard.press( 'ArrowDown' );
+		await page.keyboard.press( 'Enter' );
+
 		expect( await getEditedPostContent() ).toMatchSnapshot();
 	} );
 

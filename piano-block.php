@@ -2,9 +2,9 @@
 /**
  * Plugin Name: Piano Block
  * Description: Can play a variety of tones using the piano keyboard.
- * Requires at least: 5.9
- * Requires PHP: 7.3
- * Version: 2.1.0
+ * Requires at least: 6.1
+ * Requires PHP: 7.4
+ * Version: 2.2.0
  * Author: Aki Hamano
  * Author URI: https://github.com/t-hamano
  * License: GPL2 or later
@@ -37,11 +37,12 @@ function piano_block_render_callback( $attributes ) {
 		return '';
 	}
 
-	$volume              = ! empty( $attributes['volume'] ) ? min( max( (int) $attributes['volume'], -10 ), 5 ) : 0;
+	$volume              = ! empty( $attributes['volume'] ) ? min( max( round( (float) $attributes['volume'], 1 ), -10 ), 5 ) : 0;
 	$use_sustain_pedal   = ! empty( $attributes['useSustainPedal'] );
 	$octave_offset       = ! empty( $attributes['octaveOffset'] ) ? min( max( (int) $attributes['octaveOffset'], -2 ), 2 ) : 0;
 	$instrument          = ! empty( $attributes['instrument'] ) ? $attributes['instrument'] : 'acoustic-piano';
 	$synthesizer_setting = ! empty( $attributes['synthesizerSetting'] ) ? $attributes['synthesizerSetting'] : array();
+	$key_layout          = ! empty( $attributes['keyLayout'] ) ? $attributes['keyLayout'] : 'qwerty-1';
 
 	wp_enqueue_style( 'wp-components' );
 
@@ -50,21 +51,43 @@ function piano_block_render_callback( $attributes ) {
 		'pianoBlockVars',
 		array(
 			'assetsUrl' => PIANO_BLOCK_URL . '/assets',
-			'settings'  => array(
-				'volume'             => $volume,
-				'useSustainPedal'    => $use_sustain_pedal,
-				'octaveOffset'       => $octave_offset,
-				'instrument'         => $instrument,
-				'synthesizerSetting' => $synthesizer_setting,
-			),
 		)
 	);
+
+	$wrapper_attributes = get_block_wrapper_attributes(
+		array(
+			'data-volume'            => $volume,
+			'data-use-sustain-pedal' => $use_sustain_pedal ? 1 : 0,
+			'data-octave-offset'     => $octave_offset,
+			'data-instrument'        => $instrument,
+			'data-key-layout'        => $key_layout,
+		)
+	);
+
+	if ( ! empty( $attributes['synthesizerSetting'] ) ) {
+		$escaped_synthesizer_setting = array_map(
+			function( $attribute ) {
+				if ( is_array( $attribute ) ) {
+					return array_map(
+						function( $child_attribute ) {
+							return esc_attr( $child_attribute );
+						},
+						$attribute
+					);
+				}
+				return esc_attr( $attribute );
+			},
+			$attributes['synthesizerSetting']
+		);
+
+		$wrapper_attributes .= " data-synthesizer-setting='" . json_encode( $escaped_synthesizer_setting ) . "'";
+	}
 
 	wp_set_script_translations( 'piano-block-piano-view-script', 'piano-block' );
 
 	return sprintf(
 		'<div %s></div>',
-		get_block_wrapper_attributes(),
+		$wrapper_attributes,
 	);
 }
 

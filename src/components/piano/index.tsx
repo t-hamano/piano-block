@@ -12,10 +12,13 @@ import { useEffect, useState, useRef } from '@wordpress/element';
 /**
  * Internal dependencies
  */
-import { DEFAULT_ENVELOPE, INSTRUMENTS, KEYS } from '../constants';
-import { Loading, Keyboard, Controls } from '../components';
-import { getNormalizedVolume, getSamplerUrls } from '../utils';
-import type { BlockAttributes, Key } from '../constants';
+import { DEFAULT_ENVELOPE, INSTRUMENTS } from '../../constants';
+import { KEYBOARD_LAYOUTS } from '../../keyboard-layout';
+import Loading from '../loading';
+import Keyboard from '../keyboard';
+import Controls from '../controls';
+import { getNormalizedVolume, getSamplerUrls } from '../../utils';
+import type { BlockAttributes, Key } from '../../constants';
 
 type Props = {
 	settings: BlockAttributes;
@@ -24,13 +27,18 @@ type Props = {
 
 const Piano = ( { settings, onChange }: Props ) => {
 	const { assetsUrl } = window.pianoBlockVars;
-	const { volume, useSustainPedal, octaveOffset, instrument, synthesizerSetting } = settings;
+	const { volume, useSustainPedal, octaveOffset, instrument, synthesizerSetting, keyLayout } =
+		settings;
 	const [ piano, setPiano ] = useState< Tone.Sampler | Tone.PolySynth >();
 	const [ isReady, setIsReady ] = useState< boolean >( false );
 	const [ activeKeys, setActiveKeys ] = useState< Key[] >( [] );
 	const [ instrumentOctaveOffset, setInstrumentOctaveOffset ] = useState< number >( 0 );
 
 	const ref = useRef< HTMLDivElement >( null );
+
+	const keys: Key[] =
+		KEYBOARD_LAYOUTS.find( ( { value } ) => value === keyLayout )?.keys ||
+		KEYBOARD_LAYOUTS[ 0 ].keys;
 
 	// Create Tone.js Player.
 	useEffect( () => {
@@ -78,6 +86,7 @@ const Piano = ( { settings, onChange }: Props ) => {
 				tonePlayer.dispose();
 			}
 		};
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [ instrument ] );
 
 	// Normalize Volume.
@@ -85,6 +94,7 @@ const Piano = ( { settings, onChange }: Props ) => {
 		if ( piano ) {
 			piano.volume.value = getNormalizedVolume( volume, settings );
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [ volume, settings.synthesizerSetting ] );
 
 	// Release all sounds.
@@ -92,30 +102,17 @@ const Piano = ( { settings, onChange }: Props ) => {
 		if ( piano ) {
 			piano.releaseAll();
 		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [ settings.octaveOffset, settings.useSustainPedal, settings.synthesizerSetting ] );
 
 	// Trigger the note corresponding to the pressed key.
 	const onKeyDown = ( event: KeyboardEvent ): void => {
-		// Remove focus from key.
-		const activeElement = ref.current?.ownerDocument.activeElement;
-		if ( activeElement && activeElement.classList.contains( 'piano-block-keyboard__key' ) ) {
-			ref.current.focus();
-		}
-
-		// Disable unexpected key events on select elements.
-		const isAcceptableKey = [ 'ArrowUp', 'ArrowDown', 'Enter', 'Tab' ].includes( event.key );
-		if ( activeElement && activeElement?.tagName === 'SELECT' && ! isAcceptableKey ) {
-			event.preventDefault();
-		}
-
 		if ( ! isReady || ! piano ) {
 			return;
 		}
 
 		// Search the pressed key.
-		const targetKey: Key | undefined = KEYS.find( ( key ) =>
-			key.name.some( ( name ) => event.key === name )
-		);
+		const targetKey = keys.find( ( key ) => key.name.some( ( name ) => event.key === name ) );
 		if ( ! targetKey ) {
 			return;
 		}
@@ -139,13 +136,11 @@ const Piano = ( { settings, onChange }: Props ) => {
 
 	// Stop the note when the key is released.
 	const onKeyUp = ( event: KeyboardEvent ) => {
-		event.preventDefault();
-
 		if ( ! isReady || ! piano ) {
 			return;
 		}
 
-		const targetKey = KEYS.find( ( key ) => key.name.some( ( name ) => event.key === name ) );
+		const targetKey = keys.find( ( key ) => key.name.some( ( name ) => event.key === name ) );
 
 		if ( ! targetKey ) {
 			return;
@@ -194,6 +189,7 @@ const Piano = ( { settings, onChange }: Props ) => {
 
 	const keyboardProps = {
 		activeKeys,
+		keyLayout,
 		onKeyClick,
 	};
 

@@ -2,10 +2,10 @@
 Contributors: wildworks
 Tags: gutenberg, audio, music, piano
 Donate link: https://www.paypal.me/thamanoJP
-Requires at least: 5.9
-Tested up to: 6.2
-Stable tag: 2.1.0
-Requires PHP: 7.3
+Requires at least: 6.1
+Tested up to: 6.3
+Stable tag: 2.2.0
+Requires PHP: 7.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -96,6 +96,15 @@ License: Apache License 2.0
 Source: https://fonts.google.com/specimen/Yellowtail
 
 == Changelog ==
+
+= 2.2.0 =
+* Tested to WordPress 6.3
+* Add: Keyboard layout setting
+* Enhancement: Allow multiple blocks to be inserted
+* Enhancement: Improve keyboard and focus events
+* Enhancement: Improve compatibility with theme styles on the front end
+* Drop support for WordPress 5.9, 6.0
+* Drop support for PHP 7.3
 
 = 2.1.0 =
 * Tested to WordPress 6.2

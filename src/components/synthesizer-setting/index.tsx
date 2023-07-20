@@ -13,8 +13,8 @@ import {
 	DEFAULT_ENVELOPE,
 	EMVELOPE_CONTROLS,
 	OSCILLATOR_TYPES,
-} from '../constants';
-import type { BlockAttributes, EmvelopeControl, OscillatorType } from '../constants';
+} from '../../constants';
+import type { BlockAttributes, EmvelopeControl, OscillatorType } from '../../constants';
 
 type Props = {
 	synthesizerSetting: BlockAttributes[ 'synthesizerSetting' ];

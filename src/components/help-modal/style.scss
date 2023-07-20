@@ -1,0 +1,35 @@
+.piano-block-help-modal {
+
+	&.piano-block-help-modal {
+		max-width: 500px;
+	}
+
+	.components-modal__header {
+
+		h1 {
+			font-size: 20px;
+			font-style: normal;
+			color: inherit;
+
+			&::before,
+			&::after {
+				content: none;
+			}
+		}
+
+		.components-button {
+			color: inherit !important;
+			background-color: #fff !important;
+		}
+	}
+
+	ul {
+		padding-left: 1.5em;
+		margin: 0;
+		list-style: disc outside;
+
+		li {
+			margin-left: 0;
+		}
+	}
+}

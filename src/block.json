@@ -25,11 +25,13 @@
 		},
 		"synthesizerSetting": {
 			"type": "object"
+		},
+		"keyLayout": {
+			"type": "string"
 		}
 	},
 	"supports": {
     "align": [ "wide", "full" ],
-		"multiple": false,
 		"color": {
 			"enableContrastChecker": false,
 			"text": false,
@@ -43,6 +45,5 @@
 	"textdomain": "piano-block",
 	"viewScript": "file:view.js",
 	"editorScript": "file:index.js",
-	"editorStyle": "file:index.css",
 	"style": "file:style-index.css"
 }

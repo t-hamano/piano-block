@@ -1,0 +1,76 @@
+.piano-block-controls {
+	position: relative;
+	box-sizing: border-box;
+	display: flex;
+	flex-wrap: wrap;
+	gap: 12px;
+	align-items: flex-start;
+	width: calc(100% - 32px);
+	max-width: 818px;
+	padding: 8px 50px 8px 16px;
+	margin: 0 auto;
+	background: #fff;
+	border-radius: 2px;
+
+	.components-range-control {
+		width: 140px;
+	}
+
+	.components-base-control__label {
+		display: block;
+		font-size: 11px;
+		font-weight: 500;
+		line-height: 1.4;
+	}
+
+	.components-base-control__field {
+		margin-bottom: 0;
+	}
+
+	.components-button-group .components-button {
+		height: 30px;
+	}
+
+	.components-select-control__input:focus {
+		outline: none;
+	}
+
+	.components-toggle-control {
+		margin-bottom: 0;
+
+		.components-flex {
+			flex-flow: column-reverse;
+			gap: 14px;
+			align-items: flex-start;
+		}
+
+		.components-toggle-control__label {
+			margin: 0;
+			font-size: 11px;
+			font-weight: 500;
+			line-height: 1.4;
+			text-transform: uppercase;
+		}
+
+		.components-form-toggle {
+			display: inline-flex;
+		}
+	}
+
+	.piano-block-controls__synthesizer-toggle {
+		display: flex;
+		align-self: flex-end;
+
+		> .components-button {
+			min-width: 30px;
+			height: 30px;
+			padding: 0;
+		}
+	}
+
+	.piano-block-controls__help {
+		position: absolute;
+		top: 8px;
+		right: 8px;
+	}
+}

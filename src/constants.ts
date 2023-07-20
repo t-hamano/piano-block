@@ -6,12 +6,12 @@ import { __ } from '@wordpress/i18n';
 export interface BlockAttributes {
 	volume: number | undefined;
 	octaveOffset: number;
-	instrument: typeof INSTRUMENTS[ number ][ 'value' ];
+	instrument: ( typeof INSTRUMENTS )[ number ][ 'value' ];
 	useSustainPedal: boolean;
 	showOnFront: boolean;
 	synthesizerSetting: {
 		oscillator: {
-			type: typeof OSCILLATOR_TYPES[ number ][ 'value' ];
+			type: ( typeof OSCILLATOR_TYPES )[ number ][ 'value' ];
 		};
 		envelope?: {
 			attack: number;
@@ -20,14 +20,20 @@ export interface BlockAttributes {
 			release: number;
 		};
 	};
+	keyLayout: string;
 }
 
 export const MIN_VOLUME = -10 as const;
 export const MAX_VOLUME = 5 as const;
 export const DEFAULT_INSTRUMENT = 'acoustic-piano' as const;
 export const DEFAULT_OSCILLATOR_TYPE = 'sine' as const;
-export const KEYBOARD_WIDTH = 850 as const;
-export const KEYBOARD_PADDING = 16 as const;
+
+export const DEFAULT_ENVELOPE = {
+	attack: 0.3,
+	decay: 1.0,
+	sustain: 0.5,
+	release: 1.5,
+};
 
 export const DEFAULT_SETTINGS = {
 	volume: 0,
@@ -35,14 +41,13 @@ export const DEFAULT_SETTINGS = {
 	octaveOffset: 0,
 	instrument: DEFAULT_INSTRUMENT,
 	showOnFront: false,
-	synthesizerSetting: {},
-};
-
-export const DEFAULT_ENVELOPE = {
-	attack: 0.3,
-	decay: 1.0,
-	sustain: 0.5,
-	release: 1.5,
+	synthesizerSetting: {
+		oscillator: {
+			type: DEFAULT_OSCILLATOR_TYPE,
+		},
+		envelope: DEFAULT_ENVELOPE,
+	},
+	keyLayout: 'qwerty-1',
 };
 
 export const INSTRUMENTS = [
@@ -325,12 +330,17 @@ export const EMVELOPE_CONTROLS = [
 
 export interface Instrument {
 	label: string;
-	value: typeof INSTRUMENTS[ number ][ 'value' ];
+	value: ( typeof INSTRUMENTS )[ number ][ 'value' ];
 	notes?: string[];
 	octaveOffset: number;
 	volumeOffset: number;
 }
 
-export type Key = typeof KEYS[ number ];
-export type OscillatorType = typeof OSCILLATOR_TYPES[ number ];
-export type EmvelopeControl = typeof EMVELOPE_CONTROLS[ number ];
+export type OscillatorType = ( typeof OSCILLATOR_TYPES )[ number ];
+export type EmvelopeControl = ( typeof EMVELOPE_CONTROLS )[ number ];
+export type Key = {
+	note: string;
+	octave: number;
+	isBlackKey: boolean;
+	name: string[];
+};
