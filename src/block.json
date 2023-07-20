@@ -32,7 +32,6 @@
 	},
 	"supports": {
     "align": [ "wide", "full" ],
-		"multiple": false,
 		"color": {
 			"enableContrastChecker": false,
 			"text": false,
