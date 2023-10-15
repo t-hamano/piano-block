@@ -66,10 +66,10 @@ function piano_block_render_callback( $attributes ) {
 
 	if ( ! empty( $attributes['synthesizerSetting'] ) ) {
 		$escaped_synthesizer_setting = array_map(
-			function( $attribute ) {
+			function ( $attribute ) {
 				if ( is_array( $attribute ) ) {
 					return array_map(
-						function( $child_attribute ) {
+						function ( $child_attribute ) {
 							return esc_attr( $child_attribute );
 						},
 						$attribute
