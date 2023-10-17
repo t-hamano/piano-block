@@ -56,6 +56,12 @@ test.describe( 'Block', () => {
 		await page.keyboard.press( 'Enter' );
 		await page.keyboard.press( 'ArrowDown' );
 		await page.keyboard.press( 'Enter' );
+		// Key Indicator
+		await page.keyboard.press( 'ArrowRight' );
+		await page.keyboard.press( 'Enter' );
+		await page.keyboard.press( 'ArrowDown' );
+		await page.keyboard.press( 'Enter' );
+
 		expect( await editor.getEditedPostContent() ).toMatchSnapshot();
 	} );
 

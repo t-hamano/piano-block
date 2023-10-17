@@ -43,6 +43,9 @@ domReady( function () {
 		const octaveOffset = parseFloat( domNode.getAttribute( 'data-octave-offset' ) || '' );
 		const instrument = domNode.getAttribute( 'data-instrument' ) || DEFAULT_SETTINGS.instrument;
 		const keyLayout = domNode.getAttribute( 'data-key-layout' ) || DEFAULT_SETTINGS.keyLayout;
+		const keyIndicator =
+			domNode.getAttribute( 'data-key-indicator' ) || DEFAULT_SETTINGS.keyIndicator;
+
 		const synthesizerSetting = domNode.getAttribute( 'data-synthesizer-setting' );
 		const parsedSynthesizerSetting = synthesizerSetting
 			? JSON.parse( synthesizerSetting )
@@ -64,6 +67,7 @@ domReady( function () {
 			octaveOffset,
 			instrument,
 			keyLayout,
+			keyIndicator,
 			synthesizerSetting: normalizedSynthesizerSetting,
 			showOnFront: true,
 		};

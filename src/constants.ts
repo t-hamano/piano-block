@@ -21,6 +21,7 @@ export interface BlockAttributes {
 		};
 	};
 	keyLayout: string;
+	keyIndicator: string;
 }
 
 export const MIN_VOLUME = -10 as const;
@@ -48,6 +49,7 @@ export const DEFAULT_SETTINGS = {
 		envelope: DEFAULT_ENVELOPE,
 	},
 	keyLayout: 'qwerty-1',
+	keyIndicator: 'key',
 };
 
 export const INSTRUMENTS = [
@@ -325,6 +327,21 @@ export const EMVELOPE_CONTROLS = [
 		label: __( 'Release', 'piano-block' ),
 		parameter: 'release',
 		max: 3,
+	},
+] as const;
+
+export const KEY_INDICATORS = [
+	{
+		label: __( 'Keyboard key', 'piano-block' ),
+		value: 'key',
+	},
+	{
+		label: __( 'SPN', 'piano-block' ),
+		value: 'spn',
+	},
+	{
+		label: __( 'None', 'piano-block' ),
+		value: '',
 	},
 ] as const;
 
