@@ -97,6 +97,11 @@ Source: https://fonts.google.com/specimen/Yellowtail
 
 == Changelog ==
 
+= 2.3.0 =
+* Tested to WordPress 6.4
+* Add: Keyboard indicator setting
+* Drop support for WordPress 6.1
+
 = 2.2.0 =
 * Tested to WordPress 6.3
 * Add: Keyboard layout setting
