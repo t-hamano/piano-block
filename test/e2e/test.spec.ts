@@ -1,45 +1,31 @@
 /**
  * WordPress dependencies
  */
-import {
-	createNewPost,
-	insertBlock,
-	getEditedPostContent,
-	setBrowserViewport,
-} from '@wordpress/e2e-test-utils';
+import { test, expect } from '@wordpress/e2e-test-utils-playwright';
 
-const page = global.page;
-
-page.on( 'dialog', async ( dialog ) => await dialog.accept() );
-
-describe( 'Block', () => {
-	beforeAll( async () => {
-		await setBrowserViewport( 'large' );
+test.describe( 'Block', () => {
+	test.beforeEach( async ( { admin } ) => {
+		await admin.createNewPost();
 	} );
 
-	beforeEach( async () => {
-		await createNewPost();
-	} );
-
-	it( 'should update attributes related to sound using only keyboard.', async () => {
-		await insertBlock( 'Piano' );
+	test( 'should update attributes related to sound using only keyboard.', async ( {
+		editor,
+		page,
+	} ) => {
+		await editor.insertBlock( { name: 'piano-block/piano' } );
 		await page.keyboard.press( 'ArrowRight' );
 		await page.keyboard.press( 'ArrowRight' );
-
 		// Volume
 		for ( let i = 0; i < 3; i++ ) {
 			await page.keyboard.press( 'ArrowLeft' );
 		}
-
 		// Octave Offset
 		await page.keyboard.press( 'Tab' );
 		await page.keyboard.press( 'Tab' );
 		await page.keyboard.press( 'ArrowRight' );
 		await page.keyboard.press( 'Enter' );
-
 		// Pressing a piano key should not remove focus.
 		await page.keyboard.press( 'z' );
-
 		// Instrument
 		await page.keyboard.press( 'ArrowRight' );
 		await page.keyboard.press( 'ArrowRight' );
@@ -50,45 +36,34 @@ describe( 'Block', () => {
 			await page.keyboard.press( 'ArrowDown' );
 		}
 		await page.keyboard.press( 'Enter' );
-
 		// Pressing a piano key should not remove focus.
 		await page.keyboard.press( 'z' );
-
 		// Synthesizer Setting
 		await page.keyboard.press( 'ArrowRight' );
 		await page.keyboard.press( 'Enter' );
 		await page.keyboard.press( 'ArrowDown' );
 		await page.keyboard.press( 'ArrowDown' );
-
 		for ( let index = 0; index < 4; index++ ) {
 			await page.keyboard.press( 'Tab' );
 			await page.keyboard.press( 'ArrowRight' );
 			await page.keyboard.press( 'ArrowRight' );
 		}
 		await page.keyboard.press( 'Escape' );
-
 		// Pressing a piano key should not remove focus.
 		await page.keyboard.press( 'z' );
-
 		// Key Layout
 		await page.keyboard.press( 'ArrowRight' );
 		await page.keyboard.press( 'Enter' );
 		await page.keyboard.press( 'ArrowDown' );
 		await page.keyboard.press( 'Enter' );
-
-		expect( await getEditedPostContent() ).toMatchSnapshot();
+		expect( await editor.getEditedPostContent() ).toMatchSnapshot();
 	} );
 
-	it( 'should update attributes in the block sidebar.', async () => {
-		await insertBlock( 'Piano' );
-		const [ sidebarButton ] = await page.$$(
-			'.edit-post-header [aria-label="Settings"][aria-expanded="false"]'
-		);
-		await sidebarButton.click();
-		await page.waitForXPath( '//label[text()="Display on the front end"]' );
-		const [ showOnFront ] = await page.$x( '//label[text()="Display on the front end"]' );
-		await showOnFront.click();
-
-		expect( await getEditedPostContent() ).toMatchSnapshot();
+	test( 'should update attributes in the block sidebar.', async ( { editor, page } ) => {
+		await editor.insertBlock( { name: 'piano-block/piano' } );
+		await editor.openDocumentSettingsSidebar();
+		await page.getByLabel( 'Display on the front end' ).click();
+		expect( await editor.getEditedPostContent() ).toMatchSnapshot();
+		expect( true ).toBe( true );
 	} );
 } );
