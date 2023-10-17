@@ -20,18 +20,17 @@
 		"test:e2e:debug": "wp-scripts test-playwright --debug"
 	},
 	"devDependencies": {
-		"@types/wordpress__block-editor": "^11.5.1",
-		"@types/wordpress__components": "^23.0.1",
+		"@types/wordpress__block-editor": "^11.5.5",
+		"@types/wordpress__components": "^23.0.4",
 		"@types/wordpress__dom-ready": "2.9.0",
 		"@types/wordpress__i18n": "^3.11.0",
-		"@wordpress/env": "^8.3.0",
+		"@wordpress/env": "^8.9.0",
 		"@wordpress/eslint-plugin": "17.0.0",
-		"@wordpress/icons": "^9.28.0",
+		"@wordpress/icons": "^9.34.0",
 		"@wordpress/scripts": "^26.14.0",
 		"opener": "^1.5.2",
 		"prettier": "npm:wp-prettier@3.0.3",
-		"stylelint-config-recess-order": "^3.1.0",
-		"typescript": "^5.1.6"
+		"typescript": "^5.2.2"
 	},
 	"dependencies": {
 		"tone": "^14.7.77"
