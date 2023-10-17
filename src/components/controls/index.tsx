@@ -26,6 +26,7 @@ import {
 	INSTRUMENTS,
 	DEFAULT_ENVELOPE,
 	OCTAVE_OFFSETS,
+	KEY_INDICATORS,
 	MIN_VOLUME,
 	MAX_VOLUME,
 } from '../../constants';
@@ -42,8 +43,15 @@ type Props = {
 };
 
 const Controls = ( { settings, piano, onChange }: Props ) => {
-	const { volume, useSustainPedal, octaveOffset, instrument, synthesizerSetting, keyLayout } =
-		settings;
+	const {
+		volume,
+		useSustainPedal,
+		octaveOffset,
+		instrument,
+		synthesizerSetting,
+		keyLayout,
+		keyIndicator,
+	} = settings;
 	const [ isHelpOpen, setIsHelpOpen ] = useState< boolean >( false );
 	const [ isSynthesizerSettingOpen, setIsSynthesizerSettingOpen ] = useState< boolean >( false );
 
@@ -71,6 +79,10 @@ const Controls = ( { settings, piano, onChange }: Props ) => {
 
 	const onKeyLayoutChange = ( newKeyLayout: string ) => {
 		onChange( { keyLayout: newKeyLayout } );
+	};
+
+	const onKeyIndicatorChange = ( newKeyIndicator: string ) => {
+		onChange( { keyIndicator: newKeyIndicator } );
 	};
 
 	const onSynthesizerSettingChange = (
@@ -165,6 +177,15 @@ const Controls = ( { settings, piano, onChange }: Props ) => {
 					return { label, value };
 				} ) }
 				onChange={ onKeyLayoutChange }
+			/>
+			<SelectControl
+				className="piano-block-controls__control"
+				label={ __( 'Key Indicator', 'piano-block' ) }
+				value={ keyIndicator }
+				options={ KEY_INDICATORS.map( ( { label, value } ) => {
+					return { label, value };
+				} ) }
+				onChange={ onKeyIndicatorChange }
 			/>
 			<Button
 				className="piano-block-controls__help"

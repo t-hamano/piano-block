@@ -28,6 +28,9 @@
 		},
 		"keyLayout": {
 			"type": "string"
+		},
+		"keyIndicator": {
+			"type": "string"
 		}
 	},
 	"supports": {

@@ -27,8 +27,15 @@ type Props = {
 
 const Piano = ( { settings, onChange }: Props ) => {
 	const { assetsUrl } = window.pianoBlockVars;
-	const { volume, useSustainPedal, octaveOffset, instrument, synthesizerSetting, keyLayout } =
-		settings;
+	const {
+		volume,
+		useSustainPedal,
+		octaveOffset,
+		instrument,
+		synthesizerSetting,
+		keyLayout,
+		keyIndicator,
+	} = settings;
 	const [ piano, setPiano ] = useState< Tone.Sampler | Tone.PolySynth >();
 	const [ isReady, setIsReady ] = useState< boolean >( false );
 	const [ activeKeys, setActiveKeys ] = useState< Key[] >( [] );
@@ -190,6 +197,7 @@ const Piano = ( { settings, onChange }: Props ) => {
 	const keyboardProps = {
 		activeKeys,
 		keyLayout,
+		keyIndicator,
 		onKeyClick,
 	};
 
