@@ -1,23 +1,25 @@
 {
 	"name": "piano-block",
+	"version": "2.3.0",
+	"description": "WordPress custom block plugin that allows you to play a variety of tones using the piano keyboard.",
 	"author": "Aki Hamano",
-	"license": "GPL-2.0+",
-	"scripts": {
-		"wp-env": "wp-env",
-		"open": "wp-env start && opener http://localhost:8888",
-		"stop": "wp-env stop",
-		"start": "wp-scripts start",
-		"start:hot": "wp-scripts start --hot",
-		"build": "wp-scripts build",
-		"lint": "npm run lint:css && npm run lint:js && npm run lint:types && npm run lint:php",
-		"lint:css": "wp-scripts lint-style",
-		"lint:js": "wp-scripts lint-js",
-		"lint:php": "composer lint",
-		"lint:types": "tsc",
-		"format": "wp-scripts format ./src",
-		"test": "npm run lint && npm run test:e2e",
-		"test:e2e": "wp-scripts test-playwright",
-		"test:e2e:debug": "wp-scripts test-playwright --debug"
+	"license": "GPL-2.0-or-later",
+	"keywords": ["gutenberg", "audio", "music", "piano"],
+	"homepage": "https://github.com/t-hamano/piano-block",
+	"repository": "git+https://github.com/t-hamano/piano-block.git",
+	"bugs": {
+		"url": "https://github.com/t-hamano/piano-block/issues"
+	},
+	"engines": {
+		"node": ">=16.0.0",
+		"npm": ">=8.0.0"
+	},
+	"volta": {
+		"node": "16.18.0",
+		"npm": "8.19.2"
+	},
+	"dependencies": {
+		"tone": "^14.7.77"
 	},
 	"devDependencies": {
 		"@types/wordpress__block-editor": "^11.5.6",
@@ -32,15 +34,24 @@
 		"prettier": "npm:wp-prettier@3.0.3",
 		"typescript": "^5.2.2"
 	},
-	"dependencies": {
-		"tone": "^14.7.77"
-	},
-	"engines": {
-		"node": ">=16.0.0",
-		"npm": ">=8.0.0"
-	},
-	"volta": {
-		"node": "16.18.0",
-		"npm": "8.19.2"
+	"scripts": {
+		"wp-env": "wp-env",
+		"open": "wp-env start && opener http://localhost:8888",
+		"stop": "wp-env stop",
+		"start": "wp-scripts start",
+		"start:hot": "wp-scripts start --hot",
+		"build": "wp-scripts build",
+		"check-licenses": "wp-scripts check-licenses",
+		"lint": "npm run lint:css && npm run lint:js && npm run lint:types && npm run lint:php && npm run lint:md:docs && npm run lint:pkg-json",
+		"lint:css": "wp-scripts lint-style",
+		"lint:js": "wp-scripts lint-js",
+		"lint:types": "tsc",
+		"lint:php": "composer lint",
+		"lint:md:docs": "wp-scripts lint-md-docs",
+		"lint:pkg-json": "wp-scripts lint-pkg-json",
+		"format": "wp-scripts format ./src",
+		"test": "npm run lint && npm run test:e2e",
+		"test:e2e": "wp-scripts test-playwright",
+		"test:e2e:debug": "wp-scripts test-playwright --debug"
 	}
 }
