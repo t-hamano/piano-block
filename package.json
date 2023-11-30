@@ -4,7 +4,12 @@
 	"description": "WordPress custom block plugin that allows you to play a variety of tones using the piano keyboard.",
 	"author": "Aki Hamano",
 	"license": "GPL-2.0-or-later",
-	"keywords": ["gutenberg", "audio", "music", "piano"],
+	"keywords": [
+		"gutenberg",
+		"audio",
+		"music",
+		"piano"
+	],
 	"homepage": "https://github.com/t-hamano/piano-block",
 	"repository": "git+https://github.com/t-hamano/piano-block.git",
 	"bugs": {
@@ -24,19 +29,15 @@
 	"devDependencies": {
 		"@types/wordpress__block-editor": "^11.5.6",
 		"@types/wordpress__components": "^23.0.5",
-		"@types/wordpress__dom-ready": "2.9.0",
-		"@types/wordpress__i18n": "^3.11.0",
 		"@wordpress/env": "^8.11.0",
 		"@wordpress/eslint-plugin": "17.2.0",
 		"@wordpress/icons": "^9.36.0",
 		"@wordpress/scripts": "^26.16.0",
-		"opener": "^1.5.2",
 		"prettier": "npm:wp-prettier@3.0.3",
 		"typescript": "^5.2.2"
 	},
 	"scripts": {
 		"wp-env": "wp-env",
-		"open": "wp-env start && opener http://localhost:8888",
 		"stop": "wp-env stop",
 		"start": "wp-scripts start",
 		"start:hot": "wp-scripts start --hot",
