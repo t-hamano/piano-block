@@ -5,7 +5,7 @@
 	"title": "Piano",
 	"description": "Play the melody.",
 	"category": "media",
-	"keywords": [ "audio", "music", "piano"],
+	"keywords": [ "audio", "music", "piano" ],
 	"icon": "<svg xmlns='http://www.w3.org/2000/svg' width='24' height='24' fill='black' viewBox='0 0 24 24'><path d='M7.3,23h4.2h1h4.2h1H23V1h-5.2h-1h-4.2h-1H7.3h-1H1v22h5.2H7.3z M21.9,21.9h-4v-6.4h1.3V2.1h2.7L21.9,21.9L21.9,21.9z M16.6,15.5v6.4h-4v-6.4h1.3V2.1h1.2v13.4L16.6,15.5L16.6,15.5z M11.4,15.5v6.4h-4v-6.4h1.3V2.1h1.2v13.4L11.4,15.5L11.4,15.5z M6.1,21.9h-4V2.1h2.6v13.4h1.4V21.9z'/></svg>",
 	"attributes": {
 		"volume": {
@@ -34,7 +34,7 @@
 		}
 	},
 	"supports": {
-    "align": [ "wide", "full" ],
+		"align": [ "wide", "full" ],
 		"color": {
 			"enableContrastChecker": false,
 			"text": false,
