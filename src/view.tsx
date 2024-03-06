@@ -1,13 +1,7 @@
 /**
  * WordPress dependencies
  */
-import {
-	render,
-	// @ts-ignore: has no exported member
-	// eslint-disable-next-line import/named
-	createRoot,
-	useState,
-} from '@wordpress/element';
+import { render, createRoot, useState } from '@wordpress/element';
 import domReady from '@wordpress/dom-ready';
 
 /**
