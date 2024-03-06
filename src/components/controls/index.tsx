@@ -132,7 +132,7 @@ const Controls = ( { settings, piano, onChange }: Props ) => {
 			</BaseControl>
 			<SelectControl
 				className="piano-block-controls__control"
-				label={ __( 'Insturment', 'piano-block' ) }
+				label={ __( 'Instrument', 'piano-block' ) }
 				value={ instrument }
 				options={ INSTRUMENTS.map( ( { label, value } ) => {
 					return { label, value };

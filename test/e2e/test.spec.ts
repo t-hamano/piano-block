@@ -27,7 +27,7 @@ test.describe( 'Block', () => {
 		await pageUtils.pressKeys( 'z' );
 		// Instrument
 		await pageUtils.pressKeys( 'ArrowRight', { times: 4 } );
-		await expect( page.getByRole( 'combobox', { name: 'Insturment' } ) ).toBeFocused();
+		await expect( page.getByRole( 'combobox', { name: 'Instrument' } ) ).toBeFocused();
 		await pageUtils.pressKeys( 'Enter' );
 		await pageUtils.pressKeys( 'ArrowDown', { times: 14 } );
 		await pageUtils.pressKeys( 'Enter' );
