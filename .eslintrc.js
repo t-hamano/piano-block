@@ -7,6 +7,7 @@ module.exports = {
 	rules: {
 		'import/no-extraneous-dependencies': 'off',
 		'import/no-unresolved': 'off',
+		'react/jsx-boolean-value': 'error',
 		'@wordpress/no-unsafe-wp-apis': 'off',
 		'no-nested-ternary': 'off',
 		'prettier/prettier': [
