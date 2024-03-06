@@ -27,15 +27,15 @@
 		"tone": "^14.7.77"
 	},
 	"devDependencies": {
-		"@types/wordpress__block-editor": "^11.5.6",
-		"@types/wordpress__components": "^23.0.5",
-		"@wordpress/dom-ready": "3.47.0",
-		"@wordpress/env": "^8.11.0",
-		"@wordpress/eslint-plugin": "17.2.0",
-		"@wordpress/icons": "^9.36.0",
-		"@wordpress/scripts": "^26.16.0",
+		"@types/wordpress__block-editor": "^11.5.11",
+		"@types/wordpress__components": "^23.0.11",
+		"@wordpress/dom-ready": "3.52.0",
+		"@wordpress/env": "^9.4.0",
+		"@wordpress/eslint-plugin": "17.9.0",
+		"@wordpress/icons": "^9.43.0",
+		"@wordpress/scripts": "^27.3.0",
 		"prettier": "npm:wp-prettier@3.0.3",
-		"typescript": "^5.2.2"
+		"typescript": "^5.3.3"
 	},
 	"scripts": {
 		"wp-env": "wp-env",
