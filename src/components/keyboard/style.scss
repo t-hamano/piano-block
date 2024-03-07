@@ -4,6 +4,8 @@
 	overflow-x: auto;
 
 	@include custom-scrollbars-on-hover(transparent, rgba($white, 0.8));
+	// Prevents padding from being applied to the left and right sides.
+	scrollbar-gutter: auto;
 
 	.piano-block-keyboard__inner {
 		box-sizing: border-box;
