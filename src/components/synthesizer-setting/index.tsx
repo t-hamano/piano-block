@@ -3,7 +3,13 @@
  */
 import { __ } from '@wordpress/i18n';
 import { useEffect, useRef } from '@wordpress/element';
-import { Button, RangeControl, SelectControl } from '@wordpress/components';
+import {
+	Button,
+	RangeControl,
+	SelectControl,
+	// @ts-ignore: has no exported member
+	__experimentalVStack as VStack,
+} from '@wordpress/components';
 
 /**
  * Internal dependencies
@@ -109,7 +115,7 @@ const SynthesizerSetting = ( { synthesizerSetting, onChange }: Props ) => {
 	};
 
 	return (
-		<div className="piano-block-synthesizer-setting">
+		<VStack className="piano-block-synthesizer-setting">
 			<SelectControl
 				label={ __( 'Oscillator Type', 'piano-block' ) }
 				autoComplete="off"
@@ -146,7 +152,7 @@ const SynthesizerSetting = ( { synthesizerSetting, onChange }: Props ) => {
 			>
 				{ __( 'Reset envelope', 'piano-block' ) }
 			</Button>
-		</div>
+		</VStack>
 	);
 };
 

@@ -13,7 +13,6 @@
 		display: flex;
 		flex-wrap: wrap;
 		gap: 0 $grid-unit-20;
-		margin-top: $grid-unit-10;
 
 		.components-range-control {
 			width: calc(50% - $grid-unit-10);
@@ -29,12 +28,10 @@
 		display: block;
 		width: 100%;
 		height: $grid-unit-10 * 10;
-		margin: $grid-unit-10 0;
 		border: $border-width solid var(--wp-admin-theme-color, #007cba);
 	}
 
 	.piano-block-synthesizer-setting__reset {
-		display: block;
 		margin-left: auto;
 	}
 }
