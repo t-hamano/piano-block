@@ -192,6 +192,7 @@ const Controls = ( { settings, piano, onChange }: Props ) => {
 				label={ __( 'Help', 'piano-block' ) }
 				icon={ help }
 				onClick={ () => setIsHelpOpen( true ) }
+				size="compact"
 			/>
 			{ isHelpOpen && <HelpModal onClose={ () => setIsHelpOpen( false ) } /> }
 		</div>
