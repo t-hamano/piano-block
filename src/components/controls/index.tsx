@@ -124,6 +124,8 @@ const Controls = ( { settings, piano, onChange }: Props ) => {
 							key={ index }
 							variant={ value === octaveOffset ? 'primary' : undefined }
 							onClick={ () => onOctaveOffsetChange( value ) }
+							// @ts-ignore: `size` prop is not exist at @types
+							size="compact"
 						>
 							{ label }
 						</Button>
@@ -146,6 +148,8 @@ const Controls = ( { settings, piano, onChange }: Props ) => {
 						icon={ cog }
 						variant="primary"
 						onClick={ () => setIsSynthesizerSettingOpen( ! isSynthesizerSettingOpen ) }
+						// @ts-ignore: `size` prop is not exist at @types
+						size="compact"
 					/>
 					{ isSynthesizerSettingOpen && (
 						<Popover
@@ -177,6 +181,8 @@ const Controls = ( { settings, piano, onChange }: Props ) => {
 					return { label, value };
 				} ) }
 				onChange={ onKeyLayoutChange }
+				// @ts-ignore: `size` prop is not exist at @types
+				size="compact"
 			/>
 			<SelectControl
 				className="piano-block-controls__control"
@@ -186,12 +192,16 @@ const Controls = ( { settings, piano, onChange }: Props ) => {
 					return { label, value };
 				} ) }
 				onChange={ onKeyIndicatorChange }
+				// @ts-ignore: `size` prop is not exist at @types
+				size="compact"
 			/>
 			<Button
 				className="piano-block-controls__help"
 				label={ __( 'Help', 'piano-block' ) }
 				icon={ help }
 				onClick={ () => setIsHelpOpen( true ) }
+				// @ts-ignore: `size` prop is not exist at @types
+				size="compact"
 			/>
 			{ isHelpOpen && <HelpModal onClose={ () => setIsHelpOpen( false ) } /> }
 		</div>

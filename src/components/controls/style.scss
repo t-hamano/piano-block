@@ -3,17 +3,21 @@
 	box-sizing: border-box;
 	display: flex;
 	flex-wrap: wrap;
-	gap: 12px;
+	gap: $grid-unit-20;
 	align-items: flex-start;
-	width: calc(100% - 32px);
+	width: calc(100% - $grid-unit-40);
 	max-width: 818px;
-	padding: 8px 50px 8px 16px;
+	padding: $grid-unit-10 $grid-unit-60 $grid-unit-10 $grid-unit-20;
 	margin: 0 auto;
 	background: #fff;
-	border-radius: 2px;
+	border-radius: $radius-block-ui;
 
 	.components-range-control {
 		width: 140px;
+
+		.components-range-control__reset {
+			height: $grid-unit-40;
+		}
 	}
 
 	.components-base-control__label {
@@ -27,10 +31,6 @@
 		margin-bottom: 0;
 	}
 
-	.components-button-group .components-button {
-		height: 30px;
-	}
-
 	.components-select-control__input:focus {
 		outline: none;
 	}
@@ -40,7 +40,6 @@
 
 		.components-flex {
 			flex-flow: column-reverse;
-			gap: 14px;
 			align-items: flex-start;
 		}
 
@@ -60,17 +59,17 @@
 	.piano-block-controls__synthesizer-toggle {
 		display: flex;
 		align-self: flex-end;
-
-		> .components-button {
-			min-width: 30px;
-			height: 30px;
-			padding: 0;
-		}
 	}
 
 	.piano-block-controls__help {
 		position: absolute;
-		top: 8px;
-		right: 8px;
+		top: $grid-unit-10;
+		right: $grid-unit-10;
+	}
+
+	// Fallback for WP6.4 and below
+	.components-select-control__input.components-select-control__input.components-select-control__input {
+		height: $grid-unit-40;
+		min-height: $grid-unit-40;
 	}
 }
