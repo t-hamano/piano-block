@@ -5,7 +5,7 @@
 	z-index: 2;
 	display: flex;
 	flex-flow: column;
-	gap: 8px;
+	gap: $grid-unit-10;
 	align-items: center;
 	justify-content: center;
 	width: 100%;

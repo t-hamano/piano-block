@@ -29,6 +29,7 @@
 	"devDependencies": {
 		"@types/wordpress__block-editor": "^11.5.11",
 		"@types/wordpress__components": "^23.0.11",
+		"@wordpress/base-styles": "4.44.0",
 		"@wordpress/dom-ready": "3.52.0",
 		"@wordpress/env": "^9.4.0",
 		"@wordpress/eslint-plugin": "17.9.0",

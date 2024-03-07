@@ -1,6 +1,6 @@
 .piano-block-keyboard {
 	position: relative;
-	padding: 16px 0;
+	padding: $grid-unit-20 0;
 	overflow-x: auto;
 
 	.piano-block-keyboard__inner {
@@ -8,7 +8,7 @@
 		display: flex;
 		width: 850px;
 		height: 205px;
-		padding: 0 16px;
+		padding: 0 $grid-unit-20;
 		margin: 0 auto;
 	}
 
@@ -16,8 +16,7 @@
 		display: flex;
 		align-items: flex-end;
 		justify-content: center;
-		padding: 0;
-		padding-bottom: 8px;
+		padding: 0 0 $grid-unit-10;
 		font-size: 12px;
 		font-weight: normal;
 		text-transform: uppercase;

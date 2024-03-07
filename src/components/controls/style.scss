@@ -3,14 +3,14 @@
 	box-sizing: border-box;
 	display: flex;
 	flex-wrap: wrap;
-	gap: 12px;
+	gap: $grid-unit-20;
 	align-items: flex-start;
-	width: calc(100% - 32px);
+	width: calc(100% - $grid-unit-40);
 	max-width: 818px;
-	padding: 8px 50px 8px 16px;
+	padding: $grid-unit-10 $grid-unit-60 $grid-unit-10 $grid-unit-20;
 	margin: 0 auto;
 	background: #fff;
-	border-radius: 2px;
+	border-radius: $radius-block-ui;
 
 	.components-range-control {
 		width: 140px;
@@ -40,7 +40,6 @@
 
 		.components-flex {
 			flex-flow: column-reverse;
-			gap: 14px;
 			align-items: flex-start;
 		}
 
@@ -70,7 +69,7 @@
 
 	.piano-block-controls__help {
 		position: absolute;
-		top: 8px;
-		right: 8px;
+		top: $grid-unit-10;
+		right: $grid-unit-10;
 	}
 }
