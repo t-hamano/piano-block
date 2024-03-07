@@ -14,6 +14,10 @@
 
 	.components-range-control {
 		width: 140px;
+
+		.components-range-control__reset {
+			height: $grid-unit-40;
+		}
 	}
 
 	.components-base-control__label {
@@ -59,12 +63,6 @@
 	.piano-block-controls__synthesizer-toggle {
 		display: flex;
 		align-self: flex-end;
-
-		> .components-button {
-			min-width: 30px;
-			height: 30px;
-			padding: 0;
-		}
 	}
 
 	.piano-block-controls__help {
