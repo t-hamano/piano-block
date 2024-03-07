@@ -119,6 +119,8 @@ const SynthesizerSetting = ( { synthesizerSetting, onChange }: Props ) => {
 				} ) }
 				onKeyDown={ onOscillatorTypeKeyDown }
 				onChange={ onOscillatorTypeChange }
+				// @ts-ignore: `size` prop is not exist at @types
+				size="compact"
 			/>
 			<div className="piano-block-synthesizer-setting__envelope">
 				{ EMVELOPE_CONTROLS.map( ( { label, parameter, max } ) => (

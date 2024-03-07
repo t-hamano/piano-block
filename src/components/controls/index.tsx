@@ -124,6 +124,8 @@ const Controls = ( { settings, piano, onChange }: Props ) => {
 							key={ index }
 							variant={ value === octaveOffset ? 'primary' : undefined }
 							onClick={ () => onOctaveOffsetChange( value ) }
+							// @ts-ignore: `size` prop is not exist at @types
+							size="compact"
 						>
 							{ label }
 						</Button>
