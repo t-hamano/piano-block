@@ -66,4 +66,10 @@
 		top: $grid-unit-10;
 		right: $grid-unit-10;
 	}
+
+	// Fallback for WP6.4 and below
+	.components-select-control__input.components-select-control__input.components-select-control__input {
+		height: $grid-unit-40;
+		min-height: $grid-unit-40;
+	}
 }
