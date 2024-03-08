@@ -31,10 +31,10 @@ jobs:
             wp: WordPress#6.3.3
     name: PHP ${{ matrix.php }} / ${{ matrix.wp }} Test
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Use desired version of Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version-file: '.nvmrc'
 
@@ -73,7 +73,7 @@ jobs:
         uses: actions/checkout@main
 
       - name: Use desired version of Node.js
-        uses: actions/setup-node@v3
+        uses: actions/setup-node@v4
         with:
           node-version-file: '.nvmrc'
 
