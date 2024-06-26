@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import classnames from 'classnames';
+import clsx from 'clsx';
 
 /**
  * WordPress dependencies
@@ -39,7 +39,7 @@ const Keyboard = ( { activeKeys, keyLayout, keyIndicator, onKeyClick }: Props ) 
 						<button
 							key={ index }
 							tabIndex={ -1 }
-							className={ classnames( 'piano-block-keyboard__key', {
+							className={ clsx( 'piano-block-keyboard__key', {
 								'piano-block-keyboard__key--white': ! key.isBlackKey,
 								'piano-block-keyboard__key--black': key.isBlackKey,
 								'is-pressed': activeKeys.some(
