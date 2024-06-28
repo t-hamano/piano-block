@@ -6,10 +6,16 @@ module.exports = {
 	parser: '@typescript-eslint/parser',
 	rules: {
 		'import/no-extraneous-dependencies': 'off',
-		'import/no-unresolved': 'off',
 		'react/jsx-boolean-value': 'error',
+		'react/jsx-curly-brace-presence': [ 'error', { props: 'never', children: 'never' } ],
+		'@wordpress/dependency-group': 'error',
 		'@wordpress/no-unsafe-wp-apis': 'off',
-		'no-nested-ternary': 'off',
+		'@wordpress/i18n-text-domain': [
+			'error',
+			{
+				allowedTextDomain: 'piano-block',
+			},
+		],
 		'prettier/prettier': [
 			'error',
 			{
