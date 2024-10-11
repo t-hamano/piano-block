@@ -24,7 +24,6 @@ export interface BlockAttributes {
 	keyIndicator: string;
 }
 
-export const LATENCY = 0.01 as const;
 export const MIN_VOLUME = -10 as const;
 export const MAX_VOLUME = 5 as const;
 export const DEFAULT_INSTRUMENT = 'acoustic-piano' as const;

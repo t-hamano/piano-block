@@ -12,7 +12,7 @@ import { useEffect, useState, useRef } from '@wordpress/element';
 /**
  * Internal dependencies
  */
-import { DEFAULT_ENVELOPE, INSTRUMENTS, LATENCY } from '../../constants';
+import { DEFAULT_ENVELOPE, INSTRUMENTS } from '../../constants';
 import { KEYBOARD_LAYOUTS } from '../../keyboard-layout';
 import Loading from '../loading';
 import Keyboard from '../keyboard';
@@ -137,7 +137,7 @@ const Piano = ( { settings, onChange }: Props ) => {
 			targetKey.octave + octaveOffset + instrumentOctaveOffset
 		}`;
 
-		piano.triggerAttack( targetNote, piano.context.currentTime + LATENCY );
+		piano.triggerAttack( targetNote, piano.context.currentTime );
 		setActiveKeys( [ ...activeKeys, targetKey ] );
 	};
 
@@ -177,7 +177,7 @@ const Piano = ( { settings, onChange }: Props ) => {
 		const targetNote = `${ note }${ octave + octaveOffset + instrumentOctaveOffset }`;
 
 		if ( useSustainPedal && instrument !== 'synthesizer' ) {
-			piano.triggerAttack( targetNote, piano.context.currentTime + LATENCY );
+			piano.triggerAttack( targetNote, piano.context.currentTime );
 		} else {
 			piano.triggerAttackRelease( targetNote, 0.2 );
 		}
