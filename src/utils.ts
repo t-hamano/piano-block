@@ -2,20 +2,20 @@
  * Internal dependencies
  */
 import { INSTRUMENTS, OSCILLATOR_TYPES } from './constants';
-import type { BlockAttributes, Instrument } from './constants';
+import type { BlockAttributes } from './constants';
 
 /**
- * Return a object of audio URLs from notes of Tone.js Sampler.
+ * Return a object of audio file names from notes of Tone.js Sampler.
  *
- * @param instrument Instrument object.
+ * @param notes Notes.
  * @return Object of audio URLs.
  */
-export function getSamplerUrls( instrument: Instrument ) {
-	if ( ! instrument.notes || ! Array.isArray( instrument.notes ) ) {
+export function getSamplerFileNames( notes: string[] ) {
+	if ( ! notes || ! Array.isArray( notes ) ) {
 		return {};
 	}
 
-	return instrument.notes.reduce( ( accumulator: { [ key: string ]: string }, note: string ) => {
+	return notes.reduce( ( accumulator: { [ key: string ]: string }, note: string ) => {
 		return {
 			...accumulator,
 			[ note.replace( 's', '#' ) ]: `${ note }.mp3`,

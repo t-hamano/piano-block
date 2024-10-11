@@ -8,7 +8,7 @@ import domReady from '@wordpress/dom-ready';
  * Internal dependencies
  */
 import Piano from './components/piano';
-import { DEFAULT_SETTINGS } from './constants';
+import { DEFAULT_SETTINGS, INSTRUMENTS } from './constants';
 import type { BlockAttributes } from './constants';
 
 function View( props: BlockAttributes ) {
@@ -32,10 +32,16 @@ domReady( function () {
 	}
 
 	domNodes.forEach( ( domNode ) => {
+		const instrument = domNode.getAttribute( 'data-instrument' ) || DEFAULT_SETTINGS.instrument;
+
+		const allowedInstrument = INSTRUMENTS.find( ( { value } ) => value === instrument );
+		if ( ! allowedInstrument ) {
+			return;
+		}
+
 		const volume = parseFloat( domNode.getAttribute( 'data-volume' ) || '' );
 		const useSustainPedal = domNode.getAttribute( 'data-use-sustain-pedal' ) === '1';
 		const octaveOffset = parseFloat( domNode.getAttribute( 'data-octave-offset' ) || '' );
-		const instrument = domNode.getAttribute( 'data-instrument' ) || DEFAULT_SETTINGS.instrument;
 		const keyLayout = domNode.getAttribute( 'data-key-layout' ) || DEFAULT_SETTINGS.keyLayout;
 		const keyIndicator =
 			domNode.getAttribute( 'data-key-indicator' ) || DEFAULT_SETTINGS.keyIndicator;
@@ -59,7 +65,7 @@ domReady( function () {
 			volume,
 			useSustainPedal,
 			octaveOffset,
-			instrument,
+			instrument: allowedInstrument.value,
 			keyLayout,
 			keyIndicator,
 			synthesizerSetting: normalizedSynthesizerSetting,
