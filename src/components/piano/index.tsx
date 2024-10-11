@@ -17,7 +17,7 @@ import { KEYBOARD_LAYOUTS } from '../../keyboard-layout';
 import Loading from '../loading';
 import Keyboard from '../keyboard';
 import Controls from '../controls';
-import { getNormalizedVolume, getSamplerUrls } from '../../utils';
+import { getNormalizedVolume, getSamplerFileNames } from '../../utils';
 import type { BlockAttributes, Key } from '../../constants';
 
 type Props = {
@@ -73,7 +73,7 @@ const Piano = ( { settings, onChange }: Props ) => {
 			setIsReady( true );
 		} else {
 			tonePlayer = new Tone.Sampler( {
-				urls: getSamplerUrls( instrumentSetting ),
+				urls: getSamplerFileNames( [ ...instrumentSetting.notes ] ),
 				release: 1,
 				baseUrl: `${ assetsUrl }/instruments/${ instrument }/`,
 				onload: () => {

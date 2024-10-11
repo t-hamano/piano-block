@@ -157,7 +157,7 @@ export const INSTRUMENTS = [
 		octaveOffset: 0,
 		volumeOffset: -5,
 	},
-];
+] as const;
 
 export const OCTAVE_OFFSETS = [
 	{
@@ -353,7 +353,6 @@ export interface Instrument {
 	volumeOffset: number;
 }
 
-export type OscillatorType = ( typeof OSCILLATOR_TYPES )[ number ];
 export type EmvelopeControl = ( typeof EMVELOPE_CONTROLS )[ number ];
 export type Key = {
 	note: string;

@@ -69,8 +69,12 @@ const Controls = ( { settings, piano, onChange }: Props ) => {
 		onChange( { octaveOffset: newOctaveOffset } );
 	};
 
-	const onInstrumentChange = ( newInstrument: ( typeof INSTRUMENTS )[ number ][ 'value' ] ) => {
-		onChange( { instrument: newInstrument } );
+	const onInstrumentChange = ( newInstrument: string ) => {
+		const allowedInstrument = INSTRUMENTS.find( ( { value } ) => value === newInstrument );
+		if ( ! allowedInstrument ) {
+			return;
+		}
+		onChange( { instrument: allowedInstrument.value } );
 	};
 
 	const onUseSustainPedalChange = () => {

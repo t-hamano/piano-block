@@ -20,7 +20,7 @@ import {
 	EMVELOPE_CONTROLS,
 	OSCILLATOR_TYPES,
 } from '../../constants';
-import type { BlockAttributes, EmvelopeControl, OscillatorType } from '../../constants';
+import type { BlockAttributes, EmvelopeControl } from '../../constants';
 
 type Props = {
 	synthesizerSetting: BlockAttributes[ 'synthesizerSetting' ];
@@ -77,12 +77,20 @@ const SynthesizerSetting = ( { synthesizerSetting, onChange }: Props ) => {
 		context.closePath();
 	}, [ envelope ] );
 
-	const onOscillatorTypeChange = ( newOscillatorType: OscillatorType[ 'value' ] ) => {
+	const onOscillatorTypeChange = ( newOscillatorType: string ) => {
+		const allowedOscillatorType = OSCILLATOR_TYPES.find(
+			( { value } ) => value === newOscillatorType
+		);
+
+		if ( ! allowedOscillatorType ) {
+			return;
+		}
+
 		onChange( {
 			...synthesizerSetting,
 			oscillator: {
 				...synthesizerSetting.oscillator,
-				type: newOscillatorType,
+				type: allowedOscillatorType.value,
 			},
 		} );
 	};
