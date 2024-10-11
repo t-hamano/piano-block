@@ -113,7 +113,6 @@ const Controls = ( { settings, piano, onChange }: Props ) => {
 				max={ MAX_VOLUME }
 				step={ 0.1 }
 				allowReset
-				// @ts-ignore: `withInputField` prop is not exist at @types
 				withInputField={ false }
 				onChange={ onVolumeChange }
 			/>
@@ -128,7 +127,6 @@ const Controls = ( { settings, piano, onChange }: Props ) => {
 							key={ index }
 							variant={ value === octaveOffset ? 'primary' : undefined }
 							onClick={ () => onOctaveOffsetChange( value ) }
-							// @ts-ignore: `size` prop is not exist at @types
 							size="compact"
 						>
 							{ label }
@@ -152,15 +150,10 @@ const Controls = ( { settings, piano, onChange }: Props ) => {
 						icon={ cog }
 						variant="primary"
 						onClick={ () => setIsSynthesizerSettingOpen( ! isSynthesizerSettingOpen ) }
-						// @ts-ignore: `size` prop is not exist at @types
 						size="compact"
 					/>
 					{ isSynthesizerSettingOpen && (
-						<Popover
-							// @ts-ignore: `withInputField` prop is not exist at @types
-							placement="top"
-							onClose={ () => setIsSynthesizerSettingOpen( false ) }
-						>
+						<Popover placement="top" onClose={ () => setIsSynthesizerSettingOpen( false ) }>
 							<SynthesizerSetting
 								synthesizerSetting={ synthesizerSetting }
 								onChange={ onSynthesizerSettingChange }
@@ -174,7 +167,6 @@ const Controls = ( { settings, piano, onChange }: Props ) => {
 				label={ __( 'Sustain Pedal', 'piano-block' ) }
 				checked={ useSustainPedal }
 				onChange={ onUseSustainPedalChange }
-				// @ts-ignore: `disabled` prop is not exist at @types
 				disabled={ instrument === 'synthesizer' }
 			/>
 			<SelectControl
@@ -185,7 +177,6 @@ const Controls = ( { settings, piano, onChange }: Props ) => {
 					return { label, value };
 				} ) }
 				onChange={ onKeyLayoutChange }
-				// @ts-ignore: `size` prop is not exist at @types
 				size="compact"
 			/>
 			<SelectControl
@@ -196,7 +187,6 @@ const Controls = ( { settings, piano, onChange }: Props ) => {
 					return { label, value };
 				} ) }
 				onChange={ onKeyIndicatorChange }
-				// @ts-ignore: `size` prop is not exist at @types
 				size="compact"
 			/>
 			<Button
@@ -204,7 +194,6 @@ const Controls = ( { settings, piano, onChange }: Props ) => {
 				label={ __( 'Help', 'piano-block' ) }
 				icon={ help }
 				onClick={ () => setIsHelpOpen( true ) }
-				// @ts-ignore: `size` prop is not exist at @types
 				size="compact"
 			/>
 			{ isHelpOpen && <HelpModal onClose={ () => setIsHelpOpen( false ) } /> }

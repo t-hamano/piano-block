@@ -7,7 +7,6 @@ import {
 	Button,
 	RangeControl,
 	SelectControl,
-	// @ts-ignore: has no exported member
 	__experimentalVStack as VStack,
 } from '@wordpress/components';
 
@@ -133,7 +132,6 @@ const SynthesizerSetting = ( { synthesizerSetting, onChange }: Props ) => {
 				} ) }
 				onKeyDown={ onOscillatorTypeKeyDown }
 				onChange={ onOscillatorTypeChange }
-				// @ts-ignore: `size` prop is not exist at @types
 				size="compact"
 			/>
 			<div className="piano-block-synthesizer-setting__envelope">
@@ -145,7 +143,6 @@ const SynthesizerSetting = ( { synthesizerSetting, onChange }: Props ) => {
 						min={ 0.05 }
 						max={ max }
 						step={ 0.05 }
-						// @ts-ignore: `withInputField` prop is not exist at @types
 						withInputField={ false }
 						onChange={ ( value ) => onEnvelopeChange( parameter, value ) }
 					/>
