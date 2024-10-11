@@ -27,6 +27,7 @@
 		.components-flex {
 			flex-flow: column-reverse;
 			align-items: flex-start;
+			gap: $grid-unit-20;
 		}
 
 		.components-toggle-control__label {
