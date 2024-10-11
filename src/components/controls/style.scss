@@ -50,7 +50,11 @@
 	}
 
 	// Backwards compatible styles for WordPress 6.6 and below
-	.components-base-control:has(.components-button-group) .components-base-control__label {
-		display: block;
+	.components-base-control:has(.components-button-group),
+	.components-range-control {
+
+		.components-base-control__label {
+			display: block;
+		}
 	}
 }
