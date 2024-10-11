@@ -33,6 +33,7 @@ export default function Edit( { attributes, setAttributes }: BlockEditProps< Blo
 			<InspectorControls>
 				<PanelBody title={ __( 'Settings', 'piano-block' ) }>
 					<ToggleControl
+						__nextHasNoMarginBottom
 						label={ __( 'Display on the front end', 'piano-block' ) }
 						checked={ settings.showOnFront }
 						onChange={ ( value ) => onChange( { showOnFront: value } ) }

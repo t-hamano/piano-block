@@ -7,6 +7,7 @@ import {
 	Button,
 	RangeControl,
 	SelectControl,
+	__experimentalGrid as Grid,
 	__experimentalVStack as VStack,
 } from '@wordpress/components';
 
@@ -122,8 +123,9 @@ const SynthesizerSetting = ( { synthesizerSetting, onChange }: Props ) => {
 	};
 
 	return (
-		<VStack className="piano-block-synthesizer-setting">
+		<VStack className="piano-block-synthesizer-setting" spacing={ 4 }>
 			<SelectControl
+				__nextHasNoMarginBottom
 				label={ __( 'Oscillator Type', 'piano-block' ) }
 				autoComplete="off"
 				value={ oscillator?.type || DEFAULT_OSCILLATOR_TYPE }
@@ -134,9 +136,10 @@ const SynthesizerSetting = ( { synthesizerSetting, onChange }: Props ) => {
 				onChange={ onOscillatorTypeChange }
 				size="compact"
 			/>
-			<div className="piano-block-synthesizer-setting__envelope">
+			<Grid columns={ 2 }>
 				{ EMVELOPE_CONTROLS.map( ( { label, parameter, max } ) => (
 					<RangeControl
+						__nextHasNoMarginBottom
 						key={ parameter }
 						label={ label }
 						value={ envelope[ parameter ] ?? DEFAULT_ENVELOPE[ parameter ] }
@@ -147,12 +150,12 @@ const SynthesizerSetting = ( { synthesizerSetting, onChange }: Props ) => {
 						onChange={ ( value ) => onEnvelopeChange( parameter, value ) }
 					/>
 				) ) }
-			</div>
+			</Grid>
 			<canvas ref={ ref } className="piano-block-synthesizer-setting__graph" />
 			<Button
 				className="piano-block-synthesizer-setting__reset"
 				isDestructive
-				isSmall
+				size="small"
 				onClick={ onEnvelopeReset }
 			>
 				{ __( 'Reset envelope', 'piano-block' ) }
