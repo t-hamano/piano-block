@@ -106,7 +106,7 @@ const Controls = ( { settings, piano, onChange }: Props ) => {
 	return (
 		<div className="piano-block-controls">
 			<RangeControl
-				className="piano-block-controls__control"
+				__nextHasNoMarginBottom
 				label={ __( 'Volume', 'piano-block' ) }
 				value={ volume || 0 }
 				min={ MIN_VOLUME }
@@ -117,7 +117,7 @@ const Controls = ( { settings, piano, onChange }: Props ) => {
 				onChange={ onVolumeChange }
 			/>
 			<BaseControl
-				className="piano-block-controls__control"
+				__nextHasNoMarginBottom
 				id="piano-block-control-octave"
 				label={ __( 'Octave Offset', 'piano-block' ) }
 			>
@@ -135,7 +135,7 @@ const Controls = ( { settings, piano, onChange }: Props ) => {
 				</ButtonGroup>
 			</BaseControl>
 			<SelectControl
-				className="piano-block-controls__control"
+				__nextHasNoMarginBottom
 				label={ __( 'Instrument', 'piano-block' ) }
 				value={ instrument }
 				options={ INSTRUMENTS.map( ( { label, value } ) => {
@@ -163,14 +163,14 @@ const Controls = ( { settings, piano, onChange }: Props ) => {
 				</div>
 			) }
 			<ToggleControl
-				className="piano-block-controls__control"
+				__nextHasNoMarginBottom
 				label={ __( 'Sustain Pedal', 'piano-block' ) }
 				checked={ useSustainPedal }
 				onChange={ onUseSustainPedalChange }
 				disabled={ instrument === 'synthesizer' }
 			/>
 			<SelectControl
-				className="piano-block-controls__control"
+				__nextHasNoMarginBottom
 				label={ __( 'Key Layout', 'piano-block' ) }
 				value={ keyLayout }
 				options={ KEYBOARD_LAYOUTS.map( ( { label, value } ) => {
@@ -180,7 +180,7 @@ const Controls = ( { settings, piano, onChange }: Props ) => {
 				size="compact"
 			/>
 			<SelectControl
-				className="piano-block-controls__control"
+				__nextHasNoMarginBottom
 				label={ __( 'Key Indicator', 'piano-block' ) }
 				value={ keyIndicator }
 				options={ KEY_INDICATORS.map( ( { label, value } ) => {
@@ -194,7 +194,7 @@ const Controls = ( { settings, piano, onChange }: Props ) => {
 				label={ __( 'Help', 'piano-block' ) }
 				icon={ help }
 				onClick={ () => setIsHelpOpen( true ) }
-				size="compact"
+				size="small"
 			/>
 			{ isHelpOpen && <HelpModal onClose={ () => setIsHelpOpen( false ) } /> }
 		</div>

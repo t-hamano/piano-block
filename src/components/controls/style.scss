@@ -1,3 +1,5 @@
+@import "../../variables";
+
 .piano-block-controls {
 	position: relative;
 	box-sizing: border-box;
@@ -6,7 +8,7 @@
 	gap: $grid-unit-20;
 	align-items: flex-start;
 	width: calc(100% - $grid-unit-40);
-	max-width: 818px;
+	max-width: $white-key-width * $white-key-count - $grid-unit-40;
 	padding: $grid-unit-10 $grid-unit-60 $grid-unit-10 $grid-unit-20;
 	margin: 0 auto;
 	background: #fff;
@@ -20,23 +22,7 @@
 		}
 	}
 
-	.components-base-control__label {
-		display: block;
-		font-size: 11px;
-		font-weight: 500;
-		line-height: 1.4;
-	}
-
-	.components-base-control__field {
-		margin-bottom: 0;
-	}
-
-	.components-select-control__input:focus {
-		outline: none;
-	}
-
 	.components-toggle-control {
-		margin-bottom: 0;
 
 		.components-flex {
 			flex-flow: column-reverse;
@@ -50,10 +36,6 @@
 			line-height: 1.4;
 			text-transform: uppercase;
 		}
-
-		.components-form-toggle {
-			display: inline-flex;
-		}
 	}
 
 	.piano-block-controls__synthesizer-toggle {
@@ -65,5 +47,10 @@
 		position: absolute;
 		top: $grid-unit-10;
 		right: $grid-unit-10;
+	}
+
+	// Backwards compatible styles for WordPress 6.6 and below
+	.components-base-control:has(.components-button-group) .components-base-control__label {
+		display: block;
 	}
 }
