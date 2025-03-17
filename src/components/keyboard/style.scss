@@ -72,8 +72,11 @@
 		border-bottom-color: #666;
 		border-radius: 0 0 4px 4px;
 		box-shadow: 0 3px 5px #ccc, inset 0 0 0 1px rgb(220 220 220 / 20%);
-		transition: background 0.03s, border-bottom-width 0.03s;
 		z-index: 1;
+
+		@media not (prefers-reduced-motion) {
+			transition: background 0.03s, border-bottom-width 0.03s;
+		}
 	}
 
 	.piano-block-keyboard__key--white {
@@ -85,6 +88,9 @@
 		border-bottom: none;
 		border-radius: 0 0 3px 3px;
 		box-shadow: 0 4px 4px #aaa;
-		transition: height 0.03s, box-shadow 0.03s;
+
+		@media not (prefers-reduced-motion) {
+			transition: height 0.03s, box-shadow 0.03s;
+		}
 	}
 }
