@@ -1,15 +1,17 @@
+@use "../../wp-base-styles" as wpBaseStyles;
+
 .piano-block-synthesizer-setting {
 	box-sizing: border-box;
 	width: 240px;
 	max-width: 100%;
-	padding: $grid-unit-20;
+	padding: wpBaseStyles.$grid-unit-20;
 	overflow: hidden;
 
 	.piano-block-synthesizer-setting__graph {
 		display: block;
 		width: 100%;
-		height: $grid-unit-10 * 10;
-		border: $border-width solid $gray-600;
+		height: wpBaseStyles.$grid-unit-10 * 10;
+		border: wpBaseStyles.$border-width solid wpBaseStyles.$gray-600;
 	}
 
 	.piano-block-synthesizer-setting__reset {

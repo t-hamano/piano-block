@@ -1,4 +1,6 @@
-$black-key-width: $grid-unit-40;
-$white-key-width: $grid-unit-50;
-$white-key-height: $grid-unit-10 * 24;
+@use "wp-base-styles" as wpBaseStyles;
+
+$black-key-width: wpBaseStyles.$grid-unit-40;
+$white-key-width: wpBaseStyles.$grid-unit-50;
+$white-key-height: wpBaseStyles.$grid-unit-10 * 24;
 $white-key-count: 17;
