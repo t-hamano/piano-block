@@ -21,14 +21,15 @@ test.describe( 'Block', () => {
 
 		// Octave Offset
 		await pageUtils.pressKeys( 'Tab', { times: 2 } );
-		await expect( editor.canvas.getByRole( 'button', { name: '-2' } ) ).toBeFocused();
-		await pageUtils.pressKeys( 'ArrowRight' );
+		await expect( editor.canvas.getByRole( 'combobox', { name: 'Octave' } ) ).toBeFocused();
+		await pageUtils.pressKeys( 'Enter' );
+		await pageUtils.pressKeys( 'ArrowDown' );
 		await pageUtils.pressKeys( 'Enter' );
 		// Pressing a piano key should not remove focus.
 		await pageUtils.pressKeys( 'z' );
 
 		// Instrument
-		await pageUtils.pressKeys( 'ArrowRight', { times: 4 } );
+		await pageUtils.pressKeys( 'Tab' );
 		await expect( editor.canvas.getByRole( 'combobox', { name: 'Instrument' } ) ).toBeFocused();
 		await pageUtils.pressKeys( 'Enter' );
 		await pageUtils.pressKeys( 'ArrowDown', { times: 14 } );
@@ -37,7 +38,7 @@ test.describe( 'Block', () => {
 		await pageUtils.pressKeys( 'z' );
 
 		// Synthesizer Setting
-		await pageUtils.pressKeys( 'ArrowRight' );
+		await pageUtils.pressKeys( 'Tab' );
 		await expect(
 			editor.canvas.getByRole( 'button', { name: 'Synthesizer Setting' } )
 		).toBeFocused();
@@ -57,14 +58,14 @@ test.describe( 'Block', () => {
 		await pageUtils.pressKeys( 'z' );
 
 		// Key Layout
-		await pageUtils.pressKeys( 'ArrowRight' );
+		await pageUtils.pressKeys( 'Tab' );
 		await expect( editor.canvas.getByRole( 'combobox', { name: 'Key Layout' } ) ).toBeFocused();
 		await pageUtils.pressKeys( 'Enter' );
 		await pageUtils.pressKeys( 'ArrowDown' );
 		await pageUtils.pressKeys( 'Enter' );
 
 		// Key Indicator
-		await pageUtils.pressKeys( 'ArrowRight' );
+		await pageUtils.pressKeys( 'Tab' );
 		await expect( editor.canvas.getByRole( 'combobox', { name: 'Key Indicator' } ) ).toBeFocused();
 		await pageUtils.pressKeys( 'Enter' );
 		await pageUtils.pressKeys( 'ArrowDown' );
