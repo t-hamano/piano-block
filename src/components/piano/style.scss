@@ -1,5 +1,7 @@
+@use "../../wp-base-styles" as wpBaseStyles;
+
 .piano-block-container {
-	padding-top: $grid-unit-20;
+	padding-top: wpBaseStyles.$grid-unit-20;
 
 	&:focus::after {
 		position: absolute;
@@ -10,8 +12,8 @@
 		z-index: 1;
 		pointer-events: none;
 		content: "";
-		border-radius: $radius-block-ui;
+		border-radius: wpBaseStyles.$radius-small;
 		outline: 2px solid transparent;
-		box-shadow: 0 0 0 ($border-width * 2) var(--wp-admin-theme-color, #007cba);
+		box-shadow: 0 0 0 (wpBaseStyles.$border-width * 2) var(--wp-admin-theme-color, #007cba);
 	}
 }

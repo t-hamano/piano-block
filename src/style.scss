@@ -1,13 +1,11 @@
 @use "sass:math";
-@import "@wordpress/base-styles/colors";
-@import "@wordpress/base-styles/variables";
-@import "@wordpress/base-styles/mixins";
-@import "./components/piano/style";
-@import "./components/loading/style";
-@import "./components/controls/style";
-@import "./components/synthesizer-setting/style";
-@import "./components/help-modal/style";
-@import "./components/keyboard/style";
+@use "./variables" as var;
+@use "./components/piano/style" as piano;
+@use "./components/loading/style" as loading;
+@use "./components/controls/style" as controls;
+@use "./components/synthesizer-setting/style" as synthesizerSetting;
+@use "./components/help-modal/style" as helpModal;
+@use "./components/keyboard/style" as keyboard;
 
 .wp-block-piano-block-piano {
 	position: relative;
