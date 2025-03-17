@@ -145,7 +145,11 @@ const Controls = ( { settings, piano, onChange }: Props ) => {
 						onClick={ () => setIsSynthesizerSettingOpen( ! isSynthesizerSettingOpen ) }
 					/>
 					{ isSynthesizerSettingOpen && (
-						<Popover placement="top" onClose={ () => setIsSynthesizerSettingOpen( false ) }>
+						<Popover
+							placement="top"
+							offset={ 8 }
+							onClose={ () => setIsSynthesizerSettingOpen( false ) }
+						>
 							<SynthesizerSetting
 								synthesizerSetting={ synthesizerSetting }
 								onChange={ onSynthesizerSettingChange }
