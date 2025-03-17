@@ -8,7 +8,12 @@ import domReady from '@wordpress/dom-ready';
  * Internal dependencies
  */
 import Piano from './components/piano';
-import { DEFAULT_SETTINGS, INSTRUMENTS } from './constants';
+import {
+	DEFAULT_ENVELOPE,
+	DEFAULT_OSCILLATOR_TYPE,
+	DEFAULT_SETTINGS,
+	INSTRUMENTS,
+} from './constants';
 import type { BlockAttributes } from './constants';
 
 function View( props: BlockAttributes ) {
@@ -47,17 +52,19 @@ domReady( function () {
 			domNode.getAttribute( 'data-key-indicator' ) || DEFAULT_SETTINGS.keyIndicator;
 
 		const synthesizerSetting = domNode.getAttribute( 'data-synthesizer-setting' );
-		const parsedSynthesizerSetting = synthesizerSetting
-			? JSON.parse( synthesizerSetting )
-			: DEFAULT_SETTINGS.synthesizerSetting;
+		const parsedSynthesizerSetting = synthesizerSetting ? JSON.parse( synthesizerSetting ) : {};
+
+		const { oscillator, envelope } = parsedSynthesizerSetting;
 
 		const normalizedSynthesizerSetting = {
-			...parsedSynthesizerSetting,
+			oscillator: {
+				type: oscillator?.type || DEFAULT_OSCILLATOR_TYPE,
+			},
 			envelope: {
-				attack: parseFloat( parsedSynthesizerSetting.envelope.attack ),
-				decay: parseFloat( parsedSynthesizerSetting.envelope.decay ),
-				sustain: parseFloat( parsedSynthesizerSetting.envelope.sustain ),
-				release: parseFloat( parsedSynthesizerSetting.envelope.release ),
+				attack: envelope?.attack ? parseFloat( envelope.attack ) : DEFAULT_ENVELOPE.attack,
+				decay: envelope?.decay ? parseFloat( envelope.decay ) : DEFAULT_ENVELOPE.decay,
+				sustain: envelope?.sustain ? parseFloat( envelope.sustain ) : DEFAULT_ENVELOPE.sustain,
+				release: envelope?.release ? parseFloat( envelope.release ) : DEFAULT_ENVELOPE.release,
 			},
 		};
 
