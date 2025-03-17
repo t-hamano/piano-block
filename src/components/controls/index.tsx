@@ -8,15 +8,7 @@ import * as Tone from 'tone';
  */
 import { __ } from '@wordpress/i18n';
 import { useState } from '@wordpress/element';
-import {
-	ButtonGroup,
-	Button,
-	BaseControl,
-	SelectControl,
-	RangeControl,
-	ToggleControl,
-	Popover,
-} from '@wordpress/components';
+import { Button, SelectControl, RangeControl, ToggleControl, Popover } from '@wordpress/components';
 import { cog, help } from '@wordpress/icons';
 
 /**
@@ -65,8 +57,14 @@ const Controls = ( { settings, piano, onChange }: Props ) => {
 		onChange( { volume: newVolume } );
 	};
 
-	const onOctaveOffsetChange = ( newOctaveOffset: number ) => {
-		onChange( { octaveOffset: newOctaveOffset } );
+	const onOctaveOffsetChange = ( newOctaveOffset: string ) => {
+		const allowedOctaveOffset = OCTAVE_OFFSETS.find(
+			( { value } ) => value.toString() === newOctaveOffset
+		);
+		if ( ! allowedOctaveOffset ) {
+			return;
+		}
+		onChange( { octaveOffset: allowedOctaveOffset.value } );
 	};
 
 	const onInstrumentChange = ( newInstrument: string ) => {
@@ -107,6 +105,7 @@ const Controls = ( { settings, piano, onChange }: Props ) => {
 		<div className="piano-block-controls">
 			<RangeControl
 				__nextHasNoMarginBottom
+				__next40pxDefaultSize
 				label={ __( 'Volume', 'piano-block' ) }
 				value={ volume || 0 }
 				min={ MIN_VOLUME }
@@ -116,26 +115,19 @@ const Controls = ( { settings, piano, onChange }: Props ) => {
 				withInputField={ false }
 				onChange={ onVolumeChange }
 			/>
-			<BaseControl
-				__nextHasNoMarginBottom
-				id="piano-block-control-octave"
-				label={ __( 'Octave Offset', 'piano-block' ) }
-			>
-				<ButtonGroup>
-					{ OCTAVE_OFFSETS.map( ( { label, value }, index ) => (
-						<Button
-							key={ index }
-							variant={ value === octaveOffset ? 'primary' : undefined }
-							onClick={ () => onOctaveOffsetChange( value ) }
-							size="compact"
-						>
-							{ label }
-						</Button>
-					) ) }
-				</ButtonGroup>
-			</BaseControl>
 			<SelectControl
 				__nextHasNoMarginBottom
+				__next40pxDefaultSize
+				label={ __( 'Octave', 'piano-block' ) }
+				value={ octaveOffset.toString() }
+				options={ OCTAVE_OFFSETS.map( ( { label, value } ) => {
+					return { label, value: value.toString() };
+				} ) }
+				onChange={ onOctaveOffsetChange }
+			/>
+			<SelectControl
+				__nextHasNoMarginBottom
+				__next40pxDefaultSize
 				label={ __( 'Instrument', 'piano-block' ) }
 				value={ instrument }
 				options={ INSTRUMENTS.map( ( { label, value } ) => {
@@ -146,14 +138,18 @@ const Controls = ( { settings, piano, onChange }: Props ) => {
 			{ instrument === 'synthesizer' && (
 				<div className="piano-block-controls__synthesizer-toggle">
 					<Button
+						__next40pxDefaultSize
 						label={ __( 'Synthesizer Setting', 'piano-block' ) }
 						icon={ cog }
 						variant="primary"
 						onClick={ () => setIsSynthesizerSettingOpen( ! isSynthesizerSettingOpen ) }
-						size="compact"
 					/>
 					{ isSynthesizerSettingOpen && (
-						<Popover placement="top" onClose={ () => setIsSynthesizerSettingOpen( false ) }>
+						<Popover
+							placement="top"
+							offset={ 8 }
+							onClose={ () => setIsSynthesizerSettingOpen( false ) }
+						>
 							<SynthesizerSetting
 								synthesizerSetting={ synthesizerSetting }
 								onChange={ onSynthesizerSettingChange }
@@ -162,32 +158,32 @@ const Controls = ( { settings, piano, onChange }: Props ) => {
 					) }
 				</div>
 			) }
-			<ToggleControl
-				__nextHasNoMarginBottom
-				label={ __( 'Sustain Pedal', 'piano-block' ) }
-				checked={ useSustainPedal }
-				onChange={ onUseSustainPedalChange }
-				disabled={ instrument === 'synthesizer' }
-			/>
 			<SelectControl
 				__nextHasNoMarginBottom
+				__next40pxDefaultSize
 				label={ __( 'Key Layout', 'piano-block' ) }
 				value={ keyLayout }
 				options={ KEYBOARD_LAYOUTS.map( ( { label, value } ) => {
 					return { label, value };
 				} ) }
 				onChange={ onKeyLayoutChange }
-				size="compact"
 			/>
 			<SelectControl
 				__nextHasNoMarginBottom
+				__next40pxDefaultSize
 				label={ __( 'Key Indicator', 'piano-block' ) }
 				value={ keyIndicator }
 				options={ KEY_INDICATORS.map( ( { label, value } ) => {
 					return { label, value };
 				} ) }
 				onChange={ onKeyIndicatorChange }
-				size="compact"
+			/>
+			<ToggleControl
+				__nextHasNoMarginBottom
+				label={ __( 'Sustain Pedal', 'piano-block' ) }
+				checked={ useSustainPedal }
+				onChange={ onUseSustainPedalChange }
+				disabled={ instrument === 'synthesizer' }
 			/>
 			<Button
 				className="piano-block-controls__help"

@@ -17,10 +17,6 @@
 
 	.components-range-control {
 		width: 140px;
-
-		.components-range-control__reset {
-			height: wpBaseStyles.$grid-unit-40;
-		}
 	}
 
 	.components-toggle-control {
@@ -28,11 +24,10 @@
 		.components-flex {
 			flex-flow: column-reverse;
 			align-items: flex-start;
-			gap: wpBaseStyles.$grid-unit-20;
+			gap: wpBaseStyles.$grid-unit-20 + wpBaseStyles.$grid-unit-05;
 		}
 
 		.components-toggle-control__label {
-			margin: 0;
 			font-size: 11px;
 			font-weight: 500;
 			line-height: 1.4;
@@ -49,14 +44,5 @@
 		position: absolute;
 		top: wpBaseStyles.$grid-unit-10;
 		right: wpBaseStyles.$grid-unit-10;
-	}
-
-	// Backwards compatible styles for WordPress 6.6 and below
-	.components-base-control:has(.components-button-group),
-	.components-range-control {
-
-		.components-base-control__label {
-			display: block;
-		}
 	}
 }
