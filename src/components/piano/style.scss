@@ -1,7 +1,7 @@
-@use "../../wp-base-styles" as wpBaseStyles;
+@use "@wordpress/base-styles/variables" as variables;
 
 .piano-block-container {
-	padding-top: wpBaseStyles.$grid-unit-20;
+	padding-top: variables.$grid-unit-20;
 
 	&:focus::after {
 		position: absolute;
@@ -12,8 +12,8 @@
 		z-index: 1;
 		pointer-events: none;
 		content: "";
-		border-radius: wpBaseStyles.$radius-small;
+		border-radius: variables.$radius-small;
 		outline: 2px solid transparent;
-		box-shadow: 0 0 0 (wpBaseStyles.$border-width * 2) var(--wp-admin-theme-color, #007cba);
+		box-shadow: 0 0 0 (variables.$border-width * 2) var(--wp-admin-theme-color, #007cba);
 	}
 }

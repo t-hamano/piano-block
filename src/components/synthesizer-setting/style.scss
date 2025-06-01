@@ -1,17 +1,18 @@
-@use "../../wp-base-styles" as wpBaseStyles;
+@use "@wordpress/base-styles/variables" as variables;
+@use "@wordpress/base-styles/colors" as colors;
 
 .piano-block-synthesizer-setting {
 	box-sizing: border-box;
 	width: 240px;
 	max-width: 100%;
-	padding: wpBaseStyles.$grid-unit-20;
+	padding: variables.$grid-unit-20;
 	overflow: hidden;
 
 	.piano-block-synthesizer-setting__graph {
 		display: block;
 		width: 100%;
-		height: wpBaseStyles.$grid-unit-10 * 10;
-		border: wpBaseStyles.$border-width solid wpBaseStyles.$gray-600;
+		height: variables.$grid-unit-10 * 10;
+		border: variables.$border-width solid colors.$gray-600;
 	}
 
 	.piano-block-synthesizer-setting__reset {
