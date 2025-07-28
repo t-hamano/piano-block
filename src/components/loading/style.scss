@@ -1,4 +1,5 @@
 @use "@wordpress/base-styles/variables" as variables;
+@use "@wordpress/base-styles/colors" as colors;
 
 .piano-block-loading {
 	position: absolute;
@@ -12,6 +13,6 @@
 	justify-content: center;
 	width: 100%;
 	height: 100%;
-	color: #fff;
+	color: colors.$white;
 	background: rgba(0, 0, 0, 0.5);
 }

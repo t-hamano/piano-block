@@ -1,4 +1,5 @@
 @use "sass:math";
+@use "@wordpress/base-styles/colors" as colors;
 @use "./components/piano/style" as piano;
 @use "./components/loading/style" as loading;
 @use "./components/controls/style" as controls;
@@ -8,7 +9,7 @@
 
 .wp-block-piano-block-piano {
 	position: relative;
-	color: #1d2327;
+	color: colors.$gray-900;
 
 	&:not(.has-background) {
 		background: url(../assets/block_bg.png);
@@ -17,15 +18,15 @@
 	// Override theme button style.
 	.components-button {
 		color: inherit !important;
-		background: #fff !important;
+		background: colors.$white !important;
 
 		&.is-primary {
-			color: #fff !important;
+			color: colors.$white !important;
 			background: var(--wp-admin-theme-color, #007cba) !important;
 		}
 
 		&.is-destructive {
-			color: #cc1818 !important;
+			color: colors.$alert-red !important;
 		}
 
 		&:focus,

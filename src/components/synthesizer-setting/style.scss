@@ -3,7 +3,7 @@
 
 .piano-block-synthesizer-setting {
 	box-sizing: border-box;
-	width: 240px;
+	width: variables.$grid-unit-10 * 24; // 240px
 	max-width: 100%;
 	padding: variables.$grid-unit-20;
 	overflow: hidden;
