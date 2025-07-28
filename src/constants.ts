@@ -161,24 +161,24 @@ export const INSTRUMENTS = [
 
 export const OCTAVE_OFFSETS = [
 	{
-		label: __( '-2', 'piano-block' ),
-		value: -2,
-	},
-	{
-		label: __( '-1', 'piano-block' ),
-		value: -1,
-	},
-	{
-		label: __( '0', 'piano-block' ),
-		value: 0,
+		label: __( '+2', 'piano-block' ),
+		value: 2,
 	},
 	{
 		label: __( '+1', 'piano-block' ),
 		value: 1,
 	},
 	{
-		label: __( '+2', 'piano-block' ),
-		value: 2,
+		label: __( '0', 'piano-block' ),
+		value: 0,
+	},
+	{
+		label: __( '-1', 'piano-block' ),
+		value: -1,
+	},
+	{
+		label: __( '-2', 'piano-block' ),
+		value: -2,
 	},
 ] as const;
 
