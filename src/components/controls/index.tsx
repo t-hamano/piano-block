@@ -124,6 +124,7 @@ const Controls = ( { settings, piano, onChange }: Props ) => {
 					return { label, value: value.toString() };
 				} ) }
 				onChange={ onOctaveOffsetChange }
+				size="compact"
 			/>
 			<SelectControl
 				__nextHasNoMarginBottom
@@ -134,6 +135,7 @@ const Controls = ( { settings, piano, onChange }: Props ) => {
 					return { label, value };
 				} ) }
 				onChange={ onInstrumentChange }
+				size="compact"
 			/>
 			{ instrument === 'synthesizer' && (
 				<div className="piano-block-controls__synthesizer-toggle">
@@ -143,6 +145,7 @@ const Controls = ( { settings, piano, onChange }: Props ) => {
 						icon={ cog }
 						variant="primary"
 						onClick={ () => setIsSynthesizerSettingOpen( ! isSynthesizerSettingOpen ) }
+						size="compact"
 					/>
 					{ isSynthesizerSettingOpen && (
 						<Popover
@@ -167,6 +170,7 @@ const Controls = ( { settings, piano, onChange }: Props ) => {
 					return { label, value };
 				} ) }
 				onChange={ onKeyLayoutChange }
+				size="compact"
 			/>
 			<SelectControl
 				__nextHasNoMarginBottom
@@ -177,6 +181,7 @@ const Controls = ( { settings, piano, onChange }: Props ) => {
 					return { label, value };
 				} ) }
 				onChange={ onKeyIndicatorChange }
+				size="compact"
 			/>
 			<ToggleControl
 				__nextHasNoMarginBottom

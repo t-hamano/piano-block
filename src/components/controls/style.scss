@@ -17,7 +17,15 @@
 	border-radius: variables.$radius-small;
 
 	.components-range-control {
-		width: 140px;
+		width: variables.$grid-unit-10 * 16; // 128px
+
+		.components-range-control__root {
+			min-height: variables.$button-size-compact;
+		}
+
+		.components-range-control__reset {
+			height: variables.$button-size-compact;
+		}
 	}
 
 	.components-toggle-control {
@@ -25,13 +33,13 @@
 		.components-flex {
 			flex-flow: column-reverse;
 			align-items: flex-start;
-			gap: variables.$grid-unit-20 + variables.$grid-unit-05;
+			gap: variables.$grid-unit-20;
 		}
 
 		.components-toggle-control__label {
-			font-size: 11px;
-			font-weight: 500;
-			line-height: 1.4;
+			font-size: variables.$font-size-x-small;
+			font-weight: variables.$font-weight-medium;
+			line-height: variables.$default-line-height;
 			text-transform: uppercase;
 		}
 	}
