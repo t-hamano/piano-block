@@ -1,13 +1,12 @@
-.piano-block-help-modal {
+@use "@wordpress/base-styles/variables" as variables;
+@use "@wordpress/base-styles/colors" as colors;
 
-	&.piano-block-help-modal {
-		max-width: 500px;
-	}
+.piano-block-help-modal {
 
 	.components-modal__header {
 
 		h1 {
-			font-size: 20px;
+			font-size: variables.$font-size-x-large;
 			font-style: normal;
 			color: inherit;
 
@@ -19,11 +18,12 @@
 
 		.components-button {
 			color: inherit !important;
-			background-color: #fff !important;
+			background-color: colors.$white !important;
 		}
 	}
 
 	ul {
+		font-size: variables.$font-size-large;
 		padding-left: 1.5em;
 		margin: 0;
 		list-style: disc outside;

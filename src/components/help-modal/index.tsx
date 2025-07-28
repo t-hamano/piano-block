@@ -14,6 +14,7 @@ const HelpModal = ( { onClose }: Props ) => {
 			title={ __( 'About Piano Block', 'piano-block' ) }
 			className="piano-block-help-modal"
 			onRequestClose={ onClose }
+			size="medium"
 		>
 			<ul>
 				<li>{ __( 'You can play a variety of tones using the keyboard.', 'piano-block' ) }</li>
