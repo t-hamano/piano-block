@@ -135,8 +135,9 @@ const SynthesizerSetting = ( { synthesizerSetting, onChange }: Props ) => {
 				} ) }
 				onKeyDown={ onOscillatorTypeKeyDown }
 				onChange={ onOscillatorTypeChange }
+				size="compact"
 			/>
-			<Grid columns={ 2 }>
+			<Grid columns={ 4 }>
 				{ EMVELOPE_CONTROLS.map( ( { label, parameter, max } ) => (
 					<RangeControl
 						__nextHasNoMarginBottom
