@@ -1,4 +1,4 @@
-@use "../../wp-base-styles" as wpBaseStyles;
+@use "@wordpress/base-styles/variables" as variables;
 
 .piano-block-loading {
 	position: absolute;
@@ -7,7 +7,7 @@
 	z-index: 2;
 	display: flex;
 	flex-flow: column;
-	gap: wpBaseStyles.$grid-unit-10;
+	gap: variables.$grid-unit-10;
 	align-items: center;
 	justify-content: center;
 	width: 100%;
