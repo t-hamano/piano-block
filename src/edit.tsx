@@ -3,8 +3,13 @@
  */
 import { __ } from '@wordpress/i18n';
 import { InspectorControls, useBlockProps } from '@wordpress/block-editor';
-import { PanelBody, ToggleControl } from '@wordpress/components';
+import {
+	ToggleControl,
+	__experimentalToolsPanel as ToolsPanel,
+	__experimentalToolsPanelItem as ToolsPanelItem,
+} from '@wordpress/components';
 import type { BlockEditProps } from '@wordpress/blocks';
+import { useViewportMatch } from '@wordpress/compose';
 
 /**
  * Internal dependencies
@@ -27,18 +32,43 @@ export default function Edit( { attributes, setAttributes }: BlockEditProps< Blo
 	};
 
 	const blockProps = useBlockProps();
+	const isMobile = useViewportMatch( 'medium', '<' );
+	const dropdownMenuProps = {
+		label: __( 'Settings', 'piano-block' ),
+		...( ! isMobile && {
+			popoverProps: {
+				placement: 'left-start',
+				offset: 259,
+			},
+		} ),
+	};
 
 	return (
 		<>
 			<InspectorControls>
-				<PanelBody title={ __( 'Settings', 'piano-block' ) }>
-					<ToggleControl
-						__nextHasNoMarginBottom
+				<ToolsPanel
+					label={ __( 'Settings', 'piano-block' ) }
+					resetAll={ () => {
+						setAttributes( {
+							showOnFront: false,
+						} );
+					} }
+					dropdownMenuProps={ dropdownMenuProps }
+				>
+					<ToolsPanelItem
 						label={ __( 'Display on the front end', 'piano-block' ) }
-						checked={ settings.showOnFront }
-						onChange={ ( value ) => onChange( { showOnFront: value } ) }
-					/>
-				</PanelBody>
+						isShownByDefault
+						hasValue={ () => !! settings.showOnFront }
+						onDeselect={ () => setAttributes( { showOnFront: false } ) }
+					>
+						<ToggleControl
+							__nextHasNoMarginBottom
+							label={ __( 'Display on the front end', 'piano-block' ) }
+							checked={ settings.showOnFront }
+							onChange={ ( value ) => onChange( { showOnFront: value } ) }
+						/>
+					</ToolsPanelItem>
+				</ToolsPanel>
 			</InspectorControls>
 			<div { ...blockProps }>
 				<Piano settings={ settings } onChange={ onChange } />
