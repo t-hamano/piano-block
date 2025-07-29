@@ -2,7 +2,7 @@
 /**
  * Plugin Name: Piano Block
  * Description: Can play a variety of tones using the piano keyboard.
- * Requires at least: 6.6
+ * Requires at least: 6.7
  * Requires PHP: 7.4
  * Version: 2.7.0
  * Author: Aki Hamano
