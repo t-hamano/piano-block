@@ -2,7 +2,7 @@
 Contributors: wildworks
 Tags: gutenberg, audio, music, piano
 Donate link: https://www.paypal.me/thamanoJP
-Requires at least: 6.6
+Requires at least: 6.7
 Tested up to: 6.8
 Stable tag: 2.7.0
 Requires PHP: 7.4
