@@ -10,6 +10,7 @@
 .wp-block-piano-block-piano {
 	position: relative;
 	color: colors.$gray-900;
+	box-sizing: border-box;
 
 	&:not(.has-background) {
 		background: url(../assets/block_bg.png);

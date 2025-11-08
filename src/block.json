@@ -41,6 +41,12 @@
 			"background": true,
 			"gradients": true
 		},
+		"__experimentalBorder": {
+			"radius": true,
+			"color": true,
+			"style": true,
+			"width": true
+		},
 		"spacing": {
 			"margin": [ "top", "bottom" ]
 		}
