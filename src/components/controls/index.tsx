@@ -146,6 +146,8 @@ const Controls = ( { settings, piano, onChange }: Props ) => {
 						variant="primary"
 						onClick={ () => setIsSynthesizerSettingOpen( ! isSynthesizerSettingOpen ) }
 						size="compact"
+						aria-haspopup="true"
+						aria-expanded={ isSynthesizerSettingOpen }
 					/>
 					{ isSynthesizerSettingOpen && (
 						<Popover
@@ -196,6 +198,8 @@ const Controls = ( { settings, piano, onChange }: Props ) => {
 				icon={ help }
 				onClick={ () => setIsHelpOpen( true ) }
 				size="small"
+				aria-haspopup="dialog"
+				aria-expanded={ isHelpOpen }
 			/>
 			{ isHelpOpen && <HelpModal onClose={ () => setIsHelpOpen( false ) } /> }
 		</div>
