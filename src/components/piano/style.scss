@@ -12,8 +12,6 @@
 		z-index: 1;
 		pointer-events: none;
 		content: "";
-		border-radius: variables.$radius-small;
-		outline: 2px solid transparent;
-		box-shadow: 0 0 0 (variables.$border-width * 2) var(--wp-admin-theme-color, #007cba);
+		outline: var(--wp-admin-border-width-focus) solid var(--wp-admin-theme-color);
 	}
 }

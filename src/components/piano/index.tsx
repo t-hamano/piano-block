@@ -7,6 +7,7 @@ import { KeyboardEvent } from 'react';
 /**
  * WordPress dependencies
  */
+import { __ } from '@wordpress/i18n';
 import { useEffect, useState, useRef } from '@wordpress/element';
 
 /**
@@ -209,6 +210,7 @@ const Piano = ( { settings, onChange }: Props ) => {
 			tabIndex={ 0 }
 			onKeyDown={ onKeyDown }
 			onKeyUp={ onKeyUp }
+			aria-label={ __( 'Piano: Press keys to play', 'piano-block' ) }
 		>
 			{ ! isReady && <Loading /> }
 			<Controls { ...controlsProps } />
