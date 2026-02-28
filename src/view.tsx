@@ -13,6 +13,7 @@ import {
 	DEFAULT_OSCILLATOR_TYPE,
 	DEFAULT_SETTINGS,
 	INSTRUMENTS,
+	KEY_INDICATORS,
 } from './constants';
 import type { BlockAttributes } from './constants';
 
@@ -48,8 +49,10 @@ domReady( function () {
 		const useSustainPedal = domNode.getAttribute( 'data-use-sustain-pedal' ) === '1';
 		const octaveOffset = parseFloat( domNode.getAttribute( 'data-octave-offset' ) || '' );
 		const keyLayout = domNode.getAttribute( 'data-key-layout' ) || DEFAULT_SETTINGS.keyLayout;
+		const keyIndicatorAttr = domNode.getAttribute( 'data-key-indicator' );
 		const keyIndicator =
-			domNode.getAttribute( 'data-key-indicator' ) || DEFAULT_SETTINGS.keyIndicator;
+			KEY_INDICATORS.find( ( { value } ) => value === keyIndicatorAttr )?.value ??
+			DEFAULT_SETTINGS.keyIndicator;
 
 		const synthesizerSetting = domNode.getAttribute( 'data-synthesizer-setting' );
 		const parsedSynthesizerSetting = synthesizerSetting ? JSON.parse( synthesizerSetting ) : {};
@@ -68,7 +71,7 @@ domReady( function () {
 			},
 		};
 
-		const viewProps = {
+		const viewProps: BlockAttributes = {
 			volume,
 			useSustainPedal,
 			octaveOffset,

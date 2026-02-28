@@ -36,7 +36,7 @@ export const DEFAULT_ENVELOPE = {
 	release: 1.5,
 };
 
-export const DEFAULT_SETTINGS = {
+export const DEFAULT_SETTINGS: BlockAttributes = {
 	volume: 0,
 	useSustainPedal: false,
 	octaveOffset: 0,
