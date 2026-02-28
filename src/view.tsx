@@ -71,7 +71,7 @@ domReady( function () {
 			},
 		};
 
-		const viewProps: BlockAttributes = {
+		const viewProps = {
 			volume,
 			useSustainPedal,
 			octaveOffset,
