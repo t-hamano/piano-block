@@ -1,9 +1,4 @@
 /**
- * WordPress dependencies
- */
-import { useViewportMatch } from '@wordpress/compose';
-
-/**
  * Internal dependencies
  */
 import { INSTRUMENTS, OSCILLATOR_TYPES } from './constants';
@@ -58,21 +53,4 @@ export function getNormalizedVolume(
 	}
 
 	return normalizedVolume;
-}
-
-export function useToolsPanelDropdownMenuProps() {
-	const isMobile = useViewportMatch( 'medium', '<' );
-	return ! isMobile
-		? {
-				popoverProps: {
-					placement: 'left-start',
-					offset: 259,
-				},
-				// TODO: Once the type is fixed upstream, remove this property.
-				// See: https://github.com/WordPress/gutenberg/pull/76027
-				label: '',
-		  }
-		: // TODO: Once the type is fixed upstream, remove this property.
-		  // See: https://github.com/WordPress/gutenberg/pull/76027
-		  { label: '' };
 }

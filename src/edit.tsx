@@ -8,6 +8,7 @@ import {
 	__experimentalToolsPanel as ToolsPanel,
 	__experimentalToolsPanelItem as ToolsPanelItem,
 } from '@wordpress/components';
+import { useViewportMatch } from '@wordpress/compose';
 import type { BlockEditProps } from '@wordpress/blocks';
 
 /**
@@ -15,7 +16,6 @@ import type { BlockEditProps } from '@wordpress/blocks';
  */
 import Piano from './components/piano';
 import { DEFAULT_SETTINGS } from './constants';
-import { useToolsPanelDropdownMenuProps } from './utils';
 import type { BlockAttributes } from './constants';
 
 export default function Edit( { attributes, setAttributes }: BlockEditProps< BlockAttributes > ) {
@@ -33,6 +33,20 @@ export default function Edit( { attributes, setAttributes }: BlockEditProps< Blo
 
 	const blockProps = useBlockProps();
 
+	const dropdownMenuProps = ! useViewportMatch( 'medium', '<' )
+		? {
+				popoverProps: {
+					placement: 'left-start',
+					offset: 259,
+				},
+				// TODO: Once the type is fixed upstream, remove this property.
+				// See: https://github.com/WordPress/gutenberg/pull/76027
+				label: '',
+		  }
+		: // TODO: Once the type is fixed upstream, remove this property.
+		  // See: https://github.com/WordPress/gutenberg/pull/76027
+		  { label: '' };
+
 	return (
 		<>
 			<InspectorControls>
@@ -41,7 +55,7 @@ export default function Edit( { attributes, setAttributes }: BlockEditProps< Blo
 					resetAll={ () => {
 						setAttributes( { showOnFront: false } );
 					} }
-					dropdownMenuProps={ useToolsPanelDropdownMenuProps() }
+					dropdownMenuProps={ dropdownMenuProps }
 				>
 					<ToolsPanelItem
 						label={ __( 'Display on the front end', 'piano-block' ) }
