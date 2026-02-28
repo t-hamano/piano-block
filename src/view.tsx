@@ -1,7 +1,7 @@
 /**
  * WordPress dependencies
  */
-import { render, createRoot, useState } from '@wordpress/element';
+import { createRoot, useState } from '@wordpress/element';
 import domReady from '@wordpress/dom-ready';
 
 /**
@@ -79,13 +79,7 @@ domReady( function () {
 			showOnFront: true,
 		};
 
-		// If version is less than 18 use `render` to render the app
-		// otherwise use `createRoot` to render the app
-		if ( createRoot === undefined ) {
-			render( <View { ...viewProps } />, domNode );
-		} else {
-			const root = createRoot( domNode );
-			root.render( <View { ...viewProps } /> );
-		}
+		const root = createRoot( domNode );
+		root.render( <View { ...viewProps } /> );
 	} );
 } );
