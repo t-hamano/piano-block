@@ -21,7 +21,7 @@ export interface BlockAttributes {
 		};
 	};
 	keyLayout: string;
-	keyIndicator: string;
+	keyIndicator: ( typeof KEY_INDICATORS )[ number ][ 'value' ];
 }
 
 export const MIN_VOLUME = -10 as const;

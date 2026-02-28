@@ -31,7 +31,7 @@ import type { BlockAttributes } from '../../constants';
 type Props = {
 	settings: BlockAttributes;
 	piano: Tone.Sampler | Tone.PolySynth | undefined;
-	onChange: ( {}: Partial< BlockAttributes > ) => void;
+	onChange: ( newAttributes: Partial< BlockAttributes > ) => void;
 };
 
 const Controls = ( { settings, piano, onChange }: Props ) => {
@@ -84,7 +84,11 @@ const Controls = ( { settings, piano, onChange }: Props ) => {
 	};
 
 	const onKeyIndicatorChange = ( newKeyIndicator: string ) => {
-		onChange( { keyIndicator: newKeyIndicator } );
+		const allowedKeyIndicator = KEY_INDICATORS.find( ( { value } ) => value === newKeyIndicator );
+		if ( ! allowedKeyIndicator ) {
+			return;
+		}
+		onChange( { keyIndicator: allowedKeyIndicator.value } );
 	};
 
 	const onSynthesizerSettingChange = (
