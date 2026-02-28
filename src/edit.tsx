@@ -3,7 +3,12 @@
  */
 import { __ } from '@wordpress/i18n';
 import { InspectorControls, useBlockProps } from '@wordpress/block-editor';
-import { PanelBody, ToggleControl } from '@wordpress/components';
+import {
+	ToggleControl,
+	__experimentalToolsPanel as ToolsPanel,
+	__experimentalToolsPanelItem as ToolsPanelItem,
+} from '@wordpress/components';
+import { useViewportMatch } from '@wordpress/compose';
 import type { BlockEditProps } from '@wordpress/blocks';
 
 /**
@@ -28,17 +33,44 @@ export default function Edit( { attributes, setAttributes }: BlockEditProps< Blo
 
 	const blockProps = useBlockProps();
 
+	const dropdownMenuProps = ! useViewportMatch( 'medium', '<' )
+		? {
+				popoverProps: {
+					placement: 'left-start',
+					offset: 259,
+				},
+				// TODO: Once the type is fixed upstream, remove this property.
+				// See: https://github.com/WordPress/gutenberg/pull/76027
+				label: '',
+		  }
+		: // TODO: Once the type is fixed upstream, remove this property.
+		  // See: https://github.com/WordPress/gutenberg/pull/76027
+		  { label: '' };
+
 	return (
 		<>
 			<InspectorControls>
-				<PanelBody title={ __( 'Settings', 'piano-block' ) }>
-					<ToggleControl
-						__nextHasNoMarginBottom
+				<ToolsPanel
+					label={ __( 'Settings', 'piano-block' ) }
+					resetAll={ () => {
+						setAttributes( { showOnFront: false } );
+					} }
+					dropdownMenuProps={ dropdownMenuProps }
+				>
+					<ToolsPanelItem
 						label={ __( 'Display on the front end', 'piano-block' ) }
-						checked={ settings.showOnFront }
-						onChange={ ( value ) => onChange( { showOnFront: value } ) }
-					/>
-				</PanelBody>
+						isShownByDefault
+						hasValue={ () => settings.showOnFront }
+						onDeselect={ () => setAttributes( { showOnFront: false } ) }
+					>
+						<ToggleControl
+							__nextHasNoMarginBottom
+							label={ __( 'Display on the front end', 'piano-block' ) }
+							checked={ settings.showOnFront }
+							onChange={ ( value ) => onChange( { showOnFront: value } ) }
+						/>
+					</ToolsPanelItem>
+				</ToolsPanel>
 			</InspectorControls>
 			<div { ...blockProps }>
 				<Piano settings={ settings } onChange={ onChange } />

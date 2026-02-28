@@ -21,7 +21,7 @@ export interface BlockAttributes {
 		};
 	};
 	keyLayout: string;
-	keyIndicator: string;
+	keyIndicator: ( typeof KEY_INDICATORS )[ number ][ 'value' ];
 }
 
 export const MIN_VOLUME = -10 as const;
@@ -36,7 +36,7 @@ export const DEFAULT_ENVELOPE = {
 	release: 1.5,
 };
 
-export const DEFAULT_SETTINGS = {
+export const DEFAULT_SETTINGS: BlockAttributes = {
 	volume: 0,
 	useSustainPedal: false,
 	octaveOffset: 0,

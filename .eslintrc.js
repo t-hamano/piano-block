@@ -10,6 +10,8 @@ module.exports = {
 		'react/jsx-curly-brace-presence': [ 'error', { props: 'never', children: 'never' } ],
 		'@wordpress/dependency-group': 'error',
 		'@wordpress/no-unsafe-wp-apis': 'off',
+		'@wordpress/no-setting-ds-tokens': 'off',
+		'@wordpress/no-unknown-ds-tokens': 'off',
 		'@wordpress/i18n-text-domain': [
 			'error',
 			{

@@ -27,7 +27,7 @@
 		"tone": "^15.1.22"
 	},
 	"devDependencies": {
-		"@types/wordpress__block-editor": "^15.0.5",
+		"@types/wordpress__block-editor": "15.0.5",
 		"@wordpress/base-styles": "6.16.0",
 		"@wordpress/dom-ready": "4.40.0",
 		"@wordpress/env": "^10.39.0",
