@@ -59,15 +59,23 @@ domReady( function () {
 
 		const { oscillator, envelope } = parsedSynthesizerSetting;
 
+		const parseEnvelopeValue = ( value: unknown, defaultValue: number ): number => {
+			if ( value === null || value === undefined ) {
+				return defaultValue;
+			}
+			const parsed = parseFloat( value as string );
+			return Number.isNaN( parsed ) ? defaultValue : parsed;
+		};
+
 		const normalizedSynthesizerSetting = {
 			oscillator: {
 				type: oscillator?.type || DEFAULT_OSCILLATOR_TYPE,
 			},
 			envelope: {
-				attack: envelope?.attack ? parseFloat( envelope.attack ) : DEFAULT_ENVELOPE.attack,
-				decay: envelope?.decay ? parseFloat( envelope.decay ) : DEFAULT_ENVELOPE.decay,
-				sustain: envelope?.sustain ? parseFloat( envelope.sustain ) : DEFAULT_ENVELOPE.sustain,
-				release: envelope?.release ? parseFloat( envelope.release ) : DEFAULT_ENVELOPE.release,
+				attack: parseEnvelopeValue( envelope?.attack, DEFAULT_ENVELOPE.attack ),
+				decay: parseEnvelopeValue( envelope?.decay, DEFAULT_ENVELOPE.decay ),
+				sustain: parseEnvelopeValue( envelope?.sustain, DEFAULT_ENVELOPE.sustain ),
+				release: parseEnvelopeValue( envelope?.release, DEFAULT_ENVELOPE.release ),
 			},
 		};
 
