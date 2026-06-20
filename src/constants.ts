@@ -3,7 +3,7 @@
  */
 import { __ } from '@wordpress/i18n';
 
-export interface BlockAttributes {
+export type BlockAttributes = {
 	volume: number | undefined;
 	octaveOffset: number;
 	instrument: ( typeof INSTRUMENTS )[ number ][ 'value' ];
@@ -22,7 +22,7 @@ export interface BlockAttributes {
 	};
 	keyLayout: string;
 	keyIndicator: ( typeof KEY_INDICATORS )[ number ][ 'value' ];
-}
+};
 
 export const MIN_VOLUME = -10 as const;
 export const MAX_VOLUME = 5 as const;
