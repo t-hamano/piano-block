@@ -307,7 +307,7 @@ export const OSCILLATOR_TYPES = [
 	},
 ] as const;
 
-export const EMVELOPE_CONTROLS = [
+export const ENVELOPE_CONTROLS = [
 	{
 		label: __( 'Attack', 'piano-block' ),
 		parameter: 'attack',
@@ -353,7 +353,7 @@ export interface Instrument {
 	volumeOffset: number;
 }
 
-export type EmvelopeControl = ( typeof EMVELOPE_CONTROLS )[ number ];
+export type EnvelopeControl = ( typeof ENVELOPE_CONTROLS )[ number ];
 export type Key = {
 	note: string;
 	octave: number;

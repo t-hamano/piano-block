@@ -17,10 +17,10 @@ import {
 import {
 	DEFAULT_OSCILLATOR_TYPE,
 	DEFAULT_ENVELOPE,
-	EMVELOPE_CONTROLS,
+	ENVELOPE_CONTROLS,
 	OSCILLATOR_TYPES,
 } from '../../constants';
-import type { BlockAttributes, EmvelopeControl } from '../../constants';
+import type { BlockAttributes, EnvelopeControl } from '../../constants';
 
 type Props = {
 	synthesizerSetting: BlockAttributes[ 'synthesizerSetting' ];
@@ -104,7 +104,7 @@ const SynthesizerSetting = ( { synthesizerSetting, onChange }: Props ) => {
 	};
 
 	const onEnvelopeChange = (
-		parameter: EmvelopeControl[ 'parameter' ],
+		parameter: EnvelopeControl[ 'parameter' ],
 		value: number | undefined
 	) => {
 		onChange( {
@@ -138,7 +138,7 @@ const SynthesizerSetting = ( { synthesizerSetting, onChange }: Props ) => {
 				size="compact"
 			/>
 			<Grid columns={ 4 }>
-				{ EMVELOPE_CONTROLS.map( ( { label, parameter, max } ) => (
+				{ ENVELOPE_CONTROLS.map( ( { label, parameter, max } ) => (
 					<RangeControl
 						__nextHasNoMarginBottom
 						__next40pxDefaultSize
