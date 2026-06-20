@@ -24,7 +24,7 @@ import type { BlockAttributes, EmvelopeControl } from '../../constants';
 
 type Props = {
 	synthesizerSetting: BlockAttributes[ 'synthesizerSetting' ];
-	onChange: ( {}: BlockAttributes[ 'synthesizerSetting' ] ) => void;
+	onChange: ( newSynthesizerSetting: BlockAttributes[ 'synthesizerSetting' ] ) => void;
 };
 
 const SynthesizerSetting = ( { synthesizerSetting, onChange }: Props ) => {

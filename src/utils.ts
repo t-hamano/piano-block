@@ -15,12 +15,9 @@ export function getSamplerFileNames( notes: string[] ) {
 		return {};
 	}
 
-	return notes.reduce( ( accumulator: { [ key: string ]: string }, note: string ) => {
-		return {
-			...accumulator,
-			[ note.replace( 's', '#' ) ]: `${ note }.mp3`,
-		};
-	}, {} );
+	return Object.fromEntries(
+		notes.map( ( note ) => [ note.replace( 's', '#' ), `${ note }.mp3` ] )
+	);
 }
 
 /**
