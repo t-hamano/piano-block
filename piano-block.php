@@ -57,25 +57,15 @@ function piano_block_render_callback( $attributes ) {
 
 	$wrapper_attributes = get_block_wrapper_attributes(
 		array(
-			'data-volume'            => $volume,
-			'data-use-sustain-pedal' => $use_sustain_pedal ? 1 : 0,
-			'data-octave-offset'     => $octave_offset,
-			'data-instrument'        => $instrument,
-			'data-key-layout'        => $key_layout,
-			'data-key-indicator'     => $key_indicator,
+			'data-volume'              => $volume,
+			'data-use-sustain-pedal'   => $use_sustain_pedal ? 1 : 0,
+			'data-octave-offset'       => $octave_offset,
+			'data-instrument'          => $instrument,
+			'data-key-layout'          => $key_layout,
+			'data-key-indicator'       => $key_indicator,
+			'data-synthesizer-setting' => wp_json_encode( $synthesizer_setting ),
 		)
 	);
-
-	if ( ! empty( $synthesizer_setting ) ) {
-		$escaped_synthesizer_setting = array_map(
-			function ( $attribute ) {
-				return is_array( $attribute ) ? array_map( 'esc_attr', $attribute ) : esc_attr( $attribute );
-			},
-			$synthesizer_setting
-		);
-
-		$wrapper_attributes .= " data-synthesizer-setting='" . wp_json_encode( $escaped_synthesizer_setting ) . "'";
-	}
 
 	wp_set_script_translations( 'piano-block-piano-view-script', 'piano-block' );
 
