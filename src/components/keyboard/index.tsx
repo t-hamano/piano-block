@@ -26,11 +26,6 @@ const Keyboard = ( { activeKeys, keyLayout, keyIndicator, onKeyClick }: Props ) 
 		KEYBOARD_LAYOUTS.find( ( { value } ) => value === keyLayout )?.keys ||
 		KEYBOARD_LAYOUTS[ 0 ].keys;
 
-	// Trigger the note when the key is clicked by the mouse cursor or when the enter key is pressed.
-	const onClick = ( note: string, octave: number ) => {
-		onKeyClick( note, octave );
-	};
-
 	return (
 		<div className="piano-block-keyboard">
 			<div className="piano-block-keyboard__inner">
@@ -52,7 +47,7 @@ const Keyboard = ( { activeKeys, keyLayout, keyIndicator, onKeyClick }: Props ) 
 								key.note + key.octave
 							) }
 							type="button"
-							onClick={ () => onClick( key.note, key.octave ) }
+							onClick={ () => onKeyClick( key.note, key.octave ) }
 						>
 							{ keyIndicator === 'key' && key.name.join( ' ' ) }
 							{ keyIndicator === 'spn' && `${ key.note }${ key.octave }` }
