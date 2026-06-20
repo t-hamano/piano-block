@@ -43,7 +43,6 @@ function piano_block_render_callback( $attributes ) {
 	$instrument          = ! empty( $attributes['instrument'] ) ? $attributes['instrument'] : 'acoustic-piano';
 	$synthesizer_setting = ! empty( $attributes['synthesizerSetting'] ) ? $attributes['synthesizerSetting'] : array();
 	$key_layout          = ! empty( $attributes['keyLayout'] ) ? $attributes['keyLayout'] : 'qwerty-1';
-	$key_indicator       = ! empty( $attributes['keyIndicator'] ) ? $attributes['keyIndicator'] : 'key';
 
 	wp_enqueue_style( 'wp-components' );
 
@@ -65,23 +64,15 @@ function piano_block_render_callback( $attributes ) {
 		)
 	);
 
-	if ( ! empty( $attributes['synthesizerSetting'] ) ) {
+	if ( ! empty( $synthesizer_setting ) ) {
 		$escaped_synthesizer_setting = array_map(
 			function ( $attribute ) {
-				if ( is_array( $attribute ) ) {
-					return array_map(
-						function ( $child_attribute ) {
-							return esc_attr( $child_attribute );
-						},
-						$attribute
-					);
-				}
-				return esc_attr( $attribute );
+				return is_array( $attribute ) ? array_map( 'esc_attr', $attribute ) : esc_attr( $attribute );
 			},
-			$attributes['synthesizerSetting']
+			$synthesizer_setting
 		);
 
-		$wrapper_attributes .= " data-synthesizer-setting='" . json_encode( $escaped_synthesizer_setting ) . "'";
+		$wrapper_attributes .= " data-synthesizer-setting='" . wp_json_encode( $escaped_synthesizer_setting ) . "'";
 	}
 
 	wp_set_script_translations( 'piano-block-piano-view-script', 'piano-block' );
