@@ -49,11 +49,13 @@ const Controls = ( { settings, piano, onChange }: Props ) => {
 
 	const onVolumeChange = ( newVolume: number | undefined ) => {
 		const instrumentSetting = INSTRUMENTS.find( ( { value } ) => value === instrument );
-		if ( ! piano || ! instrumentSetting ) {
+		if ( ! instrumentSetting ) {
 			return;
 		}
 
-		piano.volume.value = getNormalizedVolume( newVolume, settings );
+		if ( piano ) {
+			piano.volume.value = getNormalizedVolume( newVolume, settings );
+		}
 		onChange( { volume: newVolume } );
 	};
 
@@ -94,14 +96,16 @@ const Controls = ( { settings, piano, onChange }: Props ) => {
 	const onSynthesizerSettingChange = (
 		newSynthesizerSetting: BlockAttributes[ 'synthesizerSetting' ]
 	) => {
-		if ( ! piano || instrument !== 'synthesizer' ) {
+		if ( instrument !== 'synthesizer' ) {
 			return;
 		}
 
-		piano.set( {
-			...newSynthesizerSetting,
-			envelope: newSynthesizerSetting.envelope || DEFAULT_ENVELOPE,
-		} );
+		if ( piano ) {
+			piano.set( {
+				...newSynthesizerSetting,
+				envelope: newSynthesizerSetting.envelope || DEFAULT_ENVELOPE,
+			} );
+		}
 		onChange( { synthesizerSetting: newSynthesizerSetting } );
 	};
 
