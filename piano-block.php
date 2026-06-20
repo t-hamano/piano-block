@@ -43,6 +43,7 @@ function piano_block_render_callback( $attributes ) {
 	$instrument          = ! empty( $attributes['instrument'] ) ? $attributes['instrument'] : 'acoustic-piano';
 	$synthesizer_setting = ! empty( $attributes['synthesizerSetting'] ) ? $attributes['synthesizerSetting'] : array();
 	$key_layout          = ! empty( $attributes['keyLayout'] ) ? $attributes['keyLayout'] : 'qwerty-1';
+	$key_indicator       = isset( $attributes['keyIndicator'] ) ? $attributes['keyIndicator'] : 'key';
 
 	wp_enqueue_style( 'wp-components' );
 
@@ -61,6 +62,7 @@ function piano_block_render_callback( $attributes ) {
 			'data-octave-offset'     => $octave_offset,
 			'data-instrument'        => $instrument,
 			'data-key-layout'        => $key_layout,
+			'data-key-indicator'     => $key_indicator,
 		)
 	);
 
