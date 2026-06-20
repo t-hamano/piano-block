@@ -8,8 +8,7 @@
 /vendor
 .distignore
 .editorconfig
-.eslintignore
-.eslintrc.js
+eslint.config.js
 .gitignore
 .npmrc
 .nvmrc
@@ -17,9 +16,10 @@
 .stylelintignore
 .stylelintrc.js
 .wp-env.json
+.wp-env.test.json
 composer.json
 composer.lock
-playwright.config.ts
+playwright.config.js
 package-lock.json
 package.json
 phpcs.ruleset.xml
