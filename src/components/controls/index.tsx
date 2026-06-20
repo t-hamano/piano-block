@@ -44,8 +44,8 @@ const Controls = ( { settings, piano, onChange }: Props ) => {
 		keyLayout,
 		keyIndicator,
 	} = settings;
-	const [ isHelpOpen, setIsHelpOpen ] = useState< boolean >( false );
-	const [ isSynthesizerSettingOpen, setIsSynthesizerSettingOpen ] = useState< boolean >( false );
+	const [ isHelpOpen, setIsHelpOpen ] = useState( false );
+	const [ isSynthesizerSettingOpen, setIsSynthesizerSettingOpen ] = useState( false );
 
 	const onVolumeChange = ( newVolume: number | undefined ) => {
 		const instrumentSetting = INSTRUMENTS.find( ( { value } ) => value === instrument );

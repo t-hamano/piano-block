@@ -23,7 +23,7 @@ import type { BlockAttributes, Key } from '../../constants';
 
 type Props = {
 	settings: BlockAttributes;
-	onChange: ( {}: Partial< BlockAttributes > ) => void;
+	onChange: ( newSettings: Partial< BlockAttributes > ) => void;
 };
 
 const Piano = ( { settings, onChange }: Props ) => {
@@ -38,9 +38,9 @@ const Piano = ( { settings, onChange }: Props ) => {
 		keyIndicator,
 	} = settings;
 	const [ piano, setPiano ] = useState< Tone.Sampler | Tone.PolySynth >();
-	const [ isReady, setIsReady ] = useState< boolean >( false );
+	const [ isReady, setIsReady ] = useState( false );
 	const [ activeKeys, setActiveKeys ] = useState< Key[] >( [] );
-	const [ instrumentOctaveOffset, setInstrumentOctaveOffset ] = useState< number >( 0 );
+	const [ instrumentOctaveOffset, setInstrumentOctaveOffset ] = useState( 0 );
 
 	const ref = useRef< HTMLDivElement >( null );
 

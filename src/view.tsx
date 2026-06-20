@@ -18,7 +18,7 @@ import {
 import type { BlockAttributes } from './constants';
 
 function View( props: BlockAttributes ) {
-	const [ settings, setSettings ] = useState< BlockAttributes >( props );
+	const [ settings, setSettings ] = useState( props );
 
 	const onChange = ( newSettings: Partial< BlockAttributes > ) => {
 		setSettings( {
