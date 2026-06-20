@@ -1,7 +1,7 @@
 /**
  * External dependencies
  */
-import * as Tone from 'tone';
+import type * as Tone from 'tone';
 
 /**
  * WordPress dependencies
