@@ -34,10 +34,10 @@ const Keyboard = ( { activeKeys, keyLayout, keyIndicator, onKeyClick }: Props ) 
 	return (
 		<div className="piano-block-keyboard">
 			<div className="piano-block-keyboard__inner">
-				{ keys.map( ( key, index ) => {
+				{ keys.map( ( key ) => {
 					return (
 						<button
-							key={ index }
+							key={ `${ key.note }${ key.octave }` }
 							tabIndex={ -1 }
 							className={ clsx( 'piano-block-keyboard__key', {
 								'piano-block-keyboard__key--white': ! key.isBlackKey,
