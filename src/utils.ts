@@ -11,10 +11,6 @@ import type { BlockAttributes } from './constants';
  * @return Object of audio URLs.
  */
 export function getSamplerFileNames( notes: string[] ) {
-	if ( ! notes || ! Array.isArray( notes ) ) {
-		return {};
-	}
-
 	return Object.fromEntries(
 		notes.map( ( note ) => [ note.replace( 's', '#' ), `${ note }.mp3` ] )
 	);
