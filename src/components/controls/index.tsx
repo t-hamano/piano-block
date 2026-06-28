@@ -112,7 +112,6 @@ const Controls = ( { settings, piano, onChange }: Props ) => {
 	return (
 		<div className="piano-block-controls">
 			<RangeControl
-				__nextHasNoMarginBottom
 				__next40pxDefaultSize
 				label={ __( 'Volume', 'piano-block' ) }
 				value={ volume || 0 }
@@ -124,8 +123,6 @@ const Controls = ( { settings, piano, onChange }: Props ) => {
 				onChange={ onVolumeChange }
 			/>
 			<SelectControl
-				__nextHasNoMarginBottom
-				__next40pxDefaultSize
 				label={ __( 'Octave', 'piano-block' ) }
 				value={ octaveOffset.toString() }
 				options={ OCTAVE_OFFSETS.map( ( { label, value } ) => {
@@ -135,8 +132,6 @@ const Controls = ( { settings, piano, onChange }: Props ) => {
 				size="compact"
 			/>
 			<SelectControl
-				__nextHasNoMarginBottom
-				__next40pxDefaultSize
 				label={ __( 'Instrument', 'piano-block' ) }
 				value={ instrument }
 				options={ INSTRUMENTS.map( ( { label, value } ) => {
@@ -172,7 +167,6 @@ const Controls = ( { settings, piano, onChange }: Props ) => {
 				</div>
 			) }
 			<SelectControl
-				__nextHasNoMarginBottom
 				__next40pxDefaultSize
 				label={ __( 'Key Layout', 'piano-block' ) }
 				value={ keyLayout }
@@ -183,8 +177,6 @@ const Controls = ( { settings, piano, onChange }: Props ) => {
 				size="compact"
 			/>
 			<SelectControl
-				__nextHasNoMarginBottom
-				__next40pxDefaultSize
 				label={ __( 'Key Indicator', 'piano-block' ) }
 				value={ keyIndicator }
 				options={ KEY_INDICATORS.map( ( { label, value } ) => {
@@ -194,7 +186,6 @@ const Controls = ( { settings, piano, onChange }: Props ) => {
 				size="compact"
 			/>
 			<ToggleControl
-				__nextHasNoMarginBottom
 				label={ __( 'Sustain Pedal', 'piano-block' ) }
 				checked={ useSustainPedal }
 				onChange={ onUseSustainPedalChange }

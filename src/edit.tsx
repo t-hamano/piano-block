@@ -64,7 +64,6 @@ export default function Edit( { attributes, setAttributes }: BlockEditProps< Blo
 						onDeselect={ () => setAttributes( { showOnFront: false } ) }
 					>
 						<ToggleControl
-							__nextHasNoMarginBottom
 							label={ __( 'Display on the front end', 'piano-block' ) }
 							checked={ settings.showOnFront }
 							onChange={ ( value ) => onChange( { showOnFront: value } ) }
