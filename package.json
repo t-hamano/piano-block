@@ -35,7 +35,7 @@
 		"@wordpress/env": "^11.15.0",
 		"@wordpress/eslint-plugin": "25.7.0",
 		"@wordpress/icons": "^15.2.0",
-		"@wordpress/scripts": "^33.0.0",
+		"@wordpress/scripts": "^34.2.0",
 		"clsx": "2.1.1",
 		"eslint-import-resolver-typescript": "^4.4.4",
 		"husky": "^9.1.7",
