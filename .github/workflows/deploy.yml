@@ -19,7 +19,7 @@ jobs:
         uses: actions/checkout@main
 
       - name: Use desired version of Node.js
-        uses: actions/setup-node@v4
+        uses: actions/setup-node@v7
         with:
           node-version-file: '.nvmrc'
 
