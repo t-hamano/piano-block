@@ -37,12 +37,8 @@ module.exports = [
 			],
 		},
 	},
-	...defaultConfig.configs[ 'test-e2e' ].map( ( config ) => ( {
+	...defaultConfig.configs[ 'test-playwright' ].map( ( config ) => ( {
 		...config,
 		files: [ 'test/e2e/**/*.ts' ],
-		rules: {
-			...config.rules,
-			'jest/expect-expect': 'off',
-		},
 	} ) ),
 ];
