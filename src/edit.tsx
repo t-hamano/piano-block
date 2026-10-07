@@ -36,16 +36,11 @@ export default function Edit( { attributes, setAttributes }: BlockEditProps< Blo
 	const dropdownMenuProps = ! useViewportMatch( 'medium', '<' )
 		? {
 				popoverProps: {
-					placement: 'left-start',
+					placement: 'left-start' as const,
 					offset: 259,
 				},
-				// TODO: Once the type is fixed upstream, remove this property.
-				// See: https://github.com/WordPress/gutenberg/pull/76027
-				label: '',
-		  }
-		: // TODO: Once the type is fixed upstream, remove this property.
-		  // See: https://github.com/WordPress/gutenberg/pull/76027
-		  { label: '' };
+			}
+		: undefined;
 
 	return (
 		<>

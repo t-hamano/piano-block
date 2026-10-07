@@ -44,7 +44,7 @@ const Piano = ( { settings, onChange }: Props ) => {
 	const [ instrumentOctaveOffset, setInstrumentOctaveOffset ] = useState( 0 );
 
 	const ref = useRef< HTMLDivElement >( null );
-	const toneRef = useRef< typeof import('tone') >();
+	const toneRef = useRef< typeof import( 'tone' ) >();
 
 	const keys: Key[] =
 		KEYBOARD_LAYOUTS.find( ( { value } ) => value === keyLayout )?.keys ||
