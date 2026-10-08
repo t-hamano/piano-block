@@ -9,6 +9,7 @@ import type * as Tone from 'tone';
 import { __ } from '@wordpress/i18n';
 import { useState } from '@wordpress/element';
 import { Button, SelectControl, RangeControl, ToggleControl, Popover } from '@wordpress/components';
+import { Stack } from '@wordpress/ui';
 import { cog, help } from '@wordpress/icons';
 
 /**
@@ -110,7 +111,7 @@ const Controls = ( { settings, piano, onChange }: Props ) => {
 	};
 
 	return (
-		<div className="piano-block-controls">
+		<Stack className="piano-block-controls" direction="row" wrap="wrap" gap="lg" align="flex-start">
 			<RangeControl
 				label={ __( 'Volume', 'piano-block' ) }
 				value={ volume || 0 }
@@ -198,7 +199,7 @@ const Controls = ( { settings, piano, onChange }: Props ) => {
 				aria-expanded={ isHelpOpen }
 			/>
 			{ isHelpOpen && <HelpModal onClose={ () => setIsHelpOpen( false ) } /> }
-		</div>
+		</Stack>
 	);
 };
 

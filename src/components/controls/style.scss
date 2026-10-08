@@ -3,10 +3,6 @@
 .piano-block-controls {
 	position: relative;
 	box-sizing: border-box;
-	display: flex;
-	flex-wrap: wrap;
-	gap: var(--wpds-dimension-gap-lg);
-	align-items: flex-start;
 	width: calc(100% - var(--wpds-dimension-padding-lg) * 2);
 	max-width: calc(pianoBlockVariables.$white-key-width * pianoBlockVariables.$white-key-count - var(--wpds-dimension-padding-lg) * 2);
 	padding: var(--wpds-dimension-padding-sm) 48px var(--wpds-dimension-padding-sm) var(--wpds-dimension-padding-lg);
