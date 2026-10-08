@@ -112,7 +112,6 @@ const Controls = ( { settings, piano, onChange }: Props ) => {
 	return (
 		<div className="piano-block-controls">
 			<RangeControl
-				__next40pxDefaultSize
 				label={ __( 'Volume', 'piano-block' ) }
 				value={ volume || 0 }
 				min={ MIN_VOLUME }
@@ -143,7 +142,6 @@ const Controls = ( { settings, piano, onChange }: Props ) => {
 			{ instrument === 'synthesizer' && (
 				<div className="piano-block-controls__synthesizer-toggle">
 					<Button
-						__next40pxDefaultSize
 						label={ __( 'Synthesizer Setting', 'piano-block' ) }
 						icon={ cog }
 						variant="primary"
@@ -167,7 +165,6 @@ const Controls = ( { settings, piano, onChange }: Props ) => {
 				</div>
 			) }
 			<SelectControl
-				__next40pxDefaultSize
 				label={ __( 'Key Layout', 'piano-block' ) }
 				value={ keyLayout }
 				options={ KEYBOARD_LAYOUTS.map( ( { label, value } ) => {

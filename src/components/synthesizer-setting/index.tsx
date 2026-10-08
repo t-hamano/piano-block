@@ -125,7 +125,6 @@ const SynthesizerSetting = ( { synthesizerSetting, onChange }: Props ) => {
 	return (
 		<VStack className="piano-block-synthesizer-setting" spacing={ 4 }>
 			<SelectControl
-				__next40pxDefaultSize
 				label={ __( 'Oscillator Type', 'piano-block' ) }
 				autoComplete="off"
 				value={ oscillator?.type || DEFAULT_OSCILLATOR_TYPE }
@@ -139,7 +138,6 @@ const SynthesizerSetting = ( { synthesizerSetting, onChange }: Props ) => {
 			<Grid columns={ 4 }>
 				{ ENVELOPE_CONTROLS.map( ( { label, parameter, max } ) => (
 					<RangeControl
-						__next40pxDefaultSize
 						key={ parameter }
 						label={ label }
 						value={ envelope[ parameter ] ?? DEFAULT_ENVELOPE[ parameter ] }
