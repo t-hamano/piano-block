@@ -1,5 +1,4 @@
 @use "sass:math";
-@use "@wordpress/base-styles/variables" as variables;
 @use "@wordpress/base-styles/colors" as colors;
 @use "@wordpress/base-styles/mixins" as mixins;
 @use "../../variables" as pianoBlockVariables;
@@ -54,7 +53,7 @@
 			}
 
 			&.piano-block-keyboard__key--white {
-				height: pianoBlockVariables.$white-key-height + variables.$grid-unit-05;
+				height: pianoBlockVariables.$white-key-height + 4px;
 				background: linear-gradient(to bottom, #ccc 10%, colors.$white);
 				box-shadow: 0 2px 2px #aaa;
 			}
@@ -64,7 +63,7 @@
 	.piano-block-keyboard__key--black {
 		position: relative;
 		width: pianoBlockVariables.$black-key-width;
-		height: variables.$grid-unit-10 * 14;
+		height: 112px;
 		margin: 0 math.div(pianoBlockVariables.$black-key-width, 2) * -1;
 		color: colors.$white !important;
 		background: linear-gradient(to bottom, #666 0%, colors.$black 100%) !important;

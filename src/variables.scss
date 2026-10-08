@@ -1,6 +1,4 @@
-@use "@wordpress/base-styles/variables" as variables;
-
-$black-key-width: variables.$grid-unit-40;
-$white-key-width: variables.$grid-unit-50;
-$white-key-height: variables.$grid-unit-10 * 24;
+$black-key-width: 32px;
+$white-key-width: 40px;
+$white-key-height: 192px;
 $white-key-count: 17;
