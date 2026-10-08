@@ -1,5 +1,3 @@
-@use "@wordpress/base-styles/variables" as variables;
-@use "@wordpress/base-styles/colors" as colors;
 @use "../../variables" as pianoBlockVariables;
 
 .piano-block-controls {
@@ -7,24 +5,24 @@
 	box-sizing: border-box;
 	display: flex;
 	flex-wrap: wrap;
-	gap: variables.$grid-unit-20;
+	gap: var(--wpds-dimension-gap-lg);
 	align-items: flex-start;
-	width: calc(100% - variables.$grid-unit-40);
-	max-width: pianoBlockVariables.$white-key-width * pianoBlockVariables.$white-key-count - variables.$grid-unit-40;
-	padding: variables.$grid-unit-10 variables.$grid-unit-60 variables.$grid-unit-10 variables.$grid-unit-20;
+	width: calc(100% - var(--wpds-dimension-padding-lg) * 2);
+	max-width: calc(pianoBlockVariables.$white-key-width * pianoBlockVariables.$white-key-count - var(--wpds-dimension-padding-lg) * 2);
+	padding: var(--wpds-dimension-padding-sm) 48px var(--wpds-dimension-padding-sm) var(--wpds-dimension-padding-lg);
 	margin: 0 auto;
-	background: #fff;
-	border-radius: variables.$radius-small;
+	background: var(--wpds-color-background-surface-neutral-strong);
+	border-radius: var(--wpds-border-radius-lg);
 
 	.components-range-control {
-		width: variables.$grid-unit-10 * 16; // 128px
+		width: 128px;
 
 		.components-range-control__root {
-			min-height: variables.$button-size-compact;
+			min-height: var(--wpds-dimension-size-md);
 		}
 
 		.components-range-control__reset {
-			height: variables.$button-size-compact;
+			height: var(--wpds-dimension-size-md);
 		}
 	}
 
@@ -33,13 +31,13 @@
 		.components-flex {
 			flex-flow: column-reverse;
 			align-items: flex-start;
-			gap: variables.$grid-unit-20;
+			gap: var(--wpds-dimension-gap-lg);
 		}
 
 		.components-toggle-control__label {
-			font-size: variables.$font-size-x-small;
-			font-weight: 500;
-			line-height: variables.$default-line-height;
+			font-size: var(--wpds-typography-font-size-xs);
+			font-weight: var(--wpds-typography-font-weight-emphasis);
+			line-height: var(--wpds-typography-line-height-xs);
 			text-transform: uppercase;
 		}
 	}
@@ -51,7 +49,7 @@
 
 	.piano-block-controls__help {
 		position: absolute;
-		top: variables.$grid-unit-10;
-		right: variables.$grid-unit-10;
+		top: var(--wpds-dimension-padding-sm);
+		right: var(--wpds-dimension-padding-sm);
 	}
 }
