@@ -9,7 +9,7 @@
 
 .wp-block-piano-block-piano {
 	position: relative;
-	color: colors.$gray-900;
+	color: var(--wpds-color-foreground-content-neutral);
 	box-sizing: border-box;
 
 	&:not(.has-background) {
@@ -27,7 +27,7 @@
 		}
 
 		&.is-destructive {
-			color: colors.$alert-red !important;
+			color: var(--wpds-color-foreground-content-error-weak) !important;
 		}
 
 		&:focus,

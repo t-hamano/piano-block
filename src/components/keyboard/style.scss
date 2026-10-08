@@ -6,7 +6,7 @@
 
 .piano-block-keyboard {
 	position: relative;
-	padding: variables.$grid-unit-20 0;
+	padding: var(--wpds-dimension-padding-lg) 0;
 	overflow-x: auto;
 	// Prevents padding from being applied to the left and right sides.
 	scrollbar-gutter: auto !important;
@@ -18,7 +18,7 @@
 		display: flex;
 		width: pianoBlockVariables.$white-key-width * pianoBlockVariables.$white-key-count;
 		height: pianoBlockVariables.$white-key-height;
-		padding: 0 variables.$grid-unit-20;
+		padding: 0 var(--wpds-dimension-padding-lg);
 		margin: 0 auto;
 	}
 
@@ -26,9 +26,9 @@
 		display: flex;
 		align-items: flex-end;
 		justify-content: center;
-		padding: 0 0 variables.$grid-unit-10;
-		font-size: variables.$font-size-x-small;
-		font-weight: 400;
+		padding: 0 0 var(--wpds-dimension-padding-sm);
+		font-size: var(--wpds-typography-font-size-xs);
+		font-weight: var(--wpds-typography-font-weight-default);
 		text-transform: uppercase;
 		margin: 0;
 
@@ -86,7 +86,7 @@
 		height: 100%;
 		color: colors.$black !important;
 		background-color: colors.$white !important;
-		border: 1px colors.$gray-600 solid;
+		border: var(--wpds-border-width-xs) colors.$gray-600 solid;
 		border-bottom: none;
 		border-radius: 0 0 3px 3px;
 		box-shadow: 0 4px 4px #aaa;
