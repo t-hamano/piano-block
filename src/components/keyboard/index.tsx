@@ -7,6 +7,7 @@ import clsx from 'clsx';
  * WordPress dependencies
  */
 import { __, sprintf } from '@wordpress/i18n';
+import { Stack } from '@wordpress/ui';
 
 /**
  * Internal dependencies
@@ -28,7 +29,7 @@ const Keyboard = ( { activeKeys, keyLayout, keyIndicator, onKeyClick }: Props ) 
 
 	return (
 		<div className="piano-block-keyboard">
-			<div className="piano-block-keyboard__inner">
+			<Stack className="piano-block-keyboard__inner">
 				{ keys.map( ( key ) => {
 					return (
 						<button
@@ -54,7 +55,7 @@ const Keyboard = ( { activeKeys, keyLayout, keyIndicator, onKeyClick }: Props ) 
 						</button>
 					);
 				} ) }
-			</div>
+			</Stack>
 		</div>
 	);
 };

@@ -8,8 +8,8 @@ import {
 	RangeControl,
 	SelectControl,
 	__experimentalGrid as Grid,
-	__experimentalVStack as VStack,
 } from '@wordpress/components';
+import { Stack } from '@wordpress/ui';
 
 /**
  * Internal dependencies
@@ -123,7 +123,7 @@ const SynthesizerSetting = ( { synthesizerSetting, onChange }: Props ) => {
 	};
 
 	return (
-		<VStack className="piano-block-synthesizer-setting" spacing={ 4 }>
+		<Stack className="piano-block-synthesizer-setting" direction="column" gap="lg">
 			<SelectControl
 				label={ __( 'Oscillator Type', 'piano-block' ) }
 				autoComplete="off"
@@ -158,7 +158,7 @@ const SynthesizerSetting = ( { synthesizerSetting, onChange }: Props ) => {
 			>
 				{ __( 'Reset envelope', 'piano-block' ) }
 			</Button>
-		</VStack>
+		</Stack>
 	);
 };
 
