@@ -1,5 +1,4 @@
 @use "sass:math";
-@use "@wordpress/base-styles/colors" as colors;
 @use "./components/piano/style" as piano;
 @use "./components/loading/style" as loading;
 @use "./components/controls/style" as controls;
@@ -19,10 +18,10 @@
 	// Override theme button style.
 	.components-button {
 		color: inherit !important;
-		background: colors.$white !important;
+		background: var(--wpds-color-background-interactive-neutral) !important;
 
 		&.is-primary {
-			color: colors.$white !important;
+			color: #fff !important;
 			background: var(--wp-admin-theme-color, #007cba) !important;
 		}
 
