@@ -8,6 +8,12 @@
 	padding: variables.$grid-unit-20;
 	overflow: hidden;
 
+	.piano-block-synthesizer-setting__envelope {
+		display: grid;
+		grid-template-columns: repeat(4, minmax(0, 1fr));
+		gap: variables.$grid-unit-15;
+	}
+
 	.piano-block-synthesizer-setting__graph {
 		display: block;
 		width: 100%;

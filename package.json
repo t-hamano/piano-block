@@ -20,6 +20,7 @@
 		"npm": ">=11.0.0"
 	},
 	"dependencies": {
+		"@wordpress/ui": "0.24.0",
 		"tone": "^15.1.22"
 	},
 	"devDependencies": {

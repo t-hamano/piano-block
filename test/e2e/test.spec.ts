@@ -15,7 +15,8 @@ test.describe( 'Block', () => {
 	} ) => {
 		await editor.insertBlock( { name: 'piano-block/piano' } );
 		// Volume
-		await pageUtils.pressKeys( 'ArrowRight', { times: 2 } );
+		await editor.canvas.getByLabel( 'Piano: Press keys to play' ).focus();
+		await pageUtils.pressKeys( 'Tab' );
 		await expect( editor.canvas.getByRole( 'slider', { name: 'Volume' } ) ).toBeFocused();
 		await pageUtils.pressKeys( 'ArrowLeft', { times: 3 } );
 
@@ -77,7 +78,7 @@ test.describe( 'Block', () => {
 	test( 'should update attributes in the block sidebar', async ( { editor, page } ) => {
 		await editor.insertBlock( { name: 'piano-block/piano' } );
 		await editor.openDocumentSettingsSidebar();
-		await page.getByLabel( 'Display on the front end' ).click();
+		await page.getByRole( 'switch', { name: 'Display on the front end' } ).click();
 		expect( await editor.getEditedPostContent() ).toMatchSnapshot();
 		expect( true ).toBe( true );
 	} );
