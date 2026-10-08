@@ -8,8 +8,8 @@
 	flex-wrap: wrap;
 	gap: var(--wpds-dimension-gap-lg);
 	align-items: flex-start;
-	width: calc(100% - variables.$grid-unit-40);
-	max-width: pianoBlockVariables.$white-key-width * pianoBlockVariables.$white-key-count - variables.$grid-unit-40;
+	width: calc(100% - var(--wpds-dimension-padding-lg) * 2);
+	max-width: calc(pianoBlockVariables.$white-key-width * pianoBlockVariables.$white-key-count - var(--wpds-dimension-padding-lg) * 2);
 	padding: var(--wpds-dimension-padding-sm) variables.$grid-unit-60 var(--wpds-dimension-padding-sm) var(--wpds-dimension-padding-lg);
 	margin: 0 auto;
 	background: var(--wpds-color-background-surface-neutral-strong);
