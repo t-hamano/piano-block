@@ -45,7 +45,6 @@
 
 	.piano-block-keyboard__inner {
 		box-sizing: border-box;
-		display: flex;
 		width: pianoBlockVariables.$white-key-width * pianoBlockVariables.$white-key-count;
 		height: pianoBlockVariables.$white-key-height;
 		padding: 0 var(--wpds-dimension-padding-lg);
