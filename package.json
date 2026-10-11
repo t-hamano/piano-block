@@ -19,6 +19,13 @@
 		"node": ">=24.0.0",
 		"npm": ">=11.0.0"
 	},
+	"files": [
+		"assets",
+		"src",
+		"build",
+		"piano-block.php",
+		"readme.txt"
+	],
 	"dependencies": {
 		"@wordpress/ui": "0.24.0",
 		"tone": "^15.1.22"
@@ -50,6 +57,7 @@
 		"start": "wp-scripts start",
 		"start:hot": "wp-scripts start --hot",
 		"build": "wp-scripts build",
+		"plugin-zip": "npm run build && wp-scripts plugin-zip",
 		"check-licenses": "wp-scripts check-licenses",
 		"lint": "npm run lint:css && npm run lint:js && npm run lint:types && npm run lint:php && npm run lint:md-docs && npm run lint:pkg-json",
 		"lint:css": "wp-scripts lint-style",
