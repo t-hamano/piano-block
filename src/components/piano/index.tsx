@@ -44,7 +44,7 @@ const Piano = ( { settings, onChange }: Props ) => {
 	const [ instrumentOctaveOffset, setInstrumentOctaveOffset ] = useState( 0 );
 
 	const ref = useRef< HTMLDivElement >( null );
-	const toneRef = useRef< typeof import( 'tone' ) >();
+	const toneRef = useRef< Pick< typeof import( 'tone' ), 'Sampler' | 'PolySynth' > >();
 
 	const keys: Key[] =
 		KEYBOARD_LAYOUTS.find( ( { value } ) => value === keyLayout )?.keys ||
@@ -53,10 +53,10 @@ const Piano = ( { settings, onChange }: Props ) => {
 	// Create Tone.js Player. Defer until the first user gesture so the
 	// AudioContext is not created on page load.
 	useEffect( () => {
-		const Tone = toneRef.current;
-		if ( ! isStarted || ! Tone ) {
+		if ( ! isStarted || ! toneRef.current ) {
 			return;
 		}
+		const { Sampler, PolySynth } = toneRef.current;
 
 		const instrumentSetting = INSTRUMENTS.find( ( { value } ) => value === instrument );
 		if ( ! instrumentSetting ) {
@@ -73,7 +73,7 @@ const Piano = ( { settings, onChange }: Props ) => {
 		let tonePlayer: Tone.Sampler | Tone.PolySynth;
 
 		if ( instrumentSetting.value === 'synthesizer' ) {
-			tonePlayer = new Tone.PolySynth().toDestination();
+			tonePlayer = new PolySynth().toDestination();
 			tonePlayer.set( {
 				...synthesizerSetting,
 				envelope: synthesizerSetting.envelope || DEFAULT_ENVELOPE,
@@ -81,7 +81,7 @@ const Piano = ( { settings, onChange }: Props ) => {
 			setInstrumentOctaveOffset( 0 );
 			setIsReady( true );
 		} else {
-			tonePlayer = new Tone.Sampler( {
+			tonePlayer = new Sampler( {
 				urls: getSamplerFileNames( [ ...instrumentSetting.notes ] ),
 				release: 1,
 				baseUrl: `${ assetsUrl }/instruments/${ instrument }/`,
@@ -126,9 +126,9 @@ const Piano = ( { settings, onChange }: Props ) => {
 		// Load Tone.js and create the AudioContext on the first user gesture, then
 		// let the effect build the player. This first key press only unlocks audio.
 		if ( ! isStarted ) {
-			const Tone = await import( /* webpackPrefetch: true */ 'tone' );
-			toneRef.current = Tone;
-			await Tone.start();
+			const { Sampler, PolySynth, start } = await import( /* webpackPrefetch: true */ 'tone' );
+			toneRef.current = { Sampler, PolySynth };
+			await start();
 			setIsStarted( true );
 			return;
 		}
@@ -191,9 +191,9 @@ const Piano = ( { settings, onChange }: Props ) => {
 		// Load Tone.js and create the AudioContext on the first user gesture, then
 		// let the effect build the player. This first click only unlocks audio.
 		if ( ! isStarted ) {
-			const Tone = await import( /* webpackPrefetch: true */ 'tone' );
-			toneRef.current = Tone;
-			await Tone.start();
+			const { Sampler, PolySynth, start } = await import( /* webpackPrefetch: true */ 'tone' );
+			toneRef.current = { Sampler, PolySynth };
+			await start();
 			setIsStarted( true );
 			return;
 		}
