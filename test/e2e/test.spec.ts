@@ -80,4 +80,33 @@ test.describe( 'Block', () => {
 		await page.getByLabel( 'Display on the front end' ).click();
 		expect( await editor.getEditedPostContent() ).toMatchSnapshot();
 	} );
+
+	test( 'should disable the sustain pedal toggle when the synthesizer is selected', async ( {
+		editor,
+	} ) => {
+		await editor.insertBlock( { name: 'piano-block/piano' } );
+		const toggle = editor.canvas.getByRole( 'checkbox', { name: 'Sustain Pedal' } );
+		await expect( toggle ).toBeEnabled();
+		await editor.canvas
+			.getByRole( 'combobox', { name: 'Instrument' } )
+			.selectOption( 'synthesizer' );
+		await expect( toggle ).toBeDisabled();
+	} );
+
+	test( 'should open and close the help modal', async ( { editor, page } ) => {
+		await editor.insertBlock( { name: 'piano-block/piano' } );
+		await editor.canvas.getByRole( 'button', { name: 'Help' } ).click();
+		const modal = page.getByRole( 'dialog', { name: 'About Piano Block' } );
+		await expect( modal ).toBeVisible();
+		await modal.getByRole( 'button', { name: 'Close' } ).click();
+		await expect( modal ).toBeHidden();
+	} );
+
+	test( 'should update the key labels when the key layout is changed', async ( { editor } ) => {
+		await editor.insertBlock( { name: 'piano-block/piano' } );
+		const key = editor.canvas.getByRole( 'button', { name: 'Note: C#4' } );
+		await expect( key ).toHaveText( 'l 2' );
+		await editor.canvas.getByRole( 'combobox', { name: 'Key Layout' } ).selectOption( 'qwerty-2' );
+		await expect( key ).toHaveText( 'l 1' );
+	} );
 } );
