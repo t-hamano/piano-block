@@ -15,15 +15,9 @@ import type { BlockEditProps } from '@wordpress/blocks';
  * Internal dependencies
  */
 import Piano from './components/piano';
-import { DEFAULT_SETTINGS } from './constants';
 import type { BlockAttributes } from './constants';
 
 export default function Edit( { attributes, setAttributes }: BlockEditProps< BlockAttributes > ) {
-	const settings = {
-		...DEFAULT_SETTINGS,
-		...attributes,
-	};
-
 	const blockProps = useBlockProps();
 
 	const dropdownMenuProps = ! useViewportMatch( 'medium', '<' )
@@ -48,19 +42,19 @@ export default function Edit( { attributes, setAttributes }: BlockEditProps< Blo
 					<ToolsPanelItem
 						label={ __( 'Display on the front end', 'piano-block' ) }
 						isShownByDefault
-						hasValue={ () => settings.showOnFront }
+						hasValue={ () => attributes.showOnFront }
 						onDeselect={ () => setAttributes( { showOnFront: false } ) }
 					>
 						<ToggleControl
 							label={ __( 'Display on the front end', 'piano-block' ) }
-							checked={ settings.showOnFront }
+							checked={ attributes.showOnFront }
 							onChange={ ( value ) => setAttributes( { showOnFront: value } ) }
 						/>
 					</ToolsPanelItem>
 				</ToolsPanel>
 			</InspectorControls>
 			<div { ...blockProps }>
-				<Piano settings={ settings } onChange={ setAttributes } />
+				<Piano settings={ attributes } onChange={ setAttributes } />
 			</div>
 		</>
 	);
