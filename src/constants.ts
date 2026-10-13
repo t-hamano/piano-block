@@ -317,6 +317,5 @@ export type EnvelopeControl = ( typeof ENVELOPE_CONTROLS )[ number ];
 export type Key = {
 	note: string;
 	octave: number;
-	isBlackKey: boolean;
 	name: string[];
 };

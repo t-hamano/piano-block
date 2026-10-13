@@ -3,19 +3,11 @@
  */
 import { __ } from '@wordpress/i18n';
 
-/**
- * Internal dependencies
- */
-import type { Key } from './constants';
-
-const createKeys = ( keys: Omit< Key, 'isBlackKey' >[] ): Key[] =>
-	keys.map( ( key ) => ( { ...key, isBlackKey: key.note.endsWith( '#' ) } ) );
-
 export const KEYBOARD_LAYOUTS = [
 	{
 		label: __( 'QWERTY 1', 'piano-block' ),
 		value: 'qwerty-1',
-		keys: createKeys( [
+		keys: [
 			{ note: 'C', octave: 3, name: [ 'z' ] },
 			{ note: 'C#', octave: 3, name: [ 's' ] },
 			{ note: 'D', octave: 3, name: [ 'x' ] },
@@ -45,12 +37,12 @@ export const KEYBOARD_LAYOUTS = [
 			{ note: 'D', octave: 5, name: [ 'o' ] },
 			{ note: 'D#', octave: 5, name: [ '0' ] },
 			{ note: 'E', octave: 5, name: [ 'p' ] },
-		] ),
+		],
 	},
 	{
 		label: __( 'QWERTY 2', 'piano-block' ),
 		value: 'qwerty-2',
-		keys: createKeys( [
+		keys: [
 			{ note: 'C', octave: 3, name: [ 'z' ] },
 			{ note: 'C#', octave: 3, name: [ 's' ] },
 			{ note: 'D', octave: 3, name: [ 'x' ] },
@@ -80,12 +72,12 @@ export const KEYBOARD_LAYOUTS = [
 			{ note: 'D', octave: 5, name: [ 'o' ] },
 			{ note: 'D#', octave: 5, name: [ '9' ] },
 			{ note: 'E', octave: 5, name: [ 'p' ] },
-		] ),
+		],
 	},
 	{
 		label: __( 'AZERTY 1', 'piano-block' ),
 		value: 'azerty-1',
-		keys: createKeys( [
+		keys: [
 			{ note: 'C', octave: 3, name: [ '<' ] },
 			{ note: 'C#', octave: 3, name: [ 'q' ] },
 			{ note: 'D', octave: 3, name: [ 'w' ] },
@@ -115,6 +107,6 @@ export const KEYBOARD_LAYOUTS = [
 			{ note: 'D', octave: 5, name: [ 'o' ] },
 			{ note: 'D#', octave: 5, name: [ 'ç' ] },
 			{ note: 'E', octave: 5, name: [ 'p' ] },
-		] ),
+		],
 	},
 ];

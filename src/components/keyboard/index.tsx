@@ -26,13 +26,14 @@ const Keyboard = ( { activeKeys, keys, keyIndicator, onKeyClick }: Props ) => {
 		<div className="piano-block-keyboard">
 			<Stack className="piano-block-keyboard__inner">
 				{ keys.map( ( key ) => {
+					const isBlackKey = key.note.endsWith( '#' );
 					return (
 						<button
 							key={ `${ key.note }${ key.octave }` }
 							tabIndex={ -1 }
 							className={ clsx( 'piano-block-keyboard__key', {
-								'piano-block-keyboard__key--white': ! key.isBlackKey,
-								'piano-block-keyboard__key--black': key.isBlackKey,
+								'piano-block-keyboard__key--white': ! isBlackKey,
+								'piano-block-keyboard__key--black': isBlackKey,
 								'is-pressed': activeKeys.some(
 									( { note, octave } ) => key.note === note && key.octave === octave
 								),
