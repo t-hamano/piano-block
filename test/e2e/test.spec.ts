@@ -2,14 +2,8 @@
  * WordPress dependencies
  */
 import { test, expect } from '@wordpress/e2e-test-utils-playwright';
-import type { Editor } from '@wordpress/e2e-test-utils-playwright';
 
 const BLOCK_NAME = 'piano-block/piano';
-
-async function getBlockAttributes( editor: Editor ) {
-	const [ block ] = await editor.getBlocks();
-	return block?.attributes;
-}
 
 test.describe( 'Block', () => {
 	test.beforeEach( async ( { admin } ) => {
@@ -23,7 +17,9 @@ test.describe( 'Block', () => {
 			await slider.focus();
 			await pageUtils.pressKeys( 'ArrowLeft', { times: 3 } );
 
-			await expect.poll( () => getBlockAttributes( editor ) ).toMatchObject( { volume: -0.3 } );
+			await expect
+				.poll( () => editor.getBlocks() )
+				.toMatchObject( [ { name: BLOCK_NAME, attributes: { volume: -0.3 } } ] );
 		} );
 
 		test( 'should update octave with the keyboard', async ( { editor, pageUtils } ) => {
@@ -38,7 +34,9 @@ test.describe( 'Block', () => {
 			await pageUtils.pressKeys( 'z' );
 			await expect( select ).toBeFocused();
 
-			await expect.poll( () => getBlockAttributes( editor ) ).toMatchObject( { octaveOffset: -1 } );
+			await expect
+				.poll( () => editor.getBlocks() )
+				.toMatchObject( [ { name: BLOCK_NAME, attributes: { octaveOffset: -1 } } ] );
 		} );
 
 		test( 'should update instrument with the keyboard', async ( { editor, pageUtils } ) => {
@@ -54,8 +52,8 @@ test.describe( 'Block', () => {
 			await expect( select ).toBeFocused();
 
 			await expect
-				.poll( () => getBlockAttributes( editor ) )
-				.toMatchObject( { instrument: 'synthesizer' } );
+				.poll( () => editor.getBlocks() )
+				.toMatchObject( [ { name: BLOCK_NAME, attributes: { instrument: 'synthesizer' } } ] );
 		} );
 
 		test( 'should update synthesizer setting with the keyboard', async ( {
@@ -88,13 +86,18 @@ test.describe( 'Block', () => {
 			await expect( button ).toBeFocused();
 
 			await expect
-				.poll( () => getBlockAttributes( editor ) )
-				.toMatchObject( {
-					synthesizerSetting: {
-						oscillator: { type: 'sawtooth' },
-						envelope: { attack: 0.4, decay: 1.1, sustain: 0.6, release: 1.6 },
+				.poll( () => editor.getBlocks() )
+				.toMatchObject( [
+					{
+						name: BLOCK_NAME,
+						attributes: {
+							synthesizerSetting: {
+								oscillator: { type: 'sawtooth' },
+								envelope: { attack: 0.4, decay: 1.1, sustain: 0.6, release: 1.6 },
+							},
+						},
 					},
-				} );
+				] );
 		} );
 
 		test( 'should update key layout with the keyboard', async ( { editor, pageUtils } ) => {
@@ -106,8 +109,8 @@ test.describe( 'Block', () => {
 			await pageUtils.pressKeys( 'Enter' );
 
 			await expect
-				.poll( () => getBlockAttributes( editor ) )
-				.toMatchObject( { keyLayout: 'qwerty-2' } );
+				.poll( () => editor.getBlocks() )
+				.toMatchObject( [ { name: BLOCK_NAME, attributes: { keyLayout: 'qwerty-2' } } ] );
 		} );
 
 		test( 'should update key indicator with the keyboard', async ( { editor, pageUtils } ) => {
@@ -119,8 +122,8 @@ test.describe( 'Block', () => {
 			await pageUtils.pressKeys( 'Enter' );
 
 			await expect
-				.poll( () => getBlockAttributes( editor ) )
-				.toMatchObject( { keyIndicator: 'spn' } );
+				.poll( () => editor.getBlocks() )
+				.toMatchObject( [ { name: BLOCK_NAME, attributes: { keyIndicator: 'spn' } } ] );
 		} );
 	} );
 
@@ -129,6 +132,8 @@ test.describe( 'Block', () => {
 		await editor.openDocumentSettingsSidebar();
 		await page.getByLabel( 'Display on the front end' ).click();
 
-		await expect.poll( () => getBlockAttributes( editor ) ).toMatchObject( { showOnFront: true } );
+		await expect
+			.poll( () => editor.getBlocks() )
+			.toMatchObject( [ { name: BLOCK_NAME, attributes: { showOnFront: true } } ] );
 	} );
 } );
