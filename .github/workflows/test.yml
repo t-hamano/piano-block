@@ -37,6 +37,23 @@ jobs:
       - name: Running lint check
         run: npm run lint
 
+  unit-test:
+    runs-on: ubuntu-latest
+    name: Unit Test
+    steps:
+      - uses: actions/checkout@v7
+
+      - name: Use desired version of Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: '.nvmrc'
+
+      - name: Npm install
+        run: npm ci
+
+      - name: Running unit tests
+        run: npm run test:unit
+
   test:
     runs-on: ubuntu-latest
     strategy:
