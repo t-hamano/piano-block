@@ -12,21 +12,16 @@ import { Stack } from '@wordpress/ui';
 /**
  * Internal dependencies
  */
-import { KEYBOARD_LAYOUTS } from '../../keyboard-layout';
 import type { Key } from '../../constants';
 
 type Props = {
 	activeKeys: Key[];
-	keyLayout: string;
+	keys: Key[];
 	keyIndicator: string;
 	onKeyClick: ( note: string, octave: number ) => void;
 };
 
-const Keyboard = ( { activeKeys, keyLayout, keyIndicator, onKeyClick }: Props ) => {
-	const keys =
-		KEYBOARD_LAYOUTS.find( ( { value } ) => value === keyLayout )?.keys ||
-		KEYBOARD_LAYOUTS[ 0 ].keys;
-
+const Keyboard = ( { activeKeys, keys, keyIndicator, onKeyClick }: Props ) => {
 	return (
 		<div className="piano-block-keyboard">
 			<Stack className="piano-block-keyboard__inner">

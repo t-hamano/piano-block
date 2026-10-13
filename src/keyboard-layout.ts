@@ -3,110 +3,55 @@
  */
 import { __ } from '@wordpress/i18n';
 
+/**
+ * Internal dependencies
+ */
+import type { Key } from './constants';
+
+const NOTES = [ 'C', 'C#', 'D', 'D#', 'E', 'F', 'F#', 'G', 'G#', 'A', 'A#', 'B' ];
+const START_OCTAVE = 3;
+
+// Create the 29 keys from C3 to E5, given the keyboard key names for each key.
+const createKeys = ( names: string[][] ): Key[] =>
+	names.map( ( name, index ) => {
+		const note = NOTES[ index % NOTES.length ];
+		return {
+			note,
+			octave: START_OCTAVE + Math.floor( index / NOTES.length ),
+			isBlackKey: note.endsWith( '#' ),
+			name,
+		};
+	} );
+
 export const KEYBOARD_LAYOUTS = [
 	{
 		label: __( 'QWERTY 1', 'piano-block' ),
 		value: 'qwerty-1',
-		keys: [
-			{ note: 'C', octave: 3, isBlackKey: false, name: [ 'z' ] },
-			{ note: 'C#', octave: 3, isBlackKey: true, name: [ 's' ] },
-			{ note: 'D', octave: 3, isBlackKey: false, name: [ 'x' ] },
-			{ note: 'D#', octave: 3, isBlackKey: true, name: [ 'd' ] },
-			{ note: 'E', octave: 3, isBlackKey: false, name: [ 'c' ] },
-			{ note: 'F', octave: 3, isBlackKey: false, name: [ 'v' ] },
-			{ note: 'F#', octave: 3, isBlackKey: true, name: [ 'g' ] },
-			{ note: 'G', octave: 3, isBlackKey: false, name: [ 'b' ] },
-			{ note: 'G#', octave: 3, isBlackKey: true, name: [ 'h' ] },
-			{ note: 'A', octave: 3, isBlackKey: false, name: [ 'n' ] },
-			{ note: 'A#', octave: 3, isBlackKey: true, name: [ 'j' ] },
-			{ note: 'B', octave: 3, isBlackKey: false, name: [ 'm' ] },
-			{ note: 'C', octave: 4, isBlackKey: false, name: [ ',', 'q' ] },
-			{ note: 'C#', octave: 4, isBlackKey: true, name: [ 'l', '2' ] },
-			{ note: 'D', octave: 4, isBlackKey: false, name: [ '.', 'w' ] },
-			{ note: 'D#', octave: 4, isBlackKey: true, name: [ '3' ] },
-			{ note: 'E', octave: 4, isBlackKey: false, name: [ 'e' ] },
-			{ note: 'F', octave: 4, isBlackKey: false, name: [ 'r' ] },
-			{ note: 'F#', octave: 4, isBlackKey: true, name: [ '5' ] },
-			{ note: 'G', octave: 4, isBlackKey: false, name: [ 't' ] },
-			{ note: 'G#', octave: 4, isBlackKey: true, name: [ '6' ] },
-			{ note: 'A', octave: 4, isBlackKey: false, name: [ 'y' ] },
-			{ note: 'A#', octave: 4, isBlackKey: true, name: [ '7' ] },
-			{ note: 'B', octave: 4, isBlackKey: false, name: [ 'u' ] },
-			{ note: 'C', octave: 5, isBlackKey: false, name: [ 'i' ] },
-			{ note: 'C#', octave: 5, isBlackKey: true, name: [ '9' ] },
-			{ note: 'D', octave: 5, isBlackKey: false, name: [ 'o' ] },
-			{ note: 'D#', octave: 5, isBlackKey: true, name: [ '0' ] },
-			{ note: 'E', octave: 5, isBlackKey: false, name: [ 'p' ] },
-		],
+		// prettier-ignore
+		keys: createKeys( [
+			[ 'z' ], [ 's' ], [ 'x' ], [ 'd' ], [ 'c' ], [ 'v' ], [ 'g' ], [ 'b' ], [ 'h' ], [ 'n' ], [ 'j' ], [ 'm' ],
+			[ ',', 'q' ], [ 'l', '2' ], [ '.', 'w' ], [ '3' ], [ 'e' ], [ 'r' ], [ '5' ], [ 't' ], [ '6' ], [ 'y' ], [ '7' ], [ 'u' ],
+			[ 'i' ], [ '9' ], [ 'o' ], [ '0' ], [ 'p' ],
+		] ),
 	},
 	{
 		label: __( 'QWERTY 2', 'piano-block' ),
 		value: 'qwerty-2',
-		keys: [
-			{ note: 'C', octave: 3, isBlackKey: false, name: [ 'z' ] },
-			{ note: 'C#', octave: 3, isBlackKey: true, name: [ 's' ] },
-			{ note: 'D', octave: 3, isBlackKey: false, name: [ 'x' ] },
-			{ note: 'D#', octave: 3, isBlackKey: true, name: [ 'd' ] },
-			{ note: 'E', octave: 3, isBlackKey: false, name: [ 'c' ] },
-			{ note: 'F', octave: 3, isBlackKey: false, name: [ 'v' ] },
-			{ note: 'F#', octave: 3, isBlackKey: true, name: [ 'g' ] },
-			{ note: 'G', octave: 3, isBlackKey: false, name: [ 'b' ] },
-			{ note: 'G#', octave: 3, isBlackKey: true, name: [ 'h' ] },
-			{ note: 'A', octave: 3, isBlackKey: false, name: [ 'n' ] },
-			{ note: 'A#', octave: 3, isBlackKey: true, name: [ 'j' ] },
-			{ note: 'B', octave: 3, isBlackKey: false, name: [ 'm' ] },
-			{ note: 'C', octave: 4, isBlackKey: false, name: [ ',', 'q' ] },
-			{ note: 'C#', octave: 4, isBlackKey: true, name: [ 'l', '1' ] },
-			{ note: 'D', octave: 4, isBlackKey: false, name: [ '.', 'w' ] },
-			{ note: 'D#', octave: 4, isBlackKey: true, name: [ '2' ] },
-			{ note: 'E', octave: 4, isBlackKey: false, name: [ 'e' ] },
-			{ note: 'F', octave: 4, isBlackKey: false, name: [ 'r' ] },
-			{ note: 'F#', octave: 4, isBlackKey: true, name: [ '4' ] },
-			{ note: 'G', octave: 4, isBlackKey: false, name: [ 't' ] },
-			{ note: 'G#', octave: 4, isBlackKey: true, name: [ '5' ] },
-			{ note: 'A', octave: 4, isBlackKey: false, name: [ 'y' ] },
-			{ note: 'A#', octave: 4, isBlackKey: true, name: [ '6' ] },
-			{ note: 'B', octave: 4, isBlackKey: false, name: [ 'u' ] },
-			{ note: 'C', octave: 5, isBlackKey: false, name: [ 'i' ] },
-			{ note: 'C#', octave: 5, isBlackKey: true, name: [ '8' ] },
-			{ note: 'D', octave: 5, isBlackKey: false, name: [ 'o' ] },
-			{ note: 'D#', octave: 5, isBlackKey: true, name: [ '9' ] },
-			{ note: 'E', octave: 5, isBlackKey: false, name: [ 'p' ] },
-		],
+		// prettier-ignore
+		keys: createKeys( [
+			[ 'z' ], [ 's' ], [ 'x' ], [ 'd' ], [ 'c' ], [ 'v' ], [ 'g' ], [ 'b' ], [ 'h' ], [ 'n' ], [ 'j' ], [ 'm' ],
+			[ ',', 'q' ], [ 'l', '1' ], [ '.', 'w' ], [ '2' ], [ 'e' ], [ 'r' ], [ '4' ], [ 't' ], [ '5' ], [ 'y' ], [ '6' ], [ 'u' ],
+			[ 'i' ], [ '8' ], [ 'o' ], [ '9' ], [ 'p' ],
+		] ),
 	},
 	{
 		label: __( 'AZERTY 1', 'piano-block' ),
 		value: 'azerty-1',
-		keys: [
-			{ note: 'C', octave: 3, isBlackKey: false, name: [ '<' ] },
-			{ note: 'C#', octave: 3, isBlackKey: true, name: [ 'q' ] },
-			{ note: 'D', octave: 3, isBlackKey: false, name: [ 'w' ] },
-			{ note: 'D#', octave: 3, isBlackKey: true, name: [ 's' ] },
-			{ note: 'E', octave: 3, isBlackKey: false, name: [ 'x' ] },
-			{ note: 'F', octave: 3, isBlackKey: false, name: [ 'c' ] },
-			{ note: 'F#', octave: 3, isBlackKey: true, name: [ 'f' ] },
-			{ note: 'G', octave: 3, isBlackKey: false, name: [ 'v' ] },
-			{ note: 'G#', octave: 3, isBlackKey: true, name: [ 'g' ] },
-			{ note: 'A', octave: 3, isBlackKey: false, name: [ 'b' ] },
-			{ note: 'A#', octave: 3, isBlackKey: true, name: [ 'h' ] },
-			{ note: 'B', octave: 3, isBlackKey: false, name: [ 'n' ] },
-			{ note: 'C', octave: 4, isBlackKey: false, name: [ ',', 'a' ] },
-			{ note: 'C#', octave: 4, isBlackKey: true, name: [ 'k', '&' ] },
-			{ note: 'D', octave: 4, isBlackKey: false, name: [ ';', 'z' ] },
-			{ note: 'D#', octave: 4, isBlackKey: true, name: [ 'é' ] },
-			{ note: 'E', octave: 4, isBlackKey: false, name: [ 'e' ] },
-			{ note: 'F', octave: 4, isBlackKey: false, name: [ 'r' ] },
-			{ note: 'F#', octave: 4, isBlackKey: true, name: [ "'" ] },
-			{ note: 'G', octave: 4, isBlackKey: false, name: [ 't' ] },
-			{ note: 'G#', octave: 4, isBlackKey: true, name: [ '(' ] },
-			{ note: 'A', octave: 4, isBlackKey: false, name: [ 'y' ] },
-			{ note: 'A#', octave: 4, isBlackKey: true, name: [ '-' ] },
-			{ note: 'B', octave: 4, isBlackKey: false, name: [ 'u' ] },
-			{ note: 'C', octave: 5, isBlackKey: false, name: [ 'i' ] },
-			{ note: 'C#', octave: 5, isBlackKey: true, name: [ '_' ] },
-			{ note: 'D', octave: 5, isBlackKey: false, name: [ 'o' ] },
-			{ note: 'D#', octave: 5, isBlackKey: true, name: [ 'ç' ] },
-			{ note: 'E', octave: 5, isBlackKey: false, name: [ 'p' ] },
-		],
+		// prettier-ignore
+		keys: createKeys( [
+			[ '<' ], [ 'q' ], [ 'w' ], [ 's' ], [ 'x' ], [ 'c' ], [ 'f' ], [ 'v' ], [ 'g' ], [ 'b' ], [ 'h' ], [ 'n' ],
+			[ ',', 'a' ], [ 'k', '&' ], [ ';', 'z' ], [ 'é' ], [ 'e' ], [ 'r' ], [ "'" ], [ 't' ], [ '(' ], [ 'y' ], [ '-' ], [ 'u' ],
+			[ 'i' ], [ '_' ], [ 'o' ], [ 'ç' ], [ 'p' ],
+		] ),
 	},
 ];

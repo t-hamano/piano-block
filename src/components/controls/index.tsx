@@ -49,11 +49,6 @@ const Controls = ( { settings, piano, onChange }: Props ) => {
 	const [ isSynthesizerSettingOpen, setIsSynthesizerSettingOpen ] = useState( false );
 
 	const onVolumeChange = ( newVolume: number | undefined ) => {
-		const instrumentSetting = INSTRUMENTS.find( ( { value } ) => value === instrument );
-		if ( ! instrumentSetting ) {
-			return;
-		}
-
 		if ( piano ) {
 			piano.volume.value = getNormalizedVolume( newVolume, settings );
 		}
