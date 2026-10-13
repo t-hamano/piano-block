@@ -43,12 +43,20 @@ const Piano = ( { settings, onChange }: Props ) => {
 	const [ activeKeys, setActiveKeys ] = useState< Key[] >( [] );
 	const [ instrumentOctaveOffset, setInstrumentOctaveOffset ] = useState( 0 );
 
+	// Mirror of `activeKeys` that is updated synchronously, so that multiple key
+	// events fired before a re-render (e.g. when playing a chord) see the latest keys.
+	const activeKeysRef = useRef< Key[] >( [] );
 	const ref = useRef< HTMLDivElement >( null );
 	const toneRef = useRef< Pick< typeof import( 'tone' ), 'Sampler' | 'PolySynth' > >();
 
 	const keys: Key[] =
 		KEYBOARD_LAYOUTS.find( ( { value } ) => value === keyLayout )?.keys ||
 		KEYBOARD_LAYOUTS[ 0 ].keys;
+
+	const updateActiveKeys = ( updater: ( currentKeys: Key[] ) => Key[] ) => {
+		activeKeysRef.current = updater( activeKeysRef.current );
+		setActiveKeys( activeKeysRef.current );
+	};
 
 	// Create Tone.js Player. Defer until the first user gesture so the
 	// AudioContext is not created on page load.
@@ -63,7 +71,7 @@ const Piano = ( { settings, onChange }: Props ) => {
 			return;
 		}
 
-		setActiveKeys( [] );
+		updateActiveKeys( () => [] );
 		setIsReady( false );
 
 		let tonePlayer: Tone.Sampler | Tone.PolySynth;
@@ -156,7 +164,7 @@ const Piano = ( { settings, onChange }: Props ) => {
 		}
 
 		// Do nothing if the key has already been pressed.
-		const isKeyPressed = activeKeys.some(
+		const isKeyPressed = activeKeysRef.current.some(
 			( { note, octave } ) => targetKey.note === note && targetKey.octave === octave
 		);
 		if ( isKeyPressed ) {
@@ -169,7 +177,7 @@ const Piano = ( { settings, onChange }: Props ) => {
 		}`;
 
 		piano.triggerAttack( targetNote, piano.context.currentTime );
-		setActiveKeys( [ ...activeKeys, targetKey ] );
+		updateActiveKeys( ( currentKeys ) => [ ...currentKeys, targetKey ] );
 	};
 
 	// Stop the note when the key is released.
@@ -192,10 +200,11 @@ const Piano = ( { settings, onChange }: Props ) => {
 			piano.triggerRelease( targetNote );
 		}
 
-		const newActiveKeys = activeKeys.filter(
-			( { note, octave } ) => ! ( targetKey.note === note && targetKey.octave === octave )
+		updateActiveKeys( ( currentKeys ) =>
+			currentKeys.filter(
+				( { note, octave } ) => ! ( targetKey.note === note && targetKey.octave === octave )
+			)
 		);
-		setActiveKeys( newActiveKeys );
 	};
 
 	// Trigger the note when the key is clicked by the mouse cursor or when the enter key is pressed.
