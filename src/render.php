@@ -32,5 +32,8 @@ $piano_block_wrapper_attributes = get_block_wrapper_attributes(
 		'data-synthesizer-setting' => wp_json_encode( $piano_block_synthesizer_setting ),
 	)
 );
+
+// get_block_wrapper_attributes() already escapes each value with esc_attr(),
+// so the output is echoed as is to avoid double escaping.
 ?>
 <div <?php echo $piano_block_wrapper_attributes; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped ?>></div>
