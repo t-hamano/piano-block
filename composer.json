@@ -16,7 +16,7 @@
 		"phpcompatibility/phpcompatibility-paragonie": "^2.0@alpha"
 	},
 	"scripts": {
-		"lint": "phpcs ./ --standard=./phpcs.ruleset.xml"
+		"lint": "phpcs"
 	},
 	"config": {
 		"allow-plugins": {
