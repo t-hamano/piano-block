@@ -54,7 +54,7 @@ jobs:
       - name: Running unit tests
         run: npm run test:unit
 
-  test:
+  e2e-test:
     runs-on: ubuntu-latest
     strategy:
       matrix:
@@ -79,7 +79,7 @@ jobs:
           - php: '8.5'
             wp: WordPress#7.1
 
-    name: PHP ${{ matrix.php }} / ${{ matrix.wp }} Test
+    name: PHP ${{ matrix.php }} / ${{ matrix.wp }} E2E Test
     steps:
       - uses: actions/checkout@v7
 
