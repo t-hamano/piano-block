@@ -169,7 +169,7 @@ const Piano = ( { settings, onChange }: Props ) => {
 		}`;
 
 		piano.triggerAttack( targetNote, piano.context.currentTime );
-		setActiveKeys( [ ...activeKeys, targetKey ] );
+		setActiveKeys( ( currentKeys ) => [ ...currentKeys, targetKey ] );
 	};
 
 	// Stop the note when the key is released.
@@ -192,10 +192,11 @@ const Piano = ( { settings, onChange }: Props ) => {
 			piano.triggerRelease( targetNote );
 		}
 
-		const newActiveKeys = activeKeys.filter(
-			( { note, octave } ) => ! ( targetKey.note === note && targetKey.octave === octave )
+		setActiveKeys( ( currentKeys ) =>
+			currentKeys.filter(
+				( { note, octave } ) => ! ( targetKey.note === note && targetKey.octave === octave )
+			)
 		);
-		setActiveKeys( newActiveKeys );
 	};
 
 	// Trigger the note when the key is clicked by the mouse cursor or when the enter key is pressed.
