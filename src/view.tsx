@@ -8,7 +8,7 @@ import domReady from '@wordpress/dom-ready';
  * Internal dependencies
  */
 import Piano from './components/piano';
-import { parseViewAttributes } from './parse-view-attributes';
+import { parseViewAttributes } from './utils';
 import type { BlockAttributes } from './constants';
 
 function View( props: BlockAttributes ) {
