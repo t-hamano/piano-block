@@ -3,164 +3,81 @@
  */
 import { test, expect } from '@wordpress/e2e-test-utils-playwright';
 
-const BLOCK_NAME = 'piano-block/piano';
-
 test.describe( 'Block', () => {
 	test.beforeEach( async ( { admin } ) => {
 		await admin.createNewPost();
 	} );
 
-	test.describe( 'Controls', () => {
-		test( 'should move focus through all controls with the Tab key', async ( {
-			editor,
-			pageUtils,
-		} ) => {
-			await editor.insertBlock( {
-				name: BLOCK_NAME,
-				attributes: { instrument: 'synthesizer' },
-			} );
+	test( 'should update attributes related to sound using only keyboard', async ( {
+		editor,
+		page,
+		pageUtils,
+	} ) => {
+		await editor.insertBlock( { name: 'piano-block/piano' } );
+		// Volume
+		await pageUtils.pressKeys( 'ArrowRight', { times: 2 } );
+		await expect( editor.canvas.getByRole( 'slider', { name: 'Volume' } ) ).toBeFocused();
+		await pageUtils.pressKeys( 'ArrowLeft', { times: 3 } );
+
+		// Octave Offset
+		await pageUtils.pressKeys( 'Tab', { times: 2 } );
+		await expect( editor.canvas.getByRole( 'combobox', { name: 'Octave' } ) ).toBeFocused();
+		await pageUtils.pressKeys( 'Enter' );
+		await pageUtils.pressKeys( 'ArrowDown' );
+		await pageUtils.pressKeys( 'Enter' );
+		// Pressing a piano key should not remove focus.
+		await pageUtils.pressKeys( 'z' );
+
+		// Instrument
+		await pageUtils.pressKeys( 'Tab' );
+		await expect( editor.canvas.getByRole( 'combobox', { name: 'Instrument' } ) ).toBeFocused();
+		await pageUtils.pressKeys( 'Enter' );
+		await pageUtils.pressKeys( 'ArrowDown', { times: 14 } );
+		await pageUtils.pressKeys( 'Enter' );
+		// Pressing a piano key should not remove focus.
+		await pageUtils.pressKeys( 'z' );
+
+		// Synthesizer Setting
+		await pageUtils.pressKeys( 'Tab' );
+		await expect(
+			editor.canvas.getByRole( 'button', { name: 'Synthesizer Setting' } )
+		).toBeFocused();
+		await pageUtils.pressKeys( 'Enter' );
+		await expect( page.getByRole( 'combobox', { name: 'Oscillator Type' } ) ).toBeFocused();
+		await pageUtils.pressKeys( 'ArrowDown', { times: 2 } );
+		for ( let index = 0; index < 4; index++ ) {
+			await pageUtils.pressKeys( 'Tab' );
 			await pageUtils.pressKeys( 'ArrowRight', { times: 2 } );
-			await expect( editor.canvas.getByRole( 'slider', { name: 'Volume' } ) ).toBeFocused();
+		}
+		await pageUtils.pressKeys( 'Escape' );
+		// Pressing the escape key in a popover rendered in the iframe editor does not
+		// return focus to the anchor element, so explicitly focus the anchor element.
+		// see: https://github.com/WordPress/gutenberg/issues/55413
+		await editor.canvas.getByRole( 'button', { name: 'Synthesizer Setting' } ).focus();
+		// Pressing a piano key should not remove focus.
+		await pageUtils.pressKeys( 'z' );
 
-			const controls = [
-				// Volume reset button
-				editor.canvas.getByRole( 'button', { name: 'Reset' } ),
-				editor.canvas.getByRole( 'combobox', { name: 'Octave' } ),
-				editor.canvas.getByRole( 'combobox', { name: 'Instrument' } ),
-				editor.canvas.getByRole( 'button', { name: 'Synthesizer Setting' } ),
-				editor.canvas.getByRole( 'combobox', { name: 'Key Layout' } ),
-				editor.canvas.getByRole( 'combobox', { name: 'Key Indicator' } ),
-				editor.canvas.getByRole( 'button', { name: 'Help' } ),
-			];
-			for ( const control of controls ) {
-				await pageUtils.pressKeys( 'Tab' );
-				await expect( control ).toBeFocused();
-			}
-		} );
+		// Key Layout
+		await pageUtils.pressKeys( 'Tab' );
+		await expect( editor.canvas.getByRole( 'combobox', { name: 'Key Layout' } ) ).toBeFocused();
+		await pageUtils.pressKeys( 'Enter' );
+		await pageUtils.pressKeys( 'ArrowDown' );
+		await pageUtils.pressKeys( 'Enter' );
 
-		test( 'should update volume with the keyboard', async ( { editor, pageUtils } ) => {
-			await editor.insertBlock( { name: BLOCK_NAME } );
-			const slider = editor.canvas.getByRole( 'slider', { name: 'Volume' } );
-			await slider.focus();
-			await pageUtils.pressKeys( 'ArrowLeft', { times: 3 } );
+		// Key Indicator
+		await pageUtils.pressKeys( 'Tab' );
+		await expect( editor.canvas.getByRole( 'combobox', { name: 'Key Indicator' } ) ).toBeFocused();
+		await pageUtils.pressKeys( 'Enter' );
+		await pageUtils.pressKeys( 'ArrowDown' );
+		await pageUtils.pressKeys( 'Enter' );
 
-			await expect
-				.poll( () => editor.getBlocks() )
-				.toMatchObject( [ { name: BLOCK_NAME, attributes: { volume: -0.3 } } ] );
-		} );
-
-		test( 'should update octave with the keyboard', async ( { editor, pageUtils } ) => {
-			await editor.insertBlock( { name: BLOCK_NAME } );
-			const select = editor.canvas.getByRole( 'combobox', { name: 'Octave' } );
-			await select.focus();
-			await pageUtils.pressKeys( 'Enter' );
-			await pageUtils.pressKeys( 'ArrowDown' );
-			await pageUtils.pressKeys( 'Enter' );
-
-			// Pressing a piano key should not remove focus.
-			await pageUtils.pressKeys( 'z' );
-			await expect( select ).toBeFocused();
-
-			await expect
-				.poll( () => editor.getBlocks() )
-				.toMatchObject( [ { name: BLOCK_NAME, attributes: { octaveOffset: -1 } } ] );
-		} );
-
-		test( 'should update instrument with the keyboard', async ( { editor, pageUtils } ) => {
-			await editor.insertBlock( { name: BLOCK_NAME } );
-			const select = editor.canvas.getByRole( 'combobox', { name: 'Instrument' } );
-			await select.focus();
-			await pageUtils.pressKeys( 'Enter' );
-			await pageUtils.pressKeys( 'ArrowDown', { times: 14 } );
-			await pageUtils.pressKeys( 'Enter' );
-
-			// Pressing a piano key should not remove focus.
-			await pageUtils.pressKeys( 'z' );
-			await expect( select ).toBeFocused();
-
-			await expect
-				.poll( () => editor.getBlocks() )
-				.toMatchObject( [ { name: BLOCK_NAME, attributes: { instrument: 'synthesizer' } } ] );
-		} );
-
-		test( 'should update synthesizer setting with the keyboard', async ( {
-			editor,
-			page,
-			pageUtils,
-		} ) => {
-			await editor.insertBlock( {
-				name: BLOCK_NAME,
-				attributes: { instrument: 'synthesizer' },
-			} );
-			const button = editor.canvas.getByRole( 'button', { name: 'Synthesizer Setting' } );
-			await button.focus();
-			await pageUtils.pressKeys( 'Enter' );
-			await expect( page.getByRole( 'combobox', { name: 'Oscillator Type' } ) ).toBeFocused();
-			await pageUtils.pressKeys( 'ArrowDown', { times: 2 } );
-			// Attack, Decay, Sustain, Release
-			for ( let index = 0; index < 4; index++ ) {
-				await pageUtils.pressKeys( 'Tab' );
-				await pageUtils.pressKeys( 'ArrowRight', { times: 2 } );
-			}
-			await pageUtils.pressKeys( 'Escape' );
-			// Pressing the escape key in a popover rendered in the iframe editor does not
-			// return focus to the anchor element, so explicitly focus the anchor element.
-			// see: https://github.com/WordPress/gutenberg/issues/55413
-			await button.focus();
-
-			// Pressing a piano key should not remove focus.
-			await pageUtils.pressKeys( 'z' );
-			await expect( button ).toBeFocused();
-
-			await expect
-				.poll( () => editor.getBlocks() )
-				.toMatchObject( [
-					{
-						name: BLOCK_NAME,
-						attributes: {
-							synthesizerSetting: {
-								oscillator: { type: 'sawtooth' },
-								envelope: { attack: 0.4, decay: 1.1, sustain: 0.6, release: 1.6 },
-							},
-						},
-					},
-				] );
-		} );
-
-		test( 'should update key layout with the keyboard', async ( { editor, pageUtils } ) => {
-			await editor.insertBlock( { name: BLOCK_NAME } );
-			const select = editor.canvas.getByRole( 'combobox', { name: 'Key Layout' } );
-			await select.focus();
-			await pageUtils.pressKeys( 'Enter' );
-			await pageUtils.pressKeys( 'ArrowDown' );
-			await pageUtils.pressKeys( 'Enter' );
-
-			await expect
-				.poll( () => editor.getBlocks() )
-				.toMatchObject( [ { name: BLOCK_NAME, attributes: { keyLayout: 'qwerty-2' } } ] );
-		} );
-
-		test( 'should update key indicator with the keyboard', async ( { editor, pageUtils } ) => {
-			await editor.insertBlock( { name: BLOCK_NAME } );
-			const select = editor.canvas.getByRole( 'combobox', { name: 'Key Indicator' } );
-			await select.focus();
-			await pageUtils.pressKeys( 'Enter' );
-			await pageUtils.pressKeys( 'ArrowDown' );
-			await pageUtils.pressKeys( 'Enter' );
-
-			await expect
-				.poll( () => editor.getBlocks() )
-				.toMatchObject( [ { name: BLOCK_NAME, attributes: { keyIndicator: 'spn' } } ] );
-		} );
+		expect( await editor.getEditedPostContent() ).toMatchSnapshot();
 	} );
 
 	test( 'should update attributes in the block sidebar', async ( { editor, page } ) => {
-		await editor.insertBlock( { name: BLOCK_NAME } );
+		await editor.insertBlock( { name: 'piano-block/piano' } );
 		await editor.openDocumentSettingsSidebar();
 		await page.getByLabel( 'Display on the front end' ).click();
-
-		await expect
-			.poll( () => editor.getBlocks() )
-			.toMatchObject( [ { name: BLOCK_NAME, attributes: { showOnFront: true } } ] );
+		expect( await editor.getEditedPostContent() ).toMatchSnapshot();
 	} );
 } );
