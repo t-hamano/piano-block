@@ -48,6 +48,10 @@ module.exports = [
 			],
 		},
 	},
+	...defaultConfig.configs[ 'test-unit' ].map( ( config ) => ( {
+		...config,
+		files: [ 'test/unit/**/*.ts' ],
+	} ) ),
 	...defaultConfig.configs[ 'test-playwright' ].map( ( config ) => ( {
 		...config,
 		files: [ 'test/e2e/**/*.ts' ],
