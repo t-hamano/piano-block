@@ -43,20 +43,12 @@ const Piano = ( { settings, onChange }: Props ) => {
 	const [ activeKeys, setActiveKeys ] = useState< Key[] >( [] );
 	const [ instrumentOctaveOffset, setInstrumentOctaveOffset ] = useState( 0 );
 
-	// Mirror of `activeKeys` that is updated synchronously, so that multiple key
-	// events fired before a re-render (e.g. when playing a chord) see the latest keys.
-	const activeKeysRef = useRef< Key[] >( [] );
 	const ref = useRef< HTMLDivElement >( null );
 	const toneRef = useRef< Pick< typeof import( 'tone' ), 'Sampler' | 'PolySynth' > >();
 
 	const keys: Key[] =
 		KEYBOARD_LAYOUTS.find( ( { value } ) => value === keyLayout )?.keys ||
 		KEYBOARD_LAYOUTS[ 0 ].keys;
-
-	const updateActiveKeys = ( updater: ( currentKeys: Key[] ) => Key[] ) => {
-		activeKeysRef.current = updater( activeKeysRef.current );
-		setActiveKeys( activeKeysRef.current );
-	};
 
 	// Create Tone.js Player. Defer until the first user gesture so the
 	// AudioContext is not created on page load.
@@ -71,7 +63,7 @@ const Piano = ( { settings, onChange }: Props ) => {
 			return;
 		}
 
-		updateActiveKeys( () => [] );
+		setActiveKeys( [] );
 		setIsReady( false );
 
 		let tonePlayer: Tone.Sampler | Tone.PolySynth;
@@ -164,7 +156,7 @@ const Piano = ( { settings, onChange }: Props ) => {
 		}
 
 		// Do nothing if the key has already been pressed.
-		const isKeyPressed = activeKeysRef.current.some(
+		const isKeyPressed = activeKeys.some(
 			( { note, octave } ) => targetKey.note === note && targetKey.octave === octave
 		);
 		if ( isKeyPressed ) {
@@ -177,7 +169,7 @@ const Piano = ( { settings, onChange }: Props ) => {
 		}`;
 
 		piano.triggerAttack( targetNote, piano.context.currentTime );
-		updateActiveKeys( ( currentKeys ) => [ ...currentKeys, targetKey ] );
+		setActiveKeys( ( currentKeys ) => [ ...currentKeys, targetKey ] );
 	};
 
 	// Stop the note when the key is released.
@@ -200,7 +192,7 @@ const Piano = ( { settings, onChange }: Props ) => {
 			piano.triggerRelease( targetNote );
 		}
 
-		updateActiveKeys( ( currentKeys ) =>
+		setActiveKeys( ( currentKeys ) =>
 			currentKeys.filter(
 				( { note, octave } ) => ! ( targetKey.note === note && targetKey.octave === octave )
 			)
