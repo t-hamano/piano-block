@@ -3,7 +3,7 @@
  */
 import type { BlockAttributes } from './constants';
 
-// Global variables output by wp_localize_script
+// Global variables output by wp_add_inline_script
 export interface PianoBlockVars {
 	assetsUrl: string;
 	settings: BlockAttributes;
