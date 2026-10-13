@@ -105,7 +105,7 @@ export const INSTRUMENTS = [
 	{
 		label: __( 'Acoustic Bass', 'piano-block' ),
 		value: 'acoustic-bass',
-		notes: [ 'C1', 'Ds1', 'Fs1', 'A1', 'C2', 'Ds2', 'Fs2', 'A2', 'C3', 'Ds3', 'Fs3', 'A3', 'C4' ],
+		notes: [ 'C1', 'Ds1', 'Fs1', 'A1', 'C2', 'Ds2', 'Fs2', 'C3', 'Ds3', 'Fs3', 'A3', 'C4' ],
 		octaveOffset: -1,
 		volumeOffset: 0,
 	},
