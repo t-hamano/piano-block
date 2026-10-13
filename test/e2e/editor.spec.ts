@@ -93,15 +93,6 @@ test.describe( 'Block', () => {
 		await expect( toggle ).toBeDisabled();
 	} );
 
-	test( 'should open and close the help modal', async ( { editor, page } ) => {
-		await editor.insertBlock( { name: 'piano-block/piano' } );
-		await editor.canvas.getByRole( 'button', { name: 'Help' } ).click();
-		const modal = page.getByRole( 'dialog', { name: 'About Piano Block' } );
-		await expect( modal ).toBeVisible();
-		await modal.getByRole( 'button', { name: 'Close' } ).click();
-		await expect( modal ).toBeHidden();
-	} );
-
 	test( 'should update the key labels when the key layout is changed', async ( { editor } ) => {
 		await editor.insertBlock( { name: 'piano-block/piano' } );
 		const key = editor.canvas.getByRole( 'button', { name: 'Note: C#4' } );

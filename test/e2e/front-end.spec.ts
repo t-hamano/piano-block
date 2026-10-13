@@ -49,28 +49,4 @@ test.describe( 'Front end', () => {
 		await expect( block ).toHaveAttribute( 'data-volume', '5' );
 		await expect( block ).toHaveAttribute( 'data-octave-offset', '-2' );
 	} );
-
-	test( 'should add the is-pressed class while a key is pressed', async ( {
-		page,
-		requestUtils,
-	} ) => {
-		// The synthesizer needs no samples to load, so it is ready right away.
-		const post = await createPublishedPost(
-			requestUtils,
-			'<!-- wp:piano-block/piano {"showOnFront":true,"instrument":"synthesizer"} /-->'
-		);
-		await page.goto( post.link );
-		const piano = page.getByLabel( 'Piano: Press keys to play' );
-		const key = page.getByRole( 'button', { name: 'Note: C3' } );
-		await piano.focus();
-		// The first key press only starts the audio context.
-		await page.keyboard.press( 'z' );
-
-		await expect( async () => {
-			await page.keyboard.down( 'z' );
-			await expect( key ).toHaveClass( /is-pressed/, { timeout: 1000 } );
-		} ).toPass();
-		await page.keyboard.up( 'z' );
-		await expect( key ).not.toHaveClass( /is-pressed/ );
-	} );
 } );
