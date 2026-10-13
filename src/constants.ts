@@ -183,38 +183,6 @@ export const OCTAVE_OFFSETS = [
 	},
 ] as const;
 
-export const KEYS = [
-	{ note: 'C', octave: 3, isBlackKey: false, name: [ 'z' ] },
-	{ note: 'C#', octave: 3, isBlackKey: true, name: [ 's' ] },
-	{ note: 'D', octave: 3, isBlackKey: false, name: [ 'x' ] },
-	{ note: 'D#', octave: 3, isBlackKey: true, name: [ 'd' ] },
-	{ note: 'E', octave: 3, isBlackKey: false, name: [ 'c' ] },
-	{ note: 'F', octave: 3, isBlackKey: false, name: [ 'v' ] },
-	{ note: 'F#', octave: 3, isBlackKey: true, name: [ 'g' ] },
-	{ note: 'G', octave: 3, isBlackKey: false, name: [ 'b' ] },
-	{ note: 'G#', octave: 3, isBlackKey: true, name: [ 'h' ] },
-	{ note: 'A', octave: 3, isBlackKey: false, name: [ 'n' ] },
-	{ note: 'A#', octave: 3, isBlackKey: true, name: [ 'j' ] },
-	{ note: 'B', octave: 3, isBlackKey: false, name: [ 'm' ] },
-	{ note: 'C', octave: 4, isBlackKey: false, name: [ ',', 'q' ] },
-	{ note: 'C#', octave: 4, isBlackKey: true, name: [ 'l', '2' ] },
-	{ note: 'D', octave: 4, isBlackKey: false, name: [ '.', 'w' ] },
-	{ note: 'D#', octave: 4, isBlackKey: true, name: [ '3' ] },
-	{ note: 'E', octave: 4, isBlackKey: false, name: [ 'e' ] },
-	{ note: 'F', octave: 4, isBlackKey: false, name: [ 'r' ] },
-	{ note: 'F#', octave: 4, isBlackKey: true, name: [ '5' ] },
-	{ note: 'G', octave: 4, isBlackKey: false, name: [ 't' ] },
-	{ note: 'G#', octave: 4, isBlackKey: true, name: [ '6' ] },
-	{ note: 'A', octave: 4, isBlackKey: false, name: [ 'y' ] },
-	{ note: 'A#', octave: 4, isBlackKey: true, name: [ '7' ] },
-	{ note: 'B', octave: 4, isBlackKey: false, name: [ 'u' ] },
-	{ note: 'C', octave: 5, isBlackKey: false, name: [ 'i' ] },
-	{ note: 'C#', octave: 5, isBlackKey: true, name: [ '9' ] },
-	{ note: 'D', octave: 5, isBlackKey: false, name: [ 'o' ] },
-	{ note: 'D#', octave: 5, isBlackKey: true, name: [ '0' ] },
-	{ note: 'E', octave: 5, isBlackKey: false, name: [ 'p' ] },
-] as const;
-
 export const OSCILLATOR_TYPES = [
 	{
 		label: __( 'Sine', 'piano-block' ),
@@ -346,18 +314,9 @@ export const KEY_INDICATORS = [
 	},
 ] as const;
 
-export interface Instrument {
-	label: string;
-	value: ( typeof INSTRUMENTS )[ number ][ 'value' ];
-	notes?: string[];
-	octaveOffset: number;
-	volumeOffset: number;
-}
-
 export type EnvelopeControl = ( typeof ENVELOPE_CONTROLS )[ number ];
 export type Key = {
 	note: string;
 	octave: number;
-	isBlackKey: boolean;
 	name: string[];
 };

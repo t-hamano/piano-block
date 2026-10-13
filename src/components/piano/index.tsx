@@ -225,7 +225,7 @@ const Piano = ( { settings, onChange }: Props ) => {
 
 	const keyboardProps = {
 		activeKeys,
-		keyLayout,
+		keys,
 		keyIndicator,
 		onKeyClick,
 	};
