@@ -82,25 +82,44 @@ describe( 'getNormalizedVolume', () => {
 	} );
 } );
 
-const createNode = ( attributes: Record< string, string > ) => ( {
-	getAttribute: ( name: string ) => attributes[ name ] ?? null,
+const createNode = ( settings?: unknown ) => ( {
+	getAttribute: ( name: string ) => {
+		if ( name !== 'data-settings' || settings === undefined ) {
+			return null;
+		}
+		return typeof settings === 'string' ? settings : JSON.stringify( settings );
+	},
 } );
 
+const DEFAULT_VIEW_ATTRIBUTES = {
+	volume: DEFAULT_SETTINGS.volume,
+	useSustainPedal: false,
+	octaveOffset: DEFAULT_SETTINGS.octaveOffset,
+	instrument: DEFAULT_SETTINGS.instrument,
+	keyLayout: DEFAULT_SETTINGS.keyLayout,
+	keyIndicator: DEFAULT_SETTINGS.keyIndicator,
+	synthesizerSetting: {
+		oscillator: { type: 'sine' },
+		envelope: DEFAULT_ENVELOPE,
+	},
+	showOnFront: true,
+};
+
 describe( 'parseViewAttributes', () => {
-	it( 'parses all data attributes', () => {
+	it( 'parses all settings', () => {
 		expect(
 			parseViewAttributes(
 				createNode( {
-					'data-volume': '-2.5',
-					'data-use-sustain-pedal': '1',
-					'data-octave-offset': '-1',
-					'data-instrument': 'synthesizer',
-					'data-key-layout': 'azerty-1',
-					'data-key-indicator': 'spn',
-					'data-synthesizer-setting': JSON.stringify( {
+					volume: -2.5,
+					useSustainPedal: true,
+					octaveOffset: -1,
+					instrument: 'synthesizer',
+					keyLayout: 'azerty-1',
+					keyIndicator: 'spn',
+					synthesizerSetting: {
 						oscillator: { type: 'square' },
 						envelope: { attack: 0.1, decay: '0.2', sustain: 0, release: 3 },
-					} ),
+					},
 				} )
 			)
 		).toEqual( {
@@ -118,48 +137,50 @@ describe( 'parseViewAttributes', () => {
 		} );
 	} );
 
-	it( 'falls back to defaults when attributes are missing', () => {
-		expect( parseViewAttributes( createNode( {} ) ) ).toEqual( {
-			volume: NaN,
-			useSustainPedal: false,
-			octaveOffset: NaN,
-			instrument: DEFAULT_SETTINGS.instrument,
-			keyLayout: DEFAULT_SETTINGS.keyLayout,
-			keyIndicator: DEFAULT_SETTINGS.keyIndicator,
-			synthesizerSetting: {
-				oscillator: { type: 'sine' },
-				envelope: DEFAULT_ENVELOPE,
-			},
-			showOnFront: true,
-		} );
+	it( 'falls back to defaults when settings are missing', () => {
+		expect( parseViewAttributes( createNode() ) ).toEqual( DEFAULT_VIEW_ATTRIBUTES );
+		expect( parseViewAttributes( createNode( {} ) ) ).toEqual( DEFAULT_VIEW_ATTRIBUTES );
+	} );
+
+	it( 'falls back to defaults when settings are not valid JSON', () => {
+		expect( parseViewAttributes( createNode( '{invalid' ) ) ).toEqual( DEFAULT_VIEW_ATTRIBUTES );
+		expect( parseViewAttributes( createNode( 'null' ) ) ).toEqual( DEFAULT_VIEW_ATTRIBUTES );
 	} );
 
 	it( 'returns null for an unknown instrument', () => {
-		expect( parseViewAttributes( createNode( { 'data-instrument': 'unknown' } ) ) ).toBeNull();
+		expect( parseViewAttributes( createNode( { instrument: 'unknown' } ) ) ).toBeNull();
 	} );
 
 	it( 'accepts an empty key indicator', () => {
-		expect( parseViewAttributes( createNode( { 'data-key-indicator': '' } ) )?.keyIndicator ).toBe(
-			''
+		expect( parseViewAttributes( createNode( { keyIndicator: '' } ) )?.keyIndicator ).toBe( '' );
+	} );
+
+	it( 'falls back to defaults for unknown enum values', () => {
+		const attributes = parseViewAttributes(
+			createNode( {
+				keyLayout: 'unknown',
+				keyIndicator: 'unknown',
+				synthesizerSetting: { oscillator: { type: 'unknown' } },
+			} )
 		);
+		expect( attributes?.keyLayout ).toBe( DEFAULT_SETTINGS.keyLayout );
+		expect( attributes?.keyIndicator ).toBe( DEFAULT_SETTINGS.keyIndicator );
+		expect( attributes?.synthesizerSetting.oscillator.type ).toBe( 'sine' );
 	} );
 
-	it( 'falls back to the default key indicator for an unknown value', () => {
-		expect(
-			parseViewAttributes( createNode( { 'data-key-indicator': 'unknown' } ) )?.keyIndicator
-		).toBe( DEFAULT_SETTINGS.keyIndicator );
-	} );
-
-	it( 'falls back to default envelope values that are null or not numeric', () => {
-		expect(
-			parseViewAttributes(
-				createNode( {
-					'data-synthesizer-setting': JSON.stringify( {
-						envelope: { attack: null, decay: 'abc', sustain: 0.8 },
-					} ),
-				} )
-			)?.synthesizerSetting.envelope
-		).toEqual( {
+	it( 'falls back to defaults for values that are not numeric', () => {
+		const attributes = parseViewAttributes(
+			createNode( {
+				volume: 'abc',
+				octaveOffset: null,
+				synthesizerSetting: {
+					envelope: { attack: null, decay: 'abc', sustain: 0.8 },
+				},
+			} )
+		);
+		expect( attributes?.volume ).toBe( DEFAULT_SETTINGS.volume );
+		expect( attributes?.octaveOffset ).toBe( DEFAULT_SETTINGS.octaveOffset );
+		expect( attributes?.synthesizerSetting.envelope ).toEqual( {
 			attack: DEFAULT_ENVELOPE.attack,
 			decay: DEFAULT_ENVELOPE.decay,
 			sustain: 0.8,

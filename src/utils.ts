@@ -9,6 +9,7 @@ import {
 	KEY_INDICATORS,
 	OSCILLATOR_TYPES,
 } from './constants';
+import { KEYBOARD_LAYOUTS } from './keyboard-layout';
 import type { BlockAttributes } from './constants';
 
 /**
@@ -55,16 +56,31 @@ export function getNormalizedVolume(
 	return normalizedVolume;
 }
 
-function parseEnvelopeValue( value: unknown, defaultValue: number ): number {
-	if ( value === null || value === undefined ) {
+function parseNumber( value: unknown, defaultValue: number ): number {
+	if ( typeof value === 'number' ) {
+		return Number.isFinite( value ) ? value : defaultValue;
+	}
+	if ( typeof value !== 'string' ) {
 		return defaultValue;
 	}
-	const parsed = parseFloat( value as string );
+	const parsed = parseFloat( value );
 	return Number.isNaN( parsed ) ? defaultValue : parsed;
 }
 
+function parseSettingsJson( json: string | null ): Record< string, any > {
+	if ( ! json ) {
+		return {};
+	}
+	try {
+		const parsed = JSON.parse( json );
+		return parsed && typeof parsed === 'object' ? parsed : {};
+	} catch {
+		return {};
+	}
+}
+
 /**
- * Parse block attributes from the data attributes of a front-end block element.
+ * Parse block attributes from the `data-settings` attribute of a front-end block element.
  *
  * @param domNode Block element.
  * @return Block attributes, or null if the instrument is not allowed.
@@ -72,47 +88,45 @@ function parseEnvelopeValue( value: unknown, defaultValue: number ): number {
 export function parseViewAttributes(
 	domNode: Pick< Element, 'getAttribute' >
 ): BlockAttributes | null {
-	const instrument = domNode.getAttribute( 'data-instrument' ) || DEFAULT_SETTINGS.instrument;
+	const settings = parseSettingsJson( domNode.getAttribute( 'data-settings' ) );
 
-	const allowedInstrument = INSTRUMENTS.find( ( { value } ) => value === instrument );
+	const allowedInstrument = INSTRUMENTS.find(
+		( { value } ) => value === ( settings.instrument ?? DEFAULT_SETTINGS.instrument )
+	);
 	if ( ! allowedInstrument ) {
 		return null;
 	}
 
-	const volume = parseFloat( domNode.getAttribute( 'data-volume' ) || '' );
-	const useSustainPedal = domNode.getAttribute( 'data-use-sustain-pedal' ) === '1';
-	const octaveOffset = parseFloat( domNode.getAttribute( 'data-octave-offset' ) || '' );
-	const keyLayout = domNode.getAttribute( 'data-key-layout' ) || DEFAULT_SETTINGS.keyLayout;
-	const keyIndicatorAttr = domNode.getAttribute( 'data-key-indicator' );
+	const keyLayout =
+		KEYBOARD_LAYOUTS.find( ( { value } ) => value === settings.keyLayout )?.value ??
+		DEFAULT_SETTINGS.keyLayout;
 	const keyIndicator =
-		KEY_INDICATORS.find( ( { value } ) => value === keyIndicatorAttr )?.value ??
+		KEY_INDICATORS.find( ( { value } ) => value === settings.keyIndicator )?.value ??
 		DEFAULT_SETTINGS.keyIndicator;
 
-	const synthesizerSetting = domNode.getAttribute( 'data-synthesizer-setting' );
-	const parsedSynthesizerSetting = synthesizerSetting ? JSON.parse( synthesizerSetting ) : {};
-
-	const { oscillator, envelope } = parsedSynthesizerSetting;
-
-	const normalizedSynthesizerSetting = {
-		oscillator: {
-			type: oscillator?.type || DEFAULT_OSCILLATOR_TYPE,
-		},
-		envelope: {
-			attack: parseEnvelopeValue( envelope?.attack, DEFAULT_ENVELOPE.attack ),
-			decay: parseEnvelopeValue( envelope?.decay, DEFAULT_ENVELOPE.decay ),
-			sustain: parseEnvelopeValue( envelope?.sustain, DEFAULT_ENVELOPE.sustain ),
-			release: parseEnvelopeValue( envelope?.release, DEFAULT_ENVELOPE.release ),
-		},
-	};
+	const { oscillator, envelope } = settings.synthesizerSetting ?? {};
+	const oscillatorType =
+		OSCILLATOR_TYPES.find( ( { value } ) => value === oscillator?.type )?.value ??
+		DEFAULT_OSCILLATOR_TYPE;
 
 	return {
-		volume,
-		useSustainPedal,
-		octaveOffset,
+		volume: parseNumber( settings.volume, DEFAULT_SETTINGS.volume ?? 0 ),
+		useSustainPedal: settings.useSustainPedal === true,
+		octaveOffset: parseNumber( settings.octaveOffset, DEFAULT_SETTINGS.octaveOffset ),
 		instrument: allowedInstrument.value,
 		keyLayout,
 		keyIndicator,
-		synthesizerSetting: normalizedSynthesizerSetting,
+		synthesizerSetting: {
+			oscillator: {
+				type: oscillatorType,
+			},
+			envelope: {
+				attack: parseNumber( envelope?.attack, DEFAULT_ENVELOPE.attack ),
+				decay: parseNumber( envelope?.decay, DEFAULT_ENVELOPE.decay ),
+				sustain: parseNumber( envelope?.sustain, DEFAULT_ENVELOPE.sustain ),
+				release: parseNumber( envelope?.release, DEFAULT_ENVELOPE.release ),
+			},
+		},
 		showOnFront: true,
 	};
 }

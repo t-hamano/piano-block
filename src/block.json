@@ -18,6 +18,23 @@
 		},
 		"instrument": {
 			"type": "string",
+			"enum": [
+				"acoustic-piano",
+				"electric-piano-1",
+				"electric-piano-2",
+				"organ",
+				"electric-guitar",
+				"acoustic-guitar",
+				"electric-bass",
+				"acoustic-bass",
+				"muted-trumpet",
+				"sax",
+				"flute",
+				"violin",
+				"harp",
+				"xylophone",
+				"synthesizer"
+			],
 			"default": "acoustic-piano"
 		},
 		"useSustainPedal": {
@@ -44,10 +61,12 @@
 		},
 		"keyLayout": {
 			"type": "string",
+			"enum": [ "qwerty-1", "qwerty-2", "azerty-1" ],
 			"default": "qwerty-1"
 		},
 		"keyIndicator": {
 			"type": "string",
+			"enum": [ "key", "spn", "" ],
 			"default": "key"
 		}
 	},
