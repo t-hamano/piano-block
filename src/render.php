@@ -13,13 +13,13 @@ if ( empty( $attributes['showOnFront'] ) ) {
 	return;
 }
 
-$piano_block_volume              = ! empty( $attributes['volume'] ) ? min( max( round( (float) $attributes['volume'], 1 ), -10 ), 5 ) : 0;
-$piano_block_use_sustain_pedal   = ! empty( $attributes['useSustainPedal'] );
-$piano_block_octave_offset       = ! empty( $attributes['octaveOffset'] ) ? min( max( (int) $attributes['octaveOffset'], -2 ), 2 ) : 0;
-$piano_block_instrument          = ! empty( $attributes['instrument'] ) ? $attributes['instrument'] : 'acoustic-piano';
-$piano_block_synthesizer_setting = ! empty( $attributes['synthesizerSetting'] ) ? $attributes['synthesizerSetting'] : array();
-$piano_block_key_layout          = ! empty( $attributes['keyLayout'] ) ? $attributes['keyLayout'] : 'qwerty-1';
-$piano_block_key_indicator       = isset( $attributes['keyIndicator'] ) ? $attributes['keyIndicator'] : 'key';
+$piano_block_volume              = min( max( round( (float) $attributes['volume'], 1 ), -10 ), 5 );
+$piano_block_use_sustain_pedal   = (bool) $attributes['useSustainPedal'];
+$piano_block_octave_offset       = min( max( (int) $attributes['octaveOffset'], -2 ), 2 );
+$piano_block_instrument          = $attributes['instrument'];
+$piano_block_synthesizer_setting = $attributes['synthesizerSetting'];
+$piano_block_key_layout          = $attributes['keyLayout'];
+$piano_block_key_indicator       = $attributes['keyIndicator'];
 
 $piano_block_wrapper_attributes = get_block_wrapper_attributes(
 	array(
