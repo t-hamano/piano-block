@@ -33,10 +33,4 @@ $piano_block_wrapper_attributes = get_block_wrapper_attributes(
 	)
 );
 ?>
-<div
-<?php
-// get_block_wrapper_attributes() already escapes each value with esc_attr(),
-// so the output is echoed as is to avoid double escaping.
-echo $piano_block_wrapper_attributes; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
-?>
-></div>
+<div <?php echo $piano_block_wrapper_attributes; ?>></div>
