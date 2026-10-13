@@ -79,6 +79,5 @@ test.describe( 'Block', () => {
 		await editor.openDocumentSettingsSidebar();
 		await page.getByLabel( 'Display on the front end' ).click();
 		expect( await editor.getEditedPostContent() ).toMatchSnapshot();
-		expect( true ).toBe( true );
 	} );
 } );
