@@ -11,6 +11,33 @@ test.describe( 'Block', () => {
 	} );
 
 	test.describe( 'Controls', () => {
+		test( 'should move focus through all controls with the Tab key', async ( {
+			editor,
+			pageUtils,
+		} ) => {
+			await editor.insertBlock( {
+				name: BLOCK_NAME,
+				attributes: { instrument: 'synthesizer' },
+			} );
+			await pageUtils.pressKeys( 'ArrowRight', { times: 2 } );
+			await expect( editor.canvas.getByRole( 'slider', { name: 'Volume' } ) ).toBeFocused();
+
+			const controls = [
+				// Volume reset button
+				editor.canvas.getByRole( 'button', { name: 'Reset' } ),
+				editor.canvas.getByRole( 'combobox', { name: 'Octave' } ),
+				editor.canvas.getByRole( 'combobox', { name: 'Instrument' } ),
+				editor.canvas.getByRole( 'button', { name: 'Synthesizer Setting' } ),
+				editor.canvas.getByRole( 'combobox', { name: 'Key Layout' } ),
+				editor.canvas.getByRole( 'combobox', { name: 'Key Indicator' } ),
+				editor.canvas.getByRole( 'button', { name: 'Help' } ),
+			];
+			for ( const control of controls ) {
+				await pageUtils.pressKeys( 'Tab' );
+				await expect( control ).toBeFocused();
+			}
+		} );
+
 		test( 'should update volume with the keyboard', async ( { editor, pageUtils } ) => {
 			await editor.insertBlock( { name: BLOCK_NAME } );
 			const slider = editor.canvas.getByRole( 'slider', { name: 'Volume' } );
