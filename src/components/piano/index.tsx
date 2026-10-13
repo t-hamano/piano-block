@@ -63,10 +63,6 @@ const Piano = ( { settings, onChange }: Props ) => {
 			return;
 		}
 
-		if ( piano ) {
-			piano.dispose();
-		}
-
 		setActiveKeys( [] );
 		setIsReady( false );
 
@@ -113,6 +109,17 @@ const Piano = ( { settings, onChange }: Props ) => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [ volume, settings.synthesizerSetting ] );
 
+	// Apply synthesizer setting.
+	useEffect( () => {
+		if ( piano && instrument === 'synthesizer' ) {
+			piano.set( {
+				...synthesizerSetting,
+				envelope: synthesizerSetting.envelope || DEFAULT_ENVELOPE,
+			} );
+		}
+		// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [ synthesizerSetting ] );
+
 	// Release all sounds.
 	useEffect( () => {
 		if ( piano ) {
@@ -121,15 +128,20 @@ const Piano = ( { settings, onChange }: Props ) => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [ settings.octaveOffset, settings.useSustainPedal, settings.synthesizerSetting ] );
 
+	// Load Tone.js and create the AudioContext on the first user gesture, then
+	// let the effect build the player.
+	const startTone = async (): Promise< void > => {
+		const Tone = await import( /* webpackPrefetch: true */ 'tone' );
+		toneRef.current = Tone;
+		await Tone.start();
+		setIsStarted( true );
+	};
+
 	// Trigger the note corresponding to the pressed key.
 	const onKeyDown = async ( event: KeyboardEvent ): Promise< void > => {
-		// Load Tone.js and create the AudioContext on the first user gesture, then
-		// let the effect build the player. This first key press only unlocks audio.
+		// This first key press only unlocks audio.
 		if ( ! isStarted ) {
-			const Tone = await import( /* webpackPrefetch: true */ 'tone' );
-			toneRef.current = Tone;
-			await Tone.start();
-			setIsStarted( true );
+			await startTone();
 			return;
 		}
 
@@ -188,13 +200,9 @@ const Piano = ( { settings, onChange }: Props ) => {
 
 	// Trigger the note when the key is clicked by the mouse cursor or when the enter key is pressed.
 	const onKeyClick = async ( note: string, octave: number ) => {
-		// Load Tone.js and create the AudioContext on the first user gesture, then
-		// let the effect build the player. This first click only unlocks audio.
+		// This first click only unlocks audio.
 		if ( ! isStarted ) {
-			const Tone = await import( /* webpackPrefetch: true */ 'tone' );
-			toneRef.current = Tone;
-			await Tone.start();
-			setIsStarted( true );
+			await startTone();
 			return;
 		}
 
@@ -214,13 +222,7 @@ const Piano = ( { settings, onChange }: Props ) => {
 
 	const controlsProps = {
 		settings,
-		piano,
-		onChange: ( newSettings: Partial< BlockAttributes > ) => {
-			onChange( {
-				...settings,
-				...newSettings,
-			} );
-		},
+		onChange,
 	};
 
 	const keyboardProps = {

@@ -21,10 +21,7 @@ function View( props: BlockAttributes ) {
 	const [ settings, setSettings ] = useState( props );
 
 	const onChange = ( newSettings: Partial< BlockAttributes > ) => {
-		setSettings( {
-			...settings,
-			...newSettings,
-		} );
+		setSettings( ( prevSettings ) => ( { ...prevSettings, ...newSettings } ) );
 	};
 
 	return <Piano settings={ settings } onChange={ onChange } />;
