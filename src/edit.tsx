@@ -24,13 +24,6 @@ export default function Edit( { attributes, setAttributes }: BlockEditProps< Blo
 		...attributes,
 	};
 
-	const onChange = ( newAttributes: Partial< BlockAttributes > ) => {
-		setAttributes( {
-			...attributes,
-			...newAttributes,
-		} );
-	};
-
 	const blockProps = useBlockProps();
 
 	const dropdownMenuProps = ! useViewportMatch( 'medium', '<' )
@@ -61,13 +54,13 @@ export default function Edit( { attributes, setAttributes }: BlockEditProps< Blo
 						<ToggleControl
 							label={ __( 'Display on the front end', 'piano-block' ) }
 							checked={ settings.showOnFront }
-							onChange={ ( value ) => onChange( { showOnFront: value } ) }
+							onChange={ ( value ) => setAttributes( { showOnFront: value } ) }
 						/>
 					</ToolsPanelItem>
 				</ToolsPanel>
 			</InspectorControls>
 			<div { ...blockProps }>
-				<Piano settings={ settings } onChange={ onChange } />
+				<Piano settings={ settings } onChange={ setAttributes } />
 			</div>
 		</>
 	);

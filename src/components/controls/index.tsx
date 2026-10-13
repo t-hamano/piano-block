@@ -1,9 +1,4 @@
 /**
- * External dependencies
- */
-import type * as Tone from 'tone';
-
-/**
  * WordPress dependencies
  */
 import { __ } from '@wordpress/i18n';
@@ -17,7 +12,6 @@ import { cog, help } from '@wordpress/icons';
  */
 import {
 	INSTRUMENTS,
-	DEFAULT_ENVELOPE,
 	OCTAVE_OFFSETS,
 	KEY_INDICATORS,
 	MIN_VOLUME,
@@ -26,16 +20,14 @@ import {
 import { KEYBOARD_LAYOUTS } from '../../keyboard-layout';
 import SynthesizerSetting from '../synthesizer-setting';
 import HelpModal from '../help-modal';
-import { getNormalizedVolume } from '../../utils';
 import type { BlockAttributes } from '../../constants';
 
 type Props = {
 	settings: BlockAttributes;
-	piano: Tone.Sampler | Tone.PolySynth | undefined;
 	onChange: ( newAttributes: Partial< BlockAttributes > ) => void;
 };
 
-const Controls = ( { settings, piano, onChange }: Props ) => {
+const Controls = ( { settings, onChange }: Props ) => {
 	const {
 		volume,
 		useSustainPedal,
@@ -49,9 +41,6 @@ const Controls = ( { settings, piano, onChange }: Props ) => {
 	const [ isSynthesizerSettingOpen, setIsSynthesizerSettingOpen ] = useState( false );
 
 	const onVolumeChange = ( newVolume: number | undefined ) => {
-		if ( piano ) {
-			piano.volume.value = getNormalizedVolume( newVolume, settings );
-		}
 		onChange( { volume: newVolume } );
 	};
 
@@ -96,12 +85,6 @@ const Controls = ( { settings, piano, onChange }: Props ) => {
 			return;
 		}
 
-		if ( piano ) {
-			piano.set( {
-				...newSynthesizerSetting,
-				envelope: newSynthesizerSetting.envelope || DEFAULT_ENVELOPE,
-			} );
-		}
 		onChange( { synthesizerSetting: newSynthesizerSetting } );
 	};
 
