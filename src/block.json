@@ -54,5 +54,7 @@
 	"textdomain": "piano-block",
 	"viewScript": "file:view.js",
 	"editorScript": "file:index.js",
-	"style": [ "file:style-index.css", "wp-theme" ]
+	"style": [ "file:style-index.css", "wp-theme" ],
+	"viewStyle": "wp-components",
+	"render": "file:render.php"
 }
