@@ -39,14 +39,17 @@ test.describe( 'Front end', () => {
 		await expect( page.locator( '.wp-block-piano-block-piano' ) ).toHaveCount( 0 );
 	} );
 
-	test( 'should clamp out-of-range values in data attributes', async ( { page, requestUtils } ) => {
+	test( 'should clamp out-of-range values in data-settings', async ( { page, requestUtils } ) => {
 		const post = await createPublishedPost(
 			requestUtils,
 			'<!-- wp:piano-block/piano {"showOnFront":true,"volume":100,"octaveOffset":-10} /-->'
 		);
 		await page.goto( post.link );
-		const block = page.locator( '.wp-block-piano-block-piano' );
-		await expect( block ).toHaveAttribute( 'data-volume', '5' );
-		await expect( block ).toHaveAttribute( 'data-octave-offset', '-2' );
+		const settings = JSON.parse(
+			( await page.locator( '.wp-block-piano-block-piano' ).getAttribute( 'data-settings' ) ) ??
+				'{}'
+		);
+		expect( settings.volume ).toBe( 5 );
+		expect( settings.octaveOffset ).toBe( -2 );
 	} );
 } );
