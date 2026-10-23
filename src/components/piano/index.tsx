@@ -130,6 +130,7 @@ const Piano = ( { settings, onChange }: Props ) => {
 
 	// Keep the up/down arrow keys inside select elements. Otherwise, the block
 	// editor moves focus to the next or previous element instead of changing the value.
+	// TODO: Remove this effect once the issue is fixed in Gutenberg's use-arrow-nav.
 	useEffect( () => {
 		const node = ref.current;
 		if ( ! node ) {
