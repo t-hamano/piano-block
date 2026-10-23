@@ -128,6 +128,26 @@ const Piano = ( { settings, onChange }: Props ) => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [ settings.octaveOffset, settings.useSustainPedal, settings.synthesizerSetting ] );
 
+	// Keep the up/down arrow keys inside select elements. Otherwise, the block
+	// editor moves focus to the next or previous element instead of changing the value.
+	// TODO: Remove this effect once the issue is fixed in Gutenberg's use-arrow-nav.
+	useEffect( () => {
+		const node = ref.current;
+		if ( ! node ) {
+			return;
+		}
+		const onSelectKeyDown = ( event: globalThis.KeyboardEvent ) => {
+			if (
+				( event.key === 'ArrowUp' || event.key === 'ArrowDown' ) &&
+				( event.target as HTMLElement ).tagName === 'SELECT'
+			) {
+				event.stopPropagation();
+			}
+		};
+		node.addEventListener( 'keydown', onSelectKeyDown );
+		return () => node.removeEventListener( 'keydown', onSelectKeyDown );
+	}, [] );
+
 	// Load Tone.js and create the AudioContext on the first user gesture, then
 	// let the effect build the player.
 	const startTone = async (): Promise< void > => {
