@@ -22,14 +22,18 @@ test.describe( 'Block', () => {
 		// Octave Offset
 		await pageUtils.pressKeys( 'Tab', { times: 2 } );
 		await expect( editor.canvas.getByRole( 'combobox', { name: 'Octave' } ) ).toBeFocused();
+		await pageUtils.pressKeys( 'Space' );
 		await pageUtils.pressKeys( 'ArrowDown' );
+		await pageUtils.pressKeys( 'Space' );
 		// Pressing a piano key should not remove focus.
 		await pageUtils.pressKeys( 'z' );
 
 		// Instrument
 		await pageUtils.pressKeys( 'Tab' );
 		await expect( editor.canvas.getByRole( 'combobox', { name: 'Instrument' } ) ).toBeFocused();
+		await pageUtils.pressKeys( 'Space' );
 		await pageUtils.pressKeys( 'ArrowDown', { times: 14 } );
+		await pageUtils.pressKeys( 'Space' );
 		// Pressing a piano key should not remove focus.
 		await pageUtils.pressKeys( 'z' );
 
@@ -56,12 +60,16 @@ test.describe( 'Block', () => {
 		// Key Layout
 		await pageUtils.pressKeys( 'Tab' );
 		await expect( editor.canvas.getByRole( 'combobox', { name: 'Key Layout' } ) ).toBeFocused();
+		await pageUtils.pressKeys( 'Space' );
 		await pageUtils.pressKeys( 'ArrowDown' );
+		await pageUtils.pressKeys( 'Space' );
 
 		// Key Indicator
 		await pageUtils.pressKeys( 'Tab' );
 		await expect( editor.canvas.getByRole( 'combobox', { name: 'Key Indicator' } ) ).toBeFocused();
+		await pageUtils.pressKeys( 'Space' );
 		await pageUtils.pressKeys( 'ArrowDown' );
+		await pageUtils.pressKeys( 'Space' );
 
 		expect( await editor.getEditedPostContent() ).toMatchSnapshot();
 	} );
