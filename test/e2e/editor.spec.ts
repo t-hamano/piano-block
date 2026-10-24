@@ -3,6 +3,9 @@
  */
 import { test, expect } from '@wordpress/e2e-test-utils-playwright';
 
+// Due to an issue in the block editor's use-arrow-nav, pressing the up/down arrow keys
+// on a closed select moves focus to another block instead of changing the selected
+// option. So open the dropdown explicitly before changing the option.
 // The key that opens a native select dropdown differs between browsers.
 const OPEN_SELECT_KEYS = {
 	chromium: 'Enter',
