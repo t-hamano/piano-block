@@ -3,13 +3,6 @@
  */
 import { test, expect } from '@wordpress/e2e-test-utils-playwright';
 
-// Change select values with `selectOption()` instead of the keyboard.
-// In the block editor, pressing the up/down arrow keys on a closed select moves focus
-// to another element instead of changing the selected option, because use-arrow-nav
-// treats a select as a navigation candidate. Opening the dropdown first does not help:
-// Playwright sends key events to the page, not to the native dropdown, so in Firefox
-// and WebKit the arrow keys still reach use-arrow-nav. `selectOption()` changes the
-// value without key events, so it behaves the same in all browsers.
 test.describe( 'Block', () => {
 	test.beforeEach( async ( { admin } ) => {
 		await admin.createNewPost();
@@ -29,6 +22,10 @@ test.describe( 'Block', () => {
 		// Octave Offset
 		await pageUtils.pressKeys( 'Tab', { times: 2 } );
 		await expect( editor.canvas.getByRole( 'combobox', { name: 'Octave' } ) ).toBeFocused();
+
+		// Use selectOption() instead of arrow keys to change select values. In the block
+		// editor, arrow keys on a select move focus to another element (use-arrow-nav),
+		// and Playwright cannot send keys to the native dropdown in Firefox and WebKit.
 		await editor.canvas.getByRole( 'combobox', { name: 'Octave' } ).selectOption( '-1' );
 		// Pressing a piano key should not remove focus.
 		await pageUtils.pressKeys( 'z' );
