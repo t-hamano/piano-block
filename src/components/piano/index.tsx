@@ -2,7 +2,7 @@
  * External dependencies
  */
 import type * as Tone from 'tone';
-import { KeyboardEvent } from 'react';
+import type { KeyboardEvent } from 'react';
 
 /**
  * WordPress dependencies
