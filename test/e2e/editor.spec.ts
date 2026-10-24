@@ -3,16 +3,6 @@
  */
 import { test, expect } from '@wordpress/e2e-test-utils-playwright';
 
-// Due to an issue in the block editor's use-arrow-nav, pressing the up/down arrow keys
-// on a closed select moves focus to another block instead of changing the selected
-// option. So open the dropdown explicitly before changing the option.
-// The key that opens a native select dropdown differs between browsers.
-const OPEN_SELECT_KEYS = {
-	chromium: 'Enter',
-	firefox: 'Space',
-	webkit: 'Space',
-};
-
 test.describe( 'Block', () => {
 	test.beforeEach( async ( { admin } ) => {
 		await admin.createNewPost();
@@ -22,10 +12,7 @@ test.describe( 'Block', () => {
 		editor,
 		page,
 		pageUtils,
-		browserName,
 	} ) => {
-		const openSelectKey = OPEN_SELECT_KEYS[ browserName ];
-
 		await editor.insertBlock( { name: 'piano-block/piano' } );
 		// Volume
 		await pageUtils.pressKeys( 'ArrowRight', { times: 2 } );
@@ -35,18 +22,21 @@ test.describe( 'Block', () => {
 		// Octave Offset
 		await pageUtils.pressKeys( 'Tab', { times: 2 } );
 		await expect( editor.canvas.getByRole( 'combobox', { name: 'Octave' } ) ).toBeFocused();
-		await pageUtils.pressKeys( openSelectKey );
-		await pageUtils.pressKeys( 'ArrowDown' );
-		await pageUtils.pressKeys( openSelectKey );
+		await editor.canvas
+			.getByRole( 'combobox', { name: 'Octave' } )
+			// Use selectOption() instead of arrow keys to change select values. In the block
+			// editor, arrow keys on a select move focus to another element (use-arrow-nav),
+			// and Playwright cannot send keys to the native dropdown in Firefox and WebKit.
+			.selectOption( '-1' );
 		// Pressing a piano key should not remove focus.
 		await pageUtils.pressKeys( 'z' );
 
 		// Instrument
 		await pageUtils.pressKeys( 'Tab' );
 		await expect( editor.canvas.getByRole( 'combobox', { name: 'Instrument' } ) ).toBeFocused();
-		await pageUtils.pressKeys( openSelectKey );
-		await pageUtils.pressKeys( 'ArrowDown', { times: 14 } );
-		await pageUtils.pressKeys( openSelectKey );
+		await editor.canvas
+			.getByRole( 'combobox', { name: 'Instrument' } )
+			.selectOption( 'synthesizer' );
 		// Pressing a piano key should not remove focus.
 		await pageUtils.pressKeys( 'z' );
 
@@ -73,16 +63,12 @@ test.describe( 'Block', () => {
 		// Key Layout
 		await pageUtils.pressKeys( 'Tab' );
 		await expect( editor.canvas.getByRole( 'combobox', { name: 'Key Layout' } ) ).toBeFocused();
-		await pageUtils.pressKeys( openSelectKey );
-		await pageUtils.pressKeys( 'ArrowDown' );
-		await pageUtils.pressKeys( openSelectKey );
+		await editor.canvas.getByRole( 'combobox', { name: 'Key Layout' } ).selectOption( 'qwerty-2' );
 
 		// Key Indicator
 		await pageUtils.pressKeys( 'Tab' );
 		await expect( editor.canvas.getByRole( 'combobox', { name: 'Key Indicator' } ) ).toBeFocused();
-		await pageUtils.pressKeys( openSelectKey );
-		await pageUtils.pressKeys( 'ArrowDown' );
-		await pageUtils.pressKeys( openSelectKey );
+		await editor.canvas.getByRole( 'combobox', { name: 'Key Indicator' } ).selectOption( 'spn' );
 
 		expect( await editor.getEditedPostContent() ).toMatchSnapshot();
 	} );
