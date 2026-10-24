@@ -22,11 +22,12 @@ test.describe( 'Block', () => {
 		// Octave Offset
 		await pageUtils.pressKeys( 'Tab', { times: 2 } );
 		await expect( editor.canvas.getByRole( 'combobox', { name: 'Octave' } ) ).toBeFocused();
-
-		// Use selectOption() instead of arrow keys to change select values. In the block
-		// editor, arrow keys on a select move focus to another element (use-arrow-nav),
-		// and Playwright cannot send keys to the native dropdown in Firefox and WebKit.
-		await editor.canvas.getByRole( 'combobox', { name: 'Octave' } ).selectOption( '-1' );
+		await editor.canvas
+			.getByRole( 'combobox', { name: 'Octave' } )
+			// Use selectOption() instead of arrow keys to change select values. In the block
+			// editor, arrow keys on a select move focus to another element (use-arrow-nav),
+			// and Playwright cannot send keys to the native dropdown in Firefox and WebKit.
+			.selectOption( '-1' );
 		// Pressing a piano key should not remove focus.
 		await pageUtils.pressKeys( 'z' );
 
