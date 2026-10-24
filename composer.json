@@ -1,6 +1,6 @@
 {
 	"name": "t-hamano/piano-block",
-	"description": "WordPress Plugin",
+	"description": "WordPress custom block plugin that allows you to play a variety of tones using the piano keyboard.",
 	"license": "GPL-2.0-or-later",
 	"authors": [
 		{
