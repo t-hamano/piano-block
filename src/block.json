@@ -2,6 +2,7 @@
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 3,
 	"name": "piano-block/piano",
+	"version": "2.10.0",
 	"title": "Piano",
 	"description": "Play the melody.",
 	"category": "media",
