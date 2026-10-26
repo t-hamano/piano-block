@@ -3,8 +3,11 @@
  */
 import { __ } from '@wordpress/i18n';
 import { useState } from '@wordpress/element';
-import { Button, SelectControl, RangeControl, Popover } from '@wordpress/components';
-import { Stack, SwitchControl } from '@wordpress/ui';
+// Keep `ToggleControl`, since the styles of `@wordpress/ui` are in a cascade
+// layer and lose to the theme styles on the front end.
+// eslint-disable-next-line @wordpress/use-recommended-components
+import { Button, SelectControl, RangeControl, ToggleControl, Popover } from '@wordpress/components';
+import { Stack } from '@wordpress/ui';
 import { cog, help } from '@wordpress/icons';
 
 /**
@@ -161,11 +164,10 @@ const Controls = ( { settings, onChange }: Props ) => {
 				onChange={ onKeyIndicatorChange }
 				size="compact"
 			/>
-			<SwitchControl
-				className="piano-block-controls__sustain-pedal"
+			<ToggleControl
 				label={ __( 'Sustain Pedal', 'piano-block' ) }
 				checked={ useSustainPedal }
-				onCheckedChange={ onUseSustainPedalChange }
+				onChange={ onUseSustainPedalChange }
 				disabled={ instrument === 'synthesizer' }
 			/>
 			<Button

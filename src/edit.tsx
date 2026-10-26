@@ -4,10 +4,12 @@
 import { __ } from '@wordpress/i18n';
 import { InspectorControls, useBlockProps } from '@wordpress/block-editor';
 import {
+	// Use `ToggleControl` like the controls on the front end.
+	// eslint-disable-next-line @wordpress/use-recommended-components
+	ToggleControl,
 	__experimentalToolsPanel as ToolsPanel,
 	__experimentalToolsPanelItem as ToolsPanelItem,
 } from '@wordpress/components';
-import { SwitchControl } from '@wordpress/ui';
 import { useViewportMatch } from '@wordpress/compose';
 import type { BlockEditProps } from '@wordpress/blocks';
 
@@ -45,10 +47,10 @@ export default function Edit( { attributes, setAttributes }: BlockEditProps< Blo
 						hasValue={ () => attributes.showOnFront }
 						onDeselect={ () => setAttributes( { showOnFront: false } ) }
 					>
-						<SwitchControl
+						<ToggleControl
 							label={ __( 'Display on the front end', 'piano-block' ) }
 							checked={ attributes.showOnFront }
-							onCheckedChange={ ( value ) => setAttributes( { showOnFront: value } ) }
+							onChange={ ( value ) => setAttributes( { showOnFront: value } ) }
 						/>
 					</ToolsPanelItem>
 				</ToolsPanel>

@@ -22,16 +22,15 @@
 		}
 	}
 
-	// Show the label above the switch, like the labels of the other controls.
-	.piano-block-controls__sustain-pedal {
-		flex-direction: column-reverse;
+	.components-toggle-control {
 
-		// Center the switch with the other controls.
-		> div {
-			height: var(--wpds-dimension-size-md);
+		.components-flex {
+			flex-flow: column-reverse;
+			align-items: flex-start;
+			gap: var(--wpds-dimension-gap-lg);
 		}
 
-		label {
+		.components-toggle-control__label {
 			font-size: var(--wpds-typography-font-size-xs);
 			font-weight: var(--wpds-typography-font-weight-emphasis);
 			line-height: var(--wpds-typography-line-height-xs);
