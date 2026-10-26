@@ -4,6 +4,8 @@
 import { __ } from '@wordpress/i18n';
 import { InspectorControls, useBlockProps } from '@wordpress/block-editor';
 import {
+	// Use `ToggleControl` like the controls on the front end.
+	// eslint-disable-next-line @wordpress/use-recommended-components
 	ToggleControl,
 	__experimentalToolsPanel as ToolsPanel,
 	__experimentalToolsPanelItem as ToolsPanelItem,

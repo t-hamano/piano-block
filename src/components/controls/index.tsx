@@ -3,6 +3,9 @@
  */
 import { __ } from '@wordpress/i18n';
 import { useState } from '@wordpress/element';
+// Keep `ToggleControl`, since the styles of `@wordpress/ui` are in a cascade
+// layer and lose to the theme styles on the front end.
+// eslint-disable-next-line @wordpress/use-recommended-components
 import { Button, SelectControl, RangeControl, ToggleControl, Popover } from '@wordpress/components';
 import { Stack } from '@wordpress/ui';
 import { cog, help } from '@wordpress/icons';
