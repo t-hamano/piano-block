@@ -27,31 +27,31 @@
 		"readme.txt"
 	],
 	"dependencies": {
-		"@wordpress/ui": "0.24.0",
+		"@wordpress/ui": "0.25.0",
 		"tone": "^15.1.22"
 	},
 	"devDependencies": {
 		"@types/node": "24.19.2",
-		"@types/wordpress__block-editor": "15.0.7",
-		"@wordpress/block-editor": "18.1.0",
-		"@wordpress/blocks": "16.2.0",
-		"@wordpress/components": "42.0.0",
-		"@wordpress/compose": "8.10.0",
-		"@wordpress/dom-ready": "4.57.0",
-		"@wordpress/e2e-test-utils-playwright": "3.0.0",
-		"@wordpress/element": "9.0.0",
+		"@types/wordpress__block-editor": "15.0.8",
+		"@wordpress/block-editor": "19.0.0",
+		"@wordpress/blocks": "17.0.0",
+		"@wordpress/components": "43.0.0",
+		"@wordpress/compose": "9.0.0",
+		"@wordpress/dom-ready": "5.0.0",
+		"@wordpress/e2e-test-utils-playwright": "3.1.0",
+		"@wordpress/element": "10.0.0",
 		"@wordpress/env": "^12.0.0",
-		"@wordpress/eslint-plugin": "27.1.0",
-		"@wordpress/icons": "^18.0.0",
-		"@wordpress/scripts": "^36.1.0",
+		"@wordpress/eslint-plugin": "28.0.0",
+		"@wordpress/icons": "^19.0.0",
+		"@wordpress/scripts": "^37.0.0",
 		"clsx": "2.1.1",
 		"eslint-import-resolver-typescript": "^4.4.5",
 		"husky": "^9.1.7",
 		"lint-staged": "17.6.0",
 		"prettier": "npm:wp-prettier@3.9.6",
 		"typescript": "6.0.3",
-		"vite": "8.3.4",
-		"vitest": "5.0.4"
+		"vite": "8.3.5",
+		"vitest": "5.0.5"
 	},
 	"scripts": {
 		"wp-env": "wp-env",
@@ -71,8 +71,8 @@
 		"format": "wp-scripts format",
 		"test:unit": "wp-scripts test-unit-js",
 		"test:unit:watch": "wp-scripts test-unit-js --watch",
-		"test:e2e": "wp-scripts test-playwright",
-		"test:e2e:debug": "wp-scripts test-playwright --debug",
+		"test:e2e": "wp-scripts test-playwright --wp-env-config=.wp-env.test.json",
+		"test:e2e:debug": "wp-scripts test-playwright --wp-env-config=.wp-env.test.json --debug",
 		"prepare": "husky"
 	},
 	"lint-staged": {
