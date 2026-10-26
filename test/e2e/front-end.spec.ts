@@ -2,15 +2,6 @@
  * WordPress dependencies
  */
 import { test, expect } from '@wordpress/e2e-test-utils-playwright';
-import type { RequestUtils } from '@wordpress/e2e-test-utils-playwright';
-
-function createPublishedPost( requestUtils: RequestUtils, content: string ) {
-	return requestUtils.createPost( {
-		status: 'publish',
-		content,
-		date_gmt: new Date().toISOString(),
-	} );
-}
 
 test.describe( 'Front end', () => {
 	test.afterEach( async ( { requestUtils } ) => {
@@ -21,10 +12,11 @@ test.describe( 'Front end', () => {
 		page,
 		requestUtils,
 	} ) => {
-		const post = await createPublishedPost(
-			requestUtils,
-			'<!-- wp:piano-block/piano {"showOnFront":true} /-->'
-		);
+		const post = await requestUtils.createPost( {
+			status: 'publish',
+			content: '<!-- wp:piano-block/piano {"showOnFront":true} /-->',
+			date_gmt: new Date().toISOString(),
+		} );
 		await page.goto( post.link );
 		await expect( page.locator( '.wp-block-piano-block-piano' ) ).toHaveCount( 1 );
 		await expect( page.getByRole( 'slider', { name: 'Volume' } ) ).toBeVisible();
@@ -34,16 +26,22 @@ test.describe( 'Front end', () => {
 		page,
 		requestUtils,
 	} ) => {
-		const post = await createPublishedPost( requestUtils, '<!-- wp:piano-block/piano /-->' );
+		const post = await requestUtils.createPost( {
+			status: 'publish',
+			content: '<!-- wp:piano-block/piano /-->',
+			date_gmt: new Date().toISOString(),
+		} );
 		await page.goto( post.link );
 		await expect( page.locator( '.wp-block-piano-block-piano' ) ).toHaveCount( 0 );
 	} );
 
 	test( 'should clamp out-of-range values in data-settings', async ( { page, requestUtils } ) => {
-		const post = await createPublishedPost(
-			requestUtils,
-			'<!-- wp:piano-block/piano {"showOnFront":true,"volume":100,"octaveOffset":-10} /-->'
-		);
+		const post = await requestUtils.createPost( {
+			status: 'publish',
+			content:
+				'<!-- wp:piano-block/piano {"showOnFront":true,"volume":100,"octaveOffset":-10} /-->',
+			date_gmt: new Date().toISOString(),
+		} );
 		await page.goto( post.link );
 		const settings = JSON.parse(
 			( await page.locator( '.wp-block-piano-block-piano' ).getAttribute( 'data-settings' ) ) ??
