@@ -1,5 +1,5 @@
 @use "sass:math";
-@use "../../variables" as pianoBlockVariables;
+@use "../variables" as pianoBlockVariables;
 
 .piano-block-keyboard {
 	position: relative;
