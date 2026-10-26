@@ -104,7 +104,12 @@ const Piano = ( { settings, onChange }: Props ) => {
 	// Normalize Volume.
 	useEffect( () => {
 		if ( piano ) {
-			piano.volume.value = getNormalizedVolume( volume, settings );
+			// Equivalent to assigning `piano.volume.value`, which the React Compiler
+			// rules reject as a mutation of the state.
+			const now = piano.now();
+			piano.volume
+				.cancelScheduledValues( now )
+				.setValueAtTime( getNormalizedVolume( volume, settings ), now );
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [ volume, settings.synthesizerSetting ] );
