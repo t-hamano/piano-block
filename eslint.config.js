@@ -92,6 +92,12 @@ module.exports = [
 			],
 		},
 	},
+	{
+		files: [ 'src/**' ],
+		rules: {
+			'import/no-extraneous-dependencies': 'error',
+		},
+	},
 	...defaultConfig.configs[ 'test-unit' ].map( ( config ) => ( {
 		...config,
 		files: [ 'test/unit/**/*.ts' ],
