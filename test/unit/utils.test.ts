@@ -58,15 +58,19 @@ describe( 'getNormalizedVolume', () => {
 	} );
 
 	it( 'applies the synthesizer and oscillator type offsets', () => {
+		const volume = 1;
+		const synthesizerVolumeOffset = -5;
+		const squareVolumeOffset = -18;
+
 		expect(
 			getNormalizedVolume(
-				1,
+				volume,
 				createSettings( {
 					instrument: 'synthesizer',
 					synthesizerSetting: { oscillator: { type: 'square' } },
 				} )
 			)
-		).toBe( 1 - 5 - 18 );
+		).toBe( volume + synthesizerVolumeOffset + squareVolumeOffset );
 	} );
 
 	it( 'ignores the oscillator type offset for non-synthesizer instruments', () => {
