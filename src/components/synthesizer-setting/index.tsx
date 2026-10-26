@@ -3,12 +3,7 @@
  */
 import { __ } from '@wordpress/i18n';
 import { useEffect, useRef } from '@wordpress/element';
-import {
-	Button,
-	RangeControl,
-	SelectControl,
-	__experimentalGrid as Grid,
-} from '@wordpress/components';
+import { Button, RangeControl, SelectControl } from '@wordpress/components';
 import { Stack } from '@wordpress/ui';
 
 /**
@@ -135,7 +130,7 @@ const SynthesizerSetting = ( { synthesizerSetting, onChange }: Props ) => {
 				onChange={ onOscillatorTypeChange }
 				size="compact"
 			/>
-			<Grid columns={ 4 }>
+			<div className="piano-block-synthesizer-setting__envelope">
 				{ ENVELOPE_CONTROLS.map( ( { label, parameter, max } ) => (
 					<RangeControl
 						key={ parameter }
@@ -148,7 +143,7 @@ const SynthesizerSetting = ( { synthesizerSetting, onChange }: Props ) => {
 						onChange={ ( value ) => onEnvelopeChange( parameter, value ) }
 					/>
 				) ) }
-			</Grid>
+			</div>
 			<canvas ref={ ref } className="piano-block-synthesizer-setting__graph" />
 			<Button
 				className="piano-block-synthesizer-setting__reset"

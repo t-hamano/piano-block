@@ -5,6 +5,12 @@
 	padding: var(--wpds-dimension-padding-lg);
 	overflow: hidden;
 
+	.piano-block-synthesizer-setting__envelope {
+		display: grid;
+		grid-template-columns: repeat(4, 1fr);
+		gap: var(--wpds-dimension-gap-md);
+	}
+
 	.piano-block-synthesizer-setting__graph {
 		display: block;
 		width: 100%;

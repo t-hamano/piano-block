@@ -4,10 +4,10 @@
 import { __ } from '@wordpress/i18n';
 import { InspectorControls, useBlockProps } from '@wordpress/block-editor';
 import {
-	ToggleControl,
 	__experimentalToolsPanel as ToolsPanel,
 	__experimentalToolsPanelItem as ToolsPanelItem,
 } from '@wordpress/components';
+import { SwitchControl } from '@wordpress/ui';
 import { useViewportMatch } from '@wordpress/compose';
 import type { BlockEditProps } from '@wordpress/blocks';
 
@@ -45,10 +45,10 @@ export default function Edit( { attributes, setAttributes }: BlockEditProps< Blo
 						hasValue={ () => attributes.showOnFront }
 						onDeselect={ () => setAttributes( { showOnFront: false } ) }
 					>
-						<ToggleControl
+						<SwitchControl
 							label={ __( 'Display on the front end', 'piano-block' ) }
 							checked={ attributes.showOnFront }
-							onChange={ ( value ) => setAttributes( { showOnFront: value } ) }
+							onCheckedChange={ ( value ) => setAttributes( { showOnFront: value } ) }
 						/>
 					</ToolsPanelItem>
 				</ToolsPanel>

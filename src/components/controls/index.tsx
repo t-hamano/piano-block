@@ -3,8 +3,8 @@
  */
 import { __ } from '@wordpress/i18n';
 import { useState } from '@wordpress/element';
-import { Button, SelectControl, RangeControl, ToggleControl, Popover } from '@wordpress/components';
-import { Stack } from '@wordpress/ui';
+import { Button, SelectControl, RangeControl, Popover } from '@wordpress/components';
+import { Stack, SwitchControl } from '@wordpress/ui';
 import { cog, help } from '@wordpress/icons';
 
 /**
@@ -161,10 +161,11 @@ const Controls = ( { settings, onChange }: Props ) => {
 				onChange={ onKeyIndicatorChange }
 				size="compact"
 			/>
-			<ToggleControl
+			<SwitchControl
+				className="piano-block-controls__sustain-pedal"
 				label={ __( 'Sustain Pedal', 'piano-block' ) }
 				checked={ useSustainPedal }
-				onChange={ onUseSustainPedalChange }
+				onCheckedChange={ onUseSustainPedalChange }
 				disabled={ instrument === 'synthesizer' }
 			/>
 			<Button
