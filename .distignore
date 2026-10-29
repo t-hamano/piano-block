@@ -22,6 +22,7 @@ eslint.config.js
 composer.json
 composer.lock
 playwright.config.js
+vitest.config.mjs
 package-lock.json
 package.json
 phpcs.xml.dist
