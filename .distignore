@@ -26,4 +26,5 @@ phpcs.xml.dist
 playwright.config.js
 README.md
 tsconfig.json
+vitest.config.mjs
 *.tsbuildinfo
