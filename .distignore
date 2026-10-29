@@ -9,9 +9,7 @@
 /vendor
 .distignore
 .editorconfig
-eslint.config.js
 .gitignore
-.markdownlint.json
 .npmrc
 .nvmrc
 .prettierrc.js
@@ -21,10 +19,11 @@ eslint.config.js
 .wp-env.test.json
 composer.json
 composer.lock
-playwright.config.js
+eslint.config.js
 package-lock.json
 package.json
 phpcs.xml.dist
+playwright.config.js
 README.md
 tsconfig.json
 *.tsbuildinfo
