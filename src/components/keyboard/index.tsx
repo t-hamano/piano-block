@@ -22,10 +22,10 @@ type Props = {
 };
 
 const Keyboard = ( { activeKeys, keys, keyIndicator, onKeyClick }: Props ) => {
-	// Browsers make the container focusable when it scrolls, so it needs a name.
 	return (
 		<div
 			className="piano-block-keyboard"
+			// Browsers make the container focusable when it scrolls, so it needs a group role and a name.
 			role="group"
 			aria-label={ __( 'Piano keys', 'piano-block' ) }
 		>
