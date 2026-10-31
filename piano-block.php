@@ -17,12 +17,9 @@
 
 defined( 'ABSPATH' ) || exit;
 
-define( 'PIANO_BLOCK_PATH', untrailingslashit( plugin_dir_path( __FILE__ ) ) );
-define( 'PIANO_BLOCK_URL', untrailingslashit( plugin_dir_url( __FILE__ ) ) );
-
 // Register block.
 function piano_block_register_block() {
-	$block_type = register_block_type( PIANO_BLOCK_PATH . '/build' );
+	$block_type = register_block_type( __DIR__ . '/build' );
 
 	if ( ! $block_type ) {
 		return;
@@ -30,7 +27,7 @@ function piano_block_register_block() {
 
 	$inline_script = sprintf(
 		'window.pianoBlockVars = %s;',
-		wp_json_encode( array( 'assetsUrl' => PIANO_BLOCK_URL . '/assets' ) )
+		wp_json_encode( array( 'assetsUrl' => plugins_url( 'assets', __FILE__ ) ) )
 	);
 
 	foreach ( array_merge( $block_type->editor_script_handles, $block_type->view_script_handles ) as $handle ) {
