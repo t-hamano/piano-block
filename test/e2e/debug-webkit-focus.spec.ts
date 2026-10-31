@@ -46,9 +46,7 @@ test.describe( 'Debug: WebKit focus', () => {
 					.filter( Boolean )
 					.join( '' );
 			};
-			const top = await page.evaluate(
-				`(${ describe.toString() })(document.activeElement)`
-			);
+			const top = await page.evaluate( `(${ describe.toString() })(document.activeElement)` );
 			const inner = canvas
 				? await canvas.evaluate( `(${ describe.toString() })(document.activeElement)` )
 				: 'no canvas';
