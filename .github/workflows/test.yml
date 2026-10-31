@@ -145,3 +145,64 @@ jobs:
           name: failures-artifacts-${{ matrix.php }}-${{ matrix.wp }}
           path: artifacts
           if-no-files-found: ignore
+
+  # Temporary job to investigate why the keyboard test fails in WebKit on Ubuntu 26.04.
+  e2e-webkit-debug:
+    runs-on: ${{ matrix.os }}
+    permissions:
+      contents: read
+    timeout-minutes: 60
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-24.04, ubuntu-latest]
+
+    name: E2E WebKit debug / ${{ matrix.os }}
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v7
+
+      - name: Use desired version of Node.js
+        uses: actions/setup-node@v7
+        with:
+          node-version-file: '.nvmrc'
+          cache: 'npm'
+
+      - name: Npm install and build
+        run: |
+          npm ci
+          npm run build
+
+      - name: Install Playwright dependencies
+        run: npx playwright install webkit --with-deps
+
+      - name: Print environment information
+        run: |
+          cat /etc/os-release
+          uname -a
+          ls ~/.cache/ms-playwright
+          dpkg-query -W -f='${Package} ${Version}\n' \
+            'libgtk-4-1' 'libglib2.0-0*' 'libwpe-1*' 'libwpebackend-fdo*' 'libsoup-3.0-0' \
+            'libicu*' 'libharfbuzz0b' 'libgstreamer1.0-0' 'libmanette-0.2-0' 'libenchant-2-2' \
+            'libxkbcommon0' 'libwayland-client0' 'libepoxy0' 2>/dev/null || true
+          echo '--- Missing shared libraries of the WebKit build ---'
+          find ~/.cache/ms-playwright/webkit-* -type f -name '*.so*' -exec ldd {} \; 2>/dev/null | grep 'not found' | sort -u || true
+
+      - name: Install WordPress
+        run: WP_ENV_CORE=WordPress/WordPress WP_ENV_PHP_VERSION=8.5 npm run wp-env-test start
+
+      - name: Running e2e tests
+        run: npm run test:e2e -- --project=webkit --retries=0 --trace=on test/e2e/editor.spec.ts test/e2e/debug-webkit-focus.spec.ts
+        env:
+          PLAYWRIGHT_SKIP_BROWSER_DOWNLOAD: 1
+          DEBUG_WEBKIT_FOCUS: 1
+          DEBUG: pw:browser
+
+      - name: Archive debug artifacts
+        uses: actions/upload-artifact@v7
+        if: always()
+        with:
+          name: webkit-debug-artifacts-${{ matrix.os }}
+          path: artifacts
+          if-no-files-found: ignore
