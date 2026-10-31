@@ -20,6 +20,9 @@ test.describe( 'Front end', () => {
 		await page.goto( post.link );
 		await expect( page.locator( '.wp-block-piano-block-piano' ) ).toHaveCount( 1 );
 		await expect( page.getByRole( 'slider', { name: 'Volume' } ) ).toBeVisible();
+		await expect( page.getByRole( 'application', { name: 'Piano' } ) ).toHaveAccessibleDescription(
+			'Press keys on your keyboard to play notes. Press Tab to move to the controls.'
+		);
 	} );
 
 	test( 'should output nothing when "Display on the front end" is disabled', async ( {

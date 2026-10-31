@@ -3,6 +3,8 @@
  */
 import { createRoot, useState } from '@wordpress/element';
 import domReady from '@wordpress/dom-ready';
+import { __ } from '@wordpress/i18n';
+import { VisuallyHidden } from '@wordpress/ui';
 
 /**
  * Internal dependencies
@@ -18,7 +20,17 @@ function View( { blockWrapper, ...props }: BlockAttributes & { blockWrapper: HTM
 		setSettings( ( prevSettings ) => ( { ...prevSettings, ...newSettings } ) );
 	};
 
-	return <Piano settings={ settings } onChange={ onChange } blockWrapper={ blockWrapper } />;
+	return (
+		<>
+			<VisuallyHidden id={ blockWrapper.getAttribute( 'aria-describedby' ) ?? undefined }>
+				{ __(
+					'Press keys on your keyboard to play notes. Press Tab to move to the controls.',
+					'piano-block'
+				) }
+			</VisuallyHidden>
+			<Piano settings={ settings } onChange={ onChange } blockWrapper={ blockWrapper } />
+		</>
+	);
 }
 
 domReady( function () {
