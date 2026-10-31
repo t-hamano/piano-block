@@ -22,8 +22,13 @@ type Props = {
 };
 
 const Keyboard = ( { activeKeys, keys, keyIndicator, onKeyClick }: Props ) => {
+	// Browsers make the container focusable when it scrolls, so it needs a name.
 	return (
-		<div className="piano-block-keyboard">
+		<div
+			className="piano-block-keyboard"
+			role="group"
+			aria-label={ __( 'Piano keys', 'piano-block' ) }
+		>
 			<Stack className="piano-block-keyboard__inner">
 				{ keys.map( ( key ) => {
 					const isBlackKey = key.note.endsWith( '#' );
