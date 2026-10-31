@@ -25,6 +25,8 @@ $piano_block_settings = array(
 
 $piano_block_wrapper_attributes = get_block_wrapper_attributes(
 	array(
+		'tabindex'      => '0',
+		'aria-label'    => __( 'Piano: Press keys to play', 'piano-block' ),
 		'data-settings' => wp_json_encode( $piano_block_settings ),
 	)
 );

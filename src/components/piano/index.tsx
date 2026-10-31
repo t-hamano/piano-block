@@ -2,12 +2,10 @@
  * External dependencies
  */
 import type * as Tone from 'tone';
-import type { KeyboardEvent } from 'react';
 
 /**
  * WordPress dependencies
  */
-import { __ } from '@wordpress/i18n';
 import { useEffect, useState, useRef } from '@wordpress/element';
 
 /**
@@ -24,9 +22,10 @@ import type { BlockAttributes, Key } from '../../constants';
 type Props = {
 	settings: BlockAttributes;
 	onChange: ( newSettings: Partial< BlockAttributes > ) => void;
+	blockWrapper: HTMLElement | null;
 };
 
-const Piano = ( { settings, onChange }: Props ) => {
+const Piano = ( { settings, onChange, blockWrapper }: Props ) => {
 	const { assetsUrl } = window.pianoBlockVars;
 	const {
 		volume,
@@ -43,7 +42,6 @@ const Piano = ( { settings, onChange }: Props ) => {
 	const [ activeKeys, setActiveKeys ] = useState< Key[] >( [] );
 	const [ instrumentOctaveOffset, setInstrumentOctaveOffset ] = useState( 0 );
 
-	const ref = useRef< HTMLDivElement >( null );
 	const toneRef = useRef< Pick< typeof import( 'tone' ), 'Sampler' | 'PolySynth' > >();
 
 	const keys: Key[] =
@@ -67,6 +65,7 @@ const Piano = ( { settings, onChange }: Props ) => {
 		setIsReady( false );
 
 		let tonePlayer: Tone.Sampler | Tone.PolySynth;
+		let isDisposed = false;
 
 		if ( instrumentSetting.value === 'synthesizer' ) {
 			tonePlayer = new PolySynth().toDestination();
@@ -82,7 +81,7 @@ const Piano = ( { settings, onChange }: Props ) => {
 				release: 1,
 				baseUrl: `${ assetsUrl }/instruments/${ instrument }/`,
 				onload: () => {
-					if ( ref.current ) {
+					if ( ! isDisposed ) {
 						setInstrumentOctaveOffset( instrumentSetting.octaveOffset || 0 );
 						setIsReady( true );
 					}
@@ -94,6 +93,7 @@ const Piano = ( { settings, onChange }: Props ) => {
 		setPiano( tonePlayer );
 
 		return () => {
+			isDisposed = true;
 			if ( tonePlayer ) {
 				tonePlayer.dispose();
 			}
@@ -226,6 +226,20 @@ const Piano = ( { settings, onChange }: Props ) => {
 		}
 	};
 
+	// Listen on the block wrapper, which is focusable in both the editor and the
+	// front end. Resubscribe on every render so the handlers see the current state.
+	useEffect( () => {
+		if ( ! blockWrapper ) {
+			return;
+		}
+		blockWrapper.addEventListener( 'keydown', onKeyDown );
+		blockWrapper.addEventListener( 'keyup', onKeyUp );
+		return () => {
+			blockWrapper.removeEventListener( 'keydown', onKeyDown );
+			blockWrapper.removeEventListener( 'keyup', onKeyUp );
+		};
+	} );
+
 	const controlsProps = {
 		settings,
 		onChange,
@@ -239,19 +253,11 @@ const Piano = ( { settings, onChange }: Props ) => {
 	};
 
 	return (
-		// eslint-disable-next-line jsx-a11y/no-static-element-interactions
-		<div
-			className="piano-block-container"
-			ref={ ref }
-			tabIndex={ 0 }
-			onKeyDown={ onKeyDown }
-			onKeyUp={ onKeyUp }
-			aria-label={ __( 'Piano: Press keys to play', 'piano-block' ) }
-		>
+		<>
 			{ isStarted && ! isReady && <Loading /> }
 			<Controls { ...controlsProps } />
 			<Keyboard { ...keyboardProps } />
-		</div>
+		</>
 	);
 };
 

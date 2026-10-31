@@ -1,5 +1,4 @@
 @use "sass:math";
-@use "./components/piano/style" as piano;
 @use "./components/loading/style" as loading;
 @use "./components/controls/style" as controls;
 @use "./components/synthesizer-setting/style" as synthesizerSetting;
@@ -8,6 +7,7 @@
 
 .wp-block-piano-block-piano {
 	position: relative;
+	padding-top: var(--wpds-dimension-padding-lg);
 	color: var(--wpds-color-foreground-content-neutral);
 	box-sizing: border-box;
 
