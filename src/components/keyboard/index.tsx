@@ -39,7 +39,7 @@ const Keyboard = ( { activeKeys, keys, keyIndicator, onKeyClick }: Props ) => {
 								),
 							} ) }
 							aria-label={ sprintf(
-								/* translators: %s is replaced with the key name. */
+								/* translators: %s: Note name, e.g. C#4. */
 								__( 'Note: %s', 'piano-block' ),
 								key.note + key.octave
 							) }

@@ -26,7 +26,7 @@ const SynthesizerSetting = ( { synthesizerSetting, onChange }: Props ) => {
 	const { oscillator, envelope = DEFAULT_ENVELOPE } = synthesizerSetting;
 	const ref = useRef< HTMLCanvasElement >( null );
 
-	// Draw ADSR graph.
+	// Draw the ADSR graph.
 	useEffect( () => {
 		if ( ! ref.current ) {
 			return;
@@ -90,7 +90,7 @@ const SynthesizerSetting = ( { synthesizerSetting, onChange }: Props ) => {
 		} );
 	};
 
-	// Disable unexpected key events on select elements.
+	// Prevent unexpected key events on the select element.
 	const onOscillatorTypeKeyDown = ( event: React.KeyboardEvent< HTMLSelectElement > ) => {
 		const isAcceptableKey = [ 'ArrowUp', 'ArrowDown', 'Enter', 'Tab' ].includes( event.key );
 		if ( ! isAcceptableKey ) {

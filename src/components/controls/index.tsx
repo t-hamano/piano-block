@@ -124,7 +124,7 @@ const Controls = ( { settings, onChange }: Props ) => {
 			{ instrument === 'synthesizer' && (
 				<Stack className="piano-block-controls__synthesizer-toggle">
 					<Button
-						label={ __( 'Synthesizer Setting', 'piano-block' ) }
+						label={ __( 'Synthesizer Settings', 'piano-block' ) }
 						icon={ cog }
 						variant="primary"
 						onClick={ () => setIsSynthesizerSettingOpen( ! isSynthesizerSettingOpen ) }

@@ -50,7 +50,7 @@ const Piano = ( { settings, onChange }: Props ) => {
 		KEYBOARD_LAYOUTS.find( ( { value } ) => value === keyLayout )?.keys ||
 		KEYBOARD_LAYOUTS[ 0 ].keys;
 
-	// Create Tone.js Player. Defer until the first user gesture so the
+	// Create the Tone.js player. Defer until the first user gesture so the
 	// AudioContext is not created on page load.
 	useEffect( () => {
 		if ( ! isStarted || ! toneRef.current ) {
@@ -101,7 +101,7 @@ const Piano = ( { settings, onChange }: Props ) => {
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [ instrument, isStarted ] );
 
-	// Normalize Volume.
+	// Normalize the volume.
 	useEffect( () => {
 		if ( piano ) {
 			// Equivalent to assigning `piano.volume.value`, which the React Compiler
@@ -144,7 +144,7 @@ const Piano = ( { settings, onChange }: Props ) => {
 
 	// Trigger the note corresponding to the pressed key.
 	const onKeyDown = async ( event: KeyboardEvent ): Promise< void > => {
-		// This first key press only unlocks audio.
+		// The first key press only unlocks audio.
 		if ( ! isStarted ) {
 			await startTone();
 			return;
@@ -154,7 +154,7 @@ const Piano = ( { settings, onChange }: Props ) => {
 			return;
 		}
 
-		// Search the pressed key.
+		// Find the pressed key.
 		const targetKey = keys.find( ( key ) => key.name.some( ( name ) => event.key === name ) );
 		if ( ! targetKey ) {
 			return;
@@ -204,9 +204,9 @@ const Piano = ( { settings, onChange }: Props ) => {
 		);
 	};
 
-	// Trigger the note when the key is clicked by the mouse cursor or when the enter key is pressed.
+	// Trigger the note when the key is clicked with the mouse or the Enter key is pressed.
 	const onKeyClick = async ( note: string, octave: number ) => {
-		// This first click only unlocks audio.
+		// The first click only unlocks audio.
 		if ( ! isStarted ) {
 			await startTone();
 			return;

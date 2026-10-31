@@ -84,7 +84,7 @@ module.exports = [
 					paths: [
 						{
 							name: 'react',
-							message: 'Please use React API through `@wordpress/element` instead.',
+							message: 'Please use the React API through `@wordpress/element` instead.',
 							allowTypeImports: true,
 						},
 					],

@@ -9,43 +9,43 @@ Requires PHP: 8.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
-Can play a variety of tones using the piano keyboard.
+Play a variety of tones using the piano keyboard.
 
 == Description ==
 
-Piano Block is a plugin that allow you to play a variety of tones using the piano keyboard.
+Piano Block is a plugin that allows you to play a variety of tones using the piano keyboard.
 This plugin does not add any useful features to WordPress, nor does it add any useful blocks to help you write posts.
-Let's insert this block and enjoy the music if you are stuck in writing an article or just want a little distraction.
+If you get stuck writing an article or just want a little distraction, insert this block and enjoy some music.
 
 - 15 instruments
-- Realistic sound based on sound sources sampled from actual instruments
-- Variable volume, switchable octave pitch and sustain pedal status
-- Synthesizer with 18 oscillators and customizable envelope
+- Realistic sounds sampled from real instruments
+- Adjustable volume, octave shift, and sustain pedal
+- Synthesizer with 18 oscillator types and a customizable envelope
 
-Note: The keys are optimized for the QWERTY keyboard and may not map correctly on other keyboards.
+Note: The keys are optimized for QWERTY keyboards and may not map correctly on other keyboards.
 
 == Installation ==
 
 1. Upload the `piano-block` folder to the `/wp-content/plugins/` directory.
-2. Activate the plugin through the \'Plugins\' menu in WordPress.
+2. Activate the plugin through the 'Plugins' menu in WordPress.
 
 == Frequently Asked Questions ==
 
-= How will this block be displayed on the frontend ? =
+= How is this block displayed on the front end? =
 
-By default, nothing is output to the front end. If you turn on "Display on the front end" in the sidebar settings, the piano will also appear on the front end and the visitors to yout site can play. However, multiple pianos cannot be displayed on the same page.
+By default, nothing is output on the front end. If you turn on "Display on the front end" in the block settings sidebar, the piano also appears on the front end and visitors to your site can play it. However, multiple pianos cannot be displayed on the same page.
 
-= Is it possible to record the sound of my play ? =
+= Can I record what I play? =
 
-Recording is not supported in the current version due to technical or licensing issues.
-I may add it in a future update if those issues can be resolved.
+Recording is not supported in the current version due to technical and licensing issues.
+I may add it in a future update if those issues are resolved.
 
 == Screenshots ==
 
 1. Piano Block
-2. Piano Block Synthesizer Setting
+2. Piano Block Synthesizer Settings
 
-== Resources, Audio Samples ==
+== Resources and Audio Samples ==
 
 = Tone.js (Web Audio framework) =
 License: MIT License
@@ -55,7 +55,7 @@ Source: https://github.com/Tonejs/Tone.js/
 License: Public Domain
 Source: https://github.com/sfzinstruments/SplendidGrandPiano
 
-= Greg Sullivan's E-Pianos (Electric Piano1, 2) =
+= Greg Sullivan's E-Pianos (Electric Piano 1, 2) =
 License: CC-BY-3.0
 Source: https://github.com/sfzinstruments/GregSullivan.E-Pianos
 
@@ -98,40 +98,40 @@ Source: https://fonts.google.com/specimen/Yellowtail
 == Changelog ==
 
 = 2.10.0 =
-* Tested to WordPress 7.1
+* Tested up to WordPress 7.1
 * Fix: Stale icon data in block.json
 * Drop support for WordPress 6.9
 
 = 2.9.1 =
 * Security: Properly escape the synthesizer setting attribute
-* Fix: Reflect keyboard indicator on the front end
+* Fix: Apply the keyboard indicator setting on the front end
 
 = 2.9.0 =
-* Tested to WordPress 7.0
-* Enhancement: Polish block sidebar
+* Tested up to WordPress 7.0
+* Enhancement: Polish the block sidebar
 * Drop support for WordPress 6.8
 
 = 2.8.0 =
-* Tested to WordPress 6.9
+* Tested up to WordPress 6.9
 * Enhancement: Add border support
-* Enhancement: Polish the control section style with 32px size
-* Enhancement: Add aria roles to toggle buttons
+* Enhancement: Use 32px-sized controls in the control section
+* Enhancement: Add ARIA roles to toggle buttons
 * Enhancement: Add label to piano container and improve focus style
-* Enhancement: Polish Synthesizer settings modal
+* Enhancement: Polish the synthesizer settings modal
 * Enhancement: Polish modal style
-* Enhancement: Change order of options in Octave dropdown
+* Enhancement: Change the order of options in the Octave dropdown
 * Drop support for WordPress 6.6 and 6.7
 * Drop support for PHP 7
 
 = 2.7.0 =
-* Tested to WordPress 6.8
+* Tested up to WordPress 6.8
 * Enhancement: Polish the style of the control section
 * Accessibility: Respect user preference for CSS transitions
-* Fix: Block is not rendered on the front-end in certain configurations
+* Fix: Block is not rendered on the front end in certain configurations
 * Drop support for WordPress 6.5
 
 = 2.6.0 =
-* Tested to WordPress 6.7
+* Tested up to WordPress 6.7
 * Enhancement: Improve playing responsiveness
 * Enhancement: Update API version from 2 to 3
 * Enhancement: Improve block icon appearance
@@ -139,57 +139,57 @@ Source: https://fonts.google.com/specimen/Yellowtail
 * Drop support for WordPress 6.4
 
 = 2.5.0 =
-* Tested to WordPress 6.6
+* Tested up to WordPress 6.6
 * Drop support for WordPress 6.3
 
 = 2.4.0 =
-* Tested to WordPress 6.5
+* Tested up to WordPress 6.5
 * Enhancement: Improve compatibility with theme styles on the front end
 * Enhancement: Improve layout consistency
-* Enhancement: Apply custom scrollbar
+* Enhancement: Apply a custom scrollbar
 * Enhancement: Reduce the size of the keyboard
 * Fix: Typo
 * Drop support for WordPress 6.2
 
 = 2.3.0 =
-* Tested to WordPress 6.4
+* Tested up to WordPress 6.4
 * Add: Keyboard indicator setting
 * Drop support for WordPress 6.1
 
 = 2.2.0 =
-* Tested to WordPress 6.3
+* Tested up to WordPress 6.3
 * Add: Keyboard layout setting
 * Enhancement: Allow multiple blocks to be inserted
 * Enhancement: Improve keyboard and focus events
 * Enhancement: Improve compatibility with theme styles on the front end
-* Drop support for WordPress 5.9, 6.0
+* Drop support for WordPress 5.9 and 6.0
 * Drop support for PHP 7.3
 
 = 2.1.0 =
-* Tested to WordPress 6.2
+* Tested up to WordPress 6.2
 
 = 2.0.0 =
 * Add: Synthesizer
-* Enhancement: Accessibility Improvements
+* Enhancement: Accessibility improvements
 * Fix: Duplicate script loading on the front end
 
 = 1.1.1 =
-* Tested to WordPress 6.1
+* Tested up to WordPress 6.1
 * Enhancement: Polish front-end styles
-* Fix: browser console error
+* Fix: Browser console error
 * Fix: Apply translation on the front end
 
 = 1.1.0 =
-* Add: Rendering option on the front-end
-* Add: margin block support
-* Add: background block support
+* Add: Rendering option on the front end
+* Add: Margin block support
+* Add: Background block support
 * Enhancement: Polish the style of the control section
 * Clean: Remove unnecessary files
 * Doc: Update readme
 
 = 1.0.2 =
-* Tested to WordPress 6.0
-* Fix: Don't enqueue scripts on frontend
+* Tested up to WordPress 6.0
+* Fix: Don't enqueue scripts on the front end
 * Doc: Update author name
 
 = 1.0.1 =

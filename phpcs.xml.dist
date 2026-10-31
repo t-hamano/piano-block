@@ -1,6 +1,6 @@
 <?xml version="1.0"?>
-<ruleset name="WordPress Theme Coding Standards">
-	<description>A custom set of code standard rules to check for WordPress themes.</description>
+<ruleset name="Piano Block Coding Standards">
+	<description>A custom set of coding standard rules for the Piano Block plugin.</description>
 	<file>.</file>
 	<rule ref="WordPress-Core" />
 	<rule ref="PHPCompatibilityWP" />

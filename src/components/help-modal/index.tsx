@@ -20,13 +20,13 @@ const HelpModal = ( { onClose }: Props ) => {
 				<li>{ __( 'You can play a variety of tones using the keyboard.', 'piano-block' ) }</li>
 				<li>
 					{ __(
-						'Clicking on the keyboard with the mouse or typing the keys indicated on the keyboard will play audio.',
+						'Click a key with the mouse, or press the corresponding key on your computer keyboard, to play a note.',
 						'piano-block'
 					) }
 				</li>
 				<li>
 					{ __(
-						'Due to conflicts with OS or browser shortcuts, some audio may not play depending on the combination of keys you are pressing.',
+						'Some key combinations may not play sound because they conflict with OS or browser shortcuts.',
 						'piano-block'
 					) }
 				</li>

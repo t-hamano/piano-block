@@ -8,7 +8,7 @@ test.describe( 'Block', () => {
 		await admin.createNewPost();
 	} );
 
-	test( 'should update attributes related to sound using only keyboard', async ( {
+	test( 'should update attributes related to sound using only the keyboard', async ( {
 		editor,
 		page,
 		pageUtils,
@@ -40,10 +40,10 @@ test.describe( 'Block', () => {
 		// Pressing a piano key should not remove focus.
 		await pageUtils.pressKeys( 'z' );
 
-		// Synthesizer Setting
+		// Synthesizer Settings
 		await pageUtils.pressKeys( 'Tab' );
 		await expect(
-			editor.canvas.getByRole( 'button', { name: 'Synthesizer Setting' } )
+			editor.canvas.getByRole( 'button', { name: 'Synthesizer Settings' } )
 		).toBeFocused();
 		await pageUtils.pressKeys( 'Enter' );
 		await expect( page.getByRole( 'combobox', { name: 'Oscillator Type' } ) ).toBeFocused();
@@ -53,10 +53,10 @@ test.describe( 'Block', () => {
 			await pageUtils.pressKeys( 'ArrowRight', { times: 2 } );
 		}
 		await pageUtils.pressKeys( 'Escape' );
-		// Pressing the escape key in a popover rendered in the iframe editor does not
-		// return focus to the anchor element, so explicitly focus the anchor element.
-		// see: https://github.com/WordPress/gutenberg/issues/55413
-		await editor.canvas.getByRole( 'button', { name: 'Synthesizer Setting' } ).focus();
+		// Pressing the Escape key in a popover rendered in the iframed editor does not
+		// return focus to the anchor element, so focus it explicitly.
+		// See: https://github.com/WordPress/gutenberg/issues/55413
+		await editor.canvas.getByRole( 'button', { name: 'Synthesizer Settings' } ).focus();
 		// Pressing a piano key should not remove focus.
 		await pageUtils.pressKeys( 'z' );
 

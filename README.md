@@ -10,11 +10,11 @@
 ## Features
 
 - 15 instruments
-- Realistic sound based on sound sources sampled from actual instruments
-- Variable volume, switchable octave pitch and sustain pedal status
-- Synthesizer with 18 oscillators and customizable envelope
+- Realistic sounds sampled from real instruments
+- Adjustable volume, octave shift, and sustain pedal
+- Synthesizer with 18 oscillator types and a customizable envelope
 
-Note: The keys are optimized for the QWERTY keyboard and may not map correctly on other keyboards.
+Note: The keys are optimized for QWERTY keyboards and may not map correctly on other keyboards.
 
 ## How to build
 
@@ -23,7 +23,7 @@ npm install
 npm run build
 ```
 
-## Resources, Audio Samples
+## Resources and Audio Samples
 
 ### Tone.js (Web Audio framework)
 
@@ -35,7 +35,7 @@ npm run build
 - License: Public Domain
 - Source: <https://github.com/sfzinstruments/SplendidGrandPiano>
 
-### Greg Sullivan's E-Pianos (Electric Piano1, 2)
+### Greg Sullivan's E-Pianos (Electric Piano 1, 2)
 
 - License: CC-BY-3.0
 - Source: <https://github.com/sfzinstruments/GregSullivan.E-Pianos>
@@ -87,4 +87,4 @@ npm run build
 
 ## Author
 
-[Aki Hamano (Github)](https://github.com/t-hamano)
+[Aki Hamano (GitHub)](https://github.com/t-hamano)

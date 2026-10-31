@@ -25,7 +25,7 @@ describe( 'getSamplerFileNames', () => {
 		} );
 	} );
 
-	it( 'returns an empty object for no notes', () => {
+	it( 'returns an empty object when given no notes', () => {
 		expect( getSamplerFileNames( [] ) ).toEqual( {} );
 	} );
 } );

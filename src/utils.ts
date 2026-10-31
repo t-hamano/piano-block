@@ -13,10 +13,10 @@ import { KEYBOARD_LAYOUTS } from './keyboard-layout';
 import type { BlockAttributes } from './constants';
 
 /**
- * Return a object of audio file names from notes of Tone.js Sampler.
+ * Return an object that maps Tone.js Sampler notes to audio file names.
  *
  * @param notes Notes.
- * @return Object of audio URLs.
+ * @return Object of audio file names keyed by note.
  */
 export function getSamplerFileNames( notes: string[] ) {
 	return Object.fromEntries(
@@ -25,11 +25,11 @@ export function getSamplerFileNames( notes: string[] ) {
 }
 
 /**
- * Return a normalized volume according to instrument or synthesizer oscillator type.
+ * Return the volume normalized for the instrument and the synthesizer oscillator type.
  *
  * @param newVolume New volume.
  * @param settings  Settings.
- * @return number Normalized volume.
+ * @return Normalized volume.
  */
 export function getNormalizedVolume(
 	newVolume: number | undefined,
