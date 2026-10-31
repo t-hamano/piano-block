@@ -15,7 +15,6 @@ test.describe( 'Block', () => {
 	} ) => {
 		await editor.insertBlock( { name: 'piano-block/piano' } );
 		// Volume
-		await pageUtils.pressKeys( 'ArrowRight', { times: 2 } );
 		await expect( editor.canvas.getByRole( 'slider', { name: 'Volume' } ) ).toBeFocused();
 		await pageUtils.pressKeys( 'ArrowLeft', { times: 3 } );
 

@@ -11,6 +11,7 @@ import {
 	__experimentalToolsPanelItem as ToolsPanelItem,
 } from '@wordpress/components';
 import { useViewportMatch } from '@wordpress/compose';
+import { useState } from '@wordpress/element';
 import type { BlockEditProps } from '@wordpress/blocks';
 
 /**
@@ -20,7 +21,8 @@ import Piano from './components/piano';
 import type { BlockAttributes } from './constants';
 
 export default function Edit( { attributes, setAttributes }: BlockEditProps< BlockAttributes > ) {
-	const blockProps = useBlockProps();
+	const [ blockWrapper, setBlockWrapper ] = useState< HTMLDivElement | null >( null );
+	const blockProps = useBlockProps( { ref: setBlockWrapper } );
 
 	const dropdownMenuProps = ! useViewportMatch( 'medium', '<' )
 		? {
@@ -56,7 +58,7 @@ export default function Edit( { attributes, setAttributes }: BlockEditProps< Blo
 				</ToolsPanel>
 			</InspectorControls>
 			<div { ...blockProps }>
-				<Piano settings={ attributes } onChange={ setAttributes } />
+				<Piano settings={ attributes } onChange={ setAttributes } blockWrapper={ blockWrapper } />
 			</div>
 		</>
 	);
