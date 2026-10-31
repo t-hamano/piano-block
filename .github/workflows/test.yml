@@ -71,7 +71,10 @@ jobs:
         run: npm run test:unit
 
   e2e-test:
-    runs-on: ubuntu-latest
+    # Pin to Ubuntu 24.04 because the Playwright WebKit build for Ubuntu 26.04 crashes
+    # when Tone.js starts audio (GStreamer-CRITICAL: gst_device_provider_stop assertion failed).
+    # Switch back to ubuntu-latest once this is fixed in Playwright or WebKit.
+    runs-on: ubuntu-24.04
     permissions:
       contents: read
     timeout-minutes: 60
