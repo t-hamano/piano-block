@@ -69,14 +69,18 @@ test.describe( 'Block', () => {
 		await expect( editor.canvas.getByRole( 'combobox', { name: 'Key Indicator' } ) ).toBeFocused();
 		await editor.canvas.getByRole( 'combobox', { name: 'Key Indicator' } ).selectOption( 'spn' );
 
-		expect( await editor.getEditedPostContent() ).toMatchSnapshot();
+		expect( await editor.getEditedPostContent() ).toBe(
+			`<!-- wp:piano-block/piano {"volume":-0.3,"octaveOffset":-1,"instrument":"synthesizer","synthesizerSetting":{"oscillator":{"type":"sawtooth"},"envelope":{"attack":0.4,"decay":1.1,"sustain":0.6,"release":1.6}},"keyLayout":"qwerty-2","keyIndicator":"spn"} /-->`
+		);
 	} );
 
 	test( 'should update attributes in the block sidebar', async ( { editor, page } ) => {
 		await editor.insertBlock( { name: 'piano-block/piano' } );
 		await editor.openDocumentSettingsSidebar();
 		await page.getByLabel( 'Display on the front end' ).click();
-		expect( await editor.getEditedPostContent() ).toMatchSnapshot();
+		expect( await editor.getEditedPostContent() ).toBe(
+			`<!-- wp:piano-block/piano {"showOnFront":true} /-->`
+		);
 	} );
 
 	test( 'should disable the sustain pedal toggle when the synthesizer is selected', async ( {
