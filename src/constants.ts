@@ -1,7 +1,7 @@
 /**
  * WordPress dependencies
  */
-import { __ } from '@wordpress/i18n';
+import { __, _x } from '@wordpress/i18n';
 
 export type BlockAttributes = {
 	volume: number | undefined;
@@ -75,7 +75,7 @@ export const INSTRUMENTS = [
 		volumeOffset: 0,
 	},
 	{
-		label: __( 'Organ', 'piano-block' ),
+		label: _x( 'Organ', 'instrument', 'piano-block' ),
 		value: 'organ',
 		notes: [ 'G2', 'C3', 'G3', 'C4', 'G4', 'C5', 'G5' ],
 		octaveOffset: 0,
@@ -162,115 +162,115 @@ export const INSTRUMENTS = [
 
 export const OCTAVE_OFFSETS = [
 	{
-		label: __( '+2', 'piano-block' ),
+		label: '+2',
 		value: 2,
 	},
 	{
-		label: __( '+1', 'piano-block' ),
+		label: '+1',
 		value: 1,
 	},
 	{
-		label: __( '0', 'piano-block' ),
+		label: '0',
 		value: 0,
 	},
 	{
-		label: __( '-1', 'piano-block' ),
+		label: '-1',
 		value: -1,
 	},
 	{
-		label: __( '-2', 'piano-block' ),
+		label: '-2',
 		value: -2,
 	},
 ] as const;
 
 export const OSCILLATOR_TYPES = [
 	{
-		label: __( 'Sine', 'piano-block' ),
+		label: _x( 'Sine', 'oscillator waveform', 'piano-block' ),
 		value: 'sine',
 		volumeOffset: 0,
 	},
 	{
-		label: __( 'Square', 'piano-block' ),
+		label: _x( 'Square', 'oscillator waveform', 'piano-block' ),
 		value: 'square',
 		volumeOffset: -18,
 	},
 	{
-		label: __( 'Sawtooth', 'piano-block' ),
+		label: _x( 'Sawtooth', 'oscillator waveform', 'piano-block' ),
 		value: 'sawtooth',
 		volumeOffset: -12,
 	},
 	{
-		label: __( 'Triangle', 'piano-block' ),
+		label: _x( 'Triangle', 'oscillator waveform', 'piano-block' ),
 		value: 'triangle',
 		volumeOffset: 0,
 	},
 	{
-		label: __( 'Fat Sine', 'piano-block' ),
+		label: _x( 'Fat Sine', 'oscillator waveform', 'piano-block' ),
 		value: 'fatsine',
 		volumeOffset: +4,
 	},
 	{
-		label: __( 'Fat Square', 'piano-block' ),
+		label: _x( 'Fat Square', 'oscillator waveform', 'piano-block' ),
 		value: 'fatsquare',
 		volumeOffset: -10,
 	},
 	{
-		label: __( 'Fat Sawtooth', 'piano-block' ),
+		label: _x( 'Fat Sawtooth', 'oscillator waveform', 'piano-block' ),
 		value: 'fatsawtooth',
 		volumeOffset: -8,
 	},
 	{
-		label: __( 'Fat Triangle', 'piano-block' ),
+		label: _x( 'Fat Triangle', 'oscillator waveform', 'piano-block' ),
 		value: 'fattriangle',
 		volumeOffset: 4,
 	},
 	{
-		label: __( 'FM Sine', 'piano-block' ),
+		label: _x( 'FM Sine', 'oscillator waveform', 'piano-block' ),
 		value: 'fmsine',
 		volumeOffset: 0,
 	},
 	{
-		label: __( 'FM Square', 'piano-block' ),
+		label: _x( 'FM Square', 'oscillator waveform', 'piano-block' ),
 		value: 'fmsquare',
 		volumeOffset: -12,
 	},
 	{
-		label: __( 'FM Sawtooth', 'piano-block' ),
+		label: _x( 'FM Sawtooth', 'oscillator waveform', 'piano-block' ),
 		value: 'fmsawtooth',
 		volumeOffset: -12,
 	},
 	{
-		label: __( 'FM Triangle', 'piano-block' ),
+		label: _x( 'FM Triangle', 'oscillator waveform', 'piano-block' ),
 		value: 'fmtriangle',
 		volumeOffset: -2,
 	},
 	{
-		label: __( 'AM Sine', 'piano-block' ),
+		label: _x( 'AM Sine', 'oscillator waveform', 'piano-block' ),
 		value: 'amsine',
 		volumeOffset: 5,
 	},
 	{
-		label: __( 'AM Square', 'piano-block' ),
+		label: _x( 'AM Square', 'oscillator waveform', 'piano-block' ),
 		value: 'amsquare',
 		volumeOffset: -10,
 	},
 	{
-		label: __( 'AM Sawtooth', 'piano-block' ),
+		label: _x( 'AM Sawtooth', 'oscillator waveform', 'piano-block' ),
 		value: 'amsawtooth',
 		volumeOffset: -8,
 	},
 	{
-		label: __( 'AM Triangle', 'piano-block' ),
+		label: _x( 'AM Triangle', 'oscillator waveform', 'piano-block' ),
 		value: 'amtriangle',
 		volumeOffset: +4,
 	},
 	{
-		label: __( 'Pulse', 'piano-block' ),
+		label: _x( 'Pulse', 'oscillator waveform', 'piano-block' ),
 		value: 'pulse',
 		volumeOffset: -17,
 	},
 	{
-		label: __( 'PWM', 'piano-block' ),
+		label: _x( 'PWM', 'oscillator waveform', 'piano-block' ),
 		value: 'pwm',
 		volumeOffset: -17,
 	},
@@ -278,22 +278,22 @@ export const OSCILLATOR_TYPES = [
 
 export const ENVELOPE_CONTROLS = [
 	{
-		label: __( 'Attack', 'piano-block' ),
+		label: _x( 'Attack', 'ADSR envelope', 'piano-block' ),
 		parameter: 'attack',
 		max: 1,
 	},
 	{
-		label: __( 'Decay', 'piano-block' ),
+		label: _x( 'Decay', 'ADSR envelope', 'piano-block' ),
 		parameter: 'decay',
 		max: 2,
 	},
 	{
-		label: __( 'Sustain', 'piano-block' ),
+		label: _x( 'Sustain', 'ADSR envelope', 'piano-block' ),
 		parameter: 'sustain',
 		max: 1,
 	},
 	{
-		label: __( 'Release', 'piano-block' ),
+		label: _x( 'Release', 'ADSR envelope', 'piano-block' ),
 		parameter: 'release',
 		max: 3,
 	},
@@ -305,11 +305,11 @@ export const KEY_INDICATORS = [
 		value: 'key',
 	},
 	{
-		label: __( 'SPN', 'piano-block' ),
+		label: _x( 'SPN', 'Scientific pitch notation', 'piano-block' ),
 		value: 'spn',
 	},
 	{
-		label: __( 'None', 'piano-block' ),
+		label: _x( 'None', 'key indicator', 'piano-block' ),
 		value: '',
 	},
 ] as const;
