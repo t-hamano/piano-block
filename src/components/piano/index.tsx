@@ -243,6 +243,8 @@ const Piano = ( { settings, onChange, blockWrapper }: Props ) => {
 	const controlsProps = {
 		settings,
 		onChange,
+		onKeyDown,
+		onKeyUp,
 	};
 
 	const keyboardProps = {

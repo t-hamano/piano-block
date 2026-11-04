@@ -28,9 +28,11 @@ import type { BlockAttributes } from '../../constants';
 type Props = {
 	settings: BlockAttributes;
 	onChange: ( newAttributes: Partial< BlockAttributes > ) => void;
+	onKeyDown: ( event: KeyboardEvent ) => void;
+	onKeyUp: ( event: KeyboardEvent ) => void;
 };
 
-const Controls = ( { settings, onChange }: Props ) => {
+const Controls = ( { settings, onChange, onKeyDown, onKeyUp }: Props ) => {
 	const {
 		volume,
 		useSustainPedal,
@@ -137,6 +139,10 @@ const Controls = ( { settings, onChange }: Props ) => {
 							placement="top"
 							offset={ 8 }
 							onClose={ () => setIsSynthesizerSettingOpen( false ) }
+							// The popover is rendered in a portal, so its key events never reach
+							// the listeners on the block wrapper. Play the piano from here instead.
+							onKeyDown={ ( event ) => onKeyDown( event.nativeEvent ) }
+							onKeyUp={ ( event ) => onKeyUp( event.nativeEvent ) }
 						>
 							<SynthesizerSetting
 								synthesizerSetting={ synthesizerSetting }
