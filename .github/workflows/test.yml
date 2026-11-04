@@ -133,6 +133,16 @@ jobs:
       - name: Install Playwright dependencies
         run: npx playwright install ${{ matrix.browsers }} --with-deps
 
+      # Firefox cannot start audio without a sound server, so provide a virtual one.
+      - name: Start a virtual sound server
+        if: contains( matrix.browsers, 'firefox' )
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y pulseaudio
+          pulseaudio --start --exit-idle-time=-1
+          pactl load-module module-null-sink sink_name=virtual_speaker
+          pactl info
+
       - name: Install WordPress
         run: |
           WP_ENV_CORE=WordPress/${{ matrix.wp }} WP_ENV_PHP_VERSION=${{ matrix.php }} npm run wp-env-test start
