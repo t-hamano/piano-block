@@ -29,7 +29,7 @@ $piano_block_wrapper_attributes = get_block_wrapper_attributes(
 		// Screen readers pass key presses through to the page only inside an application.
 		'role'             => 'application',
 		'aria-label'       => __( 'Piano', 'piano-block' ),
-		'aria-describedby' => wp_unique_id( 'piano-block-description-' ),
+		'aria-describedby' => wp_unique_prefixed_id( 'piano-block-description-' ),
 		'data-settings'    => wp_json_encode( $piano_block_settings ),
 	)
 );
