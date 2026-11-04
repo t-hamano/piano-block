@@ -74,6 +74,31 @@ test.describe( 'Block', () => {
 		);
 	} );
 
+	test( 'should play notes while focus is in the synthesizer settings popover', async ( {
+		editor,
+		page,
+	} ) => {
+		await editor.insertBlock( { name: 'piano-block/piano' } );
+		await editor.canvas
+			.getByRole( 'combobox', { name: 'Instrument' } )
+			.selectOption( 'synthesizer' );
+		await editor.canvas.getByRole( 'button', { name: 'Synthesizer Settings' } ).click();
+		const oscillatorType = page.getByRole( 'combobox', { name: 'Oscillator Type' } );
+		await expect( oscillatorType ).toBeFocused();
+
+		// The first key press only unlocks audio, so keep pressing the key until the
+		// synthesizer is ready.
+		const key = editor.canvas.getByRole( 'button', { name: 'Note: C3' } );
+		await expect( async () => {
+			await page.keyboard.up( 'z' );
+			await page.keyboard.down( 'z' );
+			await expect( key ).toHaveClass( /is-pressed/, { timeout: 500 } );
+		} ).toPass();
+		await page.keyboard.up( 'z' );
+		await expect( key ).not.toHaveClass( /is-pressed/ );
+		await expect( oscillatorType ).toBeFocused();
+	} );
+
 	test( 'should update attributes in the block sidebar', async ( { editor, page } ) => {
 		await editor.insertBlock( { name: 'piano-block/piano' } );
 		await editor.openDocumentSettingsSidebar();
