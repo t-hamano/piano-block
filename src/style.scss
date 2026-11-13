@@ -11,26 +11,6 @@
 		background: url(../assets/block_bg.png);
 	}
 
-	// Override the theme's button styles.
-	.components-button {
-		color: inherit !important;
-		background: var(--wpds-color-background-interactive-neutral) !important;
-
-		&.is-primary {
-			color: #fff !important;
-			background: var(--wp-admin-theme-color, #007cba) !important;
-		}
-
-		&.is-destructive {
-			color: var(--wpds-color-foreground-interactive-error) !important;
-		}
-
-		&:focus,
-		&:hover {
-			text-decoration: none !important;
-		}
-	}
-
 	// Nest the component styles under the block class, so they win over
 	// the theme's element and attribute selectors such as `[type=button]`,
 	// which are loaded after the block styles.
