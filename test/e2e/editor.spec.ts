@@ -64,10 +64,10 @@ test.describe( 'Block', () => {
 		await expect( editor.canvas.getByRole( 'combobox', { name: 'Key Layout' } ) ).toBeFocused();
 		await editor.canvas.getByRole( 'combobox', { name: 'Key Layout' } ).selectOption( 'qwerty-2' );
 
-		// Key Indicator
+		// Key Label
 		await pageUtils.pressKeys( 'Tab' );
-		await expect( editor.canvas.getByRole( 'combobox', { name: 'Key Indicator' } ) ).toBeFocused();
-		await editor.canvas.getByRole( 'combobox', { name: 'Key Indicator' } ).selectOption( 'spn' );
+		await expect( editor.canvas.getByRole( 'combobox', { name: 'Key Label' } ) ).toBeFocused();
+		await editor.canvas.getByRole( 'combobox', { name: 'Key Label' } ).selectOption( 'spn' );
 
 		expect( await editor.getEditedPostContent() ).toBe(
 			`<!-- wp:piano-block/piano {"volume":-0.3,"octaveOffset":-1,"instrument":"synthesizer","synthesizerSetting":{"oscillator":{"type":"sawtooth"},"envelope":{"attack":0.4,"decay":1.1,"sustain":0.6,"release":1.6}},"keyLayout":"qwerty-2","keyIndicator":"spn"} /-->`
