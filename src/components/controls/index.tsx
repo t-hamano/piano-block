@@ -3,9 +3,9 @@
  */
 import { __, _x } from '@wordpress/i18n';
 import { useState } from '@wordpress/element';
-import { Button, Popover } from '@wordpress/components';
+import { Popover } from '@wordpress/components';
 import { Stack } from '@wordpress/ui';
-import { help, settings as settingsIcon } from '@wordpress/icons';
+import { Icon, help, settings as settingsIcon } from '@wordpress/icons';
 
 /**
  * Internal dependencies
@@ -174,15 +174,16 @@ const Controls = ( { settings, onChange, onKeyDown, onKeyUp }: Props ) => {
 					disabled={ instrument === 'synthesizer' }
 				/>
 			</div>
-			<Button
+			<button
+				type="button"
 				className="piano-block-controls__help"
-				label={ __( 'Help', 'piano-block' ) }
-				icon={ help }
+				aria-label={ __( 'Help', 'piano-block' ) }
 				onClick={ () => setIsHelpOpen( true ) }
-				size="small"
 				aria-haspopup="dialog"
 				aria-expanded={ isHelpOpen }
-			/>
+			>
+				<Icon icon={ help } size={ 20 } />
+			</button>
 			{ isHelpOpen && <HelpModal onClose={ () => setIsHelpOpen( false ) } /> }
 		</Stack>
 	);

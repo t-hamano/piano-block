@@ -24,9 +24,8 @@
 	}
 
 	.piano-block-stepper__button {
-		display: flex;
-		align-items: center;
-		justify-content: center;
+		display: grid;
+		place-items: center;
 		width: 18px;
 		height: 100%;
 		padding: 0;

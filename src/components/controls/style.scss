@@ -44,5 +44,28 @@
 		position: absolute;
 		top: var(--wpds-dimension-padding-sm);
 		right: var(--wpds-dimension-padding-sm);
+		display: grid;
+		place-items: center;
+		width: 24px;
+		height: 24px;
+		padding: 0;
+		margin: 0;
+		color: inherit;
+		cursor: pointer;
+		background: transparent;
+		border: 0;
+		border-radius: 4px;
+		outline: none;
+		box-shadow: none;
+		appearance: none;
+
+		&:focus-visible {
+			outline: var(--wpds-border-width-focus) solid pianoBlockVariables.$focus-color;
+			outline-offset: 0;
+		}
+
+		svg {
+			fill: currentcolor;
+		}
 	}
 }
