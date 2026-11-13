@@ -1,0 +1,35 @@
+.piano-block-spinner {
+	display: block;
+	width: 16px;
+	height: 16px;
+	margin: 5px 11px 0;
+	overflow: visible;
+}
+
+.piano-block-spinner__track,
+.piano-block-spinner__indicator {
+	fill: transparent;
+	stroke-width: 1.5px;
+}
+
+.piano-block-spinner__track {
+	stroke: #ddd;
+}
+
+.piano-block-spinner__indicator {
+	stroke: #007cba;
+	stroke-linecap: round;
+	transform-origin: 50% 50%;
+	animation: piano-block-spinner 1.4s linear infinite both;
+}
+
+@keyframes piano-block-spinner {
+
+	from {
+		transform: rotate(0deg);
+	}
+
+	to {
+		transform: rotate(360deg);
+	}
+}
