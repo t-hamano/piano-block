@@ -1,6 +1,7 @@
 @use "sass:math";
 @use "./components/loading/style" as loading;
 @use "./components/controls/style" as controls;
+@use "./components/knob/style" as knob;
 @use "./components/synthesizer-setting/style" as synthesizerSetting;
 @use "./components/help-modal/style" as helpModal;
 @use "./components/keyboard/style" as keyboard;

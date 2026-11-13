@@ -7,6 +7,8 @@
 	max-width: calc(pianoBlockVariables.$white-key-width * pianoBlockVariables.$white-key-count - var(--wpds-dimension-padding-lg) * 2);
 	padding: var(--wpds-dimension-padding-sm) 48px var(--wpds-dimension-padding-sm) var(--wpds-dimension-padding-lg);
 	margin: 0 auto;
+	font-family: var(--wpds-typography-font-family-mono);
+	color: #ddd;
 	background:
 		linear-gradient(to bottom, #c00 0%, #600 100%) bottom / 100% 4px no-repeat border-box,
 		linear-gradient(to bottom, #333 0%, #1a1a1a 100%) border-box;
@@ -14,16 +16,8 @@
 	border-bottom: 4px solid transparent;
 	border-radius: 8px 8px 0 0;
 
-	.components-range-control {
-		width: 128px;
-
-		.components-range-control__root {
-			min-height: var(--wpds-dimension-size-md);
-		}
-
-		.components-range-control__reset {
-			height: var(--wpds-dimension-size-md);
-		}
+	* {
+		box-sizing: inherit;
 	}
 
 	// The label wrapper is capped at `100% - 10px` of the control width,

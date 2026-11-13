@@ -19,7 +19,7 @@ test.describe( 'Block', () => {
 		await pageUtils.pressKeys( 'ArrowLeft', { times: 3 } );
 
 		// Octave Offset
-		await pageUtils.pressKeys( 'Tab', { times: 2 } );
+		await pageUtils.pressKeys( 'Tab' );
 		await expect( editor.canvas.getByRole( 'combobox', { name: 'Octave' } ) ).toBeFocused();
 		await editor.canvas
 			.getByRole( 'combobox', { name: 'Octave' } )

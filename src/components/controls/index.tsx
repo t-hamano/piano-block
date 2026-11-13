@@ -6,7 +6,7 @@ import { useState } from '@wordpress/element';
 // Keep `ToggleControl`, since the styles of `@wordpress/ui` are in a cascade
 // layer and lose to the theme styles on the front end.
 // eslint-disable-next-line @wordpress/use-recommended-components
-import { Button, SelectControl, RangeControl, ToggleControl, Popover } from '@wordpress/components';
+import { Button, SelectControl, ToggleControl, Popover } from '@wordpress/components';
 import { Stack } from '@wordpress/ui';
 import { cog, help } from '@wordpress/icons';
 
@@ -21,6 +21,7 @@ import {
 	MAX_VOLUME,
 } from '../../constants';
 import { KEYBOARD_LAYOUTS } from '../../keyboard-layout';
+import Knob from '../knob';
 import SynthesizerSetting from '../synthesizer-setting';
 import HelpModal from '../help-modal';
 import type { BlockAttributes } from '../../constants';
@@ -45,7 +46,7 @@ const Controls = ( { settings, onChange, onKeyDown, onKeyUp }: Props ) => {
 	const [ isHelpOpen, setIsHelpOpen ] = useState( false );
 	const [ isSynthesizerSettingOpen, setIsSynthesizerSettingOpen ] = useState( false );
 
-	const onVolumeChange = ( newVolume: number | undefined ) => {
+	const onVolumeChange = ( newVolume: number ) => {
 		onChange( { volume: newVolume } );
 	};
 
@@ -95,14 +96,12 @@ const Controls = ( { settings, onChange, onKeyDown, onKeyUp }: Props ) => {
 
 	return (
 		<Stack className="piano-block-controls" direction="row" wrap="wrap" gap="lg" align="flex-start">
-			<RangeControl
+			<Knob
 				label={ __( 'Volume', 'piano-block' ) }
 				value={ volume || 0 }
 				min={ MIN_VOLUME }
 				max={ MAX_VOLUME }
 				step={ 0.1 }
-				allowReset
-				withInputField={ false }
 				onChange={ onVolumeChange }
 			/>
 			<SelectControl
