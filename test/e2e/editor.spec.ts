@@ -20,18 +20,13 @@ test.describe( 'Block', () => {
 
 		// Octave Offset
 		await pageUtils.pressKeys( 'Tab' );
-		await expect( editor.canvas.getByRole( 'combobox', { name: 'Octave' } ) ).toBeFocused();
-		await editor.canvas
-			.getByRole( 'combobox', { name: 'Octave' } )
-			// Use selectOption() instead of arrow keys to change select values. In the block
-			// editor, arrow keys on a select move focus to another element (use-arrow-nav),
-			// and Playwright cannot send keys to the native dropdown in Firefox and WebKit.
-			.selectOption( '-1' );
+		await expect( editor.canvas.getByRole( 'button', { name: 'Decrease Octave' } ) ).toBeFocused();
+		await pageUtils.pressKeys( 'Enter' );
 		// Pressing a piano key should not remove focus.
 		await pageUtils.pressKeys( 'z' );
 
 		// Instrument
-		await pageUtils.pressKeys( 'Tab' );
+		await pageUtils.pressKeys( 'Tab', { times: 2 } );
 		await expect( editor.canvas.getByRole( 'combobox', { name: 'Instrument' } ) ).toBeFocused();
 		await editor.canvas
 			.getByRole( 'combobox', { name: 'Instrument' } )

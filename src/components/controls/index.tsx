@@ -15,13 +15,15 @@ import { cog, help } from '@wordpress/icons';
  */
 import {
 	INSTRUMENTS,
-	OCTAVE_OFFSETS,
 	KEY_INDICATORS,
 	MIN_VOLUME,
 	MAX_VOLUME,
+	MIN_OCTAVE_OFFSET,
+	MAX_OCTAVE_OFFSET,
 } from '../../constants';
 import { KEYBOARD_LAYOUTS } from '../../keyboard-layout';
 import Knob from '../knob';
+import Stepper from '../stepper';
 import SynthesizerSetting from '../synthesizer-setting';
 import HelpModal from '../help-modal';
 import type { BlockAttributes } from '../../constants';
@@ -50,14 +52,8 @@ const Controls = ( { settings, onChange, onKeyDown, onKeyUp }: Props ) => {
 		onChange( { volume: newVolume } );
 	};
 
-	const onOctaveOffsetChange = ( newOctaveOffset: string ) => {
-		const allowedOctaveOffset = OCTAVE_OFFSETS.find(
-			( { value } ) => value.toString() === newOctaveOffset
-		);
-		if ( ! allowedOctaveOffset ) {
-			return;
-		}
-		onChange( { octaveOffset: allowedOctaveOffset.value } );
+	const onOctaveOffsetChange = ( newOctaveOffset: number ) => {
+		onChange( { octaveOffset: newOctaveOffset } );
 	};
 
 	const onInstrumentChange = ( newInstrument: string ) => {
@@ -104,14 +100,12 @@ const Controls = ( { settings, onChange, onKeyDown, onKeyUp }: Props ) => {
 				step={ 0.1 }
 				onChange={ onVolumeChange }
 			/>
-			<SelectControl
+			<Stepper
 				label={ __( 'Octave', 'piano-block' ) }
-				value={ octaveOffset.toString() }
-				options={ OCTAVE_OFFSETS.map( ( { label, value } ) => {
-					return { label, value: value.toString() };
-				} ) }
+				value={ octaveOffset }
+				min={ MIN_OCTAVE_OFFSET }
+				max={ MAX_OCTAVE_OFFSET }
 				onChange={ onOctaveOffsetChange }
-				size="compact"
 			/>
 			<SelectControl
 				label={ __( 'Instrument', 'piano-block' ) }

@@ -26,6 +26,8 @@ export type BlockAttributes = {
 
 export const MIN_VOLUME = -10 as const;
 export const MAX_VOLUME = 5 as const;
+export const MIN_OCTAVE_OFFSET = -2 as const;
+export const MAX_OCTAVE_OFFSET = 2 as const;
 export const DEFAULT_INSTRUMENT = 'acoustic-piano' as const;
 export const DEFAULT_OSCILLATOR_TYPE = 'sine' as const;
 
@@ -157,29 +159,6 @@ export const INSTRUMENTS = [
 		value: 'synthesizer',
 		octaveOffset: 0,
 		volumeOffset: -5,
-	},
-] as const;
-
-export const OCTAVE_OFFSETS = [
-	{
-		label: '+2',
-		value: 2,
-	},
-	{
-		label: '+1',
-		value: 1,
-	},
-	{
-		label: '0',
-		value: 0,
-	},
-	{
-		label: '-1',
-		value: -1,
-	},
-	{
-		label: '-2',
-		value: -2,
 	},
 ] as const;
 
