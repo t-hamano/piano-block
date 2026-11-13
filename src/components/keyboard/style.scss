@@ -3,7 +3,10 @@
 
 .piano-block-keyboard {
 	position: relative;
-	padding: 0 0 var(--wpds-dimension-padding-lg);
+	width: calc(100% - var(--wpds-dimension-padding-lg) * 2);
+	max-width: calc(pianoBlockVariables.$white-key-width * pianoBlockVariables.$white-key-count - var(--wpds-dimension-padding-lg) * 2);
+	padding: 0 0 2px;
+	margin: 0 auto;
 	overflow-x: auto;
 	scrollbar-width: thin;
 	scrollbar-color: transparent transparent;
@@ -44,18 +47,15 @@
 	}
 
 	.piano-block-keyboard__inner {
-		box-sizing: border-box;
-		width: pianoBlockVariables.$white-key-width * pianoBlockVariables.$white-key-count;
+		width: calc(pianoBlockVariables.$white-key-width * pianoBlockVariables.$white-key-count - var(--wpds-dimension-padding-lg) * 2);
 		height: pianoBlockVariables.$white-key-height;
-		padding: 0 var(--wpds-dimension-padding-lg);
-		margin: 0 auto;
 	}
 
 	.piano-block-keyboard__key {
 		display: flex;
 		align-items: flex-end;
 		justify-content: center;
-		padding: 0 0 var(--wpds-dimension-padding-sm);
+		padding: 0 0 var(--wpds-dimension-padding-md);
 		font-size: var(--wpds-typography-font-size-xs);
 		font-weight: var(--wpds-typography-font-weight-default);
 		text-transform: uppercase;
