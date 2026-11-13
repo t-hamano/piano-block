@@ -4,7 +4,7 @@ Tags: gutenberg, audio, music, piano
 Donate link: https://www.paypal.me/thamanoJP
 Requires at least: 7.1
 Tested up to: 7.2
-Stable tag: 2.11.0
+Stable tag: 2.12.0
 Requires PHP: 8.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -96,6 +96,13 @@ License: Apache License 2.0
 Source: https://fonts.google.com/specimen/Yellowtail
 
 == Changelog ==
+
+= 2.12.0 =
+* Enhancement: Redesign the control section to look like a real keyboard
+* Enhancement: Shorten the labels and options of some controls
+* Enhancement: Hide the Sustain toggle when the synthesizer is selected
+* Accessibility: Improve the appearance in high contrast mode
+* Fix: Pressing a piano key while a dropdown has focus changes the selected option
 
 = 2.11.0 =
 * Tested up to WordPress 7.2

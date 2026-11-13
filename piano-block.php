@@ -4,7 +4,7 @@
  * Description: Play a variety of tones using the piano keyboard.
  * Requires at least: 7.1
  * Requires PHP: 8.2
- * Version: 2.11.0
+ * Version: 2.12.0
  * Author: Aki Hamano
  * Author URI: https://github.com/t-hamano
  * License: GPL2 or later
