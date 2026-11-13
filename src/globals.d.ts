@@ -8,3 +8,9 @@ declare global {
 		pianoBlockVars: PianoBlockVars;
 	}
 }
+
+declare module 'react' {
+	interface HTMLAttributes< T > extends DOMAttributes< T > {
+		popover?: '' | 'auto' | 'manual' | 'hint';
+	}
+}

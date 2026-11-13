@@ -5,7 +5,7 @@ import { __, _x } from '@wordpress/i18n';
 import { useState } from '@wordpress/element';
 import { Popover } from '@wordpress/components';
 import { Stack } from '@wordpress/ui';
-import { Icon, help, settings as settingsIcon } from '@wordpress/icons';
+import { settings as settingsIcon } from '@wordpress/icons';
 
 /**
  * Internal dependencies
@@ -24,7 +24,7 @@ import Knob from '../knob';
 import Select from '../select';
 import Stepper from '../stepper';
 import SynthesizerSetting from '../synthesizer-setting';
-import HelpModal from '../help-modal';
+import Help from '../help';
 import type { BlockAttributes } from '../../constants';
 
 const sustainPedalIcon = (
@@ -52,7 +52,6 @@ const Controls = ( { settings, onChange, onKeyDown, onKeyUp }: Props ) => {
 		keyLayout,
 		keyIndicator,
 	} = settings;
-	const [ isHelpOpen, setIsHelpOpen ] = useState( false );
 	const [ isSynthesizerSettingOpen, setIsSynthesizerSettingOpen ] = useState( false );
 
 	const onVolumeChange = ( newVolume: number ) => {
@@ -174,17 +173,9 @@ const Controls = ( { settings, onChange, onKeyDown, onKeyUp }: Props ) => {
 					disabled={ instrument === 'synthesizer' }
 				/>
 			</div>
-			<button
-				type="button"
-				className="piano-block-controls__help"
-				aria-label={ __( 'Help', 'piano-block' ) }
-				onClick={ () => setIsHelpOpen( true ) }
-				aria-haspopup="dialog"
-				aria-expanded={ isHelpOpen }
-			>
-				<Icon icon={ help } size={ 20 } />
-			</button>
-			{ isHelpOpen && <HelpModal onClose={ () => setIsHelpOpen( false ) } /> }
+			<div className="piano-block-controls__help">
+				<Help />
+			</div>
 		</Stack>
 	);
 };

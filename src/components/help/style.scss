@@ -1,0 +1,69 @@
+@use "../mixins" as pianoBlockMixins;
+
+.piano-block-help__toggle,
+.piano-block-help__close {
+	display: grid;
+	place-items: center;
+	width: 24px;
+	height: 24px;
+	padding: 0;
+	margin: 0;
+	color: inherit;
+	cursor: pointer;
+	background: transparent;
+	border: 0;
+	border-radius: 4px;
+	outline: none;
+	box-shadow: none;
+	appearance: none;
+
+	&:focus-visible {
+
+		@include pianoBlockMixins.control-focus-ring;
+	}
+
+	svg {
+		fill: currentcolor;
+	}
+}
+
+.piano-block-help__bubble {
+	width: max-content;
+	max-width: min(320px, calc(100vw - 32px));
+	padding: 12px 36px 12px 16px;
+	margin: auto;
+	overflow: visible;
+	font-size: var(--wpds-typography-font-size-sm);
+	line-height: var(--wpds-typography-line-height-sm);
+	color: #ddd;
+	background: #262626;
+	border: 1px solid #555;
+	border-radius: 4px;
+	box-shadow: 0 4px 12px rgb(0 0 0 / 50%);
+
+	&:focus {
+		outline: none;
+	}
+
+	ul {
+		padding-left: 1.5em;
+		margin: 0;
+		list-style: disc outside;
+	}
+
+	li {
+		margin: 0;
+	}
+
+	.piano-block-help__close {
+		position: absolute;
+		top: 6px;
+		right: 6px;
+	}
+
+	@supports (anchor-name: --a) {
+		margin: 0 0 8px;
+		position-area: top span-left;
+		position-try-fallbacks: flip-block;
+	}
+}
