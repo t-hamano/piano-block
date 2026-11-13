@@ -1,0 +1,66 @@
+@use "../variables" as pianoBlockVariables;
+@use "../mixins" as pianoBlockMixins;
+
+.piano-block-stepper {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 4px;
+	font-size: var(--wpds-typography-font-size-xs);
+	line-height: var(--wpds-typography-line-height-xs);
+
+	.piano-block-stepper__label {
+
+		@include pianoBlockMixins.control-label;
+	}
+
+	.piano-block-stepper__control {
+
+		@include pianoBlockMixins.control-display-panel;
+		display: flex;
+		align-items: center;
+		height: 30px;
+		font-size: var(--wpds-typography-font-size-md);
+	}
+
+	.piano-block-stepper__button {
+		display: grid;
+		place-items: center;
+		width: 18px;
+		height: 100%;
+		padding: 0;
+		margin: 0;
+		font: inherit;
+		line-height: 1;
+		color: inherit;
+		text-transform: none;
+		cursor: pointer;
+		background: transparent;
+		border: 0;
+		border-radius: 3px;
+		outline: none;
+		box-shadow: none;
+		appearance: none;
+
+		&:hover:not([aria-disabled="true"]) {
+			background: pianoBlockVariables.$control-hover-background-color;
+		}
+
+		&:focus-visible {
+
+			@include pianoBlockMixins.control-focus-ring;
+		}
+
+		&[aria-disabled="true"] {
+			color: pianoBlockVariables.$control-disabled-color;
+			cursor: default;
+		}
+	}
+
+	.piano-block-stepper__value {
+		min-width: 3ch;
+
+		@include pianoBlockMixins.control-display-text;
+		text-align: center;
+	}
+}

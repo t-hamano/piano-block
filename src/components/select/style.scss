@@ -1,0 +1,62 @@
+@use "../variables" as pianoBlockVariables;
+@use "../mixins" as pianoBlockMixins;
+
+.piano-block-select {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+	gap: 4px;
+	font-size: var(--wpds-typography-font-size-xs);
+	line-height: var(--wpds-typography-line-height-xs);
+
+	.piano-block-select__label {
+
+		@include pianoBlockMixins.control-label;
+	}
+
+	.piano-block-select__control {
+		position: relative;
+
+		&::after {
+			position: absolute;
+			top: 50%;
+			right: 8px;
+			width: 4px;
+			height: 4px;
+			pointer-events: none;
+			content: "";
+			border-right: 1px solid;
+			border-bottom: 1px solid;
+			transform: translateY(-75%) rotate(45deg);
+		}
+	}
+
+	.piano-block-select__input {
+
+		@include pianoBlockMixins.control-display-panel;
+		display: block;
+		width: auto;
+		max-width: none;
+		height: 30px;
+		min-height: 0;
+		padding: 0 20px 0 8px;
+		margin: 0;
+		font-family: inherit;
+		font-size: var(--wpds-typography-font-size-md);
+		line-height: inherit;
+
+		@include pianoBlockMixins.control-display-text;
+		cursor: pointer;
+		outline: none;
+		appearance: none;
+
+		&:hover {
+			background: pianoBlockVariables.$control-hover-background-color;
+		}
+
+		&:focus-visible {
+
+			@include pianoBlockMixins.control-focus-ring;
+		}
+	}
+}

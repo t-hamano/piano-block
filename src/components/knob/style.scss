@@ -1,0 +1,74 @@
+@use "../variables" as pianoBlockVariables;
+@use "../mixins" as pianoBlockMixins;
+
+.piano-block-knob {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	gap: 4px;
+	font-size: var(--wpds-typography-font-size-xs);
+	line-height: var(--wpds-typography-line-height-xs);
+
+	.piano-block-knob__label {
+
+		@include pianoBlockMixins.control-label;
+	}
+
+	.piano-block-knob__control {
+		position: relative;
+		width: 30px;
+		height: 30px;
+		cursor: ns-resize;
+		touch-action: none;
+	}
+
+	// The input only provides the semantics and the keyboard interaction.
+	.piano-block-knob__input {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		padding: 0;
+		margin: 0;
+		opacity: 0;
+		pointer-events: none;
+		appearance: none;
+	}
+
+	.piano-block-knob__dial {
+		position: relative;
+		display: block;
+		width: 100%;
+		height: 100%;
+		background: radial-gradient(circle at 50% 25%, #5c5c5c 0%, #3a3a3a 45%, #262626 100%);
+		border: 1px solid #0d0d0d;
+		border-radius: 50%;
+		box-shadow: inset 0 1px 1px rgb(255 255 255 / 20%), 0 2px 4px rgb(0 0 0 / 60%);
+	}
+
+	.piano-block-knob__input:focus-visible + .piano-block-knob__dial {
+
+		@include pianoBlockMixins.control-focus-ring(2px);
+	}
+
+	.piano-block-knob__indicator {
+		position: absolute;
+		top: 0;
+		left: 0;
+		width: 100%;
+		height: 100%;
+		background: linear-gradient(#fff, #fff) center top 3px / 2px 8px no-repeat;
+		border-radius: 50%;
+	}
+
+	.piano-block-knob__value {
+
+		@include pianoBlockMixins.control-display-panel;
+		min-width: 7ch;
+		padding: 1px 4px;
+
+		@include pianoBlockMixins.control-display-text;
+		text-align: center;
+	}
+}

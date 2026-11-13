@@ -1,0 +1,51 @@
+@use "../variables" as pianoBlockVariables;
+@use "../mixins" as pianoBlockMixins;
+
+.piano-block-icon-button {
+	display: grid;
+	place-items: center;
+	width: 30px;
+	height: 30px;
+	padding: 0;
+	margin: 0;
+	color: inherit;
+	cursor: pointer;
+	background: linear-gradient(to bottom, #424242 0%, #2c2c2c 100%);
+	border: 1px solid #151515;
+	border-radius: 4px;
+	outline: none;
+	box-shadow: inset 0 1px 0 rgb(255 255 255 / 12%), 0 1px 2px rgb(0 0 0 / 50%);
+	appearance: none;
+
+	&:hover:not([aria-disabled="true"], [aria-expanded="true"], [aria-pressed="true"]) {
+		background: linear-gradient(to bottom, #4a4a4a 0%, #303030 100%);
+	}
+
+	&[aria-expanded="true"],
+	&[aria-pressed="true"] {
+		background: linear-gradient(to bottom, #202020 0%, #2c2c2c 100%);
+		box-shadow: inset 0 1px 3px rgb(0 0 0 / 65%);
+	}
+
+	&[aria-pressed="true"]:not([aria-disabled="true"]) {
+		color: pianoBlockVariables.$control-display-color;
+
+		svg {
+			filter: drop-shadow(pianoBlockVariables.$control-display-text-shadow);
+		}
+	}
+
+	&[aria-disabled="true"] {
+		color: pianoBlockVariables.$control-disabled-color;
+		cursor: default;
+	}
+
+	&:focus-visible {
+
+		@include pianoBlockMixins.control-focus-ring;
+	}
+
+	svg {
+		fill: currentcolor;
+	}
+}

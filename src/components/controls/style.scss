@@ -1,4 +1,5 @@
 @use "../variables" as pianoBlockVariables;
+@use "../mixins" as pianoBlockMixins;
 
 .piano-block-controls {
 	position: relative;
@@ -7,50 +8,65 @@
 	max-width: calc(pianoBlockVariables.$white-key-width * pianoBlockVariables.$white-key-count - var(--wpds-dimension-padding-lg) * 2);
 	padding: var(--wpds-dimension-padding-sm) 48px var(--wpds-dimension-padding-sm) var(--wpds-dimension-padding-lg);
 	margin: 0 auto;
-	background: var(--wpds-color-background-surface-neutral-strong);
-	border-radius: var(--wpds-border-radius-lg);
+	font-family: var(--wpds-typography-font-family-mono);
+	color: #ddd;
+	background:
+		linear-gradient(to bottom, #c00 0%, #600 100%) bottom / 100% 4px no-repeat border-box,
+		linear-gradient(to bottom, #333 0%, #1a1a1a 100%) border-box;
+	border: 1px solid #555;
+	border-bottom: 4px solid transparent;
+	border-radius: 8px 8px 0 0;
 
-	.components-range-control {
-		width: 128px;
-
-		.components-range-control__root {
-			min-height: var(--wpds-dimension-size-md);
-		}
-
-		.components-range-control__reset {
-			height: var(--wpds-dimension-size-md);
-		}
+	* {
+		box-sizing: inherit;
 	}
 
-	// The label wrapper is capped at `100% - 10px` of the control width,
-	// so labels wider than the select (e.g. in Japanese) would wrap.
-	.components-input-control__label {
-		white-space: nowrap;
+	.piano-block-controls__sustain-pedal {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 4px;
+		font-size: var(--wpds-typography-font-size-xs);
+		line-height: var(--wpds-typography-line-height-xs);
 	}
 
-	.components-toggle-control {
+	.piano-block-controls__sustain-pedal-label {
 
-		.components-flex {
-			flex-flow: column-reverse;
-			align-items: flex-start;
-			gap: var(--wpds-dimension-gap-lg);
-		}
-
-		.components-toggle-control__label {
-			font-size: var(--wpds-typography-font-size-xs);
-			font-weight: var(--wpds-typography-font-weight-emphasis);
-			line-height: var(--wpds-typography-line-height-xs);
-			text-transform: uppercase;
-		}
+		@include pianoBlockMixins.control-label;
 	}
 
-	.piano-block-controls__synthesizer-toggle {
-		align-self: flex-end;
+	.piano-block-controls__instrument {
+		display: flex;
+		align-items: flex-end;
+		gap: 4px;
 	}
 
 	.piano-block-controls__help {
 		position: absolute;
 		top: var(--wpds-dimension-padding-sm);
 		right: var(--wpds-dimension-padding-sm);
+		display: grid;
+		place-items: center;
+		width: 24px;
+		height: 24px;
+		padding: 0;
+		margin: 0;
+		color: inherit;
+		cursor: pointer;
+		background: transparent;
+		border: 0;
+		border-radius: 4px;
+		outline: none;
+		box-shadow: none;
+		appearance: none;
+
+		&:focus-visible {
+
+			@include pianoBlockMixins.control-focus-ring;
+		}
+
+		svg {
+			fill: currentcolor;
+		}
 	}
 }

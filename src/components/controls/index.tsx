@@ -3,27 +3,37 @@
  */
 import { __, _x } from '@wordpress/i18n';
 import { useState } from '@wordpress/element';
-// Keep `ToggleControl`, since the styles of `@wordpress/ui` are in a cascade
-// layer and lose to the theme styles on the front end.
-// eslint-disable-next-line @wordpress/use-recommended-components
-import { Button, SelectControl, RangeControl, ToggleControl, Popover } from '@wordpress/components';
+import { Popover } from '@wordpress/components';
 import { Stack } from '@wordpress/ui';
-import { cog, help } from '@wordpress/icons';
+import { Icon, help, settings as settingsIcon } from '@wordpress/icons';
 
 /**
  * Internal dependencies
  */
 import {
 	INSTRUMENTS,
-	OCTAVE_OFFSETS,
 	KEY_INDICATORS,
 	MIN_VOLUME,
 	MAX_VOLUME,
+	MIN_OCTAVE_OFFSET,
+	MAX_OCTAVE_OFFSET,
 } from '../../constants';
 import { KEYBOARD_LAYOUTS } from '../../keyboard-layout';
+import IconButton from '../icon-button';
+import Knob from '../knob';
+import Select from '../select';
+import Stepper from '../stepper';
 import SynthesizerSetting from '../synthesizer-setting';
 import HelpModal from '../help-modal';
 import type { BlockAttributes } from '../../constants';
+
+const sustainPedalIcon = (
+	<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+		{ [ 6, 12, 18 ].map( ( y ) =>
+			[ 6, 12, 18 ].map( ( x ) => <circle key={ `${ x }-${ y }` } cx={ x } cy={ y } r="1.75" /> )
+		) }
+	</svg>
+);
 
 type Props = {
 	settings: BlockAttributes;
@@ -45,18 +55,12 @@ const Controls = ( { settings, onChange, onKeyDown, onKeyUp }: Props ) => {
 	const [ isHelpOpen, setIsHelpOpen ] = useState( false );
 	const [ isSynthesizerSettingOpen, setIsSynthesizerSettingOpen ] = useState( false );
 
-	const onVolumeChange = ( newVolume: number | undefined ) => {
+	const onVolumeChange = ( newVolume: number ) => {
 		onChange( { volume: newVolume } );
 	};
 
-	const onOctaveOffsetChange = ( newOctaveOffset: string ) => {
-		const allowedOctaveOffset = OCTAVE_OFFSETS.find(
-			( { value } ) => value.toString() === newOctaveOffset
-		);
-		if ( ! allowedOctaveOffset ) {
-			return;
-		}
-		onChange( { octaveOffset: allowedOctaveOffset.value } );
+	const onOctaveOffsetChange = ( newOctaveOffset: number ) => {
+		onChange( { octaveOffset: newOctaveOffset } );
 	};
 
 	const onInstrumentChange = ( newInstrument: string ) => {
@@ -94,97 +98,92 @@ const Controls = ( { settings, onChange, onKeyDown, onKeyUp }: Props ) => {
 	};
 
 	return (
-		<Stack className="piano-block-controls" direction="row" wrap="wrap" gap="lg" align="flex-start">
-			<RangeControl
+		<Stack className="piano-block-controls" direction="row" wrap="wrap" gap="md" align="flex-start">
+			<Knob
 				label={ __( 'Volume', 'piano-block' ) }
 				value={ volume || 0 }
 				min={ MIN_VOLUME }
 				max={ MAX_VOLUME }
 				step={ 0.1 }
-				allowReset
-				withInputField={ false }
 				onChange={ onVolumeChange }
 			/>
-			<SelectControl
+			<Stepper
 				label={ __( 'Octave', 'piano-block' ) }
-				value={ octaveOffset.toString() }
-				options={ OCTAVE_OFFSETS.map( ( { label, value } ) => {
-					return { label, value: value.toString() };
-				} ) }
+				value={ octaveOffset }
+				min={ MIN_OCTAVE_OFFSET }
+				max={ MAX_OCTAVE_OFFSET }
 				onChange={ onOctaveOffsetChange }
-				size="compact"
 			/>
-			<SelectControl
-				label={ __( 'Instrument', 'piano-block' ) }
-				value={ instrument }
-				options={ INSTRUMENTS.map( ( { label, value } ) => {
-					return { label, value };
-				} ) }
-				onChange={ onInstrumentChange }
-				size="compact"
-			/>
-			{ instrument === 'synthesizer' && (
-				<Stack className="piano-block-controls__synthesizer-toggle">
-					<Button
-						label={ __( 'Synthesizer Settings', 'piano-block' ) }
-						icon={ cog }
-						variant="primary"
-						onClick={ () => setIsSynthesizerSettingOpen( ! isSynthesizerSettingOpen ) }
-						size="compact"
-						aria-haspopup="true"
-						aria-expanded={ isSynthesizerSettingOpen }
-					/>
-					{ isSynthesizerSettingOpen && (
-						<Popover
-							placement="top"
-							offset={ 8 }
-							onClose={ () => setIsSynthesizerSettingOpen( false ) }
-							// The popover is rendered in a portal, so its key events never reach
-							// the listeners on the block wrapper. Play the piano from here instead.
-							onKeyDown={ ( event ) => onKeyDown( event.nativeEvent ) }
-							onKeyUp={ ( event ) => onKeyUp( event.nativeEvent ) }
-						>
-							<SynthesizerSetting
-								synthesizerSetting={ synthesizerSetting }
-								onChange={ onSynthesizerSettingChange }
-							/>
-						</Popover>
-					) }
-				</Stack>
-			) }
-			<SelectControl
+			<div className="piano-block-controls__instrument">
+				<Select
+					label={ __( 'Instrument', 'piano-block' ) }
+					value={ instrument }
+					options={ INSTRUMENTS }
+					onChange={ onInstrumentChange }
+				/>
+				{ instrument === 'synthesizer' && (
+					// The popover is anchored to its parent element.
+					<div>
+						<IconButton
+							label={ __( 'Synthesizer Settings', 'piano-block' ) }
+							icon={ settingsIcon }
+							onClick={ () => setIsSynthesizerSettingOpen( ! isSynthesizerSettingOpen ) }
+							aria-haspopup="true"
+							aria-expanded={ isSynthesizerSettingOpen }
+						/>
+						{ isSynthesizerSettingOpen && (
+							<Popover
+								placement="top"
+								offset={ 8 }
+								onClose={ () => setIsSynthesizerSettingOpen( false ) }
+								// The popover is rendered in a portal, so its key events never reach
+								// the listeners on the block wrapper. Play the piano from here instead.
+								onKeyDown={ ( event ) => onKeyDown( event.nativeEvent ) }
+								onKeyUp={ ( event ) => onKeyUp( event.nativeEvent ) }
+							>
+								<SynthesizerSetting
+									synthesizerSetting={ synthesizerSetting }
+									onChange={ onSynthesizerSettingChange }
+								/>
+							</Popover>
+						) }
+					</div>
+				) }
+			</div>
+			<Select
 				label={ __( 'Key Layout', 'piano-block' ) }
 				value={ keyLayout }
-				options={ KEYBOARD_LAYOUTS.map( ( { label, value } ) => {
-					return { label, value };
-				} ) }
+				options={ KEYBOARD_LAYOUTS }
 				onChange={ onKeyLayoutChange }
-				size="compact"
 			/>
-			<SelectControl
+			<Select
 				label={ _x( 'Key Label', 'text shown on piano keys', 'piano-block' ) }
 				value={ keyIndicator }
-				options={ KEY_INDICATORS.map( ( { label, value } ) => {
-					return { label, value };
-				} ) }
+				options={ KEY_INDICATORS }
 				onChange={ onKeyIndicatorChange }
-				size="compact"
 			/>
-			<ToggleControl
-				label={ _x( 'Sustain', 'sustain pedal', 'piano-block' ) }
-				checked={ useSustainPedal }
-				onChange={ onUseSustainPedalChange }
-				disabled={ instrument === 'synthesizer' }
-			/>
-			<Button
+			<div className="piano-block-controls__sustain-pedal">
+				<span className="piano-block-controls__sustain-pedal-label" aria-hidden="true">
+					{ _x( 'Sustain', 'sustain pedal', 'piano-block' ) }
+				</span>
+				<IconButton
+					label={ _x( 'Sustain', 'sustain pedal', 'piano-block' ) }
+					icon={ sustainPedalIcon }
+					onClick={ onUseSustainPedalChange }
+					aria-pressed={ useSustainPedal }
+					disabled={ instrument === 'synthesizer' }
+				/>
+			</div>
+			<button
+				type="button"
 				className="piano-block-controls__help"
-				label={ __( 'Help', 'piano-block' ) }
-				icon={ help }
+				aria-label={ __( 'Help', 'piano-block' ) }
 				onClick={ () => setIsHelpOpen( true ) }
-				size="small"
 				aria-haspopup="dialog"
 				aria-expanded={ isHelpOpen }
-			/>
+			>
+				<Icon icon={ help } size={ 20 } />
+			</button>
 			{ isHelpOpen && <HelpModal onClose={ () => setIsHelpOpen( false ) } /> }
 		</Stack>
 	);
