@@ -84,9 +84,11 @@
 
 			&.piano-block-keyboard__key--white {
 				height: pianoBlockVariables.$white-key-height + 2px;
+				// The background color keeps the key opaque in forced colors mode,
+				// which removes background gradients.
 				background:
 					linear-gradient(to bottom, #ccc, #aaa) bottom / 100% 6px no-repeat,
-					linear-gradient(to bottom, #b4b4b4 0%, #e8e8e8 15%, #f0f0f0 100%) !important;
+					linear-gradient(to bottom, #b4b4b4 0%, #e8e8e8 15%, #f0f0f0 100%) #f0f0f0 !important;
 				box-shadow: inset 2px 0 3px -1px rgb(0 0 0 / 25%), inset -2px 0 3px -1px rgb(0 0 0 / 25%), 0 1px 1px rgb(0 0 0 / 40%);
 			}
 		}
@@ -98,7 +100,9 @@
 		height: 112px;
 		margin: 0 math.div(pianoBlockVariables.$black-key-width, 2) * -1;
 		color: #fff !important;
-		background: linear-gradient(to bottom, #666 0%, #000 100%) !important;
+		// The background color keeps the key opaque in forced colors mode,
+		// which removes background gradients.
+		background: linear-gradient(to bottom, #666 0%, #000 100%) #000 !important;
 		border-color: #000;
 		border-style: solid;
 		border-width: 0 6px 8px;
@@ -116,9 +120,11 @@
 		flex: 1;
 		height: 100%;
 		color: #000 !important;
+		// The background color keeps the key opaque in forced colors mode,
+		// which removes background gradients.
 		background:
 			linear-gradient(to bottom, #e0e0e0, #c4c4c4) bottom / 100% 6px no-repeat,
-			linear-gradient(to bottom, #d8d8d8 0%, #fff 6%) !important;
+			linear-gradient(to bottom, #d8d8d8 0%, #fff 6%) #fff !important;
 		border: var(--wpds-border-width-xs) #949494 solid;
 		border-bottom: none;
 		border-radius: 0 0 3px 3px;
@@ -126,6 +132,16 @@
 
 		@media not (prefers-reduced-motion) {
 			transition: height 0.03s, box-shadow 0.03s;
+		}
+	}
+
+	// Use a system color for the border, because Chromium replaces
+	// the border color of the focused key with Highlight
+	// in forced colors mode.
+	@media (forced-colors: active) {
+
+		.piano-block-keyboard__key {
+			border-color: ButtonText;
 		}
 	}
 }
