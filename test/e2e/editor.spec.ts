@@ -95,6 +95,9 @@ test.describe( 'Block', () => {
 		await page.keyboard.up( 'z' );
 		await expect( key ).not.toHaveClass( /is-pressed/ );
 		await expect( oscillatorType ).toBeFocused();
+
+		await page.keyboard.press( 's' );
+		await expect( oscillatorType ).toHaveValue( 'sine' );
 	} );
 
 	test( 'should update attributes in the block sidebar', async ( { editor, page } ) => {
