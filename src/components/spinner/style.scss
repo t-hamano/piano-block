@@ -1,0 +1,30 @@
+.piano-block-spinner {
+	display: inline-block;
+	width: 16px;
+	height: 16px;
+	overflow: visible;
+}
+
+.piano-block-spinner__indicator {
+	fill: transparent;
+	stroke: currentcolor;
+	stroke-width: 2px;
+	stroke-linecap: round;
+	transform-origin: 50% 50%;
+	animation: piano-block-spinner 1.4s linear infinite both;
+
+	@media (forced-colors: active) {
+		stroke: CanvasText;
+	}
+}
+
+@keyframes piano-block-spinner {
+
+	from {
+		transform: rotate(0deg);
+	}
+
+	to {
+		transform: rotate(360deg);
+	}
+}
