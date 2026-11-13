@@ -1,0 +1,37 @@
+@use "../variables" as pianoBlockVariables;
+
+.piano-block-icon-button {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 30px;
+	height: 30px;
+	padding: 0;
+	margin: 0;
+	color: inherit;
+	cursor: pointer;
+	background: linear-gradient(to bottom, #4a4a4a 0%, #2e2e2e 100%);
+	border: 1px solid #111;
+	border-radius: 4px;
+	outline: none;
+	box-shadow: inset 0 1px 0 rgb(255 255 255 / 15%), 0 2px 2px rgb(0 0 0 / 50%);
+	appearance: none;
+
+	&:hover {
+		background: linear-gradient(to bottom, #525252 0%, #333 100%);
+	}
+
+	&[aria-expanded="true"] {
+		background: linear-gradient(to bottom, #1e1e1e 0%, #2e2e2e 100%);
+		box-shadow: inset 0 2px 3px rgb(0 0 0 / 70%);
+	}
+
+	&:focus-visible {
+		outline: var(--wpds-border-width-focus) solid pianoBlockVariables.$focus-color;
+		outline-offset: 0;
+	}
+
+	svg {
+		fill: currentcolor;
+	}
+}

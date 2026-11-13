@@ -8,7 +8,7 @@ import { useState } from '@wordpress/element';
 // eslint-disable-next-line @wordpress/use-recommended-components
 import { Button, ToggleControl, Popover } from '@wordpress/components';
 import { Stack } from '@wordpress/ui';
-import { cog, help } from '@wordpress/icons';
+import { help, settings as settingsIcon } from '@wordpress/icons';
 
 /**
  * Internal dependencies
@@ -22,6 +22,7 @@ import {
 	MAX_OCTAVE_OFFSET,
 } from '../../constants';
 import { KEYBOARD_LAYOUTS } from '../../keyboard-layout';
+import IconButton from '../icon-button';
 import Knob from '../knob';
 import Select from '../select';
 import Stepper from '../stepper';
@@ -116,12 +117,10 @@ const Controls = ( { settings, onChange, onKeyDown, onKeyUp }: Props ) => {
 			/>
 			{ instrument === 'synthesizer' && (
 				<Stack className="piano-block-controls__synthesizer-toggle">
-					<Button
+					<IconButton
 						label={ __( 'Synthesizer Settings', 'piano-block' ) }
-						icon={ cog }
-						variant="primary"
+						icon={ settingsIcon }
 						onClick={ () => setIsSynthesizerSettingOpen( ! isSynthesizerSettingOpen ) }
-						size="compact"
 						aria-haspopup="true"
 						aria-expanded={ isSynthesizerSettingOpen }
 					/>

@@ -1,6 +1,7 @@
 @use "sass:math";
 @use "./components/loading/style" as loading;
 @use "./components/controls/style" as controls;
+@use "./components/icon-button/style" as iconButton;
 @use "./components/knob/style" as knob;
 @use "./components/select/style" as select;
 @use "./components/stepper/style" as stepper;
