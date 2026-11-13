@@ -20,12 +20,6 @@
 		box-sizing: inherit;
 	}
 
-	// The label wrapper is capped at `100% - 10px` of the control width,
-	// so labels wider than the select (e.g. in Japanese) would wrap.
-	.components-input-control__label {
-		white-space: nowrap;
-	}
-
 	.components-toggle-control {
 
 		.components-flex {

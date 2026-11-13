@@ -6,7 +6,7 @@ import { useState } from '@wordpress/element';
 // Keep `ToggleControl`, since the styles of `@wordpress/ui` are in a cascade
 // layer and lose to the theme styles on the front end.
 // eslint-disable-next-line @wordpress/use-recommended-components
-import { Button, SelectControl, ToggleControl, Popover } from '@wordpress/components';
+import { Button, ToggleControl, Popover } from '@wordpress/components';
 import { Stack } from '@wordpress/ui';
 import { cog, help } from '@wordpress/icons';
 
@@ -23,6 +23,7 @@ import {
 } from '../../constants';
 import { KEYBOARD_LAYOUTS } from '../../keyboard-layout';
 import Knob from '../knob';
+import Select from '../select';
 import Stepper from '../stepper';
 import SynthesizerSetting from '../synthesizer-setting';
 import HelpModal from '../help-modal';
@@ -107,14 +108,11 @@ const Controls = ( { settings, onChange, onKeyDown, onKeyUp }: Props ) => {
 				max={ MAX_OCTAVE_OFFSET }
 				onChange={ onOctaveOffsetChange }
 			/>
-			<SelectControl
+			<Select
 				label={ __( 'Instrument', 'piano-block' ) }
 				value={ instrument }
-				options={ INSTRUMENTS.map( ( { label, value } ) => {
-					return { label, value };
-				} ) }
+				options={ INSTRUMENTS }
 				onChange={ onInstrumentChange }
-				size="compact"
 			/>
 			{ instrument === 'synthesizer' && (
 				<Stack className="piano-block-controls__synthesizer-toggle">
@@ -145,23 +143,17 @@ const Controls = ( { settings, onChange, onKeyDown, onKeyUp }: Props ) => {
 					) }
 				</Stack>
 			) }
-			<SelectControl
+			<Select
 				label={ __( 'Key Layout', 'piano-block' ) }
 				value={ keyLayout }
-				options={ KEYBOARD_LAYOUTS.map( ( { label, value } ) => {
-					return { label, value };
-				} ) }
+				options={ KEYBOARD_LAYOUTS }
 				onChange={ onKeyLayoutChange }
-				size="compact"
 			/>
-			<SelectControl
+			<Select
 				label={ _x( 'Key Label', 'text shown on piano keys', 'piano-block' ) }
 				value={ keyIndicator }
-				options={ KEY_INDICATORS.map( ( { label, value } ) => {
-					return { label, value };
-				} ) }
+				options={ KEY_INDICATORS }
 				onChange={ onKeyIndicatorChange }
-				size="compact"
 			/>
 			<ToggleControl
 				label={ _x( 'Sustain', 'sustain pedal', 'piano-block' ) }
