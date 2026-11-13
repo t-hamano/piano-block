@@ -3,7 +3,7 @@
 
 .piano-block-keyboard {
 	position: relative;
-	padding: var(--wpds-dimension-padding-lg) 0;
+	padding: 0 0 var(--wpds-dimension-padding-lg);
 	overflow-x: auto;
 	scrollbar-width: thin;
 	scrollbar-color: transparent transparent;
