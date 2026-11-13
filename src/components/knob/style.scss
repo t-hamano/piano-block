@@ -2,6 +2,7 @@
 @use "../mixins" as pianoBlockMixins;
 
 .piano-block-knob {
+	position: relative;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -65,10 +66,40 @@
 	.piano-block-knob__value {
 
 		@include pianoBlockMixins.control-display-panel;
+		position: absolute;
+		bottom: calc(100% + 6px);
+		left: 50%;
+		z-index: 1;
+		display: none;
 		min-width: 7ch;
 		padding: 1px 4px;
+		transform: translateX(-50%);
 
 		@include pianoBlockMixins.control-display-text;
 		text-align: center;
+
+		&::before,
+		&::after {
+			position: absolute;
+			left: 50%;
+			content: "";
+			border: 5px solid transparent;
+			border-bottom: 0;
+			transform: translateX(-50%);
+		}
+
+		&::before {
+			top: calc(100% + 1px);
+			border-top-color: #3c3c3c;
+		}
+
+		&::after {
+			top: 100%;
+			border-top-color: #141414;
+		}
+	}
+
+	&:not(.is-value-hidden):is(:hover, .is-turning, :not(.is-pointer-focused):has(.piano-block-knob__input:focus-visible)) .piano-block-knob__value {
+		display: block;
 	}
 }
