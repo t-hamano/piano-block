@@ -10,9 +10,11 @@
 	margin: 0 auto;
 	font-family: var(--wpds-typography-font-family-mono);
 	color: #ddd;
+	// The background color keeps the panel opaque in forced colors mode,
+	// which removes background gradients.
 	background:
 		linear-gradient(to bottom, #c00 0%, #600 100%) bottom / 100% 4px no-repeat border-box,
-		linear-gradient(to bottom, #333 0%, #1a1a1a 100%) border-box;
+		linear-gradient(to bottom, #333 0%, #1a1a1a 100%) border-box #1a1a1a;
 	border: 1px solid #555;
 	border-bottom: 4px solid transparent;
 	border-radius: 8px 8px 0 0;

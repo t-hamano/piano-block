@@ -33,6 +33,13 @@
 		svg {
 			filter: drop-shadow(pianoBlockVariables.$control-display-text-shadow);
 		}
+
+		// Use Highlight instead of SelectedItem, because SelectedItem does not
+		// follow the contrast theme in Chromium.
+		@media (forced-colors: active) {
+			color: HighlightText;
+			background: Highlight;
+		}
 	}
 
 	&[aria-disabled="true"] {
