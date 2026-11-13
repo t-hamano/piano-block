@@ -24,6 +24,17 @@ const Select = ( { label, value, options, onChange }: Props ) => {
 					className="piano-block-select__input"
 					value={ value }
 					onChange={ ( event ) => onChange( event.target.value ) }
+					onKeyDown={ ( event ) => {
+						const isTypeahead =
+							event.key.length === 1 &&
+							event.key !== ' ' &&
+							! event.altKey &&
+							! event.ctrlKey &&
+							! event.metaKey;
+						if ( isTypeahead ) {
+							event.preventDefault();
+						}
+					} }
 				>
 					{ options.map( ( option ) => (
 						<option key={ option.value } value={ option.value }>
