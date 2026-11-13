@@ -1,4 +1,5 @@
 @use "../variables" as pianoBlockVariables;
+@use "../mixins" as pianoBlockMixins;
 
 .piano-block-controls {
 	position: relative;
@@ -30,8 +31,8 @@
 	}
 
 	.piano-block-controls__sustain-pedal-label {
-		font-weight: var(--wpds-typography-font-weight-emphasis);
-		text-transform: uppercase;
+
+		@include pianoBlockMixins.control-label;
 	}
 
 	.piano-block-controls__instrument {
@@ -60,8 +61,8 @@
 		appearance: none;
 
 		&:focus-visible {
-			outline: var(--wpds-border-width-focus) solid pianoBlockVariables.$focus-color;
-			outline-offset: 0;
+
+			@include pianoBlockMixins.focus-ring;
 		}
 
 		svg {

@@ -10,15 +10,8 @@
 	line-height: var(--wpds-typography-line-height-xs);
 
 	.piano-block-knob__label {
-		display: block;
-		padding: 0;
-		margin: 0;
-		font-family: inherit;
-		font-size: inherit;
-		font-weight: var(--wpds-typography-font-weight-emphasis);
-		line-height: inherit;
-		color: inherit;
-		text-transform: uppercase;
+
+		@include pianoBlockMixins.control-label;
 	}
 
 	.piano-block-knob__control {
@@ -55,8 +48,8 @@
 	}
 
 	.piano-block-knob__input:focus-visible + .piano-block-knob__dial {
-		outline: var(--wpds-border-width-focus) solid pianoBlockVariables.$focus-color;
-		outline-offset: 2px;
+
+		@include pianoBlockMixins.focus-ring(2px);
 	}
 
 	.piano-block-knob__indicator {
@@ -74,8 +67,8 @@
 		@include pianoBlockMixins.display-panel;
 		min-width: 7ch;
 		padding: 1px 4px;
-		color: pianoBlockVariables.$display-color;
+
+		@include pianoBlockMixins.display-text;
 		text-align: center;
-		text-shadow: pianoBlockVariables.$display-text-shadow;
 	}
 }

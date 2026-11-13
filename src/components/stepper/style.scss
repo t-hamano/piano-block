@@ -10,8 +10,8 @@
 	line-height: var(--wpds-typography-line-height-xs);
 
 	.piano-block-stepper__label {
-		font-weight: var(--wpds-typography-font-weight-emphasis);
-		text-transform: uppercase;
+
+		@include pianoBlockMixins.control-label;
 	}
 
 	.piano-block-stepper__control {
@@ -43,24 +43,24 @@
 		appearance: none;
 
 		&:hover:not([aria-disabled="true"]) {
-			background: #1f1f1f;
+			background: pianoBlockVariables.$hover-background-color;
 		}
 
 		&:focus-visible {
-			outline: var(--wpds-border-width-focus) solid pianoBlockVariables.$focus-color;
-			outline-offset: 0;
+
+			@include pianoBlockMixins.focus-ring;
 		}
 
 		&[aria-disabled="true"] {
-			color: #5a5a5a;
+			color: pianoBlockVariables.$disabled-color;
 			cursor: default;
 		}
 	}
 
 	.piano-block-stepper__value {
 		min-width: 3ch;
-		color: pianoBlockVariables.$display-color;
+
+		@include pianoBlockMixins.display-text;
 		text-align: center;
-		text-shadow: pianoBlockVariables.$display-text-shadow;
 	}
 }

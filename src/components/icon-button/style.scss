@@ -1,4 +1,5 @@
 @use "../variables" as pianoBlockVariables;
+@use "../mixins" as pianoBlockMixins;
 
 .piano-block-icon-button {
 	display: grid;
@@ -35,13 +36,13 @@
 	}
 
 	&[aria-disabled="true"] {
-		color: #5a5a5a;
+		color: pianoBlockVariables.$disabled-color;
 		cursor: default;
 	}
 
 	&:focus-visible {
-		outline: var(--wpds-border-width-focus) solid pianoBlockVariables.$focus-color;
-		outline-offset: 0;
+
+		@include pianoBlockMixins.focus-ring;
 	}
 
 	svg {
