@@ -24,27 +24,14 @@
 	.piano-block-select__control {
 		position: relative;
 
-		&::before,
 		&::after {
 			position: absolute;
-			pointer-events: none;
-			content: "";
-		}
-
-		&::before {
-			top: 1px;
-			right: 1px;
-			bottom: 1px;
-			width: 14px;
-			background: #242424;
-			border-radius: 0 3px 3px 0;
-		}
-
-		&::after {
 			top: 50%;
-			right: 6px;
+			right: 8px;
 			width: 4px;
 			height: 4px;
+			pointer-events: none;
+			content: "";
 			border-right: 1px solid;
 			border-bottom: 1px solid;
 			transform: translateY(-75%) rotate(45deg);
