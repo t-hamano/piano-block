@@ -171,7 +171,7 @@ const Controls = ( { settings, onChange, onKeyDown, onKeyUp }: Props ) => {
 				size="compact"
 			/>
 			<ToggleControl
-				label={ __( 'Sustain Pedal', 'piano-block' ) }
+				label={ _x( 'Sustain', 'sustain pedal', 'piano-block' ) }
 				checked={ useSustainPedal }
 				onChange={ onUseSustainPedalChange }
 				disabled={ instrument === 'synthesizer' }
