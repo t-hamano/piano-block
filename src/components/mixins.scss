@@ -24,7 +24,7 @@
 	text-shadow: pianoBlockVariables.$control-display-text-shadow;
 }
 
-@mixin control-focus-ring($offset: 0) {
+@mixin control-focus-ring {
 	outline: var(--wpds-border-width-focus) solid pianoBlockVariables.$control-focus-color;
-	outline-offset: $offset;
+	outline-offset: var(--wpds-border-width-focus);
 }
