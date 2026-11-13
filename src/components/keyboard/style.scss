@@ -83,9 +83,11 @@
 			}
 
 			&.piano-block-keyboard__key--white {
-				height: pianoBlockVariables.$white-key-height + 4px;
-				background: linear-gradient(to bottom, #ccc 10%, #fff);
-				box-shadow: 0 2px 2px #aaa;
+				height: pianoBlockVariables.$white-key-height + 2px;
+				background:
+					linear-gradient(to bottom, #ccc, #aaa) bottom / 100% 6px no-repeat,
+					linear-gradient(to bottom, #b4b4b4 0%, #e8e8e8 15%, #f0f0f0 100%) !important;
+				box-shadow: inset 2px 0 3px -1px rgb(0 0 0 / 25%), inset -2px 0 3px -1px rgb(0 0 0 / 25%), 0 1px 1px rgb(0 0 0 / 40%);
 			}
 		}
 	}
@@ -102,7 +104,7 @@
 		border-width: 0 6px 8px;
 		border-bottom-color: #666;
 		border-radius: 0 0 4px 4px;
-		box-shadow: 0 3px 5px #ccc, inset 0 0 0 1px rgb(220 220 220 / 20%);
+		box-shadow: 0 2px 3px rgb(0 0 0 / 50%), inset 0 0 0 1px rgb(220 220 220 / 20%);
 		z-index: 1;
 
 		@media not (prefers-reduced-motion) {
@@ -114,11 +116,13 @@
 		flex: 1;
 		height: 100%;
 		color: #000 !important;
-		background-color: #fff !important;
+		background:
+			linear-gradient(to bottom, #e0e0e0, #c4c4c4) bottom / 100% 6px no-repeat,
+			linear-gradient(to bottom, #d8d8d8 0%, #fff 6%) !important;
 		border: var(--wpds-border-width-xs) #949494 solid;
 		border-bottom: none;
 		border-radius: 0 0 3px 3px;
-		box-shadow: 0 4px 4px #aaa;
+		box-shadow: 0 2px 2px rgb(0 0 0 / 40%);
 
 		@media not (prefers-reduced-motion) {
 			transition: height 0.03s, box-shadow 0.03s;
