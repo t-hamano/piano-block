@@ -6,7 +6,7 @@
 	box-sizing: border-box;
 	width: calc(100% - var(--wpds-dimension-padding-lg) * 2);
 	max-width: calc(pianoBlockVariables.$white-key-width * pianoBlockVariables.$white-key-count - var(--wpds-dimension-padding-lg) * 2);
-	padding: var(--wpds-dimension-padding-sm) 48px var(--wpds-dimension-padding-sm) var(--wpds-dimension-padding-lg);
+	padding: var(--wpds-dimension-padding-md) 48px var(--wpds-dimension-padding-md) var(--wpds-dimension-padding-lg);
 	margin: 0 auto;
 	font-family: var(--wpds-typography-font-family-mono);
 	color: #ddd;
