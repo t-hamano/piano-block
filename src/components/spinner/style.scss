@@ -1,26 +1,22 @@
 .piano-block-spinner {
-	display: block;
+	display: inline-block;
 	width: 16px;
 	height: 16px;
-	margin: 5px 11px 0;
 	overflow: visible;
 }
 
-.piano-block-spinner__track,
 .piano-block-spinner__indicator {
 	fill: transparent;
-	stroke-width: 1.5px;
-}
-
-.piano-block-spinner__track {
-	stroke: #ddd;
-}
-
-.piano-block-spinner__indicator {
-	stroke: #007cba;
+	stroke: currentcolor;
+	stroke-width: 2px;
 	stroke-linecap: round;
 	transform-origin: 50% 50%;
+	// Kept even for prefers-reduced-motion. See Note 4 of https://www.w3.org/WAI/WCAG22/Understanding/pause-stop-hide.html
 	animation: piano-block-spinner 1.4s linear infinite both;
+
+	@media (forced-colors: active) {
+		stroke: CanvasText;
+	}
 }
 
 @keyframes piano-block-spinner {
