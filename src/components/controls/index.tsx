@@ -1,7 +1,7 @@
 /**
  * WordPress dependencies
  */
-import { __ } from '@wordpress/i18n';
+import { __, _x } from '@wordpress/i18n';
 import { useState } from '@wordpress/element';
 // Keep `ToggleControl`, since the styles of `@wordpress/ui` are in a cascade
 // layer and lose to the theme styles on the front end.
@@ -162,7 +162,7 @@ const Controls = ( { settings, onChange, onKeyDown, onKeyUp }: Props ) => {
 				size="compact"
 			/>
 			<SelectControl
-				label={ __( 'Key Indicator', 'piano-block' ) }
+				label={ _x( 'Key Label', 'text shown on piano keys', 'piano-block' ) }
 				value={ keyIndicator }
 				options={ KEY_INDICATORS.map( ( { label, value } ) => {
 					return { label, value };
