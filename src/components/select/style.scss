@@ -48,6 +48,7 @@
 		@include pianoBlockMixins.control-display-text;
 		cursor: pointer;
 		outline: none;
+		transition: none;
 		appearance: none;
 
 		&:hover {

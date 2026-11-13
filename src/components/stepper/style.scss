@@ -40,6 +40,7 @@
 		border-radius: 3px;
 		outline: none;
 		box-shadow: none;
+		transition: none;
 		appearance: none;
 
 		&:hover:not([aria-disabled="true"]) {

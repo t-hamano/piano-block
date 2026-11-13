@@ -60,6 +60,7 @@
 		font-weight: var(--wpds-typography-font-weight-default);
 		text-transform: uppercase;
 		margin: 0;
+		transition: none;
 
 		&:focus,
 		&:hover {

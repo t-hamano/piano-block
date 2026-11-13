@@ -1,14 +1,5 @@
 @use "sass:math";
-@use "./components/loading/style" as loading;
-@use "./components/spinner/style" as spinner;
-@use "./components/controls/style" as controls;
-@use "./components/icon-button/style" as iconButton;
-@use "./components/knob/style" as knob;
-@use "./components/select/style" as select;
-@use "./components/stepper/style" as stepper;
-@use "./components/synthesizer-setting/style" as synthesizerSetting;
-@use "./components/help/style" as help;
-@use "./components/keyboard/style" as keyboard;
+@use "sass:meta";
 
 .wp-block-piano-block-piano {
 	position: relative;
@@ -39,4 +30,18 @@
 			text-decoration: none !important;
 		}
 	}
+
+	// Nest the component styles under the block class, so they win over
+	// the theme's element and attribute selectors such as `[type=button]`,
+	// which are loaded after the block styles.
+	@include meta.load-css("./components/loading/style");
+	@include meta.load-css("./components/spinner/style");
+	@include meta.load-css("./components/controls/style");
+	@include meta.load-css("./components/icon-button/style");
+	@include meta.load-css("./components/knob/style");
+	@include meta.load-css("./components/select/style");
+	@include meta.load-css("./components/stepper/style");
+	@include meta.load-css("./components/synthesizer-setting/style");
+	@include meta.load-css("./components/help/style");
+	@include meta.load-css("./components/keyboard/style");
 }

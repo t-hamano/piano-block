@@ -15,7 +15,14 @@
 	border-radius: 4px;
 	outline: none;
 	box-shadow: none;
+	transition: none;
 	appearance: none;
+
+	&:hover,
+	&:focus {
+		color: inherit;
+		background: transparent;
+	}
 
 	&:focus-visible {
 
