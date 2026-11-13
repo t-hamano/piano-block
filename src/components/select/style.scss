@@ -5,7 +5,7 @@
 	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
-	gap: var(--wpds-dimension-gap-xs);
+	gap: 4px;
 	font-size: var(--wpds-typography-font-size-xs);
 	line-height: var(--wpds-typography-line-height-xs);
 
@@ -27,13 +27,13 @@
 		&::after {
 			position: absolute;
 			top: 50%;
-			right: var(--wpds-dimension-padding-sm);
-			width: var(--wpds-dimension-size-5xs);
-			height: var(--wpds-dimension-size-5xs);
+			right: 8px;
+			width: 4px;
+			height: 4px;
 			pointer-events: none;
 			content: "";
-			border-right: var(--wpds-border-width-xs) solid;
-			border-bottom: var(--wpds-border-width-xs) solid;
+			border-right: 1px solid;
+			border-bottom: 1px solid;
 			transform: translateY(-75%) rotate(45deg);
 		}
 	}
@@ -46,7 +46,7 @@
 		max-width: none;
 		height: 30px;
 		min-height: 0;
-		padding: 0 var(--wpds-dimension-padding-2xl) 0 var(--wpds-dimension-padding-sm);
+		padding: 0 20px 0 8px;
 		margin: 0;
 		font-family: inherit;
 		font-size: var(--wpds-typography-font-size-md);
