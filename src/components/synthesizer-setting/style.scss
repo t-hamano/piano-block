@@ -15,12 +15,20 @@
 
 	@include pianoBlockMixins.control-display-panel;
 
-	polyline {
-		fill: none;
+	line {
 		stroke: pianoBlockVariables.$control-display-color;
 		stroke-width: 1.5px;
-		stroke-linejoin: round;
 		stroke-linecap: round;
 		filter: drop-shadow(pianoBlockVariables.$control-display-text-shadow);
+	}
+}
+
+@for $index from 1 through 4 {
+	$knob: "> :nth-child(#{$index}):not(.is-value-hidden)";
+
+	.piano-block-synthesizer-setting__envelope:has(#{$knob}:is(:hover, .is-turning), #{$knob}:not(.is-pointer-focused) .piano-block-knob__input:focus-visible) ~ .piano-block-synthesizer-setting__graph > :nth-child(#{$index}) {
+		stroke: pianoBlockVariables.$control-focus-color;
+		stroke-width: 2.5px;
+		filter: drop-shadow(0 0 6px rgba(pianoBlockVariables.$control-focus-color, 0.7));
 	}
 }

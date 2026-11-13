@@ -37,9 +37,7 @@ const getEnvelopePoints = ( { attack, decay, sustain, release }: typeof DEFAULT_
 		[ decayX, sustainY ],
 		[ decayX + sustainWidth, sustainY ],
 		[ right, bottom ],
-	]
-		.map( ( point ) => point.join( ',' ) )
-		.join( ' ' );
+	];
 };
 
 type Props = {
@@ -49,6 +47,7 @@ type Props = {
 
 const SynthesizerSetting = ( { synthesizerSetting, onChange }: Props ) => {
 	const { oscillator, envelope = DEFAULT_ENVELOPE } = synthesizerSetting;
+	const envelopePoints = getEnvelopePoints( { ...DEFAULT_ENVELOPE, ...envelope } );
 
 	const onOscillatorTypeChange = ( newOscillatorType: string ) => {
 		const allowedOscillatorType = OSCILLATOR_TYPES.find(
@@ -106,7 +105,11 @@ const SynthesizerSetting = ( { synthesizerSetting, onChange }: Props ) => {
 				aria-hidden="true"
 				focusable="false"
 			>
-				<polyline points={ getEnvelopePoints( { ...DEFAULT_ENVELOPE, ...envelope } ) } />
+				{ ENVELOPE_CONTROLS.map( ( { parameter }, index ) => {
+					const [ x1, y1 ] = envelopePoints[ index ];
+					const [ x2, y2 ] = envelopePoints[ index + 1 ];
+					return <line key={ parameter } x1={ x1 } y1={ y1 } x2={ x2 } y2={ y2 } />;
+				} ) }
 			</svg>
 		</>
 	);
