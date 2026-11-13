@@ -1,7 +1,12 @@
 /**
+ * External dependencies
+ */
+import clsx from 'clsx';
+
+/**
  * WordPress dependencies
  */
-import { useId, useRef } from '@wordpress/element';
+import { useId, useRef, useState } from '@wordpress/element';
 
 type Props = {
 	label: string;
@@ -21,6 +26,9 @@ const Knob = ( { label, value, min, max, step, onChange }: Props ) => {
 	const id = useId();
 	const inputRef = useRef< HTMLInputElement >( null );
 	const dragRef = useRef< { startY: number; startValue: number } | null >( null );
+	const [ isDragging, setIsDragging ] = useState( false );
+	const [ isValueHidden, setIsValueHidden ] = useState( false );
+	const [ isPointerFocused, setIsPointerFocused ] = useState( false );
 
 	const precision = getPrecision( step );
 	const angle = ( ( value - min ) / ( max - min ) - 0.5 ) * ROTATION_RANGE;
@@ -35,6 +43,9 @@ const Knob = ( { label, value, min, max, step, onChange }: Props ) => {
 		inputRef.current?.focus();
 		event.currentTarget.setPointerCapture( event.pointerId );
 		dragRef.current = { startY: event.clientY, startValue: value };
+		setIsDragging( true );
+		setIsValueHidden( false );
+		setIsPointerFocused( true );
 	};
 
 	const onPointerMove = ( event: React.PointerEvent< HTMLDivElement > ) => {
@@ -52,10 +63,26 @@ const Knob = ( { label, value, min, max, step, onChange }: Props ) => {
 
 	const onPointerUp = () => {
 		dragRef.current = null;
+		setIsDragging( false );
+	};
+
+	const onKeyDown = ( event: React.KeyboardEvent< HTMLInputElement > ) => {
+		setIsPointerFocused( false );
+		if ( event.key === 'Escape' && ! isValueHidden ) {
+			event.stopPropagation();
+			setIsValueHidden( true );
+		}
 	};
 
 	return (
-		<div className="piano-block-knob">
+		<div
+			className={ clsx( 'piano-block-knob', {
+				'is-turning': isDragging,
+				'is-value-hidden': isValueHidden,
+				'is-pointer-focused': isPointerFocused,
+			} ) }
+			onPointerEnter={ () => setIsValueHidden( false ) }
+		>
 			<label className="piano-block-knob__label" htmlFor={ id }>
 				{ label }
 			</label>
@@ -75,7 +102,13 @@ const Knob = ( { label, value, min, max, step, onChange }: Props ) => {
 					max={ max }
 					step={ step }
 					value={ value }
-					onChange={ ( event ) => onChange( Number( event.target.value ) ) }
+					onChange={ ( event ) => {
+						setIsValueHidden( false );
+						onChange( Number( event.target.value ) );
+					} }
+					onFocus={ () => setIsValueHidden( false ) }
+					onBlur={ () => setIsPointerFocused( false ) }
+					onKeyDown={ onKeyDown }
 				/>
 				<span className="piano-block-knob__dial" aria-hidden="true">
 					<span
