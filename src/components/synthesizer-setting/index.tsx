@@ -16,6 +16,32 @@ import Knob from '../knob';
 import Select from '../select';
 import type { BlockAttributes, EnvelopeControl } from '../../constants';
 
+const GRAPH_WIDTH = 128;
+const GRAPH_HEIGHT = 48;
+const GRAPH_PADDING = 6;
+
+const getEnvelopePoints = ( { attack, decay, sustain, release }: typeof DEFAULT_ENVELOPE ) => {
+	const left = GRAPH_PADDING;
+	const right = GRAPH_WIDTH - GRAPH_PADDING;
+	const top = GRAPH_PADDING;
+	const bottom = GRAPH_HEIGHT - GRAPH_PADDING;
+	const sustainWidth = ( right - left ) / 4;
+	const unit = ( right - left - sustainWidth ) / ( attack + decay + release );
+	const attackX = left + attack * unit;
+	const decayX = attackX + decay * unit;
+	const sustainY = bottom - sustain * ( bottom - top );
+
+	return [
+		[ left, bottom ],
+		[ attackX, top ],
+		[ decayX, sustainY ],
+		[ decayX + sustainWidth, sustainY ],
+		[ right, bottom ],
+	]
+		.map( ( point ) => point.join( ',' ) )
+		.join( ' ' );
+};
+
 type Props = {
 	synthesizerSetting: BlockAttributes[ 'synthesizerSetting' ];
 	onChange: ( newSynthesizerSetting: BlockAttributes[ 'synthesizerSetting' ] ) => void;
@@ -74,6 +100,14 @@ const SynthesizerSetting = ( { synthesizerSetting, onChange }: Props ) => {
 					/>
 				) ) }
 			</div>
+			<svg
+				className="piano-block-synthesizer-setting__graph"
+				viewBox={ `0 0 ${ GRAPH_WIDTH } ${ GRAPH_HEIGHT }` }
+				aria-hidden="true"
+				focusable="false"
+			>
+				<polyline points={ getEnvelopePoints( { ...DEFAULT_ENVELOPE, ...envelope } ) } />
+			</svg>
 		</>
 	);
 };
