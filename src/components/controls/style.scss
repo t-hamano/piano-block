@@ -62,7 +62,7 @@
 
 		&:focus-visible {
 
-			@include pianoBlockMixins.focus-ring;
+			@include pianoBlockMixins.control-focus-ring;
 		}
 
 		svg {

@@ -28,21 +28,21 @@
 	}
 
 	&[aria-pressed="true"]:not([aria-disabled="true"]) {
-		color: pianoBlockVariables.$display-color;
+		color: pianoBlockVariables.$control-display-color;
 
 		svg {
-			filter: drop-shadow(pianoBlockVariables.$display-text-shadow);
+			filter: drop-shadow(pianoBlockVariables.$control-display-text-shadow);
 		}
 	}
 
 	&[aria-disabled="true"] {
-		color: pianoBlockVariables.$disabled-color;
+		color: pianoBlockVariables.$control-disabled-color;
 		cursor: default;
 	}
 
 	&:focus-visible {
 
-		@include pianoBlockMixins.focus-ring;
+		@include pianoBlockMixins.control-focus-ring;
 	}
 
 	svg {

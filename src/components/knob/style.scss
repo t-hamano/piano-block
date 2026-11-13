@@ -49,7 +49,7 @@
 
 	.piano-block-knob__input:focus-visible + .piano-block-knob__dial {
 
-		@include pianoBlockMixins.focus-ring(2px);
+		@include pianoBlockMixins.control-focus-ring(2px);
 	}
 
 	.piano-block-knob__indicator {
@@ -64,11 +64,11 @@
 
 	.piano-block-knob__value {
 
-		@include pianoBlockMixins.display-panel;
+		@include pianoBlockMixins.control-display-panel;
 		min-width: 7ch;
 		padding: 1px 4px;
 
-		@include pianoBlockMixins.display-text;
+		@include pianoBlockMixins.control-display-text;
 		text-align: center;
 	}
 }

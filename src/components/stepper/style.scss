@@ -16,7 +16,7 @@
 
 	.piano-block-stepper__control {
 
-		@include pianoBlockMixins.display-panel;
+		@include pianoBlockMixins.control-display-panel;
 		display: flex;
 		align-items: center;
 		height: 30px;
@@ -43,16 +43,16 @@
 		appearance: none;
 
 		&:hover:not([aria-disabled="true"]) {
-			background: pianoBlockVariables.$hover-background-color;
+			background: pianoBlockVariables.$control-hover-background-color;
 		}
 
 		&:focus-visible {
 
-			@include pianoBlockMixins.focus-ring;
+			@include pianoBlockMixins.control-focus-ring;
 		}
 
 		&[aria-disabled="true"] {
-			color: pianoBlockVariables.$disabled-color;
+			color: pianoBlockVariables.$control-disabled-color;
 			cursor: default;
 		}
 	}
@@ -60,7 +60,7 @@
 	.piano-block-stepper__value {
 		min-width: 3ch;
 
-		@include pianoBlockMixins.display-text;
+		@include pianoBlockMixins.control-display-text;
 		text-align: center;
 	}
 }

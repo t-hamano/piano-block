@@ -33,7 +33,7 @@
 
 	.piano-block-select__input {
 
-		@include pianoBlockMixins.display-panel;
+		@include pianoBlockMixins.control-display-panel;
 		display: block;
 		width: auto;
 		max-width: none;
@@ -45,18 +45,18 @@
 		font-size: var(--wpds-typography-font-size-md);
 		line-height: inherit;
 
-		@include pianoBlockMixins.display-text;
+		@include pianoBlockMixins.control-display-text;
 		cursor: pointer;
 		outline: none;
 		appearance: none;
 
 		&:hover {
-			background: pianoBlockVariables.$hover-background-color;
+			background: pianoBlockVariables.$control-hover-background-color;
 		}
 
 		&:focus-visible {
 
-			@include pianoBlockMixins.focus-ring;
+			@include pianoBlockMixins.control-focus-ring;
 		}
 	}
 }
