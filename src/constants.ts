@@ -1,7 +1,7 @@
 /**
  * WordPress dependencies
  */
-import { __, _x } from '@wordpress/i18n';
+import { _x } from '@wordpress/i18n';
 
 export type BlockAttributes = {
 	volume: number | undefined;
@@ -301,15 +301,15 @@ export const ENVELOPE_CONTROLS = [
 
 export const KEY_INDICATORS = [
 	{
-		label: __( 'Keyboard key', 'piano-block' ),
+		label: _x( 'Key', 'key indicator: computer keyboard key', 'piano-block' ),
 		value: 'key',
 	},
 	{
-		label: _x( 'SPN', 'Scientific pitch notation', 'piano-block' ),
+		label: _x( 'Note', 'key indicator: note name, e.g. C4', 'piano-block' ),
 		value: 'spn',
 	},
 	{
-		label: _x( 'None', 'key indicator', 'piano-block' ),
+		label: _x( 'Off', 'key indicator', 'piano-block' ),
 		value: '',
 	},
 ] as const;
