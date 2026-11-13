@@ -17,13 +17,27 @@
 	box-shadow: inset 0 1px 0 rgb(255 255 255 / 12%), 0 1px 2px rgb(0 0 0 / 50%);
 	appearance: none;
 
-	&:hover {
+	&:hover:not([aria-disabled="true"], [aria-expanded="true"], [aria-pressed="true"]) {
 		background: linear-gradient(to bottom, #4a4a4a 0%, #303030 100%);
 	}
 
-	&[aria-expanded="true"] {
+	&[aria-expanded="true"],
+	&[aria-pressed="true"] {
 		background: linear-gradient(to bottom, #202020 0%, #2c2c2c 100%);
 		box-shadow: inset 0 1px 3px rgb(0 0 0 / 65%);
+	}
+
+	&[aria-pressed="true"]:not([aria-disabled="true"]) {
+		color: pianoBlockVariables.$display-color;
+
+		svg {
+			filter: drop-shadow(pianoBlockVariables.$display-text-shadow);
+		}
+	}
+
+	&[aria-disabled="true"] {
+		color: #5a5a5a;
+		cursor: default;
 	}
 
 	&:focus-visible {

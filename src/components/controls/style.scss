@@ -20,20 +20,18 @@
 		box-sizing: inherit;
 	}
 
-	.components-toggle-control {
+	.piano-block-controls__sustain-pedal {
+		display: flex;
+		flex-direction: column;
+		align-items: flex-start;
+		gap: 4px;
+		font-size: var(--wpds-typography-font-size-xs);
+		line-height: var(--wpds-typography-line-height-xs);
+	}
 
-		.components-flex {
-			flex-flow: column-reverse;
-			align-items: flex-start;
-			gap: var(--wpds-dimension-gap-lg);
-		}
-
-		.components-toggle-control__label {
-			font-size: var(--wpds-typography-font-size-xs);
-			font-weight: var(--wpds-typography-font-weight-emphasis);
-			line-height: var(--wpds-typography-line-height-xs);
-			text-transform: uppercase;
-		}
+	.piano-block-controls__sustain-pedal-label {
+		font-weight: var(--wpds-typography-font-weight-emphasis);
+		text-transform: uppercase;
 	}
 
 	.piano-block-controls__instrument {

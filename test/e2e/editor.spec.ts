@@ -107,7 +107,7 @@ test.describe( 'Block', () => {
 		editor,
 	} ) => {
 		await editor.insertBlock( { name: 'piano-block/piano' } );
-		const toggle = editor.canvas.getByRole( 'checkbox', { name: 'Sustain' } );
+		const toggle = editor.canvas.getByRole( 'button', { name: 'Sustain' } );
 		await expect( toggle ).toBeEnabled();
 		await editor.canvas
 			.getByRole( 'combobox', { name: 'Instrument' } )

@@ -3,10 +3,7 @@
  */
 import { __, _x } from '@wordpress/i18n';
 import { useState } from '@wordpress/element';
-// Keep `ToggleControl`, since the styles of `@wordpress/ui` are in a cascade
-// layer and lose to the theme styles on the front end.
-// eslint-disable-next-line @wordpress/use-recommended-components
-import { Button, ToggleControl, Popover } from '@wordpress/components';
+import { Button, Popover } from '@wordpress/components';
 import { Stack } from '@wordpress/ui';
 import { help, settings as settingsIcon } from '@wordpress/icons';
 
@@ -29,6 +26,14 @@ import Stepper from '../stepper';
 import SynthesizerSetting from '../synthesizer-setting';
 import HelpModal from '../help-modal';
 import type { BlockAttributes } from '../../constants';
+
+const sustainPedalIcon = (
+	<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+		{ [ 6, 12, 18 ].map( ( y ) =>
+			[ 6, 12, 18 ].map( ( x ) => <circle key={ `${ x }-${ y }` } cx={ x } cy={ y } r="1.75" /> )
+		) }
+	</svg>
+);
 
 type Props = {
 	settings: BlockAttributes;
@@ -157,12 +162,18 @@ const Controls = ( { settings, onChange, onKeyDown, onKeyUp }: Props ) => {
 				options={ KEY_INDICATORS }
 				onChange={ onKeyIndicatorChange }
 			/>
-			<ToggleControl
-				label={ _x( 'Sustain', 'sustain pedal', 'piano-block' ) }
-				checked={ useSustainPedal }
-				onChange={ onUseSustainPedalChange }
-				disabled={ instrument === 'synthesizer' }
-			/>
+			<div className="piano-block-controls__sustain-pedal">
+				<span className="piano-block-controls__sustain-pedal-label" aria-hidden="true">
+					{ _x( 'Sustain', 'sustain pedal', 'piano-block' ) }
+				</span>
+				<IconButton
+					label={ _x( 'Sustain', 'sustain pedal', 'piano-block' ) }
+					icon={ sustainPedalIcon }
+					onClick={ onUseSustainPedalChange }
+					aria-pressed={ useSustainPedal }
+					disabled={ instrument === 'synthesizer' }
+				/>
+			</div>
 			<Button
 				className="piano-block-controls__help"
 				label={ __( 'Help', 'piano-block' ) }
