@@ -57,6 +57,10 @@
 		outline: none;
 		appearance: none;
 
+		&:hover {
+			background: #1f1f1f;
+		}
+
 		&:focus-visible {
 			outline: var(--wpds-border-width-focus) solid pianoBlockVariables.$focus-color;
 			outline-offset: 0;
