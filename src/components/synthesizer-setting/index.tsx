@@ -61,17 +61,19 @@ const SynthesizerSetting = ( { synthesizerSetting, onChange }: Props ) => {
 				options={ OSCILLATOR_TYPES }
 				onChange={ onOscillatorTypeChange }
 			/>
-			{ ENVELOPE_CONTROLS.map( ( { label, parameter, max } ) => (
-				<Knob
-					key={ parameter }
-					label={ label }
-					value={ envelope[ parameter ] ?? DEFAULT_ENVELOPE[ parameter ] }
-					min={ 0.05 }
-					max={ max }
-					step={ 0.05 }
-					onChange={ ( value ) => onEnvelopeChange( parameter, value ) }
-				/>
-			) ) }
+			<div className="piano-block-synthesizer-setting__envelope">
+				{ ENVELOPE_CONTROLS.map( ( { label, parameter, max } ) => (
+					<Knob
+						key={ parameter }
+						label={ label }
+						value={ envelope[ parameter ] ?? DEFAULT_ENVELOPE[ parameter ] }
+						min={ 0.05 }
+						max={ max }
+						step={ 0.05 }
+						onChange={ ( value ) => onEnvelopeChange( parameter, value ) }
+					/>
+				) ) }
+			</div>
 		</>
 	);
 };
