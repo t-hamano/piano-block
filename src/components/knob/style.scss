@@ -51,6 +51,12 @@
 	.piano-block-knob__input:focus-visible + .piano-block-knob__dial {
 
 		@include pianoBlockMixins.control-focus-ring(2px);
+
+		// Match the other controls, whose outline Chromium turns into
+		// Highlight because they are the focused element.
+		@media (forced-colors: active) {
+			outline-color: Highlight;
+		}
 	}
 
 	.piano-block-knob__indicator {

@@ -143,5 +143,11 @@
 		.piano-block-keyboard__key {
 			border-color: ButtonText;
 		}
+
+		// White keys show their bottom edge with a gradient and a shadow,
+		// which forced colors mode removes.
+		.piano-block-keyboard__key--white {
+			border-bottom: var(--wpds-border-width-xs) solid ButtonText;
+		}
 	}
 }
