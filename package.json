@@ -45,6 +45,7 @@
 		"@wordpress/eslint-plugin": "28.0.0",
 		"@wordpress/i18n": "7.0.0",
 		"@wordpress/icons": "^19.0.0",
+		"@wordpress/primitives": "4.57.0",
 		"@wordpress/scripts": "^37.0.0",
 		"clsx": "2.1.1",
 		"eslint-import-resolver-typescript": "^4.4.5",
