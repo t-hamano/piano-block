@@ -37,6 +37,7 @@
 
 	.piano-block-controls__instrument {
 		display: flex;
+		align-self: stretch;
 		align-items: flex-end;
 		gap: 4px;
 	}

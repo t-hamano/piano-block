@@ -10,7 +10,6 @@ test.describe( 'Block', () => {
 
 	test( 'should update attributes related to sound using only the keyboard', async ( {
 		editor,
-		page,
 		pageUtils,
 	} ) => {
 		await editor.insertBlock( { name: 'piano-block/piano' } );
@@ -35,22 +34,26 @@ test.describe( 'Block', () => {
 		await pageUtils.pressKeys( 'z' );
 
 		// Synthesizer Settings
+		const synthesizerSettings = editor.canvas.getByRole( 'button', {
+			name: 'Synthesizer Settings',
+		} );
+		await pageUtils.pressKeys( 'Tab' );
+		await expect( synthesizerSettings ).toBeFocused();
+		await pageUtils.pressKeys( 'Enter' );
+		await expect( synthesizerSettings ).toHaveAttribute( 'aria-pressed', 'true' );
 		await pageUtils.pressKeys( 'Tab' );
 		await expect(
-			editor.canvas.getByRole( 'button', { name: 'Synthesizer Settings' } )
+			editor.canvas.getByRole( 'combobox', { name: 'Oscillator Type' } )
 		).toBeFocused();
-		await pageUtils.pressKeys( 'Enter' );
-		await expect( page.getByRole( 'combobox', { name: 'Oscillator Type' } ) ).toBeFocused();
 		await pageUtils.pressKeys( 'ArrowDown', { times: 2 } );
 		for ( let index = 0; index < 4; index++ ) {
 			await pageUtils.pressKeys( 'Tab' );
 			await pageUtils.pressKeys( 'ArrowRight', { times: 2 } );
 		}
-		await pageUtils.pressKeys( 'Escape' );
-		// Pressing the Escape key in a popover rendered in the iframed editor does not
-		// return focus to the anchor element, so focus it explicitly.
-		// See: https://github.com/WordPress/gutenberg/issues/55413
-		await editor.canvas.getByRole( 'button', { name: 'Synthesizer Settings' } ).focus();
+		await pageUtils.pressKeys( 'shift+Tab', { times: 5 } );
+		await expect( synthesizerSettings ).toBeFocused();
+		await pageUtils.pressKeys( 'Enter' );
+		await expect( synthesizerSettings ).toHaveAttribute( 'aria-pressed', 'false' );
 		// Pressing a piano key should not remove focus.
 		await pageUtils.pressKeys( 'z' );
 
@@ -69,7 +72,7 @@ test.describe( 'Block', () => {
 		);
 	} );
 
-	test( 'should play notes while focus is in the synthesizer settings popover', async ( {
+	test( 'should play notes while focus is in the synthesizer settings', async ( {
 		editor,
 		page,
 	} ) => {
@@ -78,8 +81,8 @@ test.describe( 'Block', () => {
 			.getByRole( 'combobox', { name: 'Instrument' } )
 			.selectOption( 'synthesizer' );
 		await editor.canvas.getByRole( 'button', { name: 'Synthesizer Settings' } ).click();
-		const oscillatorType = page.getByRole( 'combobox', { name: 'Oscillator Type' } );
-		await expect( oscillatorType ).toBeFocused();
+		const oscillatorType = editor.canvas.getByRole( 'combobox', { name: 'Oscillator Type' } );
+		await oscillatorType.focus();
 
 		// The first key press only unlocks audio, so keep pressing the key until the
 		// synthesizer is ready.

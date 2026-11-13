@@ -1,24 +1,26 @@
-.piano-block-synthesizer-setting {
-	box-sizing: border-box;
-	width: var(--wpds-dimension-surface-width-sm);
-	max-width: 100%;
-	padding: var(--wpds-dimension-padding-lg);
-	overflow: hidden;
+@use "../variables" as pianoBlockVariables;
+@use "../mixins" as pianoBlockMixins;
 
-	.piano-block-synthesizer-setting__envelope {
-		display: grid;
-		grid-template-columns: repeat(4, 1fr);
-		gap: var(--wpds-dimension-gap-md);
-	}
+.piano-block-synthesizer-setting__envelope {
+	display: grid;
+	grid-auto-columns: 1fr;
+	grid-auto-flow: column;
+	gap: 8px;
+}
 
-	.piano-block-synthesizer-setting__graph {
-		display: block;
-		width: 100%;
-		height: 80px;
-		border: var(--wpds-border-width-xs) solid var(--wpds-color-stroke-surface-neutral-strong);
-	}
+.piano-block-synthesizer-setting__graph {
+	display: block;
+	width: 130px;
+	height: 50px;
 
-	.piano-block-synthesizer-setting__reset {
-		margin-left: auto;
+	@include pianoBlockMixins.control-display-panel;
+
+	polyline {
+		fill: none;
+		stroke: pianoBlockVariables.$control-display-color;
+		stroke-width: 1.5px;
+		stroke-linejoin: round;
+		stroke-linecap: round;
+		filter: drop-shadow(pianoBlockVariables.$control-display-text-shadow);
 	}
 }
