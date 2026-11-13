@@ -97,7 +97,7 @@ test.describe( 'Block', () => {
 	test( 'should update attributes in the block sidebar', async ( { editor, page } ) => {
 		await editor.insertBlock( { name: 'piano-block/piano' } );
 		await editor.openDocumentSettingsSidebar();
-		await page.getByLabel( 'Display on the front end' ).click();
+		await page.getByRole( 'switch', { name: 'Display on the front end' } ).click();
 		expect( await editor.getEditedPostContent() ).toBe(
 			`<!-- wp:piano-block/piano {"showOnFront":true} /-->`
 		);
