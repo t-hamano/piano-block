@@ -93,7 +93,7 @@ const Controls = ( { settings, onChange, onKeyDown, onKeyUp }: Props ) => {
 	};
 
 	return (
-		<Stack className="piano-block-controls" direction="row" wrap="wrap" gap="lg" align="flex-start">
+		<Stack className="piano-block-controls" direction="row" wrap="wrap" gap="md" align="flex-start">
 			<Knob
 				label={ __( 'Volume', 'piano-block' ) }
 				value={ volume || 0 }
@@ -109,39 +109,42 @@ const Controls = ( { settings, onChange, onKeyDown, onKeyUp }: Props ) => {
 				max={ MAX_OCTAVE_OFFSET }
 				onChange={ onOctaveOffsetChange }
 			/>
-			<Select
-				label={ __( 'Instrument', 'piano-block' ) }
-				value={ instrument }
-				options={ INSTRUMENTS }
-				onChange={ onInstrumentChange }
-			/>
-			{ instrument === 'synthesizer' && (
-				<Stack className="piano-block-controls__synthesizer-toggle">
-					<IconButton
-						label={ __( 'Synthesizer Settings', 'piano-block' ) }
-						icon={ settingsIcon }
-						onClick={ () => setIsSynthesizerSettingOpen( ! isSynthesizerSettingOpen ) }
-						aria-haspopup="true"
-						aria-expanded={ isSynthesizerSettingOpen }
-					/>
-					{ isSynthesizerSettingOpen && (
-						<Popover
-							placement="top"
-							offset={ 8 }
-							onClose={ () => setIsSynthesizerSettingOpen( false ) }
-							// The popover is rendered in a portal, so its key events never reach
-							// the listeners on the block wrapper. Play the piano from here instead.
-							onKeyDown={ ( event ) => onKeyDown( event.nativeEvent ) }
-							onKeyUp={ ( event ) => onKeyUp( event.nativeEvent ) }
-						>
-							<SynthesizerSetting
-								synthesizerSetting={ synthesizerSetting }
-								onChange={ onSynthesizerSettingChange }
-							/>
-						</Popover>
-					) }
-				</Stack>
-			) }
+			<div className="piano-block-controls__instrument">
+				<Select
+					label={ __( 'Instrument', 'piano-block' ) }
+					value={ instrument }
+					options={ INSTRUMENTS }
+					onChange={ onInstrumentChange }
+				/>
+				{ instrument === 'synthesizer' && (
+					// The popover is anchored to its parent element.
+					<div>
+						<IconButton
+							label={ __( 'Synthesizer Settings', 'piano-block' ) }
+							icon={ settingsIcon }
+							onClick={ () => setIsSynthesizerSettingOpen( ! isSynthesizerSettingOpen ) }
+							aria-haspopup="true"
+							aria-expanded={ isSynthesizerSettingOpen }
+						/>
+						{ isSynthesizerSettingOpen && (
+							<Popover
+								placement="top"
+								offset={ 8 }
+								onClose={ () => setIsSynthesizerSettingOpen( false ) }
+								// The popover is rendered in a portal, so its key events never reach
+								// the listeners on the block wrapper. Play the piano from here instead.
+								onKeyDown={ ( event ) => onKeyDown( event.nativeEvent ) }
+								onKeyUp={ ( event ) => onKeyUp( event.nativeEvent ) }
+							>
+								<SynthesizerSetting
+									synthesizerSetting={ synthesizerSetting }
+									onChange={ onSynthesizerSettingChange }
+								/>
+							</Popover>
+						) }
+					</div>
+				) }
+			</div>
 			<Select
 				label={ __( 'Key Layout', 'piano-block' ) }
 				value={ keyLayout }

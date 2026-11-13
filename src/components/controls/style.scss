@@ -36,8 +36,10 @@
 		}
 	}
 
-	.piano-block-controls__synthesizer-toggle {
-		align-self: flex-end;
+	.piano-block-controls__instrument {
+		display: flex;
+		align-items: flex-end;
+		gap: 4px;
 	}
 
 	.piano-block-controls__help {
