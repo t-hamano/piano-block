@@ -109,16 +109,16 @@ test.describe( 'Block', () => {
 		);
 	} );
 
-	test( 'should disable the sustain pedal toggle when the synthesizer is selected', async ( {
+	test( 'should hide the sustain pedal toggle when the synthesizer is selected', async ( {
 		editor,
 	} ) => {
 		await editor.insertBlock( { name: 'piano-block/piano' } );
 		const toggle = editor.canvas.getByRole( 'button', { name: 'Sustain' } );
-		await expect( toggle ).toBeEnabled();
+		await expect( toggle ).toBeVisible();
 		await editor.canvas
 			.getByRole( 'combobox', { name: 'Instrument' } )
 			.selectOption( 'synthesizer' );
-		await expect( toggle ).toBeDisabled();
+		await expect( toggle ).toBeHidden();
 	} );
 
 	test( 'should update the key labels when the key layout is changed', async ( { editor } ) => {

@@ -153,18 +153,19 @@ const Controls = ( { settings, onChange }: Props ) => {
 						options={ KEY_INDICATORS }
 						onChange={ onKeyIndicatorChange }
 					/>
-					<div className="piano-block-controls__sustain-pedal">
-						<span className="piano-block-controls__sustain-pedal-label" aria-hidden="true">
-							{ _x( 'Sustain', 'sustain pedal', 'piano-block' ) }
-						</span>
-						<IconButton
-							label={ _x( 'Sustain', 'sustain pedal', 'piano-block' ) }
-							icon={ sustainPedalIcon }
-							onClick={ onUseSustainPedalChange }
-							aria-pressed={ useSustainPedal }
-							disabled={ isSynthesizer }
-						/>
-					</div>
+					{ ! isSynthesizer && (
+						<div className="piano-block-controls__sustain-pedal">
+							<span className="piano-block-controls__sustain-pedal-label" aria-hidden="true">
+								{ _x( 'Sustain', 'sustain pedal', 'piano-block' ) }
+							</span>
+							<IconButton
+								label={ _x( 'Sustain', 'sustain pedal', 'piano-block' ) }
+								icon={ sustainPedalIcon }
+								onClick={ onUseSustainPedalChange }
+								aria-pressed={ useSustainPedal }
+							/>
+						</div>
+					) }
 				</>
 			) }
 			<div className="piano-block-controls__help">
