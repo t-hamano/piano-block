@@ -11,7 +11,6 @@
 	stroke-width: 2px;
 	stroke-linecap: round;
 	transform-origin: 50% 50%;
-	// Kept even for prefers-reduced-motion. See Note 4 of https://www.w3.org/WAI/WCAG22/Understanding/pause-stop-hide.html
 	animation: piano-block-spinner 1.4s linear infinite both;
 
 	@media (forced-colors: active) {
