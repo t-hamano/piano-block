@@ -19,7 +19,7 @@ import Piano from './components/piano';
 import type { BlockAttributes } from './constants';
 
 export default function Edit( { attributes, setAttributes }: BlockEditProps< BlockAttributes > ) {
-	const [ blockWrapper, setBlockWrapper ] = useState< HTMLDivElement | null >( null );
+	const [ blockWrapper, setBlockWrapper ] = useState< HTMLElement | null >( null );
 	const blockProps = useBlockProps( { ref: setBlockWrapper } );
 
 	const dropdownMenuProps = ! useViewportMatch( 'medium', '<' )
