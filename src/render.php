@@ -34,4 +34,4 @@ $piano_block_wrapper_attributes = get_block_wrapper_attributes(
 	)
 );
 ?>
-<div <?php echo $piano_block_wrapper_attributes; ?>></div>
+<div <?php echo $piano_block_wrapper_attributes; // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- get_block_wrapper_attributes() escapes its output. ?>></div>
