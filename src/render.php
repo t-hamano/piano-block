@@ -13,6 +13,8 @@ if ( empty( $attributes['showOnFront'] ) ) {
 	return;
 }
 
+// The file is loaded inside the block's render function, so these variables are not global.
+// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
 $piano_block_settings = array(
 	'volume'             => min( max( round( (float) $attributes['volume'], 1 ), -10 ), 5 ),
 	'useSustainPedal'    => (bool) $attributes['useSustainPedal'],
@@ -23,6 +25,7 @@ $piano_block_settings = array(
 	'keyIndicator'       => $attributes['keyIndicator'],
 );
 
+// phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
 $piano_block_wrapper_attributes = get_block_wrapper_attributes(
 	array(
 		'tabindex'         => '0',
